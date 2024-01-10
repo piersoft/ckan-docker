@@ -66,6 +66,10 @@ To build the images:
 
 	docker compose build
 
+To patch SOLR schema for DCATAPIT (cd /ckan/patches):
+
+	docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schem
+
 To start the containers:
 
 	docker compose up
