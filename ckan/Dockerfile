@@ -48,10 +48,10 @@ COPY patches/vocabulary.py "${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/com
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
 # Copy custom patch for access_rights and rights
-COPY patches/schema.py "${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/ckanext/dcatapit/schema.py"
-COPY patches/interfaces.py "${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/interfaces.py"
-COPY patches/rdf.py "${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py"
-COPY patches/_json.py "${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py"
+COPY patches/schema.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/schema.py
+COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/interfaces.py
+COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
+COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
 
 
 # Copy custom initialization scripts
