@@ -1,0 +1,50 @@
+#!/bin/env bash
+
+ # docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
+ # docker cp supervisord.conf ckan:/etc/supervisord.conf
+
+  # Initializes the database
+  ckan db init
+
+  # Initialize harvester database
+  ckan db upgrade -p harvest
+
+  # Inizialize dcat-ap-it database
+  ckan dcatapit initdb
+
+  # Setup multilang database
+  ckan multilang initdb
+
+ckan dcatapit load --filename="${APP_DIR}/src/ckanext-dcatapit/vocabularies/languages-filtered.rdf"
+
+ckan dcatapit load --filename="${APP_DIR}/src/ckanext-dcatapit/vocabularies/data-theme-filtered.rdf"
+
+ckan dcatapit load --filename="${APP_DIR}/src/ckanext-dcatapit/vocabularies/places-filtered.rdf"
+
+ckan dcatapit load --filename="${APP_DIR}/src/ckanext-dcatapit/vocabularies/frequencies-filtered.rdf"
+
+ckan dcatapit load --filename="${APP_DIR}/src/ckanext-dcatapit/vocabularies/filetypes-filtered.rdf"
+
+ # curl https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/regions/regions.rdf > regions.rdf
+ # paster --plugin=ckanext-dcatapit vocabulary load --filename regions.rdf --name regions --config=/etc/ckan/default/production.ini
+
+ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/theme-subtheme-mapping.rdf" --eurovoc "${APP_DIR}/src/ckanext-dcatapit/vocabularies/eurovoc-filtered.rdf"
+
+ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/licences.rdf"
+
+wget "https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/regions/regions.rdf" -O "/tmp/regions.rdf"
+ckan dcatapit load --filename "/tmp/regions.rdf" --name regions
+
+echo -e "\nCKAN init completed successfully"
+
+if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
+   # dcatapit_pkg settings have been configured in the .env file
+   # Set API token if necessary
+   echo "Set up ckanext.dcat.rdf.profiles in the CKAN config file"
+   ckan config-tool $CKAN_INI "ckanext.dcat.rdf.profiles=euro_dcat_ap it_dcat_ap"
+   ckan config-tool $CKAN_INI "ckanext.dcat.base_uri=https://www.piersoftckan.biz"
+fi
+
+ckan config-tool $CKAN_INI "ckan.locale_default = it"
+ckan config-tool $CKAN_INI "ckan.locales_offered = it en"
+ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
