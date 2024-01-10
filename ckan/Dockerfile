@@ -43,6 +43,8 @@ COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlr
 COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
 COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
 COPY patches/supervisord.conf /etc/supervisord.conf
+COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/images"
+
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
