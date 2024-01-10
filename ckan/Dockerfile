@@ -30,12 +30,12 @@ RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.gi
      pip3 install -e ${APP_DIR}/src/ckanext-multilang/
 
 # DCATAPIT theme to group mapping file
-COPY patches/theme_to_group.ini ${APP_DIR}/patches/
-RUN chmod 666 "${APP_DIR}/theme_to_group.ini"
+COPY patches/theme_to_group.ini "${APP_DIR}/patches/theme_to_group.ini"
+RUN chmod 666 "${APP_DIR}/patches/theme_to_group.ini"
 
 # CKAN group to DCATAPIT theme mapping file
-COPY patches/topics.json ${APP_DIR}/patches/
-RUN chmod 666 "${APP_DIR}/topics.json"
+COPY patches/topics.json "${APP_DIR}/patches/topics.json"
+RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
 
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
