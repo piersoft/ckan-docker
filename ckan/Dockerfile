@@ -30,11 +30,11 @@ RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.gi
      pip3 install -e ${APP_DIR}/src/ckanext-multilang/
 
 # DCATAPIT theme to group mapping file
-COPY patches/theme_to_group.ini ${APP_DIR}
+COPY patches/theme_to_group.ini ${APP_DIR}/patches/
 RUN chmod 666 "${APP_DIR}/theme_to_group.ini"
 
 # CKAN group to DCATAPIT theme mapping file
-COPY patches/topics.json ${APP_DIR}
+COPY patches/topics.json ${APP_DIR}/patches/
 RUN chmod 666 "${APP_DIR}/topics.json"
 
 
@@ -49,6 +49,9 @@ COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/ima
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
+COPY patches/groups ${APP_DIR}/patches/groups
+ 
+
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
 COPY patches ${APP_DIR}/patches
@@ -60,6 +63,5 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
-
 
 

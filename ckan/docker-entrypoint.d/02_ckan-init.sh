@@ -1,5 +1,8 @@
 #!/bin/env bash
-
+#if [ $CKAN_INI "ckan.build" != false ]; then
+if grep -q "finito" $CKAN_INI; then
+echo "Not configuring DCATAPIT already done"
+else
  # docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
  # docker cp supervisord.conf ckan:/etc/supervisord.conf
 
@@ -35,8 +38,10 @@ ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/lice
 wget "https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/regions/regions.rdf" -O "/tmp/regions.rdf"
 ckan dcatapit load --filename "/tmp/regions.rdf" --name regions
 
+ckan config-tool $CKAN_INI "ckan.build = "finito" "
 echo -e "\nCKAN init completed successfully"
 
+fi
 if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
    # dcatapit_pkg settings have been configured in the .env file
    # Set API token if necessary
@@ -48,3 +53,6 @@ fi
 ckan config-tool $CKAN_INI "ckan.locale_default = it"
 ckan config-tool $CKAN_INI "ckan.locales_offered = it en"
 ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
+
+
+
