@@ -2,7 +2,48 @@ FROM ckan/ckan-base:2.10.3
 
 # Install any extensions needed by your CKAN instance
 # See Dockerfile.dev for more details and examples
+### Harvester ###
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest' && \
+    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
+# will also require gather_consumer and fetch_consumer processes running (please see https://github.com/ckan/ckanext-harvest)
 
+### Scheming ###
+#RUN  pip3 install -e 'git+https://github.com/ckan/ckanext-scheming.git@master#egg=ckanext-scheming'
+
+### Pages ###
+#RUN  pip3 install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages
+
+RUN pip3 install pylons
+RUN pip3 install routes
+### DCAT ###
+RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@master#egg=ckanext-dcat && \
+     pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
+
+# Install ckanext-dcatapit
+RUN  pip3 install -e git+https://github.com/piersoft/dcatapit.git@main#egg=ckanext-dcatapit && \
+     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
+#&& \
+ #    pip3 install -r https://raw.githubusercontent.com/piersoft/dcatapit/main/dev-requirements.txt
+
+# Install ckanext-multilang
+RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.git@master#egg=ckanext-multilang  && \
+     pip3 install -e ${APP_DIR}/src/ckanext-multilang/
+
+# DCATAPIT theme to group mapping file
+COPY patches/theme_to_group.ini ${APP_DIR}
+RUN chmod 666 "${APP_DIR}/theme_to_group.ini"
+
+# CKAN group to DCATAPIT theme mapping file
+COPY patches/topics.json ${APP_DIR}
+RUN chmod 666 "${APP_DIR}/topics.json"
+
+
+COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
+COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py           
+COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
+COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
+COPY patches/supervisord.conf /etc/supervisord.conf
+#docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
@@ -17,3 +58,6 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
+
+
+
