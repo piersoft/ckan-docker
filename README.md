@@ -71,14 +71,16 @@ To start the containers:
 
 	docker compose up
 
+
 Stop: CTRL+C
+
+
+To patch SOLR schema for DCATAPIT:
+
+	docker cp /ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
 Start: docker start datapusher db solr redis ckan nginx
 
-To patch SOLR schema for DCATAPIT (cd /ckan/patches):
-
-	docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
- 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. You could also use the -d "detach mode" option ie: `docker compose up -d` if you wished to use the current 
 window for something else.
