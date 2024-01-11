@@ -2,7 +2,13 @@
 if grep -q "finitigruppi" $CKAN_INI; then
 echo "Not configuring DCATAPIT already done"
 else
+#add_groups () {
+#  until $(curl --output /dev/null --silent --head --fail "${CKAN_SITE_URL}"); do
+#    echo "CKAN is not ready, yet. Trying again in two seconds."
+#    sleep 2
+#  done
 
+#  apikey=$(psql -q -t -h ${CKAN_DB} -U ckan -d ${CKAN_DB_USER} -c "select apikey from public.user where name='${CKAN_SYSADMIN_NAME}';")
 #  api= $(ckan -c $CKAN_INI user token add ckan_admin datapusher | tail -n 1 | tr -d '\t')
   for file in "${APP_DIR}/patches/groups/"*.json; do
    echo "Creating group from file ${file}"

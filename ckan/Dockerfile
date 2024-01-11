@@ -37,6 +37,10 @@ RUN chmod 666 "${APP_DIR}/patches/theme_to_group.ini"
 COPY patches/topics.json "${APP_DIR}/patches/topics.json"
 RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
+# CKAN group to DCATAPIT theme mapping file
+COPY patches/regions.rdf "${APP_DIR}/patches/regions.rdf"
+RUN chmod 666 "${APP_DIR}/patches/topics.json"
+
 
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py           
@@ -44,7 +48,8 @@ COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jso
 COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
 COPY patches/supervisord.conf /etc/supervisord.conf
 COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/images"
-COPY patches/vocabulary.py "${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py"
+COPY patches/vocabulary.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py
+
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
 # Copy custom patch for access_rights and rights
