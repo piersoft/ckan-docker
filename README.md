@@ -74,7 +74,7 @@ STOP BUILD: CTRL+C
 
 Patch DCATAP_IT for SOLR Schema:
 
-	docker cp patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
+	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
  	docker start datapusher db solr redis ckan nginx
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
