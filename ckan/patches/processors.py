@@ -327,7 +327,7 @@ class RDFSerializer(RDFProcessor):
                 cat_ref = self._add_source_catalog(catalog_ref, dataset_dict, dataset_ref)
                 if not cat_ref:
                     org_site=self.g.objects(URIRef(str(catalog_ref)+"/organization/"+dataset_dict.get('owner_org')), VCARD.hasURL)
-                    self.g.add((org_site.next(), DCAT.dataset, dataset_ref))
+                    self.g.add((next(org_site), DCAT.dataset, dataset_ref))
                 else:
                      self.g.add((cat_ref, DCAT.dataset, dataset_ref))
 #                    self.g.add((catalog_ref, DCAT.dataset, dataset_ref))
