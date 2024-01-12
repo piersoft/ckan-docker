@@ -53,6 +53,7 @@ fi
 ckan config-tool $CKAN_INI "ckan.locale_default = it"
 ckan config-tool $CKAN_INI "ckan.locales_offered = it en"
 ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
+ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
 
 
 
