@@ -1,12 +1,14 @@
 from __future__ import print_function
 
+from builtins import str
+from builtins import object
 import sys
 import argparse
 import xml
 import json
 from pkg_resources import iter_entry_points
 
-from pylons import config
+from ckantoolkit import config
 
 import rdflib
 import rdflib.parser
@@ -17,7 +19,7 @@ import ckan.plugins as p
 
 from ckanext.dcat.utils import catalog_uri, dataset_uri, url_to_rdflib_format, DCAT_EXPOSE_SUBCATALOGS
 from ckanext.dcat.profiles import DCAT, DCT, FOAF
-
+from ckanext.dcat.exceptions import RDFProfileException, RDFParserException
 
 HYDRA = Namespace('http://www.w3.org/ns/hydra/core#')
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
@@ -25,9 +27,8 @@ DCATAPIT = Namespace("http://dati.gov.it/onto/dcatapit#")
 RDF_PROFILES_ENTRY_POINT_GROUP = 'ckan.rdf.profiles'
 RDF_PROFILES_CONFIG_OPTION = 'ckanext.dcat.rdf.profiles'
 COMPAT_MODE_CONFIG_OPTION = 'ckanext.dcat.compatibility_mode'
-VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 DEFAULT_RDF_PROFILES = ['euro_dcat_ap']
-
+VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 
 class RDFParserException(Exception):
     pass
@@ -35,7 +36,6 @@ class RDFParserException(Exception):
 
 class RDFProfileException(Exception):
     pass
-
 
 class RDFProcessor(object):
 
@@ -67,7 +67,7 @@ class RDFProcessor(object):
                 config.get(COMPAT_MODE_CONFIG_OPTION, False))
         self.compatibility_mode = compatibility_mode
 
-        self.g = rdflib.Graph()
+        self.g = rdflib.ConjunctiveGraph()
 
     def _load_profiles(self, profile_names):
         '''
@@ -123,7 +123,7 @@ class RDFParser(RDFProcessor):
         '''
         for pagination_node in self.g.subjects(RDF.type, HYDRA.PagedCollection):
             for o in self.g.objects(pagination_node, HYDRA.nextPage):
-                return unicode(o)
+                return str(o)
         return None
 
 
@@ -154,7 +154,7 @@ class RDFParser(RDFProcessor):
         # exceptions are not cached, add them here.
         # PluginException indicates that an unknown format was passed.
         except (SyntaxError, xml.sax.SAXParseException,
-                rdflib.plugin.PluginException, TypeError), e:
+                rdflib.plugin.PluginException, TypeError) as e:
 
             raise RDFParserException(e)
 
@@ -240,7 +240,6 @@ class RDFSerializer(RDFProcessor):
 
         Returns the reference to the dataset, which will be an rdflib URIRef.
         '''
-
         uri_value = dataset_dict.get('uri')
         if not uri_value:
             for extra in dataset_dict.get('extras', []):
@@ -327,9 +326,11 @@ class RDFSerializer(RDFProcessor):
 
                 cat_ref = self._add_source_catalog(catalog_ref, dataset_dict, dataset_ref)
                 if not cat_ref:
-	             self.g.add((catalog_ref, DCAT.dataset, dataset_ref))
-		else:
-    		     self.g.add((cat_ref, DCAT.dataset, dataset_ref))
+                    org_site=self.g.objects(URIRef(str(catalog_ref)+"/organization/"+dataset_dict.get('owner_org')), VCARD.hasURL)
+                    self.g.add((org_site.next(), DCAT.dataset, dataset_ref))
+                else:
+                     self.g.add((cat_ref, DCAT.dataset, dataset_ref))
+#                    self.g.add((catalog_ref, DCAT.dataset, dataset_ref))
 
         if pagination_info:
             self._add_pagination_triples(pagination_info)
@@ -352,16 +353,7 @@ class RDFSerializer(RDFProcessor):
 
         source_uri = _get_from_extra('source_catalog_homepage')
         if not source_uri:
-            try:
-                org_site=self.g.objects(URIRef(str(root_catalog_ref)+"/organization/"+dataset_dict.get('owner_org')), VCARD.hasURL)
-                catalog_ref = org_site.next()
-            except Exception:
-                return
-            if not catalog_ref:
-                return
-        else:
-            catalog_ref = URIRef(source_uri)
-
+            return
 
         g = self.g
         catalog_ref = URIRef(source_uri)
@@ -384,10 +376,9 @@ class RDFSerializer(RDFProcessor):
                 key, predicate, _type = item
                 value = _get_from_extra(key)
                 if value:
-	         if key == 'source_catalog_homepage' and ~value.endswith("/#"):
-        	  value = value + '/#'
-    	         g.add((catalog_ref, predicate, _type(value)))
-
+                 if key == 'source_catalog_homepage' and ~value.endswith("/#"):
+                   value = value + '/#'
+                 g.add((catalog_ref, predicate, _type(value)))
 
             publisher_sources = (
                                  ('name', Literal, FOAF.name, True,),
@@ -439,7 +430,7 @@ Operation mode.
                         help='Make the output more human readable')
     parser.add_argument('-p', '--profile', nargs='*',
                         action='store',
-                        help='RDF Profiles to use, defaults to euro_dcat_ap')
+                        help='RDF Profiles to use, defaults to euro_dcat_ap_2')
     parser.add_argument('-m', '--compat-mode',
                         action='store_true',
                         help='Enable compatibility mode')
@@ -452,7 +443,6 @@ Operation mode.
     contents = args.file.read()
 
     config.update({DCAT_EXPOSE_SUBCATALOGS: args.subcatalogs})
-
     # Workaround until the core translation function defaults to the Flask one
     from paste.registry import Registry
     from ckan.lib.cli import MockTranslator
