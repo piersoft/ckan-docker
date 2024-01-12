@@ -70,7 +70,7 @@ To start the containers:
 
 	docker compose up
 
-STOP BUILD: CTRL+C
+**STOP BUILD: CTRL+C**
 
 Patch DCATAP_IT for SOLR Schema:
 
