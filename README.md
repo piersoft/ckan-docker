@@ -78,8 +78,7 @@ Patch DCATAP_IT for SOLR Schema:
  	docker start datapusher db solr redis ckan nginx
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
-using a different colour. You could also use the -d "detach mode" option ie: `docker compose up -d` if you wished to use the current 
-window for something else.
+using a different colour. 
 
 At the end of the container start sequence there should be 6 containers running
 
