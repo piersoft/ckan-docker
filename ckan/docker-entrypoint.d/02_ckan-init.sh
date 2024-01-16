@@ -47,7 +47,7 @@ if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
    # Set API token if necessary
    echo "Set up ckanext.dcat.rdf.profiles in the CKAN config file"
    ckan config-tool $CKAN_INI "ckanext.dcat.rdf.profiles=euro_dcat_ap it_dcat_ap"
-   ckan config-tool $CKAN_INI "ckanext.dcat.base_uri=https://www.piersoftckan.biz"
+   ckan config-tool $CKAN_INI "ckanext.dcat.base_uri=$CKAN_SITE_URL"
 fi
 
 ckan config-tool $CKAN_INI "ckan.locale_default = it"
