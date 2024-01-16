@@ -7,14 +7,16 @@ import argparse
 import xml
 import json
 from pkg_resources import iter_entry_points
-
+import logging
+log = logging.getLogger(__name__)
 from ckantoolkit import config
 
 import rdflib
 import rdflib.parser
 from rdflib import URIRef, BNode, Literal
-from rdflib.namespace import Namespace, RDF
-
+from rdflib.namespace import Namespace, RDF, XSD
+import datetime
+from dateutil.parser import parse as parse_date
 import ckan.plugins as p
 
 from ckanext.dcat.utils import catalog_uri, dataset_uri, url_to_rdflib_format, DCAT_EXPOSE_SUBCATALOGS
@@ -364,7 +366,6 @@ class RDFSerializer(RDFProcessor):
             g.add((root_catalog_ref, DCT.hasPart, catalog_ref))
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
             g.add((catalog_ref, DCAT.dataset, dataset_ref))
-
             sources = (('source_catalog_title', DCT.title, Literal,),
                        ('source_catalog_description', DCT.description, Literal,),
                        ('source_catalog_homepage', FOAF.homepage, URIRef,),
@@ -376,16 +377,23 @@ class RDFSerializer(RDFProcessor):
                 key, predicate, _type = item
                 value = _get_from_extra(key)
                 if value:
-                 if key == 'source_catalog_homepage' and ~value.endswith("/#"):
+                 if key == 'source_catalog_modified':
+                   default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
+                   _date = parse_date(value, default=default_datetime)
+                   g.add((catalog_ref, predicate, _type(_date.isoformat(),
+                                                  datatype=XSD.dateTime)))
+                 elif key == 'source_catalog_homepage' and ~value.endswith("/#"):
                    value = value + '/#'
-                 g.add((catalog_ref, predicate, _type(value)))
+                 else:
+                   g.add((catalog_ref, predicate, _type(value)))
 
             publisher_sources = (
+                                 ('identifier', Literal, DCT.identifier, False,),
                                  ('name', Literal, FOAF.name, True,),
                                  ('email', Literal, FOAF.mbox, False,),
                                  ('url', URIRef, FOAF.homepage,False,),
                                  ('type', Literal, DCT.type, False,))
-
+            identifier=dataset_dict.get('holder_identifier')
             _pub = _get_from_extra('source_catalog_publisher')
             if _pub:
                 pub = json.loads(_pub)
@@ -393,11 +401,14 @@ class RDFSerializer(RDFProcessor):
                 #pub_uri = URIRef(pub.get('uri'))
 
                 agent = BNode()
+                g.add((agent, RDF.type, DCATAPIT.Agent))
                 g.add((agent, RDF.type, FOAF.Agent))
+                g.add((agent, DCT.identifier, Literal(identifier)))
                 g.add((catalog_ref, DCT.publisher, agent))
 
                 for src_key, _type, predicate, required in publisher_sources:
                     val = pub.get(src_key)
+                    log.info('val: %s',val)
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))
                     elif val is None:
