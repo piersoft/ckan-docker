@@ -326,7 +326,8 @@ class DCATRDFHarvester(DCATHarvester):
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     package_schema = harvester.update_package_schema_for_update(package_schema)
                 context['schema'] = package_schema
-
+                if 'access_rights' in package_schema:
+                 del package_schema['access_rights']
                 # Don't change the dataset name even if the title has
                 dataset['name'] = existing_dataset['name']
                 dataset['id'] = existing_dataset['id']
