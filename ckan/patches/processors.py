@@ -365,6 +365,7 @@ class RDFSerializer(RDFProcessor):
 
             g.add((root_catalog_ref, DCT.hasPart, catalog_ref))
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
+            g.add((catalog_ref, RDF.type, DCAT.Catalog))
             g.add((catalog_ref, DCAT.dataset, dataset_ref))
             sources = (('source_catalog_title', DCT.title, Literal,),
                        ('source_catalog_description', DCT.description, Literal,),
@@ -372,6 +373,7 @@ class RDFSerializer(RDFProcessor):
                        ('source_catalog_language', DCT.language, Literal,),
                        ('source_catalog_modified', DCT.modified, Literal,),)
 
+            
             # base catalog struct
             for item in sources:
                 key, predicate, _type = item
@@ -394,6 +396,8 @@ class RDFSerializer(RDFProcessor):
                                  ('url', URIRef, FOAF.homepage,False,),
                                  ('type', Literal, DCT.type, False,))
             identifier=dataset_dict.get('holder_identifier')
+ 
+
             _pub = _get_from_extra('source_catalog_publisher')
             if _pub:
                 pub = json.loads(_pub)
@@ -408,7 +412,17 @@ class RDFSerializer(RDFProcessor):
 
                 for src_key, _type, predicate, required in publisher_sources:
                     val = pub.get(src_key)
-                    log.info('val: %s',val)
+                    if src_key == 'url':
+                        homepage=_get_from_extra('source_catalog_homepage')
+                        if homepage.endswith("/#"):
+                          homepage=homepage.replace('/#','/')
+                        elif not homepage.endswith("/"):
+                          homepage=homepage+'/'
+                        else:
+                          homepage=homepage.replace('#','')
+                        g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
+                        log.info('val: %s',val)
+                        continue
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))
                     elif val is None:
