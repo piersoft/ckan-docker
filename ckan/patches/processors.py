@@ -352,8 +352,10 @@ class RDFSerializer(RDFProcessor):
             for ex in dataset_dict.get('extras', []):
                 if ex['key'] == key:
                     return ex['value']
-
-        source_uri = _get_from_extra('source_catalog_homepage')
+        if 'r_marche' in dataset_dict.get('holder_identifier'):
+            source_uri='http://goodpa.regione.marche.it'
+        else:
+            source_uri = _get_from_extra('source_catalog_homepage')
         if not source_uri:
             return
 
