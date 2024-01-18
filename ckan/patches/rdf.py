@@ -388,10 +388,14 @@ class DCATRDFHarvester(DCATHarvester):
                 harvester_tmp_dict = {}
 
                 name = dataset['name']
+                notes = dataset['notes']
+                if not notes:
+                    dataset['notes']="N_A"
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:
                  del package_schema['access_rights']
+               
                 try:
                     if dataset:
                         # Save reference to the package on the object
