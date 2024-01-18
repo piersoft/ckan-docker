@@ -31,7 +31,7 @@ RDF_PROFILES_CONFIG_OPTION = 'ckanext.dcat.rdf.profiles'
 COMPAT_MODE_CONFIG_OPTION = 'ckanext.dcat.compatibility_mode'
 DEFAULT_RDF_PROFILES = ['euro_dcat_ap']
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
-
+CKAN_SITE_URL='ckanext.dcat.base_uri'
 class RDFParserException(Exception):
     pass
 
@@ -249,8 +249,13 @@ class RDFSerializer(RDFProcessor):
                     uri_value = extra['value']
                     break
 
-        dataset_ref = URIRef(dataset_uri(dataset_dict))
-
+        dataset_ref1 = URIRef(dataset_uri(dataset_dict))
+        if 'r_emiro' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
+        if 'r_marche' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
+        dataset_ref = URIRef(dataset_ref1)
+        log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
         for profile_class in self._profiles:
             profile = profile_class(self.g, self.compatibility_mode)
             profile.graph_from_dataset(dataset_dict, dataset_ref)
@@ -352,8 +357,11 @@ class RDFSerializer(RDFProcessor):
             for ex in dataset_dict.get('extras', []):
                 if ex['key'] == key:
                     return ex['value']
+        # patch per harvesting marche e emilia-romagna per hasPart Catalog
         if 'r_marche' in dataset_dict.get('holder_identifier'):
-            source_uri='http://goodpa.regione.marche.it'
+            source_uri='http://goodpa.regione.marche.it/'
+        elif 'r_emiro' in dataset_dict.get('holder_identifier'):
+            source_uri='https://dati.emilia-romagna.it/'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
         if not source_uri:
@@ -364,6 +372,10 @@ class RDFSerializer(RDFProcessor):
 
         # we may have multiple subcatalogs, let's check if this one has been already added
         if (root_catalog_ref, DCT.hasPart, catalog_ref) not in g:
+            dataset_reftmp=dataset_ref
+            dataset_reftmp=dataset_ref.replace("www.piersoftckan.biz/",source_uri)
+            dataset_ref=URIRef(dataset_reftmp)
+            log.info('dataset_ref %s',dataset_ref)
 
             g.add((root_catalog_ref, DCT.hasPart, catalog_ref))
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
