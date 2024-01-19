@@ -391,6 +391,9 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
+                freq = dataset['frequency']
+                if not freq:
+                    dataset['frequancy']="UNKNOW"
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:
