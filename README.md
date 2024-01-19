@@ -57,6 +57,10 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
 
 Copy the included `.env.example` and rename it to `.env`. Modify it depending on your own needs.
 
+ATTENTION!!! substituto every www.piersoftckan.biz in .env file and in each files into /entrypoint dir!!
+
+First step: git clone https://github.com/piersoft/ckan-docker.git
+
 Please note that when accessing CKAN directly (via a browser) ie: not going through NGINX you will need to make sure you have "ckan" set up
 to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for CKAN_SITE_URL
 
