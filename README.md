@@ -82,8 +82,8 @@ Patch DCATAP_IT for SOLR Schema (IN ORDER):
   
   (after 3 minutes):
   
-        docker exec -it ckan sh /docker-entrypoint.d/03_ckan_groups.end
-        docker restart ckan
+docker exec -it ckan sh /docker-entrypoint.d/03_ckan_groups.end
+docker restart ckan
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. 
