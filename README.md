@@ -75,7 +75,8 @@ To start the containers:
 	docker compose up
 
 ## Patch DCATAP_IT for SOLR Schema (IN ORDER):
-
+(after 5 minutes since first boot):
+ 
 	STOP BUILD: CTRL+C
  
 	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
