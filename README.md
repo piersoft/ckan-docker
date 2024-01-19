@@ -77,8 +77,8 @@ To start the containers:
 Patch DCATAP_IT for SOLR Schema (IN ORDER): 
 ###STOP BUILD: CTRL+C###
  
-	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
- 	docker start datapusher db solr redis ckan nginx
+docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
+docker start datapusher db solr redis ckan nginx
   
   (after 3 minutes):
   
