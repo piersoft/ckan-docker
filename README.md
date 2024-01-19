@@ -74,8 +74,8 @@ To start the containers:
 
 	docker compose up
 
-Patch DCATAP_IT for SOLR Schema (IN ORDER): 
-##STOP BUILD: CTRL+C
+##Patch DCATAP_IT for SOLR Schema (IN ORDER): 
+	STOP BUILD: CTRL+C
  
 	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 	docker start datapusher db solr redis ckan nginx
