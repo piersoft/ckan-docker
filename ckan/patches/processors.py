@@ -417,7 +417,7 @@ class RDFSerializer(RDFProcessor):
             _pub = _get_from_extra('source_catalog_publisher')
 
             if 'r_marche' in identifier:
-              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it/#", "type": ""}'
 
             if _pub:
                 pub = json.loads(_pub)
