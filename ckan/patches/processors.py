@@ -357,6 +357,7 @@ class RDFSerializer(RDFProcessor):
             for ex in dataset_dict.get('extras', []):
                 if ex['key'] == key:
                     return ex['value']
+
         # patch per harvesting marche e emilia-romagna per hasPart Catalog
         if 'r_marche' in dataset_dict.get('holder_identifier'):
             source_uri='http://goodpa.regione.marche.it/'
@@ -364,6 +365,7 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://dati.emilia-romagna.it/'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
+
         if not source_uri:
             return
 
@@ -387,7 +389,7 @@ class RDFSerializer(RDFProcessor):
                        ('source_catalog_language', DCT.language, Literal,),
                        ('source_catalog_modified', DCT.modified, Literal,),)
 
-            
+ 
             # base catalog struct
             for item in sources:
                 key, predicate, _type = item
@@ -409,10 +411,14 @@ class RDFSerializer(RDFProcessor):
                                  ('email', Literal, FOAF.mbox, False,),
                                  ('url', URIRef, FOAF.homepage,False,),
                                  ('type', Literal, DCT.type, False,))
+
             identifier=dataset_dict.get('holder_identifier')
- 
 
             _pub = _get_from_extra('source_catalog_publisher')
+
+            if 'r_marche' in identifier:
+              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it/", "type": ""}'
+
             if _pub:
                 pub = json.loads(_pub)
 
