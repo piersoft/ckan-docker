@@ -533,12 +533,20 @@ class CKANHarvester(HarvesterBase):
                 for extra in package_dict.get('extras', []):
                   if extra['key'] == 'rightsHolder':
                     if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
-                      if len(resource['format']) >=4 :
-                        mimtmp=resource['format'].strip(' ')
-                        mimetype=mimtmp[-3:]
-                        resource.pop('format', None)
-                        resource['format'] = mimetype
+                        resource['license_type'] = "https://creativecommons.org/licenses/by/4.0/"
+                       #log.info('Ckanharvester standard: non ci sono licenze nelle risorse. Set CCBY40')
+                        resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                        # mimtmp=resource['format'].strip(' ')
+                         #mimetype=mimtmp[-3:]
+                        if 'pdf' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'PDF'
+                        if 'xls' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XLSX'
+                        resource['distribution_format'] = resource['format'].upper()
                         log.info('Trovato formato sbagliato e poi corretto dentro il mimetype %s',resource['format'])
+
                 # Clear remote url_type for resources (eg datastore, upload) as
                 # we are only creating normal resources with links to the
                 # remote ones
