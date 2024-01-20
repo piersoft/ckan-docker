@@ -531,13 +531,14 @@ class CKANHarvester(HarvesterBase):
 
             for resource in package_dict.get('resources', []):
                 for extra in package_dict.get('extras', []):
+                  resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                   if extra['key'] == 'rightsHolder':
                     if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
                         resource['license_type'] = "https://creativecommons.org/licenses/by/4.0/"
-                       #log.info('Ckanharvester standard: non ci sono licenze nelle risorse. Set CCBY40')
-                        resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                        # mimtmp=resource['format'].strip(' ')
-                         #mimetype=mimtmp[-3:]
+                        #log.info('Ckanharvester standard: non ci sono licenze nelle risorse. Set CCBY40')
+                        #resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                        #mimtmp=resource['format'].strip(' ')
+                        #mimetype=mimtmp[-3:]
                         if 'pdf' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
