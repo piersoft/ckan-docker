@@ -53,12 +53,12 @@ COPY patches/processors.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/processors.p
 COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
-# Copy custom patch for access_rights and rights
+# Copy custom patch for access_rights and rights and custom harvesting for ISPRA, r_emiro, r_marche, BDAP
 COPY patches/schema.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/schema.py
 COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/interfaces.py
 COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
 COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
-
+COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
 
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
