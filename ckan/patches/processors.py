@@ -360,9 +360,9 @@ class RDFSerializer(RDFProcessor):
 
         # patch per harvesting marche e emilia-romagna per hasPart Catalog
         if 'r_marche' in dataset_dict.get('holder_identifier'):
-            source_uri='http://goodpa.regione.marche.it/'
+            source_uri='http://goodpa.regione.marche.it'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
-            source_uri='https://dati.emilia-romagna.it/'
+            source_uri='https://dati.emilia-romagna.it'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -416,8 +416,9 @@ class RDFSerializer(RDFProcessor):
 
             _pub = _get_from_extra('source_catalog_publisher')
 
+            # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
             if 'r_marche' in identifier:
-              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it/#", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it", "type": ""}'
 
             if _pub:
                 pub = json.loads(_pub)
