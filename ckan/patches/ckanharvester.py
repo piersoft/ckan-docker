@@ -529,22 +529,30 @@ class CKANHarvester(HarvesterBase):
 
                     package_dict['extras'].append({'key': key, 'value': value})
 
+# seguono patch generalie per Regione Marche e Basilicata che hanno ckan 2.2 senza alcun metadato e per BDAP che fornisce errori nei formati
+
+            notes = package_dict['notes']
+            if not notes:
+                   package_dict['notes']="N_A"
+#            freq = package_dict['frequency']
+#            if not freq:
+#                   package_dict['frequency']="UNKNOW"
+
             for resource in package_dict.get('resources', []):
+
+                resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                resource['license_type'] = "https://creativecommons.org/licenses/by/4.0/"
+                resource['distribution_format'] = resource['format'].upper()
                 for extra in package_dict.get('extras', []):
-                  resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                   if extra['key'] == 'rightsHolder':
                     if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
-                        resource['license_type'] = "https://creativecommons.org/licenses/by/4.0/"
-                        #log.info('Ckanharvester standard: non ci sono licenze nelle risorse. Set CCBY40')
-                        #resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                        #mimtmp=resource['format'].strip(' ')
-                        #mimetype=mimtmp[-3:]
                         if 'pdf' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
                         if 'xls' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'XLSX'
+                        resource.pop('distribution_format', None)
                         resource['distribution_format'] = resource['format'].upper()
                         log.info('Trovato formato sbagliato e poi corretto dentro il mimetype %s',resource['format'])
 
