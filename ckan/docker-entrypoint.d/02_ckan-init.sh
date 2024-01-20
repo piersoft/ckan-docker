@@ -39,9 +39,6 @@ ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/lice
 ckan dcatapit load --filename "${APP_DIR}/patches/regions.rdf" --name regions
 
 ckan config-tool $CKAN_INI "ckan.build = "finito" "
-echo -e "\nCKAN init completed successfully"
-
-fi
 if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
    # dcatapit_pkg settings have been configured in the .env file
    # Set API token if necessary
@@ -54,6 +51,10 @@ ckan config-tool $CKAN_INI "ckan.locale_default = it"
 ckan config-tool $CKAN_INI "ckan.locales_offered = it en"
 ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
 ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
+echo -e "\nCKAN init completed successfully"
+
+fi
+
 
 
 
