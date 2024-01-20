@@ -57,6 +57,10 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
 
 Copy the included `.env.example` and rename it to `.env`. Modify it depending on your own needs.
 
+ATTENTION!!! substitute every www.piersoftckan.biz in .env file and in each files into ckan/docker-entrypoint.d/ dir. Change in .env ckan_admin password..
+
+First step: git clone https://github.com/piersoft/ckan-docker.git
+
 Please note that when accessing CKAN directly (via a browser) ie: not going through NGINX you will need to make sure you have "ckan" set up
 to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for CKAN_SITE_URL
 
@@ -70,15 +74,18 @@ To start the containers:
 
 	docker compose up
 
-Patch DCATAP_IT for SOLR Schema (IN ORDER):
-
+## Patch DCATAP_IT for SOLR Schema (IN ORDER):
+(after 5 minutes since first boot):
+ 
 	STOP BUILD: CTRL+C
  
 	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
- 	docker start datapusher db solr redis ckan nginx
-  	(after 2 minutes):
-  	docker exec -it ckan sh /docker-entrypoint.d/03_ckan_groups.end
-   	docker restart ckan
+	docker start datapusher db solr redis ckan nginx
+  
+  (after 3 minutes):
+  
+	docker exec -it ckan sh /docker-entrypoint.d/03_ckan_groups.end
+	docker restart ckan
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. 
@@ -87,7 +94,7 @@ At the end of the container start sequence there should be 6 containers running
 
 ![Screenshot 2022-12-12 at 10 36 21 am](https://user-images.githubusercontent.com/54408245/207012236-f9571baa-4d99-4ffe-bd93-30b11c4829e0.png)
 
-After this step, CKAN should be running at `CKAN_SITE_URL`.
+After this step, CKAN should be running at `CKAN_SITE_URL`. (example https://192.168.0.67:8443)
 
 
 #### Development mode
