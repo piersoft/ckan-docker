@@ -326,8 +326,14 @@ class DCATRDFHarvester(DCATHarvester):
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     package_schema = harvester.update_package_schema_for_update(package_schema)
                 context['schema'] = package_schema
-                if 'access_rights' in package_schema:
-                 del package_schema['access_rights']
+                if dataset.get('access_rights'):
+                 if dataset['access_rights']=='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
+                  log.warning('1. esiste access_rights')
+  #                   if 'access_rights' in package_schema:
+                  del package_schema['access_rights']
+                  dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                   #  if 'access_rights' in package_schema:
+                     # del package_schema['access_rights']
 
                 # Don't change the dataset name even if the title has
                 dataset['name'] = existing_dataset['name']
@@ -343,22 +349,39 @@ class DCATRDFHarvester(DCATHarvester):
                     if res_uri and res_uri in resource_mapping:
                         resource['id'] = resource_mapping[res_uri]
                         if not 'rights' in resource:
-                         resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                          resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                         if not 'access_rights' in dataset:
-                         dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                          dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                         if 'license' in resource:
-                         if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40':
-                          resource['license'] = 'https://creativecommons.org/licenses/by/4.0/' 
+                          if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40':
+                           resource['license'] = 'https://creativecommons.org/licenses/by/4.0/' 
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_update(harvest_object, dataset, harvester_tmp_dict)
-
+                    package_schema = harvester.update_package_schema_for_update(package_schema)
+                    context['schema'] = package_schema
+                    if 'access_rights' in package_schema:
+                      del package_schema['access_rights']
+                      dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                 try:
                     if dataset:
+                        package_schema = package_plugin.update_package_schema()
+                        for harvester in p.PluginImplementations(IDCATRDFHarvester):
+                             package_schema = harvester.update_package_schema_for_update(package_schema)
+                        context['schema'] = package_schema
+                        if dataset.get('access_rights'):
+                           if dataset['access_rights']=='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
+                            log.warning('2. esiste access_rights')
+                            if 'ispra' in dataset['holder_identifier']:
+                             del package_schema['access_rights']
+                            dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+
                         # Save reference to the package on the object
                         harvest_object.package_id = dataset['id']
                         harvest_object.add()
 
                         p.toolkit.get_action('package_update')(context, dataset)
+                        if dataset.get('access_rights') !='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
+                          dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                     else:
                         log.info('Ignoring dataset %s' % existing_dataset['name'])
                         return 'unchanged'
@@ -380,7 +403,10 @@ class DCATRDFHarvester(DCATHarvester):
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     package_schema = harvester.update_package_schema_for_create(package_schema)
                 context['schema'] = package_schema
-
+                if 'access_rights' in package_schema:
+                      del package_schema['access_rights']
+                      dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                 
                 # We need to explicitly provide a package ID
                 dataset['id'] = str(uuid.uuid4())
                 package_schema['id'] = [unicode_safe]
@@ -393,11 +419,12 @@ class DCATRDFHarvester(DCATHarvester):
                     dataset['notes']="N_A"
                 freq = dataset['frequency']
                 if not freq:
-                    dataset['frequancy']="UNKNOW"
+                    dataset['frequency']="UNKNOW"
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:
-                 del package_schema['access_rights']
+     #                 continue
+                    del package_schema['access_rights']
                
                 try:
                     if dataset:
