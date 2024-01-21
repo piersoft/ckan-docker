@@ -1122,6 +1122,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                     ):
                 value = self._object_value(distribution, predicate)
                 if value:
+                    if 'https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40' in value:
+                       value='https://creativecommons.org/licenses/by/4.0/'
                     resource_dict[key] = value
 
             resource_dict['url'] = (self._object_value(distribution,
