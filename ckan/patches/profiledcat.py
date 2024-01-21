@@ -539,6 +539,7 @@ class RDFProfile(object):
         for distribution in self._distributions(dataset_ref):
             # If distribution has a license, attach it to the dataset
             license = self._object(distribution, DCT.license)
+
             if license:
                 # Try to find a matching license comparing URIs, then titles
                 license_id = license_uri2id.get(license.toPython())
@@ -1122,8 +1123,11 @@ class EuropeanDCATAPProfile(RDFProfile):
                     ):
                 value = self._object_value(distribution, predicate)
                 if value:
-                    if 'https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40' in value:
-                       value='https://creativecommons.org/licenses/by/4.0/'
+                      #log.info('value type: %s',type(value))
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','')
+                     # value='https://creativecommons.org/publicdomain/zero/1.0/'
                     resource_dict[key] = value
 
             resource_dict['url'] = (self._object_value(distribution,
