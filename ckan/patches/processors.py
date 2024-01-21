@@ -419,7 +419,7 @@ class RDFSerializer(RDFProcessor):
             # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
             if 'r_marche' in identifier:
               _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it", "type": ""}'
-            if 'r_marche' in identifier:
+            if 'r_emiro' in identifier:
               _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it", "type": ""}'
 
             if _pub:
