@@ -339,6 +339,16 @@ class DCATRDFHarvester(DCATHarvester):
                 dataset['name'] = existing_dataset['name']
                 dataset['id'] = existing_dataset['id']
 
+                notes = dataset['notes']
+                if not notes:
+                    dataset['notes']="N_A"
+               # tags = dataset['tags']
+               # if not tags:
+               #     dataset['tags']="N_A"
+                freq = dataset['frequency']
+                if not freq:
+                    dataset['frequency']="UNKNOW"
+
                 harvester_tmp_dict = {}
 
                 # check if resources already exist based on their URI
@@ -417,9 +427,9 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
-                tags = dataset['tags']
-                if not tags:
-                    dataset['tags']="N_A"
+                #tags = dataset['tags']
+                #if not tags:
+                #    dataset['tags']="N_A"
                 freq = dataset['frequency']
                 if not freq:
                     dataset['frequency']="UNKNOW"
