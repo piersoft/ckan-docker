@@ -254,6 +254,8 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
         if 'r_marche' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
+        if 'r_toscan' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.toscana.it")
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
         for profile_class in self._profiles:
@@ -363,6 +365,8 @@ class RDFSerializer(RDFProcessor):
             source_uri='http://goodpa.regione.marche.it'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.emilia-romagna.it'
+        elif 'r_toscan' in dataset_dict.get('holder_identifier'):
+            source_uri='https://dati.toscana.it'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -395,13 +399,13 @@ class RDFSerializer(RDFProcessor):
                 key, predicate, _type = item
                 value = _get_from_extra(key)
                 if value:
+                 if key == 'source_catalog_homepage' and ~value.endswith("/#"):
+                   value = value + '/#'
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
                    g.add((catalog_ref, predicate, _type(_date.isoformat(),
                                                   datatype=XSD.dateTime)))
-                 elif key == 'source_catalog_homepage' and ~value.endswith("/#"):
-                   value = value + '/#'
                  else:
                    g.add((catalog_ref, predicate, _type(value)))
 
@@ -421,6 +425,8 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it", "type": ""}'
             if 'r_emiro' in identifier:
               _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it", "type": ""}'
+            if 'r_toscan' in identifier:
+              _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it", "type": ""}'
 
             if _pub:
                 pub = json.loads(_pub)
@@ -437,14 +443,15 @@ class RDFSerializer(RDFProcessor):
                     val = pub.get(src_key)
                     if src_key == 'url':
                         homepage=_get_from_extra('source_catalog_homepage')
-                        if homepage.endswith("/#"):
-                          homepage=homepage.replace('/#','/')
-                        elif not homepage.endswith("/"):
-                          homepage=homepage+'/'
-                        else:
-                          homepage=homepage.replace('#','')
-                        g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
-                        log.info('val: %s',val)
+                        if homepage is not None:
+                         if homepage.endswith("/#"):
+                           homepage=homepage.replace('/#','/')
+                         elif not homepage.endswith("/"):
+                           homepage=homepage+'/'
+                         else:
+                           homepage=homepage.replace('#','')
+                           g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
+                           log.info('val: %s',val)
                         continue
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))

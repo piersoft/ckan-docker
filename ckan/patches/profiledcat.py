@@ -539,8 +539,8 @@ class RDFProfile(object):
         for distribution in self._distributions(dataset_ref):
             # If distribution has a license, attach it to the dataset
             license = self._object(distribution, DCT.license)
-
             if license:
+                license.replace('deed.it','')
                 # Try to find a matching license comparing URIs, then titles
                 license_id = license_uri2id.get(license.toPython())
                 if not license_id:
@@ -1123,10 +1123,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                     ):
                 value = self._object_value(distribution, predicate)
                 if value:
-                      #log.info('value type: %s',type(value))
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','')
+                    # if resource_dict[key] == 'license':
+                    log.info('value: %s',value)
+                    value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
+                    value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
+                    value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','')
+                    value.replace('deed.it','')
                      # value='https://creativecommons.org/publicdomain/zero/1.0/'
                     resource_dict[key] = value
 
@@ -1365,17 +1367,23 @@ class EuropeanDCATAPProfile(RDFProfile):
         for resource_dict in dataset_dict.get('resources', []):
 
             distribution = CleanedURIRef(resource_uri(resource_dict))
+             #distribution = distribution.replace("deed.it","")
             if 'r_marche' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
               distribution=CleanedURIRef(distribution)
-              log.info('resource_distribution_it %s',distribution)
+               # log.info('resource_distribution_it %s',distribution)
             if 'r_emiro' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
               distribution=CleanedURIRef(distribution)
-              log.info('resource_distribution_it %s',distribution)
-            g.add((dataset_ref, DCAT.distribution, distribution))
+               # log.info('resource_distribution_it %s',distribution)
+            if 'r_toscan' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("www.piersoftckan.biz","dati.toscana.it")
+              distribution=CleanedURIRef(distribution)
+               # log.info('resource_distribution_it %s',distribution)
+            if distribution is not None:
+             g.add((dataset_ref, DCAT.distribution, distribution))
 
-            g.add((distribution, RDF.type, DCAT.Distribution))
+             g.add((distribution, RDF.type, DCAT.Distribution))
 
             #  Simple values
             items = [
