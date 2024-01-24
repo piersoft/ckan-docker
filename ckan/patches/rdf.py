@@ -345,9 +345,9 @@ class DCATRDFHarvester(DCATHarvester):
                # tags = dataset['tags']
                # if not tags:
                #     dataset['tags']="N_A"
-                freq = dataset['frequency']
-                if not freq:
-                    dataset['frequency']="UNKNOW"
+               # freq = dataset['frequency']
+               # if not freq:
+               #     dataset['frequency']="UNKNOW"
 
                 harvester_tmp_dict = {}
 
