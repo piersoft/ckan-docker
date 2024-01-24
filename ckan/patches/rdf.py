@@ -1,4 +1,4 @@
-from builtins import str
+ƒfrom builtins import str
 from past.builtins import basestring
 import json
 import uuid
@@ -430,9 +430,9 @@ class DCATRDFHarvester(DCATHarvester):
                 #tags = dataset['tags']
                 #if not tags:
                 #    dataset['tags']="N_A"
-                freq = dataset['frequency']
-                if not freq:
-                    dataset['frequency']="UNKNOW"
+                 #freq = dataset['frequency']
+                 #if not freq:
+                  #   dataset['frequency']="UNKNOW"
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:
