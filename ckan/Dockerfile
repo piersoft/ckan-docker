@@ -42,6 +42,7 @@ COPY patches/regions.rdf "${APP_DIR}/patches/regions.rdf"
 RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
 
+COPY patches/basedcat.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/base.py
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py           
 COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
