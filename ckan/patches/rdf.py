@@ -379,11 +379,9 @@ class DCATRDFHarvester(DCATHarvester):
                              package_schema = harvester.update_package_schema_for_update(package_schema)
                         context['schema'] = package_schema
                         if dataset.get('access_rights'):
-                           if dataset['access_rights']=='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
-                            log.warning('2. esiste access_rights')
-                            if 'ispra' in dataset['holder_identifier']:
-                             del package_schema['access_rights']
-                            dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                           log.warning('2. esiste access_rights')
+                           del package_schema['access_rights']
+                           dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
 
                         # Save reference to the package on the object
                         harvest_object.package_id = dataset['id']
