@@ -245,7 +245,8 @@ class DCATJSONHarvester(DCATHarvester):
             source_dataset = model.Package.get(harvest_object.source.id)
             if source_dataset.owner_org:
                 package_dict['owner_org'] = source_dataset.owner_org
-
+        if not package_dict.get('access_rights'):
+                package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
         # Flag this object as the current one
         harvest_object.current = True
         harvest_object.add()
@@ -264,7 +265,10 @@ class DCATJSONHarvester(DCATHarvester):
                 # We need to explicitly provide a package ID
                 package_dict['id'] = str(uuid.uuid4())
                 package_schema['id'] = [unicode_safe]
-
+                if package_dict.get('access_rights'):
+                      if 'access_rights' in package_schema:
+                          del package_schema['access_rights']
+                package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                 # Save reference to the package on the object
                 harvest_object.package_id = package_dict['id']
                 harvest_object.add()
@@ -280,9 +284,11 @@ class DCATJSONHarvester(DCATHarvester):
                 package_dict['id'] = harvest_object.package_id
 
             if status in ['new', 'change']:
+                package_schema = logic.schema.default_update_package_schema()
+                context['schema'] = package_schema
                 action = 'package_create' if status == 'new' else 'package_update'
                 message_status = 'Created' if status == 'new' else 'Updated'
-
+  
                 package_id = p.toolkit.get_action(action)(context, package_dict)
                 log.info('%s dataset with id %s', message_status, package_id)
 
@@ -341,8 +347,10 @@ def copy_across_resource_ids(existing_dataset, harvested_dataset):
                     existing_resource_identities[identity]
                 resource['id'] = matching_existing_resource['id']
                 if not 'rights' in resource:
-                 resource['rights'] ='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-
+                   resource['rights'] ='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                if not 'license' in resource:
+                   resource['license']='https://creativecommons.org/licenses/by/4.0/'
+                   resource['license_type']='https://creativecommons.org/licenses/by/4.0/'
                 # make sure we don't match this existing_resource again
                 del existing_resource_identities[identity]
                 existing_resources_still_to_match.remove(
