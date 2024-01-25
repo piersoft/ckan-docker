@@ -36,7 +36,8 @@ class DCATHarvester(HarvesterBase):
         :param content_type: will be returned as type
         :return: a tuple containing the content and content-type
         '''
-        url = url.replace("https://dati.regione.calabria.it", "http://dati.regione.calabria.it")
+        # patch per Regione Calabria che ha redirect sbagliato e ssl mal configurato
+        url = url.replace("https://dati.regione.calabria.it", "http://dati.regione.calabria.it/opendata")
         if not url.lower().startswith('http'):
             # Check local file
             if os.path.exists(url):
