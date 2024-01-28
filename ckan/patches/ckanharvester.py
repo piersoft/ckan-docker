@@ -555,9 +555,27 @@ class CKANHarvester(HarvesterBase):
        
             autemail = package_dict['author_email']
             if autemail:
-              if check(autemail) == 'Invalid Email':
-                 packege_dict.pop('author_email', None)
+              if " " in autemail:
+                 package_dict.pop('author_email', None)
                  package_dict['author_email'] =""
+              if "©" in autemail:
+                 package_dict.pop('author_email', None)
+                 package_dict['author_email'] =""
+              if ";" in autemail:
+                 package_dict.pop('author_email', None)
+                 package_dict['author_email'] =""
+
+            mautemail = package_dict['maintainer_email']
+            if mautemail:
+              if " " in mautemail:
+                 package_dict.pop('maintainer_email', None)
+                 package_dict['maintainer_email'] =""
+              if "©" in mautemail:
+                 package_dict.pop('maintainer_email', None)
+                 package_dict['maintainer_email'] =""
+              if ";" in mautemail:
+                 package_dict.pop('maintainer_email', None)
+                 package_dict['maintainer_email'] =""
 
             for resource in package_dict.get('resources', []):
 
@@ -580,6 +598,8 @@ class CKANHarvester(HarvesterBase):
                         if 'pdf' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
+                        if 'N/N' in resource['url']:
+                              resource.pop('url', None)
                         if 'xls' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'XLSX'
@@ -595,15 +615,21 @@ class CKANHarvester(HarvesterBase):
                         if '-http--link' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'HTML'
+                        if 'geojson' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'GEOJSON'
                         resource.pop('distribution_format', None)
                         resource['distribution_format'] = resource['format'].upper()
+                        resource.pop('tags', None)
+                     
                   #      log.info('Trovato formato sbagliato e poi corretto dentro il mimetype %s',resource['format'])
-
+                  if '7ecde342-4dd8-46c4-b55c-0815dea4e1a6' in package_dict.get('id'):
+                     resource.pop('tags', None)
+                     resource.pop('url', None)
                 # Clear remote url_type for resources (eg datastore, upload) as
                 # we are only creating normal resources with links to the
                 # remote ones
                 resource.pop('url_type', None)
-
                 # Clear revision_id as the revision won't exist on this CKAN
                 # and saving it will cause an IntegrityError with the foreign
                 # key.
