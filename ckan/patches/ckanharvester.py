@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import re
 import requests
 from requests.exceptions import HTTPError, RequestException
 
@@ -542,17 +543,36 @@ class CKANHarvester(HarvesterBase):
 #            if not freq:
 #                   package_dict['frequency']="UNKNOW"
 
+            regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+            def check(email):
+                # pass the regular expression
+                # and the string into the fullmatch() method
+               if(re.fullmatch(regex, email)):
+                   print("Valid Email")
+               else:
+                   print("Invalid Email")
+       
+            autemail = package_dict['author_email']
+            if autemail:
+              if check(autemail) == 'Invalid Email':
+                 packege_dict.pop('author_email', None)
+                 package_dict['author_email'] =""
+
             for resource in package_dict.get('resources', []):
 
                 resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                if package_dict['license_url'] is not None:
+                if package_dict.get('license_url') is not None:
                    resource['license_type'] = package_dict['license_url']
                    resource['license_id'] = package_dict['license_title']
                    resource['license_type'].replace("http://www.opendefinition.org/licenses/cc-by","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
                 else:
                    resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"
                    resource['license_id'] = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-
+                if len(resource['id'])<7 :
+                     newlenres=resource['id']+resource['id']+resource['id']
+                     resource.pop('id', None)
+ #                     resource['id']=newlenres
                 resource['distribution_format'] = resource['format'].upper()
                 for extra in package_dict.get('extras', []):
                   if 'url' in extra:

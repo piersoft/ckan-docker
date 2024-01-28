@@ -42,7 +42,6 @@ COPY patches/regions.rdf "${APP_DIR}/patches/regions.rdf"
 RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
 
-COPY patches/basedcat.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/base.py
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py           
 COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
@@ -52,6 +51,7 @@ COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/ima
 COPY patches/vocabulary.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py
 COPY patches/processors.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/processors.py
 COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
+COPY patches/profiledcat.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/profiles.py
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
 # Copy custom patch for access_rights and rights and custom harvesting for ISPRA, r_emiro, r_marche, BDAP
@@ -60,6 +60,7 @@ COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/inte
 COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
 COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
 COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
+COPY patches/baseharv.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/base.py
 
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
