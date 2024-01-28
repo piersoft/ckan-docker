@@ -531,17 +531,11 @@ class CKANHarvester(HarvesterBase):
                     package_dict['extras'].append({'key': key, 'value': value})
 
 # seguono patch generalie per Regione Marche e Basilicata che hanno ckan 2.2 senza alcun metadato e per BDAP che fornisce errori nei formati
-
-#             identif = package_dict['identifier']
-  #           if not identif:
-    #                package_dict['identifier']=package_dict['id']
-
+            
             notes = package_dict['notes']
             if not notes:
                    package_dict['notes']="N_A"
-#            freq = package_dict['frequency']
-#            if not freq:
-#                   package_dict['frequency']="UNKNOW"
+
 
             regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
@@ -587,10 +581,10 @@ class CKANHarvester(HarvesterBase):
                 else:
                    resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"
                    resource['license_id'] = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
+
                 if len(resource['id'])<7 :
-                     newlenres=resource['id']+resource['id']+resource['id']
                      resource.pop('id', None)
- #                     resource['id']=newlenres
+
                 resource['distribution_format'] = resource['format'].upper()
                 for extra in package_dict.get('extras', []):
                   if 'url' in extra:
