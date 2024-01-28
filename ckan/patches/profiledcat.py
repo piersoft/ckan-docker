@@ -1126,9 +1126,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                     # if resource_dict[key] == 'license':
 #                    log.info('value: %s',value)
                    # if 'friuli' not in value:
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
+ #                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
+   #                  value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
+    #                 value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
                     value=value.replace('deed.it','')
                     value=value.replace('https://api.smartdatanet.it/metadataapi/api/license/CCBY','https://creativecommons.org/licenses/by/4.0/')
                      # value='https://creativecommons.org/publicdomain/zero/1.0/'
@@ -1371,8 +1371,16 @@ class EuropeanDCATAPProfile(RDFProfile):
 
             distribution = CleanedURIRef(resource_uri(resource_dict))
              #distribution = distribution.replace("deed.it","")
+            if 'r_lazio' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("https://www.piersoftckan.biz","http://dati.lazio.it/catalog")
+            if 'r_basili' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("www.piersoftckan.biz","dati.regione.basilicata.it/catalog")
+              distribution=CleanedURIRef(distribution)
             if 'r_marche' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
+              distribution=CleanedURIRef(distribution)
+            if 'aci' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("https://www.piersoftckan.biz","http://lod.aci.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if 'r_emiro' in dataset_dict.get('holder_identifier'):
@@ -1381,6 +1389,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                # log.info('resource_distribution_it %s',distribution)
             if 'r_toscan' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","dati.toscana.it")
+              distribution=CleanedURIRef(distribution)
+            if 'm_lps' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("https://www.piersoftckan.biz","http://dati.lavoro.it")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if distribution is not None:

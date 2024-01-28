@@ -1,4 +1,4 @@
-ƒfrom builtins import str
+from builtins import str
 from past.builtins import basestring
 import json
 import uuid
@@ -145,7 +145,7 @@ class DCATRDFHarvester(DCATHarvester):
     def gather_stage(self, harvest_job):
 
         log.debug('In DCATRDFHarvester gather_stage')
-
+        setlic=0
         rdf_format = None
         if harvest_job.source.config:
             rdf_format = json.loads(harvest_job.source.config).get("rdf_format")
@@ -240,16 +240,20 @@ class DCATRDFHarvester(DCATHarvester):
 
                     obj = HarvestObject(guid=guid, job=harvest_job,
                                         content=json.dumps(dataset))
-
+            
                     obj.save()
                     object_ids.append(obj.id)
             except Exception as e:
-                self._save_gather_error('Error when processsing dataset: %r / %s' % (e, traceback.format_exc()),
-                                        harvest_job)
+                setlic=1
+                info.debug('ha dato error ma continuo')
+ #                self._save_gather_error('Error when processsing dataset: %r / %s' % (e, traceback.format_exc()),
+ #                                        harvest_job)
                 return []
+           
 
             # get the next page
-            next_page_url = parser.next_page()
+            if setlic==0:
+               next_page_url = parser.next_page()
 
         # Check if some datasets need to be deleted
         object_ids_to_delete = self._mark_datasets_for_deletion(guids_in_source, harvest_job)
@@ -339,6 +343,10 @@ class DCATRDFHarvester(DCATHarvester):
                 dataset['name'] = existing_dataset['name']
                 dataset['id'] = existing_dataset['id']
 
+                identif = dataset['identifier']
+                if not identif:
+                    dataset['identifier']=dataset['id']
+
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
@@ -362,9 +370,11 @@ class DCATRDFHarvester(DCATHarvester):
                           resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                         if not 'access_rights' in dataset:
                           dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                        if 'license' in resource:
-                          if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40':
-                           resource['license'] = 'https://creativecommons.org/licenses/by/4.0/' 
+   #                         if 'license' in resource:
+      #                        if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40':
+      #                         resource['license'] = 'https://creativecommons.org/licenses/by/4.0/'
+      #                        if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20':
+      #                         resource['license'] = 'https://www.dati.gov.it/content/italian-open-data-license-v20' 
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_update(harvest_object, dataset, harvester_tmp_dict)
                     package_schema = harvester.update_package_schema_for_update(package_schema)
@@ -380,7 +390,10 @@ class DCATRDFHarvester(DCATHarvester):
                         context['schema'] = package_schema
                         if dataset.get('access_rights'):
                            log.warning('2. esiste access_rights')
-                           del package_schema['access_rights']
+                           if dataset.get('holder_identifier')=='ispra_rm':
+                              del package_schema['access_rights']
+                           if dataset.get('publisher_identifier')=='lispa':
+                              del package_schema['access_rights']
                            dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
 
                         # Save reference to the package on the object
@@ -422,15 +435,18 @@ class DCATRDFHarvester(DCATHarvester):
                 harvester_tmp_dict = {}
 
                 name = dataset['name']
+                identif = dataset['identifier']
+                if not identif:
+                    dataset['identifier']=dataset['id']
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
                 #tags = dataset['tags']
                 #if not tags:
                 #    dataset['tags']="N_A"
-                 #freq = dataset['frequency']
-                 #if not freq:
-                  #   dataset['frequency']="UNKNOW"
+                  # freq = dataset['frequency']
+                  # if not freq:
+                    #   dataset['frequency']="UNKNOW"
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:

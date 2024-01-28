@@ -250,12 +250,22 @@ class RDFSerializer(RDFProcessor):
                     break
 
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
+
+        if 'm_lps' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://dati.lavoro.it/")
         if 'r_emiro' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
         if 'r_marche' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
         if 'r_toscan' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.toscana.it")
+        if 'r_basili' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz/","dati.regione.basilicata.it/catalog/")
+        if 'r_lazio' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://dati.lazio.it/catalog/")
+        if 'aci' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://lod.aci.it/")
+
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
         for profile_class in self._profiles:
@@ -367,6 +377,14 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://dati.emilia-romagna.it'
         elif 'r_toscan' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.toscana.it'
+        elif 'r_lazio' in dataset_dict.get('holder_identifier'):
+            source_uri='http://dati.regione.lazioit'
+        elif 'r_basili' in dataset_dict.get('holder_identifier'):
+            source_uri='https://dati.regione.basilicata.it'
+        elif 'aci' in dataset_dict.get('holder_identifier'):
+            source_uri='http://lod.aci.it/'
+        elif 'm_lps' in dataset_dict.get('holder_identifier'):
+            source_uri='http://dati.lavoro.it/'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -427,6 +445,12 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it", "type": ""}'
             if 'r_toscan' in identifier:
               _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it", "type": ""}'
+            if 'r_basili' in identifier:
+              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it", "type": ""}'
+            if 'aci' in identifier:
+              _pub= '{"uri": "", "name": "ACI", "email": "", "url": "http://lod.aci.it/", "type": ""}'
+            if 'm_lps' in identifier:
+              _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.it/", "type": ""}'
 
             if _pub:
                 pub = json.loads(_pub)

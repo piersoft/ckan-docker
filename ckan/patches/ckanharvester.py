@@ -531,6 +531,10 @@ class CKANHarvester(HarvesterBase):
 
 # seguono patch generalie per Regione Marche e Basilicata che hanno ckan 2.2 senza alcun metadato e per BDAP che fornisce errori nei formati
 
+#             identif = package_dict['identifier']
+  #           if not identif:
+    #                package_dict['identifier']=package_dict['id']
+
             notes = package_dict['notes']
             if not notes:
                    package_dict['notes']="N_A"
@@ -541,20 +545,39 @@ class CKANHarvester(HarvesterBase):
             for resource in package_dict.get('resources', []):
 
                 resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                resource['license_type'] = "https://creativecommons.org/licenses/by/4.0/"
+                if package_dict['license_url'] is not None:
+                   resource['license_type'] = package_dict['license_url']
+                   resource['license_id'] = package_dict['license_title']
+                   resource['license_type'].replace("http://www.opendefinition.org/licenses/cc-by","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
+                else:
+                   resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"
+                   resource['license_id'] = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
+
                 resource['distribution_format'] = resource['format'].upper()
                 for extra in package_dict.get('extras', []):
-                  if extra['key'] == 'rightsHolder':
-                    if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
+                  if 'url' in extra:
+                 #   if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
                         if 'pdf' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
                         if 'xls' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'XLSX'
+                        if '.csv' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if 'xml' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XML'
+                        if 'zip' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if '-http--link' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'HTML'
                         resource.pop('distribution_format', None)
                         resource['distribution_format'] = resource['format'].upper()
-                        log.info('Trovato formato sbagliato e poi corretto dentro il mimetype %s',resource['format'])
+                  #      log.info('Trovato formato sbagliato e poi corretto dentro il mimetype %s',resource['format'])
 
                 # Clear remote url_type for resources (eg datastore, upload) as
                 # we are only creating normal resources with links to the
