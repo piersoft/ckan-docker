@@ -531,11 +531,17 @@ class CKANHarvester(HarvesterBase):
                     package_dict['extras'].append({'key': key, 'value': value})
 
 # seguono patch generalie per Regione Marche e Basilicata che hanno ckan 2.2 senza alcun metadato e per BDAP che fornisce errori nei formati
-            
+
+#             identif = package_dict['identifier']
+  #           if not identif:
+    #                package_dict['identifier']=package_dict['id']
+
             notes = package_dict['notes']
             if not notes:
                    package_dict['notes']="N_A"
-
+#            freq = package_dict['frequency']
+#            if not freq:
+#                   package_dict['frequency']="UNKNOW"
 
             regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
@@ -546,9 +552,16 @@ class CKANHarvester(HarvesterBase):
                    print("Valid Email")
                else:
                    print("Invalid Email")
-       
-            autemail = package_dict['author_email']
-            if autemail:
+
+            if package_dict.get('url') is not None:
+             url_dataset = package_dict.get('url')
+             if url_dataset:
+              if "onsiglio" in url_dataset or "ONSIGLIO" in url_dataset:
+                 package_dict['url']=""        
+
+            if package_dict.get('author_email') is not None:
+             autemail = package_dict.get('author_email')
+             if autemail:
               if " " in autemail:
                  package_dict.pop('author_email', None)
                  package_dict['author_email'] =""
@@ -559,8 +572,9 @@ class CKANHarvester(HarvesterBase):
                  package_dict.pop('author_email', None)
                  package_dict['author_email'] =""
 
-            mautemail = package_dict['maintainer_email']
-            if mautemail:
+            if package_dict.get('maintainer_email') is not None:
+             mautemail = package_dict.get('maintainer_email')
+             if mautemail:
               if " " in mautemail:
                  package_dict.pop('maintainer_email', None)
                  package_dict['maintainer_email'] =""
@@ -572,23 +586,61 @@ class CKANHarvester(HarvesterBase):
                  package_dict['maintainer_email'] =""
 
             for resource in package_dict.get('resources', []):
-
+                if 'format' in resource:
+                        if 'csv-' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if 'CSV-' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if 'csv-semicolon' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if '-link' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'HTML'
+                        if 'ZIP' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if 'zip' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if 'wms' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'WMS'
+                        if 'wfs' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'WFS'
+                        if 'gml' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'GML'
+                        if 'OData' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XML'
+                        resource.pop('distribution_format', None)
+                        resource['distribution_format'] = resource['format'].upper()
                 resource['rights'] = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                 if package_dict.get('license_url') is not None:
                    resource['license_type'] = package_dict['license_url']
                    resource['license_id'] = package_dict['license_title']
-                   resource['license_type'].replace("http://www.opendefinition.org/licenses/cc-by","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
+                   resource['license_type']=resource['license_type'].replace("http://www.opendefinition.org/licenses/cc-by","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
+                   resource['license_type']=resource['license_type'].replace("http://www.opendefinition.org/licenses/odc-odbl","https://w3id.org/italia/controlled-vocabulary/licences/A310_ODBL")
                 else:
-                   resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"
-                   resource['license_id'] = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-
+                   resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknow"
+                   resource['license_id'] = 'Licenza sconosciuta'
                 if len(resource['id'])<7 :
                      resource.pop('id', None)
-
-                resource['distribution_format'] = resource['format'].upper()
                 for extra in package_dict.get('extras', []):
                   if 'url' in extra:
                  #   if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
+                        if ' ' in resource['url']:
+                              resource['url']=resource['url'].replace(" ","")
+                        if 'ZIP(' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if 'zip(' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
                         if 'pdf' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
@@ -600,18 +652,29 @@ class CKANHarvester(HarvesterBase):
                         if '.csv' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'CSV'
+                        if 'csv-' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if 'CSV-' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
                         if 'xml' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'XML'
                         if 'zip' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'ZIP'
-                        if '-http--link' in resource['url']:
+                        if '-http--link' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'HTML'
                         if 'geojson' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'GEOJSON'
+                        if 'csv-semicolon' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+
+
                         resource.pop('distribution_format', None)
                         resource['distribution_format'] = resource['format'].upper()
                         resource.pop('tags', None)

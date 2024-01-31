@@ -144,7 +144,7 @@ class RDFParser(RDFProcessor):
 
         Returns nothing.
         '''
-
+        log.debug('SONO PRIMA DI URL_TO_RDFLIB con _format: %s',_format)
         _format = url_to_rdflib_format(_format)
         if not _format or _format == 'pretty-xml':
             _format = 'xml'
@@ -265,6 +265,14 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://dati.lazio.it/catalog/")
         if 'aci' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://lod.aci.it/")
+        if 'c_l219' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://aperto.comune.torino.it/")
+        if 'cr_campa' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://opendata-crc.di.unisa.it/")
+        if '00304260409' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","opendata.comune.rimini.it")
+        if 'c_a345' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","ckan.opendatalaquila.it")
 
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
@@ -356,6 +364,7 @@ class RDFSerializer(RDFProcessor):
 
         if not _format:
             _format = 'xml'
+
         _format = url_to_rdflib_format(_format)
         output = self.g.serialize(format=_format)
 
@@ -385,6 +394,15 @@ class RDFSerializer(RDFProcessor):
             source_uri='http://lod.aci.it/'
         elif 'm_lps' in dataset_dict.get('holder_identifier'):
             source_uri='http://dati.lavoro.it/'
+        elif 'c_l219' in dataset_dict.get('holder_identifier'):
+            source_uri='http://aperto.comune.torino.it/'
+        elif 'cr_campa' in dataset_dict.get('holder_identifier'):
+            source_uri='http://opendata-crc.di.unisa.it/'
+        elif '00304260409' in dataset_dict.get('holder_identifier'):
+            source_uri='https://opendata.comune.rimini.it/'
+        elif 'c_a345' in dataset_dict.get('holder_identifier'):
+            source_uri='https://ckan.opendatalaquila.it/'
+
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -451,6 +469,16 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "ACI", "email": "", "url": "http://lod.aci.it/", "type": ""}'
             if 'm_lps' in identifier:
               _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.it/", "type": ""}'
+            if 'c_l219' in identifier:
+              _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": ""}'
+            if 'cr_campa' in identifier:
+              _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": ""}'
+            if '00304260409' in identifier:
+              _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": ""}'
+            if 'c_a345' in identifier:
+              _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": ""}'
+
+
 
             if _pub:
                 pub = json.loads(_pub)
@@ -472,10 +500,12 @@ class RDFSerializer(RDFProcessor):
                            homepage=homepage.replace('/#','/')
                          elif not homepage.endswith("/"):
                            homepage=homepage+'/'
+                         elif homepage.endswith("/"):
+                           homepage=homepage+'#'
                          else:
                            homepage=homepage.replace('#','')
                            g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
-                           log.info('val: %s',val)
+                           log.info('homepage foaf: %s',URIRef(homepage))
                         continue
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))

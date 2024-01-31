@@ -609,6 +609,7 @@ class RDFProfile(object):
 
         _format = self._object(distribution, DCT['format'])
         if isinstance(_format, Literal):
+            _format=_format.replace('CSV-SEMICOLON DELIMITED','csv')
             if not imt and '/' in _format:
                 imt = str(_format)
             else:
@@ -999,6 +1000,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                log.debug('value landing: %s',value)
+                if 'onsiglio' or 'CONSIGLIO' in value:
+                    value=''
                 dataset_dict[key] = value
 
         if not dataset_dict.get('version'):
@@ -1123,16 +1127,16 @@ class EuropeanDCATAPProfile(RDFProfile):
                     ):
                 value = self._object_value(distribution, predicate)
                 if value:
-                    # if resource_dict[key] == 'license':
-#                    log.info('value: %s',value)
-                   # if 'friuli' not in value:
- #                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','')
-   #                  value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','')
-    #                 value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
                     value=value.replace('deed.it','')
+                    value=value.replace('https://sparql-noipa.mef.gov.it/metadata/Licenza','https://creativecommons.org/licenses/by/4.0/')
                     value=value.replace('https://api.smartdatanet.it/metadataapi/api/license/CCBY','https://creativecommons.org/licenses/by/4.0/')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40','https://creativecommons.org/licenses/by/4.0/')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
+                    value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")
+
                      # value='https://creativecommons.org/publicdomain/zero/1.0/'
-                    #log.info('value: %s',value)
+                    log.info('valuelic: %s',value)
                     resource_dict[key] = value
 
             resource_dict['url'] = (self._object_value(distribution,
@@ -1371,8 +1375,14 @@ class EuropeanDCATAPProfile(RDFProfile):
 
             distribution = CleanedURIRef(resource_uri(resource_dict))
              #distribution = distribution.replace("deed.it","")
+
+
+            if 'c_l219' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("https://www.piersoftckan.biz","http://aperto.comune.torino.it")
+              distribution=CleanedURIRef(distribution)
             if 'r_lazio' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("https://www.piersoftckan.biz","http://dati.lazio.it/catalog")
+              distribution=CleanedURIRef(distribution)
             if 'r_basili' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","dati.regione.basilicata.it/catalog")
               distribution=CleanedURIRef(distribution)
@@ -1386,6 +1396,9 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'r_emiro' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
               distribution=CleanedURIRef(distribution)
+            if 'cr_campa' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("https://www.piersoftckan.biz","http://opendata-crc.di.unisa.it/")
+              distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if 'r_toscan' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("www.piersoftckan.biz","dati.toscana.it")
@@ -1394,6 +1407,15 @@ class EuropeanDCATAPProfile(RDFProfile):
               distribution = distribution.replace("https://www.piersoftckan.biz","http://dati.lavoro.it")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
+            if '00304260409' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("www.piersoftckan.biz","opendata.comune.rimini.it/")
+              distribution=CleanedURIRef(distribution)
+            if 'c_a345' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace("www.piersoftckan.biz","ckan.opendatalaquila.it")
+              distribution=CleanedURIRef(distribution)
+
+
+
             if distribution is not None:
              g.add((dataset_ref, DCAT.distribution, distribution))
 
