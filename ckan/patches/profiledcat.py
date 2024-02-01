@@ -1134,6 +1134,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
                     value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
                     value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")
+                    value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown","https://creativecommons.org/licenses/by/4.0/")
 
                      # value='https://creativecommons.org/publicdomain/zero/1.0/'
                     log.info('valuelic: %s',value)
