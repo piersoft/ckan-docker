@@ -65,6 +65,7 @@ ckan config-tool $CKAN_INI "ckanext.dcatapit.nonconformant_themes_mapping.file= 
 ckan config-tool $CKAN_INI "ckanext.dcatapit.theme_group_mapping.add_new_groups= true"
 ckan config-tool $CKAN_INI "geonames.username=piersoft"
 ckan config-tool $CKAN_INI "ckanext.multilang.localized_resources = true"
+ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/licences.rdf"
 
   for file in "${APP_DIR}/patches/groups/"*.json; do
    echo "Creating group from file ${file}"
