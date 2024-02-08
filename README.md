@@ -12,19 +12,7 @@ Perchè non si importa anche la Toscana o Emilia-Romagna con il catalog.rdf? per
 * [Installing Docker](#installing-docker)
 * [docker compose vs docker-compose](#docker-compose-vs-docker-compose)
 * [Install CKAN plus dependencies](#install-ckan-plus-dependencies)
-* [Development mode](#development-mode)
-   * [Create an extension](#create-an-extension)
-   * [Running HTTPS on development mode](#running-https-on-development-mode)
-* [CKAN images](#ckan-images)
-   * [Extending the base images](#extending-the-base-images)
-   * [Applying patches](#applying-patches)
-* [Debugging with pdb](#pdb)
-* [Datastore and Datapusher](#Datastore-and-datapusher)
-* [NGINX](#nginx)
-* [The ckanext-envvars extension](#envvars)
-* [The CKAN_SITE_URL parameter](#CKAN_SITE_URL)
-* [Changing the base image](#Changing-the-base-image)
-* [Replacing DataPusher with XLoader](#Replacing-DataPusher-with-XLoader)
+
 
 
 ## 1.  Overview
