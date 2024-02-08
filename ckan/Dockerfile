@@ -60,7 +60,7 @@ COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/inte
 COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
 COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
 COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
-COPY patches/baseharv.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/base.py
+COPY patches/baseharv.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/base.py
 
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
