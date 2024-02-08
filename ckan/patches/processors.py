@@ -32,6 +32,8 @@ COMPAT_MODE_CONFIG_OPTION = 'ckanext.dcat.compatibility_mode'
 DEFAULT_RDF_PROFILES = ['euro_dcat_ap']
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 CKAN_SITE_URL='ckanext.dcat.base_uri'
+PREF_LANDING= config.get('ckanext.dcat.base_uri')
+
 class RDFParserException(Exception):
     pass
 
@@ -252,27 +254,30 @@ class RDFSerializer(RDFProcessor):
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
 
         if 'm_lps' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://dati.lavoro.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
         if 'r_emiro' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.emilia-romagna.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.emilia-romagna.it")
+           dataset_ref1=dataset_ref1.replace("dati.comune.fe.it","https://dati.comune.fe.it")
         if 'r_marche' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","goodpa.regione.marche.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://goodpa.regione.marche.it")
         if 'r_toscan' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","dati.toscana.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.toscana.it")
         if 'r_basili' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz/","dati.regione.basilicata.it/catalog/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
         if 'r_lazio' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://dati.lazio.it/catalog/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
         if 'aci' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://lod.aci.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it/")
         if 'c_l219' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://aperto.comune.torino.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
         if 'cr_campa' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("https://www.piersoftckan.biz/","http://opendata-crc.di.unisa.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
         if '00304260409' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","opendata.comune.rimini.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://opendata.comune.rimini.it")
         if 'c_a345' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace("www.piersoftckan.biz","ckan.opendatalaquila.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
+        if 'uds_ca' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
 
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
@@ -384,6 +389,7 @@ class RDFSerializer(RDFProcessor):
             source_uri='http://goodpa.regione.marche.it'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.emilia-romagna.it'
+            source_catalog_homepage=source_uri
         elif 'r_toscan' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.toscana.it'
         elif 'r_lazio' in dataset_dict.get('holder_identifier'):
@@ -402,7 +408,8 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://opendata.comune.rimini.it/'
         elif 'c_a345' in dataset_dict.get('holder_identifier'):
             source_uri='https://ckan.opendatalaquila.it/'
-
+        elif 'uds_ca' in dataset_dict.get('holder_identifier'):
+            source_uri='https://data.tdm-project.it'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -415,7 +422,7 @@ class RDFSerializer(RDFProcessor):
         # we may have multiple subcatalogs, let's check if this one has been already added
         if (root_catalog_ref, DCT.hasPart, catalog_ref) not in g:
             dataset_reftmp=dataset_ref
-            dataset_reftmp=dataset_ref.replace("www.piersoftckan.biz/",source_uri)
+            dataset_reftmp=dataset_ref.replace(PREF_LANDING,source_uri)
             dataset_ref=URIRef(dataset_reftmp)
             log.info('dataset_ref %s',dataset_ref)
 
@@ -477,6 +484,9 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": ""}'
             if 'c_a345' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": ""}'
+            if 'uds_ca' in identifier:
+              _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": ""}'
+
 
 
 
