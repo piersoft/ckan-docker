@@ -60,7 +60,9 @@ to be an alias to localhost in the local hosts file. Either that or you will nee
 Using the default values on the `.env.example` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). This should be obviously changed before running this setup as a public CKAN instance.
 
 
-## First step: git clone https://github.com/piersoft/ckan-docker.git
+## First step: 
+
+	git clone https://github.com/piersoft/ckan-docker.git
 
 To build the images:
 
