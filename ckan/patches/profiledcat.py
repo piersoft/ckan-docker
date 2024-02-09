@@ -1382,7 +1382,7 @@ class EuropeanDCATAPProfile(RDFProfile):
         for resource_dict in dataset_dict.get('resources', []):
 
             distribution = CleanedURIRef(resource_uri(resource_dict))
-            distribution = distribution.replace("deed.it","")
+            #distribution = distribution.replace("deed.it","")
 
 
             if 'c_l219' in dataset_dict.get('holder_identifier'):
