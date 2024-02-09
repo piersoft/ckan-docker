@@ -587,6 +587,9 @@ class CKANHarvester(HarvesterBase):
 
             for resource in package_dict.get('resources', []):
                 if 'format' in resource:
+                        if 'pdf' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'PDF'
                         if 'csv-' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'CSV'
