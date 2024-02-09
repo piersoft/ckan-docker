@@ -541,7 +541,7 @@ class RDFProfile(object):
             # If distribution has a license, attach it to the dataset
             license = self._object(distribution, DCT.license)
             if license:
-                license.replace('deed.it','')
+                license=license.replace("deed.it","")
                 # Try to find a matching license comparing URIs, then titles
                 license_id = license_uri2id.get(license.toPython())
                 if not license_id:
@@ -1129,7 +1129,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                 value = self._object_value(distribution, predicate)
                 if value:
  # applico patch alle licenze specifiche e per evitare duplicati in dct:license
-                    value=value.replace('deed.it','')
+                    value=value.replace("deed.it","")
                     value=value.replace('https://sparql-noipa.mef.gov.it/metadata/Licenza','https://creativecommons.org/licenses/by/4.0/')
                     value=value.replace('https://api.smartdatanet.it/metadataapi/api/license/CCBY','https://creativecommons.org/licenses/by/4.0/')
    #                   value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40','https://creativecommons.org/licenses/by/4.0/')
@@ -1156,7 +1156,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     ('language', DCT.language),
                     ('documentation', FOAF.page),
                     ('conforms_to', DCT.conformsTo),
-                    ):
+                    ):	
                 values = self._object_value_list(distribution, predicate)
                 if values:
                     resource_dict[key] = json.dumps(values)
@@ -1381,8 +1381,9 @@ class EuropeanDCATAPProfile(RDFProfile):
         # Resources
         for resource_dict in dataset_dict.get('resources', []):
 
+            
             distribution = CleanedURIRef(resource_uri(resource_dict))
-            #distribution = distribution.replace("deed.it","")
+             #distribution = distribution.replace("deed.it","")
 
 
             if 'c_l219' in dataset_dict.get('holder_identifier'):
@@ -1458,6 +1459,22 @@ class EuropeanDCATAPProfile(RDFProfile):
                 g.add((distribution, DCT.license, URIRefOrLiteral(resource_license_fallback)))
 
             # Format
+            if 'csv' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='CSV'
+            if 'link' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='HTML_SIMPL'
+            if 'ZIP' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='ZIP'
+            if 'pdf' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='PDF'
+            if 'PDF' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='PDF'
+
             mimetype = resource_dict.get('mimetype')
             fmt = resource_dict.get('format')
 
