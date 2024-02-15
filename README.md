@@ -72,14 +72,6 @@ To start the containers:
 
 	docker compose up
 
-## Patch DCATAP_IT for SOLR Schema (IN ORDER):
-(after 5 minutes since first boot):
- 
-	STOP BUILD: CTRL+C
- 
-	docker cp ckan/patches/managed-schema solr:/var/solr/data/ckan/conf/managed-schema
-	docker start datapusher db solr redis ckan nginx
-
 
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
