@@ -73,7 +73,7 @@ ckan config-tool $CKAN_INI "ckanext.multilang.localized_resources = true"
   done
 
 ckan config-tool $CKAN_INI "ckan.build_groups = "finitigruppi" "
-
+fi
 echo -e "\nCKAN init groups completed successfully"
 
 
