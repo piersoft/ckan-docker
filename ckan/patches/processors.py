@@ -267,7 +267,7 @@ class RDFSerializer(RDFProcessor):
         if 'r_lazio' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
         if 'aci' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
         if 'c_l219' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
         if 'cr_campa' in dataset_dict.get('holder_identifier'):
@@ -278,9 +278,13 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
         if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
+<<<<<<< HEAD
+    
+=======
         if 'aci' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
             
+>>>>>>> d3beb93149d7c60aeae960135c46e59b3bd76c12
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
         for profile_class in self._profiles:
@@ -400,6 +404,7 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://dati.regione.basilicata.it'
         elif 'aci' in dataset_dict.get('holder_identifier'):
             source_uri='http://lod.aci.it/'
+            source_catalog_homepage=source_uri
         elif 'm_lps' in dataset_dict.get('holder_identifier'):
             source_uri='http://dati.lavoro.it/'
         elif 'c_l219' in dataset_dict.get('holder_identifier'):
@@ -488,6 +493,8 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": ""}'
             if 'uds_ca' in identifier:
               _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": ""}'
+            if 'aci' in identifier:
+              _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it", "type": ""}'
 
 
 
@@ -507,6 +514,8 @@ class RDFSerializer(RDFProcessor):
                     val = pub.get(src_key)
                     if src_key == 'url':
                         homepage=_get_from_extra('source_catalog_homepage')
+                        if 'aci' in dataset_dict.get('holder_identifier'):
+                            homepage='http://lod.aci.it/'
                         if homepage is not None:
                          if homepage.endswith("/#"):
                            homepage=homepage.replace('/#','/')
@@ -516,8 +525,8 @@ class RDFSerializer(RDFProcessor):
                            homepage=homepage+'#'
                          else:
                            homepage=homepage.replace('#','')
-                           g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
-                           log.info('homepage foaf: %s',URIRef(homepage))
+                         g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
+                         log.info('homepage foaf: %s',URIRef(homepage))
                         continue
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))
