@@ -278,7 +278,9 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
         if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
-
+        if 'aci' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
+            
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
         for profile_class in self._profiles:
