@@ -368,9 +368,9 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
-                tags = dataset.get('tags')
+                tags = dataset.get('tags',[])
                 if not tags:
-                    dataset['tags']="N_A"
+                    dataset['tags']="[\"N_A\"]"
                 else:
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
@@ -463,9 +463,9 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
-                tags = dataset.get('tags') 
+                tags = dataset.get('tags',[]) 
                 if not tags:
-                    dataset['tags']="N_A"
+                    dataset['tags']="[\"N_A\"]"
                 else:
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
