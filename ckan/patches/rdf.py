@@ -370,7 +370,7 @@ class DCATRDFHarvester(DCATHarvester):
                     dataset['notes']="N_A"
                 tags = dataset.get('tags',[])
                 if not tags:
-                    dataset['tags']=[{"display_name": "N_A", "id": "b8907f2e-928c-4a83-a24e-51c0c0fc6d39", "name": "N_A", "state": "active", "vocabulary_id": null}]
+                    dataset['tags']=[{"display_name": "N_A", "id": "b8907f2e-928c-4a83-a24e-51c0c0fc6d39", "name": "N_A", "state": "active"}]
                 else:
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
@@ -465,7 +465,7 @@ class DCATRDFHarvester(DCATHarvester):
                     dataset['notes']="N_A"
                 tags = dataset.get('tags',[]) 
                 if not tags:
-                    dataset['tags']=[{"display_name": "N_A", "id": "b8907f2e-928c-4a83-a24e-51c0c0fc6d39", "name": "N_A", "state": "active", "vocabulary_id": null}]
+                    dataset['tags']=[{"display_name": "N_A", "id": "b8907f2e-928c-4a83-a24e-51c0c0fc6d39", "name": "N_A", "state": "active"}]
                 else:
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
