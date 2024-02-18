@@ -10,17 +10,35 @@ import ckan.plugins as p
 import ckan.model as model
 
 import ckan.lib.plugins as lib_plugins
-
+from ckanext.harvest.harvesters.base import HarvesterBase
 from ckanext.harvest.model import HarvestObject, HarvestObjectExtra
 from ckanext.harvest.logic.schema import unicode_safe
 from ckanext.dcat.harvesters.base import DCATHarvester
 from ckanext.dcat.processors import RDFParserException, RDFParser
 from ckanext.dcat.interfaces import IDCATRDFHarvester
+from ckan.lib.munge import munge_title_to_name, munge_tag
 
 log = logging.getLogger(__name__)
 
 
 class DCATRDFHarvester(DCATHarvester):
+    def _clean_tags(self, tags):
+        try:
+            def _update_tag(tag_dict, key, newvalue):
+                # update the dict and return it
+                tag_dict[key] = newvalue
+                return tag_dict
+
+            # assume it's in the package_show form
+            tags = [_update_tag(t, 'name', munge_tag(t['name'])) for t in tags if munge_tag(t['name']) != '']
+
+        except TypeError:  # a TypeError is raised if `t` above is a string
+            # REST format: 'tags' is a list of strings
+            tags = [munge_tag(t) for t in tags if munge_tag(t) != '']
+            tags = list(set(tags))
+            return tags
+
+        return tags
 
     def info(self):
         return {
@@ -322,7 +340,7 @@ class DCATRDFHarvester(DCATHarvester):
 
         # Check if a dataset with the same guid exists
         existing_dataset = self._get_existing_dataset(harvest_object.guid)
-
+        
         try:
             package_plugin = lib_plugins.lookup_package_plugin(dataset.get('type', None))
             if existing_dataset:
@@ -350,13 +368,15 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
-               # tags = dataset['tags']
-               # if not tags:
-               #     dataset['tags']="N_A"
-               # freq = dataset['frequency']
-               # if not freq:
-               #     dataset['frequency']="UNKNOW"
-
+                tags = dataset.get('tags', [])
+                if not tags:
+                    dataset['tags']="N_A"
+                else:
+                    dataset['tags']=self._clean_tags(tags)
+                freq = dataset.get('frequency')
+                if not freq:
+                    dataset['frequency']="UNKNOW"
+           
                 harvester_tmp_dict = {}
 
                 # check if resources already exist based on their URI
@@ -443,12 +463,15 @@ class DCATRDFHarvester(DCATHarvester):
                 notes = dataset['notes']
                 if not notes:
                     dataset['notes']="N_A"
-                #tags = dataset['tags']
-                #if not tags:
-                #    dataset['tags']="N_A"
-                  # freq = dataset['frequency']
-                  # if not freq:
-                    #   dataset['frequency']="UNKNOW"
+                tags = dataset.get('tags', []) 
+                if not tags:
+                    dataset['tags']="N_A"
+                else:
+                    dataset['tags']=self._clean_tags(tags)
+                freq = dataset.get('frequency')
+                if not freq:
+                    dataset['frequency']="UNKNOW"
+
                 for harvester in p.PluginImplementations(IDCATRDFHarvester):
                     harvester.before_create(harvest_object, dataset, harvester_tmp_dict)
                 if 'access_rights' in package_schema:
