@@ -278,8 +278,7 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
         if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
-        if 'aci' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
+
 
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
@@ -475,8 +474,6 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it", "type": ""}'
             if 'r_basili' in identifier:
               _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it", "type": ""}'
-            if 'aci' in identifier:
-              _pub= '{"uri": "", "name": "ACI", "email": "", "url": "http://lod.aci.it/", "type": ""}'
             if 'm_lps' in identifier:
               _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.it/", "type": ""}'
             if 'c_l219' in identifier:
