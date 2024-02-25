@@ -259,7 +259,7 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.emilia-romagna.it")
            dataset_ref1=dataset_ref1.replace("dati.comune.fe.it","https://dati.comune.fe.it")
         if 'r_marche' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://goodpa.regione.marche.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.marche.it/")
         if 'r_toscan' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.toscana.it")
         if 'r_basili' in dataset_dict.get('holder_identifier'):
@@ -387,7 +387,7 @@ class RDFSerializer(RDFProcessor):
 
         # patch per harvesting marche e emilia-romagna per hasPart Catalog
         if 'r_marche' in dataset_dict.get('holder_identifier'):
-            source_uri='http://goodpa.regione.marche.it'
+            source_uri='https://dati.regione.marche.it/'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.emilia-romagna.it'
             source_catalog_homepage=source_uri
@@ -467,7 +467,7 @@ class RDFSerializer(RDFProcessor):
 
             # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
             if 'r_marche' in identifier:
-              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "http://goodpa.regione.marche.it", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": ""}'
             if 'r_emiro' in identifier:
               _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it", "type": ""}'
             if 'r_toscan' in identifier:
