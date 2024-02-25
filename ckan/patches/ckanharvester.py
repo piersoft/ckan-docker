@@ -587,6 +587,12 @@ class CKANHarvester(HarvesterBase):
 
             for resource in package_dict.get('resources', []):
                 if 'format' in resource:
+                        if 'doc' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'DOC'
+                        if 'xls' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XLS'
                         if 'pdf' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'PDF'
