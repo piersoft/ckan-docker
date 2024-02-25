@@ -394,7 +394,7 @@ class RDFSerializer(RDFProcessor):
         elif 'r_toscan' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.toscana.it'
         elif 'r_lazio' in dataset_dict.get('holder_identifier'):
-            source_uri='http://dati.regione.lazioit'
+            source_uri='http://dati.regione.lazio.it'
         elif 'r_basili' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.regione.basilicata.it'
         elif 'aci' in dataset_dict.get('holder_identifier'):
