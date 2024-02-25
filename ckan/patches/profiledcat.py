@@ -1399,7 +1399,7 @@ class EuropeanDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog")
               distribution=CleanedURIRef(distribution)
             if 'r_marche' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://goodpa.regione.marche.it")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it")
               distribution=CleanedURIRef(distribution)
             if 'aci' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it")
