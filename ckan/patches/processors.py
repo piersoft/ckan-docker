@@ -278,6 +278,8 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
         if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
+        if 'm_it' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://www.interno.gov.it/")
 
 
         dataset_ref = URIRef(dataset_ref1)
@@ -412,6 +414,8 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://ckan.opendatalaquila.it/'
         elif 'uds_ca' in dataset_dict.get('holder_identifier'):
             source_uri='https://data.tdm-project.it'
+        elif 'm_it' in dataset_dict.get('holder_identifier'):
+            source_uri='interno.gov.it/'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
