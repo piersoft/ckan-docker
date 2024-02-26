@@ -1429,6 +1429,10 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'uds_ca' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://data.tdm-project.it")
               distribution=CleanedURIRef(distribution)
+            if 'm_it' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"interno.gov.it/")
+              distribution=CleanedURIRef(distribution)
+
 
 
             if distribution is not None:
