@@ -1390,13 +1390,13 @@ class EuropeanDCATAPProfile(RDFProfile):
 
 
             if 'c_l219' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it")
+              distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
               distribution=CleanedURIRef(distribution)
             if 'r_lazio' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog")
+              distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
               distribution=CleanedURIRef(distribution)
             if 'r_basili' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
               distribution=CleanedURIRef(distribution)
             if 'r_marche' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
@@ -1407,17 +1407,17 @@ class EuropeanDCATAPProfile(RDFProfile):
                # log.info('resource_distribution_it %s',distribution)
             if 'r_emiro' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("dati.comune.fe.it","https://dati.comune.fe.it")
-              distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
               distribution=CleanedURIRef(distribution)
             if 'cr_campa' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if 'r_toscan' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
               distribution=CleanedURIRef(distribution)
             if 'm_lps' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it")
+              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if '00304260409' in dataset_dict.get('holder_identifier'):
@@ -1430,10 +1430,8 @@ class EuropeanDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"https://data.tdm-project.it")
               distribution=CleanedURIRef(distribution)
             if 'm_it' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"interno.gov.it/")
+              distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=CleanedURIRef(distribution)
-
-
 
             if distribution is not None:
              g.add((dataset_ref, DCAT.distribution, distribution))
