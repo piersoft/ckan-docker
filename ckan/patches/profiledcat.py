@@ -1392,7 +1392,7 @@ class EuropeanDCATAPProfile(RDFProfile):
              #distribution = distribution.replace("deed.it","")
 
 
-            if 'c_l219' in dataset_dict.get('holder_identifier'):
+            if '00514490010' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
               distribution=CleanedURIRef(distribution)
             if 'r_lazio' in dataset_dict.get('holder_identifier'):
