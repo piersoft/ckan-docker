@@ -1485,7 +1485,10 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'PDF' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='PDF'
-
+            if 'doc' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='DOC'
+                
             mimetype = resource_dict.get('mimetype')
             fmt = resource_dict.get('format')
 
