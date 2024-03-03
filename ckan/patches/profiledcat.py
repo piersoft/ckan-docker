@@ -994,6 +994,9 @@ class EuropeanDCATAPProfile(RDFProfile):
 
         dataset_dict['extras'] = []
         dataset_dict['resources'] = []
+        # Patch Lazio Dato non disponibile
+        if 'Dato' or 'disponibile' in dataset_dict['frequency']:
+             dataset_dict['frequency']='UNKNOW'
 
         # Basic fields
         for key, predicate in (
