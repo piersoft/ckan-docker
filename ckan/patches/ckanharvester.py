@@ -645,6 +645,10 @@ class CKANHarvester(HarvesterBase):
                 if len(resource['id'])<7 :
                      resource.pop('id', None)
                 for extra in package_dict.get('extras', []):
+                  if 'frequency' in extra:
+                 #   Dato non disponibile nel catalog della Regione Lazio. Spacca il catalog. Sostituisco
+                        if 'Dato' in extra['value']:
+                              extra['value']="UNKNOW"
                   if 'url' in extra:
                  #   if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
                         if ' ' in resource['url']:
