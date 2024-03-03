@@ -1036,6 +1036,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                log.debug('value freq: %s',value)
+                if 'Dato' or 'disponibile' in value:
+                    value='UNKNOW'
                 dataset_dict['extras'].append({'key': key, 'value': value})
 
         #  Lists
