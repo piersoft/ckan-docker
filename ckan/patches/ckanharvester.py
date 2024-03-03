@@ -542,6 +542,8 @@ class CKANHarvester(HarvesterBase):
 #            freq = package_dict['frequency']
 #            if not freq:
 #                   package_dict['frequency']="UNKNOW"
+            if package_dict.get('frequency') is not None:
+                package_dict['frequency']=package_dict['frequency'].replace("Dato non disponibile","UNKNOW")
 
             regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
@@ -590,6 +592,9 @@ class CKANHarvester(HarvesterBase):
                         if 'doc' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'DOC'
+                        if 'geo json' in resource['format']:
+                              resource.pop('format', None)
+                              resource['format'] = 'GEOJSON'
                         if 'xls' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'XLS'
