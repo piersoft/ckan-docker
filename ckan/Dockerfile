@@ -20,8 +20,9 @@ RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@master#egg=cka
      pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
 
 # Install ckanext-dcatapit
-RUN  pip3 install -e git+https://github.com/piersoft/dcatapit.git@main#egg=ckanext-dcatapit && \
-     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
+COPY patches/dcatapit ${APP_DIR}/src/ckanext-dcatapit
+#RUN  pip3 install -e git+https://github.com/piersoft/dcatapit.git@main#egg=ckanext-dcatapit && \
+RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
 #&& \
  #    pip3 install -r https://raw.githubusercontent.com/piersoft/dcatapit/main/dev-requirements.txt
 
@@ -51,16 +52,14 @@ COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/ima
 COPY patches/vocabulary.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py
 COPY patches/processors.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/processors.py
 COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
-COPY patches/profiledcat.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/profiles.py
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
-# Copy custom patch for access_rights and rights and custom harvesting for ISPRA, r_emiro, r_marche, BDAP
+# Copy custom patch for access_rights and rights
 COPY patches/schema.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/schema.py
 COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/interfaces.py
 COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
 COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
-COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
-COPY patches/baseharv.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/base.py
+
 
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
