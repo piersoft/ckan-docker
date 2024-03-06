@@ -1,0 +1,20 @@
+[babel.extractors]
+ckan = ckan.lib.extract:extract_ckan
+
+[ckan.plugins]
+dcatapit_ckan_harvester = ckanext.dcatapit.harvesters.ckanharvester:CKANMappingHarvester
+dcatapit_config = ckanext.dcatapit.plugin:DCATAPITConfigurerPlugin
+dcatapit_csw_harvester = ckanext.dcatapit.harvesters.csw_harvester:DCATAPITCSWHarvester
+dcatapit_harvest_list = ckanext.dcatapit.plugin:DCATAPITHarvestListPlugin
+dcatapit_harvester = ckanext.dcatapit.dcat.harvester:DCATAPITHarvesterPlugin
+dcatapit_org = ckanext.dcatapit.plugin:DCATAPITOrganizationPlugin
+dcatapit_pkg = ckanext.dcatapit.plugin:DCATAPITPackagePlugin
+dcatapit_subcatalog_facets = ckanext.dcatapit.plugin:DCATAPITFacetsPlugin
+dcatapit_theme_group_mapper = ckanext.dcatapit.plugin:DCATAPITGroupMapper
+dcatapit_vocabulary = ckanext.dcatapit.plugins.vocabulary:DCATAPITVocabularyPlugin
+
+[ckan.rdf.profiles]
+it_dcat_ap = ckanext.dcatapit.dcat.profiles:ItalianDCATAPProfile
+
+[paste.paster_command]
+vocabulary = ckanext.dcatapit.commands.dcatapit:DCATAPITCommands

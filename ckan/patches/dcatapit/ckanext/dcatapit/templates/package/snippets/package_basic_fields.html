@@ -1,0 +1,95 @@
+{% ckan_extends %}
+{% set pkg_fields = h.get_dcatapit_package_schema() %}
+{% set icustom_fields = [] %}
+{% for custom_field in h.dcatapit_get_icustomschema_fields() %}
+    {% if {'name': custom_field['name']} not in icustom_fields and not custom_field['in_tab']%}
+        {% set tmp=icustom_fields.append({'name': custom_field['name']}) %}
+    {% endif %}
+{% endfor %}
+
+{% block package_basic_fields_custom %}
+    {{ super() }}
+
+    {% block dcatapit_package_basic_fields_custom %}
+    {% block dcatapit_package_basic_fields_custom_settings %}
+    <div id="dcatapit-edit-form-settings" class="hidden" ext="dcatapit">{{ h.json_dump({'tabs': [
+    {'id': 'information',
+    'name': _('Information'),
+    'fields': [{'name': 'title'},
+               {'name': 'name'},
+               {'name': 'notes'},
+               {'name': None, 'selector': '.slug-preview-value', 'parent': '.slug-preview'},
+               {'name': 'description'},
+               {'name': 'identifier', 'class': 'form-control',},
+               {'name': 'alternate_identifier', 'parent': '.alternate-identifier-wrap'},
+               {'name': 'language'},
+               {'name': 'is_version_of'},
+               {'name': 'license_id'},
+               {'name': 'private', 'parent': '[data-module="dataset-visibility"]', 'class': 'form-control', 'style':'width:50%'},
+               {'name': 'version'}
+              ]},
+    {'id': 'classification',
+     'name': _('Classification'),
+     'fields': [
+               {'name': 'theme', 'parent': '.theme-wrap'},
+               {'name': 'tag_string'},
+                ]},
+    {'id': 'organization',
+     'name': _('Subjects'),
+     'fields': [
+               {'name': 'owner_org', 'style': 'width:50%;margin-bottom:10px'},
+               {'name': 'publisher_name'},
+               {'name': 'creator', 'parent': '.creator-wrap'},
+               {'name': None, 'selector': '[for="field-range-rights_holder-key"]'},
+               {'name': None, 'selector': '[for="rights_holder-key"]'},
+               ],},
+    {'id': 'temporal',
+     'name': _('Temporal'),
+     'fields': [
+                {'name': 'issued', 'class': 'form-control', 'style': 'width:50%'},
+                {'name': 'modified', 'class': 'form-control', 'style': 'width:50%'},
+                {'name': 'frequency', 'class': 'form-control', 'style': 'width:50%'},
+                {'name': 'released'},
+                {'name': 'temporal_coverage', 'parent': '.temporal-coverage-wrap'},
+               ]},
+    {'id': 'spatial',
+     'name': _('Spatial'),
+     'fields': [
+                {'name': 'geographical_name'},
+                {'name': 'geographical_geonames_url'},
+               ]},
+    {'id': 'standards',
+     'name': _('Standards'),
+     'fields': [
+                {'name': 'conforms_to', 'parent': '.conforms-to-wrap'}
+               ]},
+    {'id': 'related',
+     'name': _('Related Datasets'),
+     'fields': [
+                {'name': 'is_version_of', 'class': 'form-control',},
+                {'name': 'url', 'class': 'form-control'}
+              ]},
+    {'id': 'extra',
+     'name': _('Additional Info'),
+     'fields': [
+                {'name': 'author'},
+                {'name': 'author_email'},
+                {'name': 'maintainer'},
+                {'name': 'maintainer_email'},] + icustom_fields,
+     'use_extra': true},
+    ]}) }}
+    {% endblock %}
+    </div>
+    {% asset 'ckanext-dcatapit/dcatapit_style' %}
+    {% asset 'ckanext-dcatapit/dcatapit_script' %}
+	{% snippet 'snippets/dcatapit_form_fields.html', data=data, errors=errors, schema_fields=pkg_fields %}
+    {% if h.dcatapit_enable_form_tabs() %}
+    <div class="dcatapit-form"
+         data-module="dcatapit-edit-form"
+         data-module-settings-container="#dcatapit-edit-form-settings"
+         data-module-form-container="#dataset-edit">
+    </div>
+    {% endif %}
+    {% endblock %}
+{% endblock %}
+

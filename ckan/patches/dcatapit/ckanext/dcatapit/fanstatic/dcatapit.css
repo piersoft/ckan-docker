@@ -1,0 +1,619 @@
+.size-8 {
+    font-size: 8pt!important;
+}
+
+.size-10 {
+    font-size: 10pt!important;
+}
+
+.size-12 {
+    font-size: 12pt!important;
+}
+
+.size-14 {
+    font-size: 14pt!important;
+}
+
+
+.template {
+    display: none!important;
+}
+
+.w200 {
+    max-width: 200px;
+}
+
+.w380 {
+    max-width: 380px;
+    width: 380px;
+}
+.add_new {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 130px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.add_new.error {
+    color: #c6898b;
+}
+
+.temporal-coverage-wrap {
+    margin-bottom: 4px;
+}
+.std-key {
+    font-weight: bold;
+}
+
+.std .row:even {
+    background: #f2f2f2
+}
+.conforms_to {
+}
+.bold {
+    font-weight: bold;
+}
+.control-custom .remove {
+    font-size: 14px;
+}
+
+.conforms_to .remove, .alternate_identifier .remove, .creator .remove, .temporal-coverage .remove, .theme .remove{
+    display: inline-block;
+    padding-right: 10px;
+    width: 100%;
+    padding-right: 20px;
+    text-align: right;
+    cursor: pointer;
+    float: right;
+    margin-top: 5px;
+}
+
+.remove_reference_documentation {
+    width: 20px!important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.remove .button {
+    display: inline-block;
+    border-radius: 15px;
+    border: solid 1px #000;
+    color: #fff;
+    background-color: #bd362f;
+    position: relative;
+    font-size: 0px;
+    top: 0;
+    left: 5px;
+    padding: 6px 8px;
+    line-height: 8px;
+}
+
+.removable {
+    border: dotted 1px #ccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    margin-top: 5px!important;
+    margin-bottom: 5px!important;
+}
+
+.inline-block {
+    display: inline-block;
+    margin-left:  5pt;
+    /* float:  right; */
+    margin-right:  5pt;
+    color: #aaaaaa;
+}
+
+/* Component containers
+
+----------------------------------*/
+.ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+}
+.ui-widget .ui-widget {
+    font-size: 1em;
+}
+.ui-widget-content a {
+    color: #333333;
+}
+.module-tabs .ui-widget-header {
+    color: #333333;
+    font-weight: bold;
+}
+.ui-widget-header a {
+    color: #333333;
+}
+
+
+.ui-tooltip {
+    padding: 8px;
+    position: absolute;
+    z-index: 9999;
+    max-width: 300px;
+    -webkit-box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px #aaa;
+    background-color: #fefefe!important;
+}
+body .ui-tooltip {
+    border-width: 2px;
+}
+.errors .error-item {
+    display: block;
+    background-color: #c6898b;
+    color: #fff;
+    padding: 4px;
+    margin-left: 130px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+/*!
+ * jQuery UI Tabs 1.10.4
+ * http://jqueryui.com
+ *
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/tabs/#theming
+ */
+.ui-tabs {
+	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	padding: .2em;
+}
+.ui-tabs .ui-tabs-nav {
+	/* margin: 0; */
+	/* padding: .2em .2em 0; */
+	float:  left;
+	width:  160px;
+}
+.ui-tabs .ui-tabs-nav li {
+	list-style: none;
+	float: left;
+	position: relative;
+	top: 0;
+	margin: 1px .2em 0 0;
+	border-bottom-width: 0;
+	padding: 0;
+	white-space: nowrap;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+	float: left;
+	padding: .5em 1em;
+	text-decoration: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+	cursor: text;
+}
+.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+	cursor: pointer;
+}
+.ui-tabs .ui-tabs-panel {
+	display: block;
+	border-width: 0;
+	padding: 1em 1.4em;
+	background: none;
+}
+
+ul.ui-tabs-nav {
+    list-style-type: none;
+    margin-left: 1pt;
+}
+
+.hovered {
+    background-color: #8ca0a6;
+}
+
+.form-nav {
+    padding: 6pt;
+}
+
+
+.prev-item {
+    float: left;
+}
+
+.next-item {
+    float: right;
+}
+
+.with-error a {
+    color: #b55457;
+
+}
+
+.form-nav-item a {
+    text-decoration: none;
+}
+
+
+/* Interaction states
+----------------------------------*/
+.module-tabs .ui-state-default,
+.module-tabs .ui-widget-content .ui-state-default,
+.module-tabs .ui-widget-header .ui-state-default {
+	font-weight: normal;
+	color: #454545;
+}
+.module-tabs .ui-state-default a,
+.module-tabs .ui-state-default a:link,
+.module-tabs .ui-state-default a:visited {
+	color: #454545;
+	text-decoration: none;
+}
+.module-tabs .ui-state-hover a,
+.module-tabs .ui-state-hover a:hover,
+.module-tabs .ui-state-hover a:link,
+.module-tabs .ui-state-hover a:visited,
+.module-tabs .ui-state-focus a,
+.module-tabs .ui-state-focus a:hover,
+.module-tabs .ui-state-focus a:link,
+.module-tabs .ui-state-focus a:visited {
+	color: #2b2b2b;
+	text-decoration: none;
+}
+
+.module-tabs .ui-state-active,
+.module-tabs .ui-widget-content .ui-state-active,
+.module-tabs .ui-widget-header .ui-state-active,
+.module-tabs .ui-state-active.ui-state-hover
+{
+	font-weight: normal;
+	color: #ffffff;
+	background-color: #8ca0a6;
+}
+
+.module-tabs .ui-state-active a:before{
+
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: -6px;
+    width: 6px;
+    height: 34px;
+    background-image: url("../../../base/images/nav-active.png?1");
+}
+
+.module-tabs .ui-state-active a,
+.module-tabs .ui-state-active a:link,
+.module-tabs .ui-state-active a:visited {
+	color: #333;
+	text-decoration: none;
+	background-color: #8ca0a6;
+}
+
+
+.module-tabs .ui-state-hover,
+.module-tabs .ui-widget-content .ui-state-hover,
+.module-tabs .ui-widget-header .ui-state-hover,
+.module-tabs .ui-state-focus,
+.module-tabs .ui-widget-content .ui-state-focus,
+.module-tabs .ui-widget-header .ui-state-focus {
+	font-weight: normal;
+	color: #2b2b2b;
+	background-color: #eee;
+}
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+	color: #777620;
+}
+.ui-state-highlight a,
+.ui-widget-content .ui-state-highlight a,
+.ui-widget-header .ui-state-highlight a {
+	color: #777620;
+}
+.ui-state-error,
+.ui-widget-content .ui-state-error,
+.ui-widget-header .ui-state-error {
+	color: #5f3f3f;
+}
+.ui-state-error a,
+.ui-widget-content .ui-state-error a,
+.ui-widget-header .ui-state-error a {
+	color: #5f3f3f;
+}
+.ui-state-error-text,
+.ui-widget-content .ui-state-error-text,
+.ui-widget-header .ui-state-error-text {
+	color: #5f3f3f;
+}
+.ui-priority-primary,
+.ui-widget-content .ui-priority-primary,
+.ui-widget-header .ui-priority-primary {
+	font-weight: bold;
+}
+.ui-priority-secondary,
+.ui-widget-content .ui-priority-secondary,
+.ui-widget-header .ui-priority-secondary {
+	opacity: .7;
+	filter:Alpha(Opacity=70);
+	font-weight: normal;
+}
+.ui-state-disabled,
+.ui-widget-content .ui-state-disabled,
+.ui-widget-header .ui-state-disabled {
+	opacity: .35;
+	filter:Alpha(Opacity=35);
+	background-image: none;
+}
+.ui-state-disabled .ui-icon {
+	filter:Alpha(Opacity=35); /* For IE8 - See #6059 */
+}
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon {
+	width: 16px;
+	height: 16px;
+}
+.ui-icon,
+.ui-widget-content .ui-icon {
+	background-image: url("images/ui-icons_444444_256x240.png");
+}
+.ui-widget-header .ui-icon {
+	background-image: url("images/ui-icons_444444_256x240.png");
+}
+.ui-state-default .ui-icon {
+	background-image: url("images/ui-icons_777777_256x240.png");
+}
+.ui-state-hover .ui-icon,
+.ui-state-focus .ui-icon {
+	background-image: url("images/ui-icons_555555_256x240.png");
+}
+.ui-state-active .ui-icon {
+	background-image: url("images/ui-icons_ffffff_256x240.png");
+}
+.ui-state-highlight .ui-icon {
+	background-image: url("images/ui-icons_777620_256x240.png");
+}
+.ui-state-error .ui-icon,
+.ui-state-error-text .ui-icon {
+	background-image: url("images/ui-icons_cc0000_256x240.png");
+}
+
+
+
+/* Overlays */
+.ui-widget-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+.ui-autocomplete {
+	position: absolute;
+	cursor: default;
+    background: #fff;
+    border: solid 1px #343;
+	width: 375px !important;
+
+}
+.ui-menu {
+	list-style: none;
+	padding: 2px;
+	margin: 0;
+	display: block;
+	outline: none;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+	position: absolute;
+}
+.ui-menu .ui-menu-item {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	/* support: IE10, see #8844 */
+	list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+}
+.ui-menu .ui-menu-divider {
+	margin: 5px -2px 5px -2px;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	border-width: 1px 0 0 0;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration: none;
+	display: block;
+	padding: 2px .4em;
+	line-height: 1.5;
+	min-height: 0; /* support: IE7 */
+	font-weight: normal;
+}
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+
+.ui-menu .ui-state-disabled {
+	font-weight: normal;
+	margin: .4em 0 .2em;
+	line-height: 1.5;
+}
+.ui-menu .ui-state-disabled a {
+	cursor: default;
+}
+
+/* Corner radius */
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-left,
+.ui-corner-tl {
+	border-top-left-radius: 3px;
+}
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-right,
+.ui-corner-tr {
+	border-top-right-radius: 3px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-left,
+.ui-corner-bl {
+	border-bottom-left-radius: 3px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-br {
+	border-bottom-right-radius: 3px;
+}
+
+/* Overlays */
+.ui-widget-overlay {
+	background: #aaaaaa;
+	opacity: .3;
+	filter: Alpha(Opacity=30);
+}
+.ui-widget-shadow {
+	margin: 0px 0 0 0px;
+	padding: 5px;
+	background: #666666;
+	opacity: .3;
+	filter: Alpha(Opacity=30);
+	border-radius: 8px;
+}
+
+
+.ui-helper-hidden {
+	display: none;
+}
+
+.hidden {
+    display: none;
+
+}
+
+.ui-helper-hidden-accessible {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.removable .control-group,
+.removable.control-group {
+    display: flex;
+}
+
+.removable .control-group .control-label,
+.removable.control-group .control-label {
+    padding-right: 8px;
+    width: 120px;
+}
+
+.removable .control-group .controls,
+.removable.control-group  .controls {
+    flex: 1;
+    margin-left: 0;
+}
+
+.removable .control-group .controls .span11 .add_new,
+.removable.control-group  .controls .span11 .add_new {
+    padding: 0;
+}
+
+.removable .control-group .controls .span11 .reference_documentation,
+.removable.control-group  .controls .span11 .reference_documentation {
+    display: flex;
+}
+
+.removable .control-group .controls .span11 .reference_documentation,
+.removable.control-group  .controls .span11 .reference_documentation {
+    display: flex;
+}
+
+.removable .control-group .controls .span11 .reference_documentation + .reference_documentation,
+.removable.control-group  .controls .span11 .reference_documentation + .reference_documentation {
+    margin-top: 8px;
+}
+
+.removable .control-group .controls .span11 .reference_documentation .remove,
+.removable.control-group  .controls .span11 .reference_documentation .remove {
+  margin: 0;
+  display: flex;
+  margin-left: 5px;
+}
+
+.removable .control-group .controls .span11 .reference_documentation input,
+.removable.control-group  .controls .span11 .reference_documentation input {
+    flex: 1;
+    max-width: none;
+    width: auto;
+}
+
+.removable .control-group:last-child{
+    margin-bottom: 0;
+}
+
+.removable .control-group .controls.editor,
+.removable.control-group  .controls.editor {
+    display: flex;
+}
+
+.removable .control-group .controls.editor .input-prepend,
+.removable.control-group  .controls.editor .input-prepend {
+    flex: 1;
+    display: flex;
+}
+
+.removable .control-group .controls.editor .input-prepend input,
+.removable.control-group  .controls.editor .input-prepend input {
+    flex: 2;
+}
+
+
+.removable .control-group .controls.editor .remove,
+.removable.control-group  .controls.editor .remove {
+    width: 30px !important;
+    margin: 0;
+}
+
+.removable .remove {
+    display: block;
+    padding: 0;
+}
+
+.removable .remove .button {
+    border: none;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.select2-search-choice-close,
+.select2-container-multi .select2-search-choice-close {
+  top: 4px!important;
+}
