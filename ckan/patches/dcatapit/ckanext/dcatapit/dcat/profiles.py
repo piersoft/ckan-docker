@@ -1102,7 +1102,9 @@ class ItalianDCATAPProfile(RDFProfile):
 
             distribution = URIRef(resource_uri(resource_dict))  # TODO: preserve original info if harvested
             
-
+            if 'cmna' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"ttps://dati.cittametropolitana.na.it/")
+              distribution=URIRef(distribution)
             if 'c_l219' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it")
               distribution=URIRef(distribution)
