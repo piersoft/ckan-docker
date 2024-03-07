@@ -761,7 +761,7 @@ class ItalianDCATAPProfile(RDFProfile):
 
         noaddsl=0
         if 'cmna' in dataset_dict.get('holder_identifier'):
-            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"ttps://dati.cittametropolitana.na.it/")
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
         if '00514490010' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
         if 'r_lazio' in dataset_dict.get('holder_identifier'):
@@ -1105,7 +1105,7 @@ class ItalianDCATAPProfile(RDFProfile):
             distribution = URIRef(resource_uri(resource_dict))  # TODO: preserve original info if harvested
             
             if 'cmna' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"ttps://dati.cittametropolitana.na.it/")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=URIRef(distribution)
             if 'c_l219' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it")
