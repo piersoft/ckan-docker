@@ -760,6 +760,8 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)  # TODO: preserve original URI if harvested
 
         noaddsl=0
+        if 'KH5RHFCV' in dataset_dict.get('holder_identifier'):
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati-ustat.mur.gov.it/")
         if 'cmna' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
         if '00514490010' in dataset_dict.get('holder_identifier'):
