@@ -1395,7 +1395,7 @@ class EuropeanDCATAPProfile(RDFProfile):
              #distribution = distribution.replace("deed.it","")
 
             if 'cmna' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"ttps://dati.cittametropolitana.na.it/")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=CleanedURIRef(distribution)
             if '00514490010' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
