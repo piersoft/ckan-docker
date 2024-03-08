@@ -804,8 +804,6 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
         if '04155080270' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
-        if 'cmna' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
         if 'm_bac' in dataset_dict.get('holder_identifier'):
             landing_page_uri = 'http://dati.san.beniculturali.it/dataset'
         if 'M_ef' in dataset_dict.get('holder_identifier'):
