@@ -52,6 +52,8 @@ COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/ima
 COPY patches/vocabulary.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py
 COPY patches/processors.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/processors.py
 COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
+COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
+
 #docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
 
 # Copy custom patch for access_rights and rights
