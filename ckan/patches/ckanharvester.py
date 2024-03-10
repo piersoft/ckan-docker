@@ -642,7 +642,7 @@ class CKANHarvester(HarvesterBase):
                 else:
                    resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknow"
                    resource['license_id'] = 'Licenza sconosciuta'
-                if len(resource['id'])<7 :
+                if len(resource['id'])<5 :
                      resource.pop('id', None)
                 for extra in package_dict.get('extras', []):
                   if 'frequency' in extra:
