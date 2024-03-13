@@ -1160,7 +1160,7 @@ class ItalianDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it")
               distribution=URIRef(distribution)
             if 'm_inf' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog/")
               distribution=URIRef(distribution)
          
 
