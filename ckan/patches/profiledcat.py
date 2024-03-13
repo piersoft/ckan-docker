@@ -1440,6 +1440,9 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'm_it' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=CleanedURIRef(distribution)
+            if 'm_inf' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog/")
+              distribution=CleanedURIRef(distribution)
 
             if distribution is not None:
              g.add((dataset_ref, DCAT.distribution, distribution))
