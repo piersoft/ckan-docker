@@ -1499,6 +1499,11 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'JSON' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='JSON' 
+            if resource_dict.get('uri'):
+             if 'json' in resource_dict.get('uri'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='JSON' 
+
             mimetype = resource_dict.get('mimetype')
             fmt = resource_dict.get('format')
 
