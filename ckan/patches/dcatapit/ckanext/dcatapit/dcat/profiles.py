@@ -149,8 +149,8 @@ class ItalianDCATAPProfile(RDFProfile):
         ):
             valueRef = self._object_value(dataset_ref, predicate)
             if valueRef:
-                if 'Dato' or 'disponibile' in valueRef:
-                   valueRef='UNKNOW'
+        #        if 'Dato' or 'disponibile' in valueRef:
+         #          valueRef='UNKNOW'
                 self._remove_from_extra(dataset_dict, key)
                 value = self._strip_uri(valueRef, base_uri)
                 dataset_dict[key] = value
@@ -335,6 +335,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20","https://www.dati.gov.it/content/italian-open-data-license-v20")
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")
                 license=license.replace("http://www.opendefinition.org/licenses/cc-zero","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
+                license=license.replace("https://creativecommons.org/publicdomain/zero/1.0/","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
                 license=license.replace("C1_Unknown","A21_CCBY40")
                 license=license.replace("Licenza Sconosciuta","Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)")
                 license_uri = str(license)
@@ -771,6 +772,8 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
             noaddsl=1
+        if 'cciaan' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
         if 'r_basili' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
@@ -881,7 +884,7 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://data.tdm-project.it")
             noaddsl=1
-        if '5N2TR557' in dataset_dict.get('publisher_identifier'):
+        if 'pcm' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=1
         if 'PCM - Dipartimento della Protezione Civile' in dataset_dict.get('holder_name'):
