@@ -995,8 +995,8 @@ class EuropeanDCATAPProfile(RDFProfile):
         dataset_dict['extras'] = []
         dataset_dict['resources'] = []
         # Patch Lazio Dato non disponibile
-        if 'Dato' or 'disponibile' in dataset_dict['frequency']:
-             dataset_dict['frequency']='UNKNOW'
+         #if 'Dato' or 'disponibile' in dataset_dict['frequency']:
+           #   dataset_dict['frequency']='UNKNOW'
 
         # Basic fields
         for key, predicate in (
@@ -1040,8 +1040,8 @@ class EuropeanDCATAPProfile(RDFProfile):
             value = self._object_value(dataset_ref, predicate)
             if value:
                 log.debug('value freq: %s',value)
-                if 'Dato' or 'disponibile' in value:
-                    value='UNKNOW'
+                 #if 'Dato' or 'disponibile' in value:
+                   #  value='UNKNOW'
                 dataset_dict['extras'].append({'key': key, 'value': value})
 
         #  Lists
