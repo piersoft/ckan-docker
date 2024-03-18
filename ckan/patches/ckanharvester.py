@@ -588,6 +588,9 @@ class CKANHarvester(HarvesterBase):
                  package_dict['maintainer_email'] =""
 
             for resource in package_dict.get('resources', []):
+                if 'url' in resource:
+                        if 'ODataProxy':
+                              resource['url']=resource['url'].replace("'","%27")
                 if 'format' in resource:
                         if 'doc' in resource['format']:
                               resource.pop('format', None)
