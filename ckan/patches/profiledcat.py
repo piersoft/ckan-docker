@@ -36,7 +36,7 @@ LOCN = Namespace('http://www.w3.org/ns/locn#')
 GSP = Namespace('http://www.opengis.net/ont/geosparql#')
 OWL = Namespace('http://www.w3.org/2002/07/owl#')
 SPDX = Namespace('http://spdx.org/rdf/terms#')
-
+RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 GEOJSON_IMT = 'https://www.iana.org/assignments/media-types/application/vnd.geo+json'
 
 namespaces = {
@@ -53,13 +53,13 @@ namespaces = {
     'gsp': GSP,
     'owl': OWL,
     'spdx': SPDX,
+    'rdfs': RDFS,
 }
 
 PREFIX_MAILTO = u'mailto:'
 
 DISTRIBUTION_LICENSE_FALLBACK_CONFIG = 'ckanext.dcat.resource.inherit.license'
 PREF_LANDING= config.get('ckanext.dcat.base_uri')
-
 
 class URIRefOrLiteral(object):
     '''Helper which creates an URIRef if the value appears to be an http URL,
@@ -947,6 +947,9 @@ class RDFProfile(object):
         for key, predicate in sources:
             val = self._object_value(catalog_ref, predicate)
             if val:
+                if key == 'source_catalog_modified':
+                   default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
+                   val = parse_date(val, default=default_datetime)
                 out.append({'key': key, 'value': val})
 
         out.append({'key': 'source_catalog_publisher', 'value': json.dumps(self._publisher(catalog_ref, DCT.publisher))})
@@ -995,7 +998,7 @@ class EuropeanDCATAPProfile(RDFProfile):
         dataset_dict['extras'] = []
         dataset_dict['resources'] = []
         # Patch Lazio Dato non disponibile
-         #if 'Dato' or 'disponibile' in dataset_dict['frequency']:
+         #if 'disponibile' in dataset_dict['frequency']:
            #   dataset_dict['frequency']='UNKNOW'
 
         # Basic fields
@@ -1007,9 +1010,14 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ):
             value = self._object_value(dataset_ref, predicate)
             if value:
-                log.debug('value landing: %s',value)
-                if 'onsiglio' or 'CONSIGLIO' in value:
-                    value=''
+                if 'opendata.marche.camcom.it' in value:
+                   #dataset_dict['url']=value
+                   log.debug('sono in CamCom Marche')
+              #    dataset_dict[key] = value
+                   log.debug('value landing: %s',value)
+                else:
+                    if 'onsiglio' or 'CONSIGLIO' in value:
+                     value=''
                 dataset_dict[key] = value
 
         if not dataset_dict.get('version'):
@@ -1040,7 +1048,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             value = self._object_value(dataset_ref, predicate)
             if value:
                 log.debug('value freq: %s',value)
-                 #if 'Dato' or 'disponibile' in value:
+                 #if 'disponibile' in value:
                    #  value='UNKNOW'
                 dataset_dict['extras'].append({'key': key, 'value': value})
 
@@ -1440,9 +1448,6 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'm_it' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=CleanedURIRef(distribution)
-            if 'm_inf' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog/")
-              distribution=CleanedURIRef(distribution)
 
             if distribution is not None:
              g.add((dataset_ref, DCAT.distribution, distribution))
@@ -1493,17 +1498,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'doc' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='DOC'
-            if 'json' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='JSON'     
-            if 'JSON' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='JSON' 
-            if resource_dict.get('uri'):
-             if 'json' in resource_dict.get('uri'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='JSON' 
-
+                
             mimetype = resource_dict.get('mimetype')
             fmt = resource_dict.get('format')
 

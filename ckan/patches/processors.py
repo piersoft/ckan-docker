@@ -26,6 +26,7 @@ from ckanext.dcat.exceptions import RDFProfileException, RDFParserException
 HYDRA = Namespace('http://www.w3.org/ns/hydra/core#')
 DCAT = Namespace("http://www.w3.org/ns/dcat#")
 DCATAPIT = Namespace("http://dati.gov.it/onto/dcatapit#")
+RDFS = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 RDF_PROFILES_ENTRY_POINT_GROUP = 'ckan.rdf.profiles'
 RDF_PROFILES_CONFIG_OPTION = 'ckanext.dcat.rdf.profiles'
 COMPAT_MODE_CONFIG_OPTION = 'ckanext.dcat.compatibility_mode'
@@ -268,7 +269,7 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
         if 'aci' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
-        if '00514490010' in dataset_dict.get('holder_identifier'):
+        if 'c_l219' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
         if 'cr_campa' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
@@ -404,7 +405,7 @@ class RDFSerializer(RDFProcessor):
             source_catalog_homepage=source_uri
         elif 'm_lps' in dataset_dict.get('holder_identifier'):
             source_uri='http://dati.lavoro.it/'
-        elif '00514490010' in dataset_dict.get('holder_identifier'):
+        elif 'c_l219' in dataset_dict.get('holder_identifier'):
             source_uri='http://aperto.comune.torino.it/'
         elif 'cr_campa' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata-crc.di.unisa.it/'
@@ -448,11 +449,12 @@ class RDFSerializer(RDFProcessor):
                 key, predicate, _type = item
                 value = _get_from_extra(key)
                 if value:
-                 if key == 'source_catalog_homepage' and ~value.endswith("/#"):
+                 if key == 'source_catalog_homepage' and value.endswith("/#"):
                    value = value + '/#'
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
+                   
                    g.add((catalog_ref, predicate, _type(_date.isoformat(),
                                                   datatype=XSD.dateTime)))
                  else:
@@ -475,14 +477,14 @@ class RDFSerializer(RDFProcessor):
             if 'r_marche' in identifier:
               _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": ""}'
             if 'r_emiro' in identifier:
-              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it/", "type": ""}'
             if 'r_toscan' in identifier:
-              _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it/", "type": ""}'
             if 'r_basili' in identifier:
-              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": ""}'
             if 'm_lps' in identifier:
               _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.it/", "type": ""}'
-            if '00514490010' in identifier:
+            if 'c_l219' in identifier:
               _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": ""}'
             if 'cr_campa' in identifier:
               _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": ""}'
@@ -493,7 +495,7 @@ class RDFSerializer(RDFProcessor):
             if 'uds_ca' in identifier:
               _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": ""}'
             if 'aci' in identifier:
-              _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it", "type": ""}'
+              _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": ""}'
 
 
 
@@ -518,15 +520,15 @@ class RDFSerializer(RDFProcessor):
                         if homepage is not None:
                          if homepage.endswith("/#"):
                            homepage=homepage.replace('/#','/')
-                         elif not homepage.endswith("/"):
-                           homepage=homepage+'/'
-                         elif homepage.endswith("/"):
-                           homepage=homepage+'#'
+                         if not homepage.endswith("/"):
+                            homepage=homepage+'/'
+                          #if homepage.endswith("/"):
+                           # homepage=homepage+'#'
                          else:
                            homepage=homepage.replace('#','')
-                         g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
+  #                        g.add((catalog_ref ,FOAF.homepage,URIRef(homepage)))
                          log.info('homepage foaf: %s',URIRef(homepage))
-                        continue
+  #                      continue
                     if val is None and required:
                         raise ValueError("Value for %s (%s) is required" % (src_key, predicate))
                     elif val is None:

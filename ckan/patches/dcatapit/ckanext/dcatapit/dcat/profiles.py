@@ -19,6 +19,7 @@ from ckanext.dcat.profiles import (
     TIME,
     VCARD,
     RDFProfile,
+    RDFS,
 )
 from ckanext.dcat.utils import catalog_uri, dataset_uri, resource_uri
 
@@ -149,8 +150,8 @@ class ItalianDCATAPProfile(RDFProfile):
         ):
             valueRef = self._object_value(dataset_ref, predicate)
             if valueRef:
-        #        if 'Dato' or 'disponibile' in valueRef:
-         #          valueRef='UNKNOW'
+    #              if 'Dato' or 'disponibile' in valueRef:
+       #              valueRef='UNKNOW'
                 self._remove_from_extra(dataset_dict, key)
                 value = self._strip_uri(valueRef, base_uri)
                 dataset_dict[key] = value
@@ -335,7 +336,6 @@ class ItalianDCATAPProfile(RDFProfile):
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20","https://www.dati.gov.it/content/italian-open-data-license-v20")
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")
                 license=license.replace("http://www.opendefinition.org/licenses/cc-zero","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
-                license=license.replace("https://creativecommons.org/publicdomain/zero/1.0/","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
                 license=license.replace("C1_Unknown","A21_CCBY40")
                 license=license.replace("Licenza Sconosciuta","Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)")
                 license_uri = str(license)
@@ -566,10 +566,10 @@ class ItalianDCATAPProfile(RDFProfile):
             _added = False
             if start:
                 _added = True
-                self._add_date_triple(temporal_extent, SCHEMA.startDate, start)
+                self._add_date_triple(temporal_extent, DCATAPIT.startDate, start)
             if end:
                 _added = True
-                self._add_date_triple(temporal_extent, SCHEMA.endDate, end)
+                self._add_date_triple(temporal_extent, DCATAPIT.endDate, end)
             if _added:
                 g.add((dataset_ref, DCT.temporal, temporal_extent))
 
@@ -579,8 +579,8 @@ class ItalianDCATAPProfile(RDFProfile):
 
         for interval in self.g.objects(dataset_ref, pred):
             # Fist try the schema.org way
-            start = self._object_value(interval, SCHEMA.startDate)
-            end = self._object_value(interval, SCHEMA.endDate)
+            start = self._object_value(interval, DCATAPIT.startDate)
+            end = self._object_value(interval, DCATAPIT.endDate)
             if start or end:
                 out.append({'temporal_start': start,
                             'temporal_end': end})
@@ -768,19 +768,17 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)  # TODO: preserve original URI if harvested
 
          noaddsl=0
+         if 'cciaan' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = landing_page_url
          if 'KH5RHFCV' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati-ustat.mur.gov.it/")
          if 'cmna' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
-            noaddsl=1
          if '00514490010' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
          if 'r_lazio' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
-            noaddsl=1
-         if 'cciaan' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
          if 'r_basili' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
@@ -825,10 +823,6 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'MEF-BDAP' in dataset_dict.get('holder_name'):
             landing_page_uri = dataset_uri(dataset_dict)
             # landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://sparql-noipa.mef.gov.it")
-            noaddsl=1
-         if 'm_inf' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
-            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog")
             noaddsl=1
          if 'm_pi' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
@@ -891,9 +885,6 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://data.tdm-project.it")
             noaddsl=1
-         if 'pcm' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
-            noaddsl=1
          if 'PCM - Dipartimento della Protezione Civile' in dataset_dict.get('holder_name'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://github.com/pcm-dpc")
@@ -904,13 +895,6 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'ispra_rm' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=1
-         if 'r_piemon' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
-            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://api.smartdatanet.it")
-            noaddsl=1 
-         if 'm_it' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
-            noaddsl=1             
          if noaddsl==0:
            landing_page_uri += '/'
          self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
@@ -1133,8 +1117,8 @@ class ItalianDCATAPProfile(RDFProfile):
             if 'cmna' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=URIRef(distribution)
-            if '00514490010' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
+            if 'c_l219' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it")
               distribution=URIRef(distribution)
             if 'r_marche' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it")
@@ -1175,10 +1159,7 @@ class ItalianDCATAPProfile(RDFProfile):
             if 'aci' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it")
               distribution=URIRef(distribution)
-            if 'm_inf' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/catalog/")
-              distribution=URIRef(distribution)
-         
+
 
             # Add the DCATAPIT type
             g.add((distribution, RDF.type, DCATAPIT.Distribution))
@@ -1516,6 +1497,7 @@ class ItalianDCATAPProfile(RDFProfile):
         # Try to avoid to have the Catalog URIRef identical to the homepage URI
         g.remove((catalog_ref, FOAF.homepage, URIRef(config.get('ckan.site_url'))))
         g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri() + '/#')))
+ #        g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri())))
 
         # publisher
         pub_agent_name = config.get('ckanext.dcatapit_configpublisher_name', 'unknown')
