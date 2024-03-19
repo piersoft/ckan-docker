@@ -1538,6 +1538,7 @@ class ItalianDCATAPProfile(RDFProfile):
         for lang_offered in langs.split():
             lang_code = lang_mapping_ckan_to_voc.get(lang_offered)
             if lang_code:
+                self.g.remove((catalog_ref, DCT.language, Literal(lang_offered)))
                 self.g.add((catalog_ref, DCT.language, URIRef(LANG_BASE_URI + lang_code)))
 
         self.g.remove((catalog_ref, DCT.language, Literal(config.get(DEFAULT_LANG))))
