@@ -947,9 +947,6 @@ class RDFProfile(object):
         for key, predicate in sources:
             val = self._object_value(catalog_ref, predicate)
             if val:
-                if key == 'source_catalog_modified':
-                   default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
-                   val = parse_date(val, default=default_datetime)
                 out.append({'key': key, 'value': val})
 
         out.append({'key': 'source_catalog_publisher', 'value': json.dumps(self._publisher(catalog_ref, DCT.publisher))})
