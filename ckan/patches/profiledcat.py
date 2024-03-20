@@ -1146,6 +1146,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     value=value.replace("deed.it","")
                     value=value.replace('https://sparql-noipa.mef.gov.it/metadata/Licenza','https://creativecommons.org/licenses/by/4.0/')
                     value=value.replace('https://api.smartdatanet.it/metadataapi/api/license/CCBY','https://creativecommons.org/licenses/by/4.0/')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
    #                   value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40','https://creativecommons.org/licenses/by/4.0/')
       #                value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
          #             value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
