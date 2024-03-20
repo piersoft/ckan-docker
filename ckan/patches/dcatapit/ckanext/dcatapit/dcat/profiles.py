@@ -401,11 +401,14 @@ class ItalianDCATAPProfile(RDFProfile):
                            #log.warning('names %s',names.values()[0])
                            license_name = names.values()[0]
                         else:
-                           #log.warning('license_type.default_name')
+                           log.warning('license_type.default_name')
                            license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
+                           if license_type.document_uri is not None:
+                             if 'publicdomain' in license_type.document_uri:
+                               license_name='Creative Commons CC0 1.0 Universale - Public Domain Dedication (CC0 1.0)'
                            #license_type.default_name
-                        continue
-                continue
+                         #continue
+                 #continue
 
                 #if dataset_dict.get('holder_identifier') is not None:
                  #         if 'r_campan' in dataset_dict.get('holder_identifier'):
