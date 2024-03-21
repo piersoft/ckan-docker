@@ -416,7 +416,7 @@ class RDFSerializer(RDFProcessor):
         elif 'uds_ca' in dataset_dict.get('holder_identifier'):
             source_uri='https://data.tdm-project.it'
         elif 'm_it' in dataset_dict.get('holder_identifier'):
-            source_uri='interno.gov.it/'
+            source_uri='https://www.interno.gov.it/'
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
