@@ -1462,7 +1462,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ('access_url', DCAT.accessURL, None, URIRef),
                 ('download_url', DCAT.downloadURL, None, URIRef),
             ]
-
+            if not resource_dict.get('download_url'):
+              resource_dict['download_url']=resource_dict['access_url']
             self._add_triples_from_dict(resource_dict, distribution, items)
 
             #  Lists
