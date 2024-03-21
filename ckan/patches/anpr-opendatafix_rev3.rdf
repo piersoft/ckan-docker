@@ -5,7 +5,7 @@
 
 <dcatapit:Catalog rdf:about="https://github.com/italia/anpr-opendata/tree/main/data#">
   <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Catalog"/>
-  <dct:title>ANPR - Open Data</dct:title>
+  <dct:title>Ministero dell'Interno - servizio ANPR</dct:title>
   <dct:publisher>
     <dcatapit:Agent rdf:about="m_it">
       <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -24,6 +24,7 @@
   </dcat:themeTaxonomy>
   <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-07-06</dct:modified>
   <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-07-06</dct:issued>
+
   <dcat:dataset rdf:resource="https://github.com/italia/anpr-opendata/blob/main/format/accessi_export.md"/>
   <dcat:dataset rdf:resource="https://github.com/italia/anpr-opendata/blob/main/format/accessi_famiglie_export.md"/>
   <dcat:dataset rdf:resource="https://github.com/italia/anpr-opendata/blob/main/format/attivita_AIRE_export.md"/>
@@ -50,7 +51,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/accessi_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Accessi</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/accessi</dct:landingpage>
     <dct:description>Trend giornaliero della tipologia di accesso al portale ANPR</dct:description>
@@ -69,7 +70,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -87,7 +88,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/accessi_famiglie_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Accessi famiglie</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/accessi-famiglie</dct:landingpage>
     <dct:description>Trend giornaliero degli accessi al portale ANPR da parte delle famiglie</dct:description>
@@ -106,7 +107,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -124,7 +125,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/attivita_AIRE_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Attività AIRE</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/attività-aire</dct:landingpage>
     <dct:description>Distribuzione dell'utilizzo dei servizi ANPR relativa ai soli soggetti AIRE</dct:description>
@@ -143,7 +144,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -161,7 +162,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/attivita_residenti_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Attività residenti</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/attività-residenti</dct:landingpage>
     <dct:description>Distribuzione dell'utilizzo dei servizi ANPR relativa ai soli soggetti residenti in Italia</dct:description>
@@ -180,7 +181,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -198,7 +199,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/cambi_residenza.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Cambi residenza</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/cambi-residenza</dct:landingpage>
     <dct:description>Trend mensile delle dichiarazioni dei cambi di residenza effettuate sia da Portale ANPR sia da Comune</dct:description>
@@ -217,7 +218,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -235,7 +236,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/cambi_residenza_stato_lavorazione.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Cambi residenza per stato lavorazione</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/cambi-residenza-per-stato-lavorazione</dct:landingpage>
     <dct:description>Trend mensile di cambi di residenza effettuati da portale ANPR per stato di lavorazione della pratica</dct:description>
@@ -254,7 +255,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -272,7 +273,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/cambi_residenza_stato_lavorazione_last_month.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Cambi residenza per stato lavorazione (mese in corso)</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/cambi-residenza-per-stato-lavorazione-(mese-in-corso)</dct:landingpage>
     <dct:description>Trend del mese corrente di cambi di residenza effettuati da portale ANPR per stato di lavorazione della pratica</dct:description>
@@ -291,7 +292,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -309,7 +310,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/certificati_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Certificati</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/certificati</dct:landingpage>
     <dct:description>Trend mensile dei certificati richiesti</dct:description>
@@ -328,7 +329,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -346,7 +347,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/certificati_last_month.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Certificati (mese in corso)</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/certificati-(mese-in-corso)</dct:landingpage>
     <dct:description>Trend del mese corrente dei certificati richiesti</dct:description>
@@ -365,7 +366,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -383,7 +384,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/dichiarazioni_cambi_residenza.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Dichiarazioni cambi di residenza</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/dichiarazioni-cambi-di-residenza</dct:landingpage>
     <dct:description>Trend mensile delle dichiarazioni di cambi di residenza effettuati da portale ANPR</dct:description>
@@ -402,7 +403,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -420,7 +421,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/dichiarazioni_cambi_residenza_last_month.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Dichiarazioni cambi di residenza (mese in corso)</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/dichiarazioni-cambi-di-residenza-(mese-in-corso)</dct:landingpage>
     <dct:description>Trend del mese corrente delle dichiarazioni di cambi di residenza effettuati da portale ANPR</dct:description>
@@ -439,7 +440,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
@@ -457,7 +458,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/popolazione_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Popolazione</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/popolazione</dct:landingpage>
     <dct:description>Trend giornaliero della popolazione in ANPR</dct:description>
@@ -476,7 +477,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -494,7 +495,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/popolazione_residente_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Popolazione residente</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/popolazione-residente</dct:landingpage>
     <dct:description>Trend giornaliero della popolazione residente per comune in ANPR</dct:description>
@@ -513,7 +514,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -531,7 +532,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/rettifiche_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Rettifiche</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/rettifiche</dct:landingpage>
     <dct:description>Trend mensile delle rettifiche richieste</dct:description>
@@ -550,7 +551,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -568,7 +569,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/rettifiche_last_month.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Rettifiche (mese in corso)</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/rettifiche-(mese-in-corso)</dct:landingpage>
     <dct:description>Trend del mese corrente delle rettifiche richieste</dct:description>
@@ -587,7 +588,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -605,7 +606,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/subentro_liste_elettorali_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Subentro liste elettorali</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/blob/main/format/subentro_liste_elettorali_export.md</dct:landingpage>
     <dct:description>Stato di integrazione dei dati elettorali nell'ANPR per comune</dct:description>
@@ -624,7 +625,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -642,7 +643,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/tipologia_cambi_residenza_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Tipologia cambi di residenza</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/tipologia-cambi-di-residenza</dct:landingpage>
     <dct:description>Trend mensile delle tipologie di cambi di residenza</dct:description>
@@ -661,7 +662,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -679,7 +680,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/visure_autocertificazioni_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Visure e autocertificazioni</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/visure-e-autocertificazioni</dct:landingpage>
     <dct:description>Trend mensile delle visure e delle autocertificazioni richieste</dct:description>
@@ -698,7 +699,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -716,7 +717,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/visure_autocertificazioni_last_month.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Visure e autocertificazioni (mese in corso)</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/visure-e-autocertificazioni-(mese-in-corso)</dct:landingpage>
     <dct:description>Trend del mese corrente delle visure e delle autocertificazioni richieste</dct:description>
@@ -735,7 +736,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -753,7 +754,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/attivita_residenti_2021_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Attività residenti 2021</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/attività-residenti-2021</dct:landingpage>
     <dct:description>Distribuzione dell'utilizzo dei servizi relativa ai soli soggetti residenti in Italia in riferimento all'anno 2021</dct:description>
@@ -772,7 +773,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -790,7 +791,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/attivita_residenti_2022_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Attività residenti 2022</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/attività-residenti-2022</dct:landingpage>
     <dct:description>Distribuzione dell'utilizzo dei servizi relativa ai soli soggetti residenti in Italia in riferimento all'anno 2022</dct:description>
@@ -809,7 +810,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
@@ -827,7 +828,7 @@
   <dcatapit:Dataset rdf:about="https://github.com/italia/anpr-opendata/blob/main/format/attivita_residenti_2023_export.md">
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
-    <dct:license rdf:resource="http://www.opendefinition.org/licenses/cc-zero"/>
+
     <dct:title>Attività residenti 2023</dct:title>
     <dct:landingpage>https://github.com/italia/anpr-opendata/tree/main/data#/attività-residenti-2023</dct:landingpage>
     <dct:description>Distribuzione dell'utilizzo dei servizi relativa ai soli soggetti residenti in Italia in riferimento all'anno 2023</dct:description>
@@ -846,7 +847,7 @@
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <dct:identifier>m_it</dct:identifier>
-        <foaf:name>ANPR - Open Data</foaf:name>
+        <foaf:name>Ministero dell'Interno - servizio ANPR</foaf:name>
       </dcatapit:Agent>
     </dct:publisher>
     <dct:subject rdf:resource="http://eurovoc.europa.eu/"/>
