@@ -5,7 +5,7 @@
 
 <dcatapit:Catalog rdf:about="https://github.com/italia/anpr-opendata/tree/main/data#">
   <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Catalog"/>
-  <dct:title>Ministero dell'Interno - servizio ANPR</dct:title>
+  <dct:title>ANPR Open Data</dct:title>
   <dct:publisher>
     <dcatapit:Agent rdf:about="m_it">
       <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
