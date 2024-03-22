@@ -2,7 +2,7 @@ from __future__ import absolute_import
 import re
 import requests
 from requests.exceptions import HTTPError, RequestException
-
+import random
 import datetime
 
 from urllib.parse import urlencode
@@ -672,9 +672,8 @@ class CKANHarvester(HarvesterBase):
                    resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknow"
                    resource['license_id'] = 'Licenza sconosciuta'
                 if len(resource['id'])<=5 :
- #                     resource.pop('id', None)
-                     if resource['package_id']:
-                       resource['id']=resource['id']+resource['package_id']
+                 #    resource.pop('id', None)
+                    resource['id']=random.randint(1, 20)+resource['id']+random.randint(1, 20)
                 for extra in package_dict.get('extras', []):
                   if 'frequency' in extra:
                  #   Dato non disponibile nel catalog della Regione Lazio. Spacca il catalog. Sostituisco
