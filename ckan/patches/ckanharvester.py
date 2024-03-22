@@ -591,6 +591,31 @@ class CKANHarvester(HarvesterBase):
                 if 'url' in resource:
                         if 'ODataProxy':
                               resource['url']=resource['url'].replace("'","%27")
+                        if ' ' in resource['url']:
+                              resource['url']=resource['url'].replace(" ","")
+                        if 'ZIP(' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if 'zip(' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'
+                        if 'pdf' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'PDF'
+                        if 'N/N' in resource['url']:
+                              resource.pop('url', None)
+                        if 'xls' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XLSX'
+                        if '.csv' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'CSV'
+                        if 'xml' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'XML'
+                        if 'zip' in resource['url']:
+                              resource.pop('format', None)
+                              resource['format'] = 'ZIP'  
                 if 'format' in resource:
                         if 'doc' in resource['format']:
                               resource.pop('format', None)
@@ -634,46 +659,6 @@ class CKANHarvester(HarvesterBase):
                         if 'OData' in resource['format']:
                               resource.pop('format', None)
                               resource['format'] = 'XML'
-                        if ' ' in resource['url']:
-                              resource['url']=resource['url'].replace(" ","")
-                        if 'ZIP(' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'ZIP'
-                        if 'zip(' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'ZIP'
-                        if 'pdf' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'PDF'
-                        if 'N/N' in resource['url']:
-                              resource.pop('url', None)
-                        if 'xls' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'XLSX'
-                        if '.csv' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'CSV'
-                        if 'csv-' in resource['format']:
-                              resource.pop('format', None)
-                              resource['format'] = 'CSV'
-                        if 'CSV-' in resource['format']:
-                              resource.pop('format', None)
-                              resource['format'] = 'CSV'
-                        if 'xml' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'XML'
-                        if 'zip' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'ZIP'
-                        if '-http--link' in resource['format']:
-                              resource.pop('format', None)
-                              resource['format'] = 'HTML'
-                        if 'geojson' in resource['url']:
-                              resource.pop('format', None)
-                              resource['format'] = 'GEOJSON'
-                        if 'csv-semicolon' in resource['format']:
-                              resource.pop('format', None)
-                              resource['format'] = 'CSV'
 
                         resource.pop('distribution_format', None)
                         resource['distribution_format'] = resource['format'].upper()
