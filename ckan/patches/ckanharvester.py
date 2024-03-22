@@ -673,7 +673,7 @@ class CKANHarvester(HarvesterBase):
                    resource['license_id'] = 'Licenza sconosciuta'
                 if len(resource['id'])<=5 :
                  #    resource.pop('id', None)
-                    resource['id']=random.randint(1, 20)+resource['id']+random.randint(1, 20)
+                    resource['id']=str(random.randint(1, 20))+resource['id']+str(random.randint(1, 20))
                 for extra in package_dict.get('extras', []):
                   if 'frequency' in extra:
                  #   Dato non disponibile nel catalog della Regione Lazio. Spacca il catalog. Sostituisco
