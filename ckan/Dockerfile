@@ -20,10 +20,8 @@ RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@master#egg=cka
      pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
 
 # Install ckanext-dcatapit
-RUN  pip3 install -e git+https://github.com/piersoft/dcatapit.git@main#egg=ckanext-dcatapit && \
-     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
-#&& \
- #    pip3 install -r https://raw.githubusercontent.com/piersoft/dcatapit/main/dev-requirements.txt
+COPY patches/dcatapit ${APP_DIR}/src/ckanext-dcatapit
+RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
 
 # Install ckanext-multilang
 RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.git@master#egg=ckanext-multilang  && \
