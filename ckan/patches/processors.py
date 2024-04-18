@@ -451,6 +451,7 @@ class RDFSerializer(RDFProcessor):
                 if value:
                  if key == 'source_catalog_homepage' and value.endswith("/#"):
                    value = value + '/#'
+                   value = value.replace('/#/#','')
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
