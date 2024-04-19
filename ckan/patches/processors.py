@@ -264,7 +264,7 @@ class RDFSerializer(RDFProcessor):
         if 'r_toscan' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.toscana.it")
         if 'r_basili' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog")
         if 'r_lazio' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
         if 'aci' in dataset_dict.get('holder_identifier'):
