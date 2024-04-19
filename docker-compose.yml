@@ -21,7 +21,7 @@ services:
         condition: service_healthy
     ports:
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
+
   ckan:
     container_name: ${CKAN_CONTAINER_NAME}
     build:
@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
-    
+
   datapusher:
     container_name: ${DATAPUSHER_CONTAINER_NAME}
     networks:
@@ -80,12 +80,14 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
-     
+
   solr:
     container_name: ${SOLR_CONTAINER_NAME}
     networks:
       - solrnet
-    image: piersoft/solr-9
+    build:
+      context: solr/
+      dockerfile: Dockerfile
     volumes:
       - solr_data:/var/solr
     restart: unless-stopped
@@ -100,7 +102,7 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
-    
+
 networks:
   webnet:
   ckannet:
