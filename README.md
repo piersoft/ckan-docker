@@ -74,6 +74,8 @@ To start the containers:
 
 
 
+**PS: if CKAN failed (unhealty) launch docker start ckan and after 2-3 minutes launch docker start nginx.**
+
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. 
 
