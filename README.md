@@ -70,7 +70,7 @@ To build the images:
 
 To start the containers:
 
-	docker compose up
+	docker compose up -d
 
 
 
