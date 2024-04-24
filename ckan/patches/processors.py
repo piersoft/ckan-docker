@@ -253,7 +253,8 @@ class RDFSerializer(RDFProcessor):
                     break
 
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
-
+        if 'm_lps' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
         if 'm_lps' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
         if 'r_emiro' in dataset_dict.get('holder_identifier'):
@@ -389,6 +390,8 @@ class RDFSerializer(RDFProcessor):
                     return ex['value']
 
         # patch per harvesting marche e emilia-romagna per hasPart Catalog
+        if 'inps' in dataset_dict.get('holder_identifier'):
+            source_uri='https://www.inps.it/nuovoportaleinps/default.aspx?sPathID=%3b0%3b46292%3b&lastMenu=46292&iMenu=12&p4=2/'
         if 'r_marche' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.regione.marche.it/'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
