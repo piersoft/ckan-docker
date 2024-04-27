@@ -62,5 +62,6 @@ format_mapping = {
     'PDF': 'PDF',
     'DOC': 'DOC',
     'xls': 'XLS',
+    'RDF': 'RDF_XML',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
