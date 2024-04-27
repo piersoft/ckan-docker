@@ -1514,9 +1514,20 @@ class EuropeanDCATAPProfile(RDFProfile):
                     # output format value as dcat:mediaType instead of dct:format
                     mimetype = fmt
                     fmt = None
-                else:
+                if 'CSV' in fmt:
+                    mimetype = 'text/csv'
+                if 'JSON' in fmt:
+                    mimetype = 'application/json'
+                if 'ZIP' in fmt:
+                    mimetype = 'application/zip'
+                if 'XML' in fmt:
+                    mimetype = 'text/xml'
+                if 'RDF' in fmt:
+                    mimetype = 'application/rdf+xml'
+
+               # else:
                     # Use dct:format
-                    mimetype = None
+                #    mimetype = None
 
             if mimetype:
                 g.add((distribution, DCAT.mediaType,
