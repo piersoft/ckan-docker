@@ -1522,7 +1522,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/zip'
                 if 'XML' in fmt:
                     mimetype = 'text/xml'
-                if 'RDF' in fmt:
+                if 'RDF_XML' in fmt:
                     mimetype = 'application/rdf+xml'
 
                # else:
