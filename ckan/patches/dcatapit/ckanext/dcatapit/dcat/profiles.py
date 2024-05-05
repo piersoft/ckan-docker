@@ -903,7 +903,14 @@ class ItalianDCATAPProfile(RDFProfile):
             noaddsl=1             
          if noaddsl==0:
            landing_page_uri += '/'
-         self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
+
+         landing_page_uri_f=''
+         if landing_page_uri.endswith("/"):
+            landing_page_uri_f = landing_page_uri[:-1]
+         else:
+            landing_page_uri_f = landing_page_uri
+             
+         self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri_f)))
 
         # conformsTo
         self.g.remove((dataset_ref, DCT.conformsTo, None))
