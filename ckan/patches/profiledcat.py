@@ -1149,7 +1149,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
    #                   value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40','https://creativecommons.org/licenses/by/4.0/')
       #                value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
-         #             value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
+                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
                     value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")              
                     #if 'dati.regione.campania' in dataset_dict.get('url'):
 #                    value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown","https://creativecommons.org/licenses/by/4.0/")
@@ -1514,9 +1514,20 @@ class EuropeanDCATAPProfile(RDFProfile):
                     # output format value as dcat:mediaType instead of dct:format
                     mimetype = fmt
                     fmt = None
-                else:
+                if 'CSV' in fmt:
+                    mimetype = 'text/csv'
+                if 'JSON' in fmt:
+                    mimetype = 'application/json'
+                if 'ZIP' in fmt:
+                    mimetype = 'application/zip'
+                if 'XML' in fmt:
+                    mimetype = 'text/xml'
+                if 'RDF_XML' in fmt:
+                    mimetype = 'application/rdf+xml'
+
+               # else:
                     # Use dct:format
-                    mimetype = None
+                #    mimetype = None
 
             if mimetype:
                 g.add((distribution, DCAT.mediaType,
@@ -1617,6 +1628,8 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
         for key, predicate in (
             ('temporal_resolution', DCAT.temporalResolution),
             ('is_referenced_by', DCT.isReferencedBy),
+            ('applicableLegislation', DCATAP.applicableLegislation),
+            ('hvdCategory', DCATAP.hvdCategory),
         ):
             values = self._object_value_list(dataset_ref, predicate)
             if values:
@@ -1656,6 +1669,14 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
                         value = self._object_value(distribution, predicate)
                         if value:
                             resource_dict[key] = value
+                            
+                    #  Lists
+                    for key, predicate in (
+                            ('applicableLegislation', DCATAP.applicableLegislation),
+                            ):
+                        values = self._object_value_list(distribution, predicate)
+                        if values:
+                            resource_dict[key] = json.dumps(values)
 
                     # Access services
                         access_service_list = []
@@ -1708,7 +1729,9 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
         # Lists
         for key, predicate, fallbacks, type, datatype in (
             ('temporal_resolution', DCAT.temporalResolution, None, Literal, XSD.duration),
-            ('is_referenced_by', DCT.isReferencedBy, None, URIRefOrLiteral, None)
+            ('is_referenced_by', DCT.isReferencedBy, None, URIRefOrLiteral, None),
+            ('applicableLegislation', DCATAP.applicableLegislation, None, URIRefOrLiteral, None),
+            ('hvdCategory', DCATAP.hvdCategory, None, URIRefOrLiteral, None),
         ):
             self._add_triple_from_dict(dataset_dict, dataset_ref, predicate, key, list_value=True,
                                        fallbacks=fallbacks, _type=type, _datatype=datatype)
@@ -1763,6 +1786,12 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
             ]
 
             self._add_triples_from_dict(resource_dict, distribution, items)
+            
+            #  Lists
+            items = [
+                ('applicableLegislation', DCATAP.applicableLegislation, None, URIRefOrLiteral),
+            ]
+            self._add_list_triples_from_dict(resource_dict, distribution, items)
 
             try:
                 access_service_list = json.loads(resource_dict.get('access_services', '[]'))

@@ -573,6 +573,8 @@ class CKANHarvester(HarvesterBase):
               if ";" in autemail:
                  package_dict.pop('author_email', None)
                  package_dict['author_email'] =""
+              if "]" in autemail:
+                 package_dict['author_email']=package_dict['author_email'].replace("]","")
 
             if package_dict.get('maintainer_email') is not None:
              mautemail = package_dict.get('maintainer_email')
@@ -586,6 +588,8 @@ class CKANHarvester(HarvesterBase):
               if ";" in mautemail:
                  package_dict.pop('maintainer_email', None)
                  package_dict['maintainer_email'] =""
+              if "]" in mautemail:
+                 package_dict['maintainer_email'] =package_dict['maintainer_email'].replace("]","")
 
             for resource in package_dict.get('resources', []):
                 if 'url' in resource:
