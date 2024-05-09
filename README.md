@@ -82,6 +82,9 @@ Go to into docker --> docker exec -it ckan bash . Go to cd /dockerentry-point an
 
 After --> mv 03.ckan_group.sh 03.ckan_group.end
 
+exit --> docker restart ckan
+
+
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. 
 
