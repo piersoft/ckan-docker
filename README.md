@@ -76,7 +76,7 @@ To start the containers:
 
 **PS: if CKAN failed (unhealty) launch docker start ckan and after 2-3 minutes launch docker start nginx.**
 
-IMPORTANT AFTER CKAN IS OK:
+**IMPORTANT AFTER CKAN IS OK:**
 Go to into docker --> docker exec -it ckan bash . Go to cd /dockerentry-point and launch --> sh 03.ckan_group.sh
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
