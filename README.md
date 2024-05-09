@@ -77,6 +77,7 @@ To start the containers:
 **PS: if CKAN failed (unhealty) launch docker start ckan and after 2-3 minutes launch docker start nginx.**
 
 **IMPORTANT AFTER CKAN IS OK:**
+
 Go to into docker --> docker exec -it ckan bash . Go to cd /dockerentry-point and launch --> sh 03.ckan_group.sh
 After --> mv 03.ckan_group.sh 03.ckan_group.end
 
