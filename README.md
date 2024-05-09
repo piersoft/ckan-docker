@@ -79,6 +79,7 @@ To start the containers:
 **IMPORTANT AFTER CKAN IS OK:**
 
 Go to into docker --> docker exec -it ckan bash . Go to cd /dockerentry-point and launch --> sh 03.ckan_group.sh
+
 After --> mv 03.ckan_group.sh 03.ckan_group.end
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
