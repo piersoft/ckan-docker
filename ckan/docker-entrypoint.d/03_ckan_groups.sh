@@ -1,7 +1,5 @@
 #!/bin/env bash
-#if grep -q "finitigruppi" $CKAN_INI; then
-#echo "Not configuring DCATAPIT already done"
-#else
+
 
 ckan config-tool $CKAN_INI "ckanext.dcatapit.theme_group_mapping.file = ${APP_DIR}/patches/theme_to_group.ini"
 ckan config-tool $CKAN_INI "ckanext.dcatapit.nonconformant_themes_mapping.file= ${APP_DIR}/patches/topics.json"
@@ -18,4 +16,3 @@ ckan config-tool $CKAN_INI "ckan.build_groups = "finitigruppi" "
 
 echo -e "\nCKAN init groups completed successfully"
 
-#fi
