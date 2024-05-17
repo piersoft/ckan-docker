@@ -4,7 +4,7 @@
 ckan config-tool $CKAN_INI "ckanext.dcatapit.theme_group_mapping.file = ${APP_DIR}/patches/theme_to_group.ini"
 ckan config-tool $CKAN_INI "ckanext.dcatapit.nonconformant_themes_mapping.file= ${APP_DIR}/patches/topics.json"
 ckan config-tool $CKAN_INI "ckanext.dcatapit.theme_group_mapping.add_new_groups= true"
-ckan config-tool $CKAN_INI "geonames.username=piersoft"
+ckan config-tool $CKAN_INI "geonames.username=demo"
 ckan config-tool $CKAN_INI "ckanext.multilang.localized_resources = true"
 
   for file in "${APP_DIR}/patches/groups/"*.json; do
