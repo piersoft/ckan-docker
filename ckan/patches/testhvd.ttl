@@ -40,7 +40,6 @@ exampleMS:1T2p3o4B a dcat:Dataset;
         skos:notation "https://dataportal.exampleMS.gov/dataset/Thepopulationofbees";
         ];
    dct:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/BIENNIAL>;
-   dct:conformsTo <https://orgea.exampleMS.gov/applicationprofile/populationOfInsects>;
    dcat:distribution exampleMS:1T2p3o4B-dist-SHP, exampleMS:1T2p3o4B-dist-RDF.
 
 exampleMS:1T2p3o4B-dist-SHP a dcat:Distribution;
