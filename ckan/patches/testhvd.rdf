@@ -11,15 +11,15 @@
          xmlns:skos="http://www.w3.org/2004/02/skos/core#">
 
   <dcat:Catalogue rdf:about="https://data.exampleMS.gov/id/dataset/HVD-reporting-2023">
-    <dct:title xml:lang="en">MS HVD Reporting 2023</dct:title>
-    <dct:description xml:lang="en">All information to provide the HVD conformance assessment for MS</dct:description>
+    <dct:title>MS HVD Reporting 2023</dct:title>
+    <dct:description>All information to provide the HVD conformance assessment for MS</dct:description>
     <dcat:dataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
     <dcat:service rdf:resource="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform" />
   </dcat:Catalogue>
 
   <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
-        <dct:title xml:lang="en">EA API platform</dct:title>
-        <dct:description xml:lang="en">The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
+        <dct:title>EA API platform</dct:title>
+        <dct:description>The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
         <dcat:endpointURL rdf:resource="https://orgea.exampleMS.gov/api/v2/"/>
         <dcat:endpointDescription rdf:resource="https://orgea.exampleMS.gov/api/openAPI/index.html"/>
         <foaf:page rdf:resource="https://orgea.exampleMS.gov/api/sla.html"/>
@@ -39,7 +39,7 @@
     <dct:description>This dataset provides the population of bees based on a yearly inquiry held among beekeepers and farmers in spring.</dct:description>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
-    <dct:identifier>1T2p3o4B</dct:identifier>
+    <dct:identifier>1T2p3o4BAAAAAAAAAAAAA</dct:identifier>
     <dct:rightsHolder>
           <dcatapit:Agent rdf:nodeID="N7b3d1c2a5a7a4d50887cda1c27d6aeca">
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
@@ -63,18 +63,16 @@
     <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
   </dcat:Dataset>
   <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/0126b9dc-88e4-41c8-9e65-0ba281c4aace">
-    <dct:title xml:lang="it">ANNCSU</dct:title>
+    <dct:title>ANNCSU</dct:title>
     <dct:description>File in formato XLSX</dct:description>
     <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
-    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <dct:description">File in formato XLSX</dct:description>
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
     <dct:title>ANNCSU</dct:title>
     <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAvpMQ0kzO0rSmiHykrO2Dh2t7BtY3SiEypA186-QGHYFT9PoSaqNd9Am3q68nYt9aTwzVzqxnoBqo/pub?output=xlsx"/>
     <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
   </dcatapit:Distribution>
-  <foaf:Agent rdf:nodeID="genid1">
-    <foaf:name>MS Environmental Agency</foaf:name>
-  </foaf:Agent>
+
   <vcard:Kind rdf:about="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1">
     <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Organization"/>
     <vcard:fn>comune-di-copertino</vcard:fn>
