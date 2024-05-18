@@ -54,8 +54,6 @@
         <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
       </dcat:Distribution>
     </dcat:distribution>
-
-    <dcat:distribution rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-RDF"/>
   </dcat:Dataset>
 
   <foaf:Agent rdf:nodeID="genid1">
