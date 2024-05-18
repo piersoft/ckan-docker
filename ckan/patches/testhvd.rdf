@@ -8,8 +8,7 @@
          xmlns:ns1="http://www.w3.org/ns/adms#"
          xmlns:skos="http://www.w3.org/2004/02/skos/core#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
-         xmlns:hydra="http://www.w3.org/ns/hydra/core#"
-         xmlns:dcatapit="http://dati.gov.it/onto/dcatapit#"       
+         xmlns:hydra="http://www.w3.org/ns/hydra/core#"      
          >
 
   <dcat:Catalogue rdf:about="https://data.exampleMS.gov/id/dataset/HVD-reporting-2023">
