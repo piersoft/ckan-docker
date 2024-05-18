@@ -55,11 +55,20 @@
     <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
 
     <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
-
+    <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/0126b9dc-88e4-41c8-9e65-0ba281c4aace"/>
     <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3"/>
     <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
   </dcat:Dataset>
-
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/0126b9dc-88e4-41c8-9e65-0ba281c4aace">
+    <dct:title xml:lang="it">ANNCSU</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>ANNCSU</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAvpMQ0kzO0rSmiHykrO2Dh2t7BtY3SiEypA186-QGHYFT9PoSaqNd9Am3q68nYt9aTwzVzqxnoBqo/pub?output=xlsx"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
   <foaf:Agent rdf:nodeID="genid1">
     <foaf:name>MS Environmental Agency</foaf:name>
   </foaf:Agent>
