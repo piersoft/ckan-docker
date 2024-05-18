@@ -66,7 +66,7 @@
     <dct:title>ANNCSU</dct:title>
     <dct:description>File in formato XLSX</dct:description>
     <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
-    <dct:description>File in formato XLSX</dct:description>
+    <dct:description>File in formato geografico per le strade la cui manutenzione è in progettazione</dct:description>
     <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
     <dct:title>ANNCSU</dct:title>
     <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAvpMQ0kzO0rSmiHykrO2Dh2t7BtY3SiEypA186-QGHYFT9PoSaqNd9Am3q68nYt9aTwzVzqxnoBqo/pub?output=xlsx"/>
