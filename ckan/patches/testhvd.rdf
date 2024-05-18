@@ -46,18 +46,10 @@
       <dcat:Distribution rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-SHP">
         <dcat:accessURL rdf:resource="https://orgea.exampleMS.gov/files/1T2p3o4B.shp"/>
         <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
-        <dct:license>
-          <dct:LicenseDocument rdf:about="https://data.exampleMS.gov/resource/FreeAndOpen">
-            <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/licence/CC0"/>
-          </dct:LicenseDocument>
-        </dct:license>
         <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
       </dcat:Distribution>
     </dcat:distribution>
   </dcat:Dataset>
 
-  <foaf:Agent rdf:nodeID="genid1">
-    <foaf:name>MS Environmental Agency</foaf:name>
-  </foaf:Agent>
 
 </rdf:RDF>
