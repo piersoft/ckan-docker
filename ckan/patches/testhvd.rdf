@@ -29,6 +29,7 @@
             <foaf:page rdf:resource="https://orgea.exampleMS.gov/api/sla.html"/>
             <dct:license rdf:resource="https://orgea.exampleMS.gov/api/documentation/TermsOfUse"/>
             <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+            <dcat:servesDataset rdf:resource="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf"/>
           </dcat:DataService>
         </dcat:service>
         <dct:title xml:lang="it">Elenco aree verdi disponibili Comune di Copertino</dct:title>
