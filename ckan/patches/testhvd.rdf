@@ -65,6 +65,7 @@
            <foaf:name xml:lang="en">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
           </dct:LicenseDocument>
         </dct:license>
+        <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/8cc7e156-6ec1-4f80-9672-94c6aedece1a/download/copertino.geojson"/>
       </dcat:Distribution>
     </dcat:distribution>
   </dcat:Dataset>
