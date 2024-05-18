@@ -51,6 +51,13 @@
             <dct:identifier>c_c978</dct:identifier>
           </dcatapit:Agent>
     </dct:rightsHolder>
+    <dct:publisher>
+          <foaf:Agent rdf:nodeID="N421a7255e6d846c992dcd8551fc98bc7">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </foaf:Agent>
+    </dct:publisher>
     <dcat:keyword>censimento</dcat:keyword>
     <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
 
