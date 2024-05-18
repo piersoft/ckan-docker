@@ -14,8 +14,10 @@
     <dct:title xml:lang="en">MS HVD Reporting 2023</dct:title>
     <dct:description xml:lang="en">All information to provide the HVD conformance assessment for MS</dct:description>
     <dcat:dataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
-    <dcat:service>
-      <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
+    <dcat:service rdf:resource="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform" />
+  </dcat:Catalogue>
+
+  <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
         <dct:title xml:lang="en">EA API platform</dct:title>
         <dct:description xml:lang="en">The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
         <dcat:endpointURL rdf:resource="https://orgea.exampleMS.gov/api/v2/"/>
@@ -29,11 +31,7 @@
           </vcard:Kind>
         </dcat:contactPoint>
         <dcat:servesDataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
-      </dcat:DataService>
-    </dcat:service>
-
-  </dcat:Catalogue>
-
+  </dcat:DataService>
   <dcat:Dataset rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B">
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
     <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
