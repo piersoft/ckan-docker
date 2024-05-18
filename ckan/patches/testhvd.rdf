@@ -51,10 +51,11 @@
     </dct:rightsHolder>
     <dcat:keyword>censimento</dcat:keyword>
     <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
+    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
     <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
     <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3"/>
-    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+    
   </dcat:Dataset>
 
   <foaf:Agent rdf:nodeID="genid1">
