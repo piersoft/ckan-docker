@@ -35,8 +35,9 @@
   <dcat:Dataset rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B">
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
     <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
-    <dct:title>The population of bees</dct:title>
-    <dct:description>This dataset provides the population of bees based on a yearly inquiry held among beekeepers and farmers in spring.</dct:description>
+    <dct:title xml:lang="it">Dati Rifiuti Solidi Urbani progressivo per anno 2022 per il Comune di Copertino</dct:title>
+    <dct:title>Dati Rifiuti Solidi Urbani progressivo per anno 2022 per il Comune di Copertino</dct:title>
+    <dct:description xml:lang="it">Importazione automatica dal portale [ambientale regionale](https://pugliacon.regione.puglia.it/orp/public/servizi/rsu-per-comune), con i dati relativi al Comune di Copertino. I dati sono relativi all'anno in corso. Ai sensi del Codice dell'Amministrazione Digitale, i dati importati sono con licenza CC-BY 4.0. E' presente anche un grafico interattivo per una visualizzazione complessiva rispetto ad anni precedenti e ai mesi dell'anno 2022. La percentuale di raccolta differenziata è un dataset strategico, per cui trovate un grafico dinamicamente collegato a questo dataset, nella home page del portale opendata.</dct:description>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
     <dct:identifier>1T2p3o4BAAAAAAAAAAAAA</dct:identifier>
