@@ -54,18 +54,7 @@
         <dcat:accessURL rdf:resource="https://orgea.exampleMS.gov/files/1T2p3o4B.shp"/>
         <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
         <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
-        <dct:license>
-          <dct:LicenseDocument rdf:about="https://www.dati.gov.it/content/italian-open-data-license-v20">
-           <owl:versionInfo>2.0</owl:versionInfo>
-           <foaf:name xml:lang="de">Italienische Open Data Lizenz 2.0 (IODL 2.0)</foaf:name>
-           <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#LicenseDocument"/>
-           <foaf:name xml:lang="it">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
-           <dct:type rdf:resource="http://purl.org/adms/licencetype/Attribution"/>
-           <foaf:name xml:lang="fr">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
-           <foaf:name xml:lang="en">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
-          </dct:LicenseDocument>
-        </dct:license>
-        <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/8cc7e156-6ec1-4f80-9672-94c6aedece1a/download/copertino.geojson"/>
+        <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
       </dcat:Distribution>
     </dcat:distribution>
   </dcat:Dataset>
