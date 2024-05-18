@@ -6,7 +6,12 @@
          xmlns:ns0="http://data.europa.eu/r5r/"
          xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
          xmlns:ns1="http://www.w3.org/ns/adms#"
-         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:hydra="http://www.w3.org/ns/hydra/core#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dcatapit="http://dati.gov.it/onto/dcatapit#"       
+         >
 
   <dcat:Catalogue rdf:about="https://data.exampleMS.gov/id/dataset/HVD-reporting-2023">
     <dc:title xml:lang="en">MS HVD Reporting 2023</dc:title>
