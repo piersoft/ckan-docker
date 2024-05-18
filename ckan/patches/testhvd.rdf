@@ -41,20 +41,6 @@
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
     <dc:publisher rdf:nodeID="genid1"/>
     <dc:identifier>https://data.exampleMS.gov/id/dataset/1T2p3o4B</dc:identifier>
-    <ns1:identifier>
-      <rdf:Description>
-        <dc:creator rdf:nodeID="genid1"/>
-        <skos:notation>https://data.exampleMS.gov/id/dataset/1T2p3o4B</skos:notation>
-      </rdf:Description>
-    </ns1:identifier>
-
-    <ns1:identifier>
-      <rdf:Description>
-        <dc:creator rdf:resource="https://dataportal.exampleMS.gov"/>
-        <skos:notation>https://dataportal.exampleMS.gov/dataset/Thepopulationofbees</skos:notation>
-      </rdf:Description>
-    </ns1:identifier>
-
     <dc:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL"/>
     <dc:conformsTo rdf:resource="https://orgea.exampleMS.gov/applicationprofile/populationOfInsects"/>
     <dcat:distribution>
