@@ -1,87 +1,1563 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:dcat="http://www.w3.org/ns/dcat#"
-         xmlns:dct="http://purl.org/dc/terms/"
-         xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:ns0="http://data.europa.eu/r5r/"
-         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
-         xmlns:ns1="http://www.w3.org/ns/adms#"
-         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-         xmlns:owl="http://www.w3.org/2002/07/owl#"
-         xmlns:hydra="http://www.w3.org/ns/hydra/core#"
-         xmlns:dcatapit="http://dati.gov.it/onto/dcatapit#"       
-         >
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:hydra="http://www.w3.org/ns/hydra/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcat="http://www.w3.org/ns/dcat#"
+  xmlns:dct="http://purl.org/dc/terms/"
+  xmlns:dcatapit="http://dati.gov.it/onto/dcatapit#"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+>
+  <vcard:Organization rdf:nodeID="Nc6eaef1bbbf94a798c9d9ac3db145e80">
+    <vcard:fn>Emanuele Viva</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:ufficioattivitaproduttive@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <dcat:Catalog rdf:about="http://dati.comune.copertino.le.it">
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-03-22T22:15:19.459195</dct:modified>
+    <dct:language>it</dct:language>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf">
+        <dcat:service>
+          <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
+            <dct:title xml:lang="en">EA API platform</dct:title>
+            <dct:description xml:lang="en">The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
+            <dcat:endpointURL rdf:resource="https://orgea.exampleMS.gov/api/v2/"/>
+            <dcat:endpointDescription rdf:resource="https://orgea.exampleMS.gov/api/openAPI/index.html"/>
+            <foaf:page rdf:resource="https://orgea.exampleMS.gov/api/sla.html"/>
+            <dct:license rdf:resource="https://orgea.exampleMS.gov/api/documentation/TermsOfUse"/>
+            <ns0:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+            <dcat:contactPoint>
+              <vcard:Kind>
+                <vcard:hasURL rdf:resource="https://eams.jira.net/servicedesk"/>
+              </vcard:Kind>
+            </dcat:contactPoint>
 
-  <dcat:Catalogue rdf:about="https://data.exampleMS.gov/id/dataset/HVD-reporting-2023">
-    <dct:title xml:lang="en">MS HVD Reporting 2023</dct:title>
-    <dct:description xml:lang="en">All information to provide the HVD conformance assessment for MS</dct:description>
-    <dcat:dataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
-    <dcat:service>
-      <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
-        <dct:title xml:lang="en">EA API platform</dct:title>
-        <dct:description xml:lang="en">The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
-        <dcat:endpointURL rdf:resource="https://orgea.exampleMS.gov/api/v2/"/>
-        <dcat:endpointDescription rdf:resource="https://orgea.exampleMS.gov/api/openAPI/index.html"/>
-        <foaf:page rdf:resource="https://orgea.exampleMS.gov/api/sla.html"/>
-        <dct:license rdf:resource="https://orgea.exampleMS.gov/api/documentation/TermsOfUse"/>
-        <ns0:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
-        <dcat:contactPoint>
-          <vcard:Kind>
-            <vcard:hasURL rdf:resource="https://eams.jira.net/servicedesk"/>
-          </vcard:Kind>
-        </dcat:contactPoint>
-
-        <dcat:servesDataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
-        <dcat:servesDataset rdf:resource="https://data.exampleMS.gov/id/dataset/1W2o3p4T"/>
-      </dcat:DataService>
-    </dcat:service>
-
-  </dcat:Catalogue>
-
-  <dcat:Dataset rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B">
-    <dct:title xml:lang="en">The population of bees</dct:title>
-    <dct:description xml:lang="en">This dataset provides the population of bees based on a yearly inquiry held among beekeepers and farmers in spring.</dct:description>
-    <ns0:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
-    <ns0:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
-    <dct:publisher rdf:nodeID="genid1"/>
-    <dct:identifier>https://data.exampleMS.gov/id/dataset/1T2p3o4B</dct:identifier>
-    <ns1:identifier>
-      <rdf:Description>
-        <dct:creator rdf:nodeID="genid1"/>
-        <skos:notation>https://data.exampleMS.gov/id/dataset/1T2p3o4B</skos:notation>
-      </rdf:Description>
-    </ns1:identifier>
-
-    <ns1:identifier>
-      <rdf:Description>
-        <dct:creator rdf:resource="https://dataportal.exampleMS.gov"/>
-        <skos:notation>https://dataportal.exampleMS.gov/dataset/Thepopulationofbees</skos:notation>
-      </rdf:Description>
-    </ns1:identifier>
-
-    <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL"/>
-    <dct:conformsTo rdf:resource="https://orgea.exampleMS.gov/applicationprofile/populationOfInsects"/>
-    <dcat:distribution>
-      <dcat:Distribution rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-SHP">
-        <dcat:accessURL rdf:resource="https://orgea.exampleMS.gov/files/1T2p3o4B.shp"/>
-        <dct:conformsTo rdf:resource="https://orgea.exampleMS.gov/dataset/1T2p3o4B/schema/shp"/>
-        <dcat:spatialResolutionInMeters rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25000.0</dcat:spatialResolutionInMeters>
-        <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP"/>
-        <dct:license>
-          <dct:LicenseDocument rdf:about="https://data.exampleMS.gov/resource/FreeAndOpen">
-            <skos:exactMatch rdf:resource="http://publications.europa.eu/resource/authority/licence/CC0"/>
-          </dct:LicenseDocument>
-        </dct:license>
-
-        <ns0:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
-      </dcat:Distribution>
-    </dcat:distribution>
-
-    <dcat:distribution rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-RDF"/>
-  </dcat:Dataset>
-
-  <foaf:Agent rdf:nodeID="genid1">
-    <foaf:name>MS Environmental Agency</foaf:name>
-  </foaf:Agent>
-
+            <dcat:servesDataset rdf:resource="https://data.exampleMS.gov/id/dataset/1T2p3o4B"/>
+            <dcat:servesDataset rdf:resource="https://data.exampleMS.gov/id/dataset/1W2o3p4T"/>
+          </dcat:DataService>
+        </dcat:service>
+        <dct:title xml:lang="it">Elenco aree verdi disponibili Comune di Copertino</dct:title>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/457caaf4-bdb0-4b6a-b240-1fc6c6efe87f"/>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="Ncb4f625d256c4ec89575e3f4a186eb08">
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-11-09T00:00:00</dct:modified>
+        <dcat:keyword>aree verdi adottabili</dcat:keyword>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/elenco-aree-verdi-disponibili-comune-di-copertino"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100242"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N0a90513957d2466f94d115bf9282f82d">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:identifier>c_c978:elenco-aree-verdi-disponibili-comune-di-copertino</dct:identifier>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/758d7ca0-1b05-40c3-a493-cebd33843b14"/>
+        <dct:description xml:lang="it">Elenco delle aree verdi disponibile georiferito</dct:description>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N1a763e04e9024719b5e5f5eab236c9b4">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:description>Elenco delle aree verdi disponibile georiferito</dct:description>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-11-09T09:37:56.254837</dct:issued>
+        <dct:title>Elenco aree verdi disponibili Comune di Copertino</dct:title>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/a84c52dc-7bcb-4a9f-acac-e11d23a93227"/>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dct:description>Portale dati aperti del Comune di Copertino</dct:description>
+    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ENG"/>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be">
+        <dcat:keyword>alberi</dcat:keyword>
+        <dct:title>Censimento arboreo Comune di Copertino</dct:title>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-09-02T08:56:43.221281</dct:issued>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N0ae8de1a4a0d4140bb20e62ad3d108bc">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
+        <dcat:keyword>quercie</dcat:keyword>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/e815d711-0fdc-4f00-8279-0bff180c5214"/>
+        <dct:description xml:lang="it">Censimento arboreo con l'indicazione del Codice, delle coordinate Geografiche (WGS84 EPSG4326), Inidirizzo, Specie e Nome Comune. Si offre anche una Mappa per una visualizzazione in riuso dei dati.</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/6c0ed489-8531-403e-bf91-7bc057d59f9e"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="Nb67be8e7da55470aa322ea5eef6db1da">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:identifier>c_c978:censimento-arboreo-comune-di-copertino</dct:identifier>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100243"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/f26891a2-7106-4a27-b312-0a23ec3747ba"/>
+        <dcat:keyword>censimento</dcat:keyword>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <dcat:keyword>ambiente</dcat:keyword>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
+        <dcat:keyword>lecci</dcat:keyword>
+        <dct:title xml:lang="it">Censimento arboreo Comune di Copertino</dct:title>
+        <dcat:keyword>cipressi</dcat:keyword>
+        <dct:description>Censimento arboreo con l'indicazione del Codice, delle coordinate Geografiche (WGS84 EPSG4326), Inidirizzo, Specie e Nome Comune. Si offre anche una Mappa per una visualizzazione in riuso dei dati.</dct:description>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="Nde781cc3720a4ca0a4c730757fcbbeb5">
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/856d222e-0f4b-457d-b865-8da2bb3774dd">
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/dati-rifiuti-solidi-urbani-progressivo-per-anno-2021-per-il-comune-di-copertino"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="Na9890596046b4246823af07bf3ecc2b0">
+            <dcatapit:geographicalIdentifier>https://www.geonames.org/6537588</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-20T07:15:04.422107</dct:issued>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dcat:keyword>rifiuti urbani</dcat:keyword>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/856d222e-0f4b-457d-b865-8da2bb3774dd/resource/a697267a-4399-4dde-a5f0-167a9c2d83bb"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N36e79e089f714f1c80021abe9bf7438d">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100242"/>
+        <dct:identifier>c_c978:dati-rifiuti-solidi-urbani-progressivo-per-anno-2021-per-il-comune-di-copertino</dct:identifier>
+        <dct:title>Dati Rifiuti Solidi Urbani progressivo per anno 2021 per il Comune di Copertino</dct:title>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:description xml:lang="it">Importazione automatica dal portale [ambientale regionale](https://pugliacon.regione.puglia.it/orp/public/servizi/rsu-per-comune), con i dati relativi al Comune di Copertino. I dati sono relativi all'anno 2021. Ai sensi del Codice dell'Amministrazione Digitale, i dati importati sono con licenza CC-BY 4.0. E' presente anche un grafico interattivo per una visualizzazione complessiva rispetto ad anni precedenti e ai mesi dell'anno 2021. La percentuale di raccolta differenziata è un dataset strategico, per cui trovate un grafico dinamicamente collegato a questo dataset, nella home page del portale opendata.</dct:description>
+        <dcat:keyword>raccolta differenziata</dcat:keyword>
+        <dct:description>Importazione automatica dal portale [ambientale regionale](https://pugliacon.regione.puglia.it/orp/public/servizi/rsu-per-comune), con i dati relativi al Comune di Copertino. I dati sono relativi all'anno 2021. Ai sensi del Codice dell'Amministrazione Digitale, i dati importati sono con licenza CC-BY 4.0. E' presente anche un grafico interattivo per una visualizzazione complessiva rispetto ad anni precedenti e ai mesi dell'anno 2021. La percentuale di raccolta differenziata è un dataset strategico, per cui trovate un grafico dinamicamente collegato a questo dataset, nella home page del portale opendata.</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/856d222e-0f4b-457d-b865-8da2bb3774dd/resource/36055f2d-09d3-4e64-8670-e3b885919edd"/>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-20T00:00:00</dct:modified>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="N65be8492f68e4c8dbe1fc836c79438e2">
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dct:title xml:lang="it">Dati Rifiuti Solidi Urbani progressivo per anno 2021 per il Comune di Copertino</dct:title>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9">
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100210"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/0126b9dc-88e4-41c8-9e65-0ba281c4aace"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/anncsu-anagrafe-nazionale-numeri-civici-e-strade-urbane-comune-di-copertino"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N421a7255e6d846c992dcd8551fc98bc7">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:title>ANNCSU - Anagrafe Nazionale Numeri Civici e Strade Urbane - Comune di Copertino</dct:title>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T00:00:00</dct:modified>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/4d244117-d831-40ca-84fa-338b50ff5803"/>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:keyword>strade</dcat:keyword>
+        <dct:identifier>c_c978:anncsu-anagrafe-nazionale-numeri-civici-e-strade-urbane-comune-di-copertino</dct:identifier>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N405deaabf94a4a96970580acad7093d2">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dcat:keyword>toponomastica</dcat:keyword>
+        <dct:description>File inserito nella piattaforma SISTER dell'Agenzia delle Entrate, conforme agli standard per l'ANNCSU</dct:description>
+        <dct:description xml:lang="it">File inserito nella piattaforma SISTER dell'Agenzia delle Entrate, conforme agli standard per l'ANNCSU</dct:description>
+        <dcat:keyword>numeri civici</dcat:keyword>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="Na8a519674db047fd98c4b38e6c7016f3">
+            <dcatapit:geographicalIdentifier>	https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T00:00:00</dct:issued>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+        <dct:title xml:lang="it">ANNCSU - Anagrafe Nazionale Numeri Civici e Strade Urbane - Comune di Copertino</dct:title>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/c7469a63-04fd-4246-b1a5-e30a36aed647">
+        <dct:title xml:lang="it">Serie storica SUAP 2018-2021</dct:title>
+        <dcat:keyword>cila</dcat:keyword>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T11:04:43.617486</dct:issued>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="Nb6b9ea8a376e4cf184725c4db0609431">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T00:00:00</dct:modified>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dct:description xml:lang="it">Serie storica pratiche SUAP ricevute 2018-2021 tramite il portale impresainungiorno.gov.it dallo sportello delle attività produttive del Comune di Copertino</dct:description>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/c7469a63-04fd-4246-b1a5-e30a36aed647/resource/e4b0597d-277a-433b-86ce-980db462573d"/>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100229"/>
+        <dct:description>Serie storica pratiche SUAP ricevute 2018-2021 tramite il portale impresainungiorno.gov.it dallo sportello delle attività produttive del Comune di Copertino</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/c7469a63-04fd-4246-b1a5-e30a36aed647/resource/4c16928f-26c0-43a2-8208-b5d8e6828a91"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N5c6c8c3d29e34b27808877c5a6079d73">
+            <dcatapit:geographicalIdentifier>	https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/serie-storica-suap-2018-2021"/>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N0e8b7c0ac0f8402f9f4fef6ad9298e07">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dct:identifier>c_c978:serie-storica-pratiche-suap-ricevute-2018-2021</dct:identifier>
+        <dcat:keyword>scia</dcat:keyword>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dct:title>Serie storica SUAP 2018-2021</dct:title>
+        <dcat:keyword>subingresso</dcat:keyword>
+        <dcat:keyword>pdc</dcat:keyword>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:keyword>cessata attività</dcat:keyword>
+        <dcat:keyword>inizio attività</dcat:keyword>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d">
+        <dcat:keyword>edifici</dcat:keyword>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/dpc-aggregati-strutturali-comune-di-copertino"/>
+        <dct:title>DPC-Aggregati-Strutturali-Comune di Copertino</dct:title>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/8cc7e156-6ec1-4f80-9672-94c6aedece1a"/>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T00:00:00</dct:modified>
+        <dct:description>La serie di dataset degli Aggregati Strutturali rappresenta il risultato di una elaborazione realizzata (in prevalenza) a partire dalla classe dell’edificato dei database geotopografici regionali. I poligoni derivati sono stati, inoltre, ripartiti sulla base dei confini delle unità amministrative ISTAT aggiornati al 2021. A differenza dei dati originali relativi all’edificato (o dei fabbricati catastali, in taluni casi), eterogenei per le loro provenienze e modalità di realizzazione - anche dal punto di vista temporale -, il prodotto finale derivato garantisce una armonizzazione a livello nazionale delle informazioni e delle elaborazioni effettuate e dei contenuti generati. E' tuttavia necessario esaminare preliminarmente e in dettaglio alcune caratteristiche che descrivono la complessità e specificità dei dati originali utilizzati. Le repository con tutto il SUD è presente [QUI](https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITF-Sud). La licenza d'uso, come indicato, è la CCBY 4.0 per il Dipartimento Protezione Civile - Presidenza del Consiglio. In relazione ai dati della Puglia è la IoDL2.0 per la Regione Puglia.</dct:description>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100282"/>
+        <dct:isVersionOf rdf:resource="https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITF-Sud"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N558f8aea53324b39b61197d906138752">
+            <dcatapit:geographicalIdentifier>https://www.geonames.org/6537588</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:title xml:lang="it">DPC-Aggregati-Strutturali-Comune di Copertino</dct:title>
+        <dcat:keyword>aggregati strutturali</dcat:keyword>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="Nff85117b1eb847769fd038dcd4b59945">
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:conformsTo>
+          <dcatapit:Standard rdf:nodeID="Nd681be69a0e141cfabcbb2a6cbedb2cf">
+            <dct:title xml:lang="de"></dct:title>
+            <dct:description xml:lang="it">EPSG 7794</dct:description>
+            <dct:description xml:lang="fr">EPSG 7794</dct:description>
+            <dct:title xml:lang="en"></dct:title>
+            <dct:description xml:lang="en">EPSG 7794</dct:description>
+            <dct:title xml:lang="it"></dct:title>
+            <dct:title xml:lang="fr"></dct:title>
+            <dct:description xml:lang="de">EPSG 7794</dct:description>
+            <dct:identifier>SHAPE</dct:identifier>
+            <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+          </dcatapit:Standard>
+        </dct:conformsTo>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/433df1cb-89bd-4578-bc1a-abd01c976e9b"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T16:09:09.011117</dct:issued>
+        <dct:description xml:lang="it">La serie di dataset degli Aggregati Strutturali rappresenta il risultato di una elaborazione realizzata (in prevalenza) a partire dalla classe dell’edificato dei database geotopografici regionali. I poligoni derivati sono stati, inoltre, ripartiti sulla base dei confini delle unità amministrative ISTAT aggiornati al 2021. A differenza dei dati originali relativi all’edificato (o dei fabbricati catastali, in taluni casi), eterogenei per le loro provenienze e modalità di realizzazione - anche dal punto di vista temporale -, il prodotto finale derivato garantisce una armonizzazione a livello nazionale delle informazioni e delle elaborazioni effettuate e dei contenuti generati. E' tuttavia necessario esaminare preliminarmente e in dettaglio alcune caratteristiche che descrivono la complessità e specificità dei dati originali utilizzati. Le repository con tutto il SUD è presente [QUI](https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITF-Sud). La licenza d'uso, come indicato, è la CCBY 4.0 per il Dipartimento Protezione Civile - Presidenza del Consiglio. In relazione ai dati della Puglia è la IoDL2.0 per la Regione Puglia.</dct:description>
+        <dct:identifier>c_c978:dpc-aggregati-strutturali-comune-di-copertino</dct:identifier>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:publisher>
+          <dcatapit:Agent rdf:nodeID="Nc99e8753f55c43538847656a51f675ad">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+          </dcatapit:Agent>
+        </dct:publisher>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/19d9c628-e2f8-4607-aeb1-e684b398e697">
+        <dct:title>Feed Albo Pretorio Comune di Copertino</dct:title>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N6815c17c3fe64c7493163e4777b9f7ff">
+            <dcatapit:geographicalIdentifier>https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/CONT"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/19d9c628-e2f8-4607-aeb1-e684b398e697/resource/d4767679-8d60-4d29-adab-0775c8d3070d"/>
+        <dcat:keyword>ordinanze</dcat:keyword>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:keyword>albopop</dcat:keyword>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="N92fd6266b66c421a960953daa824fe34">
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/feed-albo-pretorio-comune-di-copertino"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-18T00:00:00</dct:issued>
+        <dcat:keyword>determine</dcat:keyword>
+        <dct:description xml:lang="it">Feed delle ultime pubblicazioni dell'[__Albo Pretorio__](http://www.svichosting.com/copertino/mc/mc_p_ricerca.php)</dct:description>
+        <dct:title xml:lang="it">Feed Albo Pretorio Comune di Copertino</dct:title>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/19d9c628-e2f8-4607-aeb1-e684b398e697/resource/925664bc-33b3-4c8c-bc4c-cb2a13b9f74b"/>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dct:identifier>c_c978:feed-albo-pretorio-comune-di-copertino</dct:identifier>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N3190985425f84ac0ae86a816ecf76470">
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dcat:keyword>albo</dcat:keyword>
+        <dct:description>Feed delle ultime pubblicazioni dell'[__Albo Pretorio__](http://www.svichosting.com/copertino/mc/mc_p_ricerca.php)</dct:description>
+        <dcat:keyword>delibere</dcat:keyword>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-18T00:00:00</dct:modified>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100168"/>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4">
+        <dct:description xml:lang="it">Estrazione automatica dei dati dei Lavori Pubblici dalla banca dati nazionale OpenBDAP filtrata su Copertino. Per una visualizzazione grafica si rimanda la [__sito ministeriale__](	https://openbdap.rgs.mef.gov.it/BO/OpenDocument?modalita=link&amp;docID=FgAUHFlfxgsAFwYAAACHAiUbeOO1D67w&amp;T=BusinessObject&amp;idType=CUID&amp;noDetailsPanel=true&amp;X_Ente=80008830756)</dct:description>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N9d3e6119852649d0aa378113e564e79e">
+            <dcatapit:geographicalIdentifier>	https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N2bb9ed35d0e9413faae8e02c658342f3">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T00:00:00</dct:modified>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N2e672386a7854d5b9d1c909e6c296f2a">
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dcat:keyword>opere pubbliche</dcat:keyword>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/3a6e3e8f-8b34-4c9a-a678-23cddb2f70b2"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/banca-dati-lavori-pubblici-bdap-comune-di-copertino"/>
+        <dct:description>Estrazione automatica dei dati dei Lavori Pubblici dalla banca dati nazionale OpenBDAP filtrata su Copertino. Per una visualizzazione grafica si rimanda la [__sito ministeriale__](	https://openbdap.rgs.mef.gov.it/BO/OpenDocument?modalita=link&amp;docID=FgAUHFlfxgsAFwYAAACHAiUbeOO1D67w&amp;T=BusinessObject&amp;idType=CUID&amp;noDetailsPanel=true&amp;X_Ente=80008830756)</dct:description>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dcat:keyword>lavori pubblici</dcat:keyword>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:identifier>c_c978:banca-dati-lavori-pubblici-bdap-comune-di-copertino</dct:identifier>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100169"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/d61ef489-8e1a-414a-ab8e-e7472514a476"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+        <dct:isVersionOf rdf:resource="https://openbdap.mef.gov.it/BO/OpenDocument?modalita=link&amp;docID=FgAUHFlfxgsAFwYAAACHAiUbeOO1D67w&amp;T=BusinessObject&amp;idType=CUID&amp;noDetailsPanel=true&amp;X_Ente=80008830756"/>
+        <dcat:keyword>bdap</dcat:keyword>
+        <dct:title xml:lang="it">Banca dati Lavori Pubblici - BDAP - Comune di Copertino</dct:title>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T00:00:00</dct:issued>
+        <dcat:keyword>llpp</dcat:keyword>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/46d27675-4f1d-4f27-994f-c94815fb13fd"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/CONT"/>
+        <dct:title>Banca dati Lavori Pubblici - BDAP - Comune di Copertino</dct:title>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dct:title>OpenData Copertino</dct:title>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-18T00:00:00</dct:issued>
+    <dct:publisher>
+      <dcatapit:Agent rdf:nodeID="N0b4aec4be31f4d8f8329a5561ce0a2c9">
+        <dct:identifier>c_c978</dct:identifier>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <foaf:name>Redazione OD</foaf:name>
+      </dcatapit:Agent>
+    </dct:publisher>
+    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/FRA"/>
+    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+    <foaf:homepage rdf:resource="http://dati.comune.copertino.le.it/#"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Catalog"/>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225">
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100181"/>
+        <dcat:keyword>mafia</dcat:keyword>
+        <dcat:keyword>confische</dcat:keyword>
+        <dct:description>Beni confiscati tratti dinamicamente dalla Banca Dati dell'ANBSC - Agenzia nazionale per l'amministrazione e la destinazione dei beni sequestrati e confiscati alla criminalità organizzata. Progetto OpenRegio con Lic. IoDL2.0.</dct:description>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N7b3d1c2a5a7a4d50887cda1c27d6aeca">
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/ecd47447-026d-4895-b205-f5fc6c28b025"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/354c822a-13c2-47ae-99aa-9e9098555b0c"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N2bab5d6596d24b80b8d1f3cd9c5475ce">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/8c6337a9-899e-44cb-a983-a130c61a0fed"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/75f3380d-2301-436b-a129-d14ef39c22ca"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N6260c012df3f40d280d04c18251e73d4">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/beni-confiscati-alla-criminalita-organizzata-comune-di-copertino"/>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-23T00:00:00</dct:modified>
+        <dct:title>Beni confiscati alla criminalità organizzata - Comune di Copertino</dct:title>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-23T19:05:50.095342</dct:issued>
+        <dct:title xml:lang="it">Beni confiscati alla criminalità organizzata - Comune di Copertino</dct:title>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/JUST"/>
+        <dct:description xml:lang="it">Beni confiscati tratti dinamicamente dalla Banca Dati dell'ANBSC - Agenzia nazionale per l'amministrazione e la destinazione dei beni sequestrati e confiscati alla criminalità organizzata. Progetto OpenRegio con Lic. IoDL2.0.</dct:description>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:identifier>c_c978:beni-confiscati-alla-criminalita-organizzata-comune-di-copertino</dct:identifier>
+        <dcat:keyword>immobili confiscati</dcat:keyword>
+        <dcat:keyword>criminalità organizzata</dcat:keyword>
+        <dcat:keyword>openregio</dcat:keyword>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dcat:themeTaxonomy>
+      <skos:ConceptScheme rdf:about="http://publications.europa.eu/resource/authority/data-theme">
+        <dct:title xml:lang="it">Il Vocabolario Data Theme</dct:title>
+      </skos:ConceptScheme>
+    </dcat:themeTaxonomy>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/4ea7fb37-d09c-46b7-8c96-fa7fe47a478b">
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N115ab882ee804931bd9996e7a2daf3c3">
+            <dcatapit:geographicalIdentifier>https://www.geonames.org/6537588</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-20T00:00:00</dct:modified>
+        <dct:title xml:lang="it">Dati Rifiuti Solidi Urbani progressivo per anno 2022 per il Comune di Copertino</dct:title>
+        <dct:title>Dati Rifiuti Solidi Urbani progressivo per anno 2022 per il Comune di Copertino</dct:title>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:description xml:lang="it">Importazione automatica dal portale [ambientale regionale](https://pugliacon.regione.puglia.it/orp/public/servizi/rsu-per-comune), con i dati relativi al Comune di Copertino. I dati sono relativi all'anno in corso. Ai sensi del Codice dell'Amministrazione Digitale, i dati importati sono con licenza CC-BY 4.0. E' presente anche un grafico interattivo per una visualizzazione complessiva rispetto ad anni precedenti e ai mesi dell'anno 2022. La percentuale di raccolta differenziata è un dataset strategico, per cui trovate un grafico dinamicamente collegato a questo dataset, nella home page del portale opendata.</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/4ea7fb37-d09c-46b7-8c96-fa7fe47a478b/resource/e6755ba3-2bf8-472d-b202-a69c1879aa13"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/4ea7fb37-d09c-46b7-8c96-fa7fe47a478b/resource/1da68dc7-bd1c-448c-8069-5dbe711f411c"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100242"/>
+        <dcat:keyword>raccolta differenziata</dcat:keyword>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="N987d37cef86749a8b5bd82c0d9467172">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-20T07:21:12.291617</dct:issued>
+        <dcat:keyword>rifiuti urbani</dcat:keyword>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="Nc142cef3a959445389cf4b3e89dd1c0c">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dct:identifier>c_c978:dati-rifiuti-solidi-urbani-progressivo-per-anno-2022-per-il-comune-di-copertino</dct:identifier>
+        <dct:description>Importazione automatica dal portale [ambientale regionale](https://pugliacon.regione.puglia.it/orp/public/servizi/rsu-per-comune), con i dati relativi al Comune di Copertino. I dati sono relativi all'anno in corso. Ai sensi del Codice dell'Amministrazione Digitale, i dati importati sono con licenza CC-BY 4.0. E' presente anche un grafico interattivo per una visualizzazione complessiva rispetto ad anni precedenti e ai mesi dell'anno 2022. La percentuale di raccolta differenziata è un dataset strategico, per cui trovate un grafico dinamicamente collegato a questo dataset, nella home page del portale opendata.</dct:description>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/dati-rifiuti-solidi-urbani-progressivo-per-anno-2022-per-il-comune-di-copertino"/>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9">
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="Neb239ca40d8d43a69025f761fd0fbdcc">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:keyword>incidenti</dcat:keyword>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/incidenti-anno-2021-comune-di-copertino"/>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="N8511fc78bb954a50a3b03b643ed5a8c8">
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:publisher>
+          <dcatapit:Agent rdf:nodeID="Nbb044cbbdb5b49089014025ce10e1120">
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+          </dcatapit:Agent>
+        </dct:publisher>
+        <dcat:keyword>sinistri stradali</dcat:keyword>
+        <dct:description>Incidenti rilevati dalla Polizia Locale per l'anno 2021.&#13;
+&#13;
+C.F. = Con Feriti&#13;
+MO = Mortali&#13;
+S.F. = Senza Feriti&#13;
+</dct:description>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-07-17T00:00:00</dct:modified>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-07-17T00:00:00</dct:issued>
+        <dcat:keyword>feriti</dcat:keyword>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dct:identifier>c_c978:/incidenti-anno-2021-comune-di-copertino</dct:identifier>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/cf96a1fb-5068-4e67-9e9f-4ca2652f7bdb"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/61185d79-6526-4c8c-9ab9-06e55ce8cb41"/>
+        <dct:title xml:lang="it">Incidenti anno 2021 - Comune di Copertino</dct:title>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100239"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/02adc002-7e0a-40ca-9bec-ec530aab570f"/>
+        <dcat:keyword>incidenti stradali</dcat:keyword>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+        <dct:description xml:lang="it">Incidenti rilevati dalla Polizia Locale per l'anno 2021.&#13;
+&#13;
+C.F. = Con Feriti&#13;
+MO = Mortali&#13;
+S.F. = Senza Feriti&#13;
+</dct:description>
+        <dct:title>Incidenti anno 2021 - Comune di Copertino</dct:title>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95">
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/ddf731ee-db0f-494f-950b-a28cce1f6f0a"/>
+        <dct:description>Lavori di rifacimento del manto stradale nel Comune di Copertino divisi per lotti.&#13;
+Le tipologie sono: Progettate, In Corso, Completate.&#13;
+Per comodità di visualizzazione, è stata realizzata la seguente [__MAPPA__](https://umap.openstreetmap.fr/it/map/manutenzione-strade-comune-di-copertino_757197#14/40.2705/18.0562)&#13;
+&#13;
+[![mappaumap][mappa_logo]][link_map]   &#13;
+&#13;
+&#13;
+&#13;
+[link_map]:https://certificates.theodi.org/it/datasets/224340/certificate/&#13;
+&#13;
+[mappa_logo]: https://certificates.theodi.org/it/datasets/224340/certificate/badge.png</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/dffeb933-4a7b-4566-8bb8-0d87aa2a8dcd"/>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N81b1bf740f394bc8afc2d026a24295cd">
+            <dcatapit:geographicalIdentifier>https://www.geonames.org/6538969/copertino.html#:~:text=Lecce%20LE%20%C2%BB-,Copertino,-075022</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T00:00:00</dct:modified>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-02-19T11:14:09.940593</dct:issued>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N1a9e4c2695714396965ab5b0b3e63a9b">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="Ndb3e48f0f8f948c89488064095fbdb78">
+            <dct:identifier>c_e986</dct:identifier>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:title>Manutenzione straordinaria strade Comune di Copertino</dct:title>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/72880866-38c9-43a6-821c-841e9d4f67ce"/>
+        <dcat:keyword>asfalto</dcat:keyword>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100273"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/CONT"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/manutenzione-strade-comune-di-copertino"/>
+        <dct:description xml:lang="it">Lavori di rifacimento del manto stradale nel Comune di Copertino divisi per lotti.&#13;
+Le tipologie sono: Progettate, In Corso, Completate.&#13;
+Per comodità di visualizzazione, è stata realizzata la seguente [__MAPPA__](https://umap.openstreetmap.fr/it/map/manutenzione-strade-comune-di-copertino_757197#14/40.2705/18.0562)&#13;
+&#13;
+[![mappaumap][mappa_logo]][link_map]   &#13;
+&#13;
+&#13;
+&#13;
+[link_map]:https://certificates.theodi.org/it/datasets/224340/certificate/&#13;
+&#13;
+[mappa_logo]: https://certificates.theodi.org/it/datasets/224340/certificate/badge.png</dct:description>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/4731eca6-ad9b-463f-837b-850a041b0adc"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/62bbf2dc-b56d-4356-9eef-c00dcf192c32"/>
+        <dcat:keyword>manutenzione strade</dcat:keyword>
+        <dct:identifier>c_e986:manutenzione-strade-comune-di-copertino</dct:identifier>
+        <dct:title xml:lang="it">Manutenzione straordinaria strade Comune di Copertino</dct:title>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/DEU"/>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/34152faa-deb5-4b58-9c7b-078b30fc0640">
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dct:title>OpenPNRR - Comune di Copertino</dct:title>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-21T00:00:00</dct:modified>
+        <dct:title xml:lang="it">OpenPNRR - Comune di Copertino</dct:title>
+        <dct:description>Estrazione automatica dei progetti PNRR dal portale [OpenCUP](https://opencup.gov.it/) riferiti al Comune di Copertino.&#13;
+Sono tutti i progetti presentati.</dct:description>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="Na14f5c00af87499e9935d01eb4e64e20">
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-20T23:21:24.543966</dct:issued>
+        <dcat:keyword>opencup</dcat:keyword>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N125481d97b7e495494bf21108008a5f5">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:publisher>
+          <dcatapit:Agent rdf:nodeID="Ne18265aa8ad842d78a781ff88bbb3180">
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+          </dcatapit:Agent>
+        </dct:publisher>
+        <dct:identifier>c_c978:openpnrr-comune-di-copertino</dct:identifier>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/34152faa-deb5-4b58-9c7b-078b30fc0640/resource/7441a3ee-8e24-45a8-94f6-15dc81f0d536"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100202"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/34152faa-deb5-4b58-9c7b-078b30fc0640/resource/fad41ed5-74d4-4b78-8c28-8d487cec231e"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/openpnrr-comune-di-copertino"/>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/MONTHLY"/>
+        <dct:description xml:lang="it">Estrazione automatica dei progetti PNRR dal portale [OpenCUP](https://opencup.gov.it/) riferiti al Comune di Copertino.&#13;
+Sono tutti i progetti presentati.</dct:description>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:keyword>finanziamenti</dcat:keyword>
+        <dcat:keyword>pnrr</dcat:keyword>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e">
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/23a2d0b9-7e44-4b70-a34b-1b2d15df3300"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/c1bcf84e-4bd8-41e8-8183-1344e51bd9c5"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/675228f3-4664-4f47-80e8-63a5b5cb7900"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/a9850268-8c25-4272-b43d-4e1bc885cad6"/>
+        <dcat:keyword>verbali</dcat:keyword>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/74d8ba27-e244-44e7-8d0a-32331bbe653a"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100181"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/a0b125f5-573f-43a0-8d46-4d56b26c6fda"/>
+        <dct:title>Verbali elevati ai sensi del C.d.S. anno 2021 Comune di Copertino</dct:title>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/JUST"/>
+        <dct:title xml:lang="it">Verbali elevati ai sensi del C.d.S. anno 2021 Comune di Copertino</dct:title>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-10-25T00:00:00</dct:modified>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/f818dade-c590-4854-9f98-85569aa44553"/>
+        <dcat:keyword>infrazioni</dcat:keyword>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="Nd46aaf03585642d190b4d0bd3d02df6e">
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:identifier>verbali-elevati-ai-sensi-del-c-d-s-anno-2021-comune-di-copertino</dct:identifier>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/925f47ea-32ba-488c-ade9-f266b65e6b05"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/d8aa5aff-a9e2-4e16-9448-a7901bb236b9"/>
+        <dct:description xml:lang="it">Verbali elevati ai sensi del C.d.S. anno 2021 divisi per mese, Tipo Infrazione, tipologia di rilevazione</dct:description>
+        <dct:description>Verbali elevati ai sensi del C.d.S. anno 2021 divisi per mese, Tipo Infrazione, tipologia di rilevazione</dct:description>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dcat:keyword>polizia locale</dcat:keyword>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-10-25T00:00:00</dct:issued>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dct:publisher>
+          <foaf:Agent rdf:nodeID="Ne7b8f7bfe10846f085f971d9c176ec28">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+          </foaf:Agent>
+        </dct:publisher>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N03fa3c26f5fe4bbbb1ec9c28431e89c9">
+            <dcatapit:geographicalIdentifier>https://geonames.org/3178141</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/0f954653-5547-438b-8dc7-b8ac5e754e16"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/6810fa9c-a72f-4156-8262-a779eeb935f8"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/verbali-elevati-ai-sensi-del-c-d-s-anno-2021-comune-di-copertino"/>
+        <dcat:keyword>codice della strada</dcat:keyword>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/d99657a6-2bf7-434c-a259-8179722e2ef2"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/3e21925a-4b42-4e73-b61c-dd3aab399c19"/>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcat:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/77126238-165b-4244-baf7-df8ee8c4d5fe">
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T10:37:32.535197</dct:issued>
+        <dcat:keyword>ponteggi</dcat:keyword>
+        <dct:description>Serie storica delle pratiche autorizzate di occupazione suolo pubblico per gli anni 2018-2021.&#13;
+Per agevolare l'utenza, si propone un [grafico interattivo](https://docs.google.com/spreadsheets/d/e/2PACX-1vTw6K8Fl53PSuikdXQ7aoLDgLd3nXukNeoRMbycpQuAJgL6TYuCpJEk1hChHpqPNLoAZVruSebB4Pwg/pubhtml?gid=680652701&amp;single=true)</dct:description>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100229"/>
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/77126238-165b-4244-baf7-df8ee8c4d5fe/resource/0f5a2d6d-f5d8-4651-bd2b-c3ad2a93e475"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/77126238-165b-4244-baf7-df8ee8c4d5fe/resource/56e1b089-ca10-4c3d-afcc-b9deb491c5a0"/>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-27T00:00:00</dct:modified>
+        <dct:title xml:lang="it">Serie storica occupazione suolo pubblico 2018-2021</dct:title>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+        <dcat:keyword>occupazione suolo pubblico</dcat:keyword>
+        <dct:title>Serie storica occupazione suolo pubblico 2018-2021</dct:title>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <dct:identifier>c_c978:serie-storica-occupazione-suolo-pubblico-2018-2021</dct:identifier>
+        <dct:rightsHolder>
+          <foaf:Agent rdf:nodeID="Nb926c0e9105544f192cb8c468afca442">
+            <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+          </foaf:Agent>
+        </dct:rightsHolder>
+        <dct:description xml:lang="it">Serie storica delle pratiche autorizzate di occupazione suolo pubblico per gli anni 2018-2021.&#13;
+Per agevolare l'utenza, si propone un [grafico interattivo](https://docs.google.com/spreadsheets/d/e/2PACX-1vTw6K8Fl53PSuikdXQ7aoLDgLd3nXukNeoRMbycpQuAJgL6TYuCpJEk1hChHpqPNLoAZVruSebB4Pwg/pubhtml?gid=680652701&amp;single=true)</dct:description>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/serie-storica-occupazione-suolo-pubblico-2018-2021"/>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N71860893508e42648817c409ee40b78b">
+            <dcatapit:geographicalIdentifier>	https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dct:publisher>
+          <dcatapit:Agent rdf:nodeID="N4ea379c59f6746c5bb67b72ae51f467c">
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+          </dcatapit:Agent>
+        </dct:publisher>
+      </dcat:Dataset>
+    </dcat:dataset>
+    <dcat:dataset>
+      <dcatapit:Dataset rdf:about="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab">
+        <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
+        <dct:subject rdf:resource="http://eurovoc.europa.eu/100242"/>
+        <dct:description>Dettaglio su base mensile della Raccolta differenziate</dct:description>
+        <dct:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"/>
+        <dcat:keyword>ambiente</dcat:keyword>
+        <dct:rightsHolder>
+          <dcatapit:Agent rdf:nodeID="N0fde7083e5dd4800b6539e695a0f7f5c">
+            <foaf:name xml:lang="it">Comune di Copertino</foaf:name>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            <dct:identifier>c_c978</dct:identifier>
+          </dcatapit:Agent>
+        </dct:rightsHolder>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/5ad2bcd7-d160-43ff-95d2-7533ec9ce9ac"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/b1dab1c1-56bc-40e5-a0dc-8bf3dec22d10"/>
+        <dct:publisher>
+          <dcatapit:Agent rdf:nodeID="N1b2ad41f438f46619c4fc49d76a60194">
+            <foaf:name xml:lang="it">Redazione OD</foaf:name>
+            <dct:identifier>c_c978</dct:identifier>
+            <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+          </dcatapit:Agent>
+        </dct:publisher>
+        <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER"/>
+        <dct:description xml:lang="it">Dettaglio su base mensile della Raccolta differenziate</dct:description>
+        <dct:title xml:lang="it">Raccolta differenziata 2021 dettagli</dct:title>
+        <dct:title>Raccolta differenziata 2021 dettagli</dct:title>
+        <dct:identifier>c_c978:raccolta-differenziata-2021-dettagli</dct:identifier>
+        <dcat:keyword>raccolta differenziata</dcat:keyword>
+        <dct:spatial>
+          <dct:Location rdf:nodeID="N27713db6829943f1b0253de7c9d09a27">
+            <dcatapit:geographicalIdentifier>	https://www.geonames.org/6538969</dcatapit:geographicalIdentifier>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+        <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/raccolta-differenziata-2021-dettagli"/>
+        <dcat:distribution rdf:resource="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/8056172a-62c1-444b-98db-d7ad417216ac"/>
+        <dcat:keyword>rifiuti</dcat:keyword>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T00:00:00</dct:issued>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-04-28T00:00:00</dct:modified>
+      </dcatapit:Dataset>
+    </dcat:dataset>
+  </dcat:Catalog>
+  <vcard:Organization rdf:nodeID="N5b48108be51b48b7a01ae2b0e46296d5">
+    <vcard:fn>Luca Conte</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:ufficio.llpp@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N9cb6e159730f4fbc9f82bfc5673a6f6f">
+    <vcard:fn>Arch. Francesco Calasso</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:francesco.calasso@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <hydra:PagedCollection rdf:about="http://dati.comune.copertino.le.it/catalog.rdf?page=1">
+    <hydra:itemsPerPage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</hydra:itemsPerPage>
+    <hydra:lastPage>http://dati.comune.copertino.le.it/catalog.rdf?page=1</hydra:lastPage>
+    <hydra:firstPage>http://dati.comune.copertino.le.it/catalog.rdf?page=1</hydra:firstPage>
+    <hydra:totalItems rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</hydra:totalItems>
+  </hydra:PagedCollection>
+  <vcard:Organization rdf:nodeID="N410b71d76840491c83b6278aa8fe491f">
+    <vcard:fn>Emanuele Viva</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:ufficioattivitaproduttive@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="Nf1282654769d45de9eef738adda28a5f">
+    <vcard:fn>Redazione OD</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N491b51cff8264926a35d47cab8280f56">
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+    <vcard:fn>Redazione OD</vcard:fn>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N3cd9cc561ea7401ca457d580ed89fca9">
+    <vcard:fn>Luca Conte</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:ufficio.llpp@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="Neabac26fc9444c9b9a3a966d161b4f33">
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+    <vcard:fn>Redazione OD</vcard:fn>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N126205b7beec4ccf87852d2c1d139e79">
+    <vcard:fn>Emanuele Viva</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:ufficioattivitaproduttive@comune.copertino.le.it"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="Nbfd6bfe5aa5443bfba268f81e8433da6">
+    <vcard:hasEmail rdf:resource="mailto:francesco.calasso@comune.copertino.le.it"/>
+    <vcard:fn>Arch. Francesco Calasso</vcard:fn>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N83843ec0ad96402eae630f3ba881f1ca">
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+    <vcard:fn>Redazione OD</vcard:fn>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="Ne3cfe83c29554ad7bbb6b75108445150">
+    <vcard:fn>Redazione OD</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N7756def164d74716a4c4e1dbc8ff7b81">
+    <vcard:hasEmail rdf:resource="mailto:polizia.municipale@comune.copertino.le.it"/>
+    <vcard:fn>Polizia Locale</vcard:fn>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="N767aa10601f843579e624db7ee77c5d0">
+    <vcard:fn>Redazione OD</vcard:fn>
+    <vcard:hasEmail rdf:resource="mailto:redazioneopendatacopertino@gmail.com"/>
+  </vcard:Organization>
+  <vcard:Organization rdf:nodeID="Necf63751f3fd46ae9d85f7de90dbb664">
+    <vcard:hasEmail rdf:resource="mailto:polizia.municipale@comune.copertino.le.it"/>
+    <vcard:fn>Polizia Locale</vcard:fn>
+  </vcard:Organization>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/758d7ca0-1b05-40c3-a493-cebd33843b14">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTq4IjEHVjTLP-ASK9Nw0azMIirWmiRaiZowVMR-pNdV7xoInBFhNwYHsUJRMRCKY5wU0m46N4QxkoA/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description>File in formato CSV interoperabile</dct:description>
+    <dct:title xml:lang="it">ElencoAreeVerdiDisponibiliCSV</dct:title>
+    <dct:title>ElencoAreeVerdiDisponibiliCSV</dct:title>
+    <dct:description xml:lang="it">File in formato CSV interoperabile</dct:description>
+    <dct:license>
+      <dct:LicenseDocument rdf:about="https://creativecommons.org/licenses/by/4.0/">
+        <foaf:name xml:lang="de">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</foaf:name>
+        <foaf:name xml:lang="fr">Creative Commons Attribution 4.0 International (CC BY 4.0)</foaf:name>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#LicenseDocument"/>
+        <owl:versionInfo>4.0</owl:versionInfo>
+        <dct:type rdf:resource="http://purl.org/adms/licencetype/Attribution"/>
+        <foaf:name xml:lang="it">Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)</foaf:name>
+        <foaf:name xml:lang="en">Creative Commons Attribution 4.0 International (CC BY 4.0)</foaf:name>
+      </dct:LicenseDocument>
+    </dct:license>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/REGI">
+    <skos:prefLabel xml:lang="es">Regiones y ciudades</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Regionen und Städte</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Regions and cities</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">Régions et villes</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Regioni e città</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100243">
+    <skos:prefLabel xml:lang="it">5211 ambiente naturale</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">5211 milieu naturel</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">5211 natural environment</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">5211 Natürliche Umgebung</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/72880866-38c9-43a6-821c-841e9d4f67ce">
+    <dct:title xml:lang="it">InCorso</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/base/parzcoperte.geojson"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description xml:lang="it">File in formato geografico per le strade parzialmente gestite (in corso)</dct:description>
+    <dct:title>InCorso</dct:title>
+    <dct:description>File in formato geografico per le strade parzialmente gestite (in corso)</dct:description>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/61185d79-6526-4c8c-9ab9-06e55ce8cb41">
+    <dct:description xml:lang="it">File per la visualizzazione in formato XLSX</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRF8Gd34yq205tMm-o7hoRHFzR_5-XTql6EUyRK8iL2r_33X_ZNf7K-0kbV4O5SALF2Gy9jdmckyL95/pub?output=xlsx"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">Incidenti2021XLSX</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:title>Incidenti2021XLSX</dct:title>
+    <dct:description>File per la visualizzazione in formato XLSX</dct:description>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/c7469a63-04fd-4246-b1a5-e30a36aed647/resource/4c16928f-26c0-43a2-8208-b5d8e6828a91">
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title xml:lang="it">PraticheSuap20182021</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:title>PraticheSuap20182021</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTw6K8Fl53PSuikdXQ7aoLDgLd3nXukNeoRMbycpQuAJgL6TYuCpJEk1hChHpqPNLoAZVruSebB4Pwg/pub?output=xlsx"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/cf96a1fb-5068-4e67-9e9f-4ca2652f7bdb">
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>Incidenti2021CSV</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRF8Gd34yq205tMm-o7hoRHFzR_5-XTql6EUyRK8iL2r_33X_ZNf7K-0kbV4O5SALF2Gy9jdmckyL95/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:title xml:lang="it">Incidenti2021CSV</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/34152faa-deb5-4b58-9c7b-078b30fc0640/resource/7441a3ee-8e24-45a8-94f6-15dc81f0d536">
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTDkBAVXk1uCcFeckfoFllOc3ID_jr5_h6t6ntaA6D3jeO-oxrigCb43yTUrfPhyXNaiOwQKLGDSofC/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:title xml:lang="it">OpenPNRRCSV</dct:title>
+    <dct:title>OpenPNRRCSV</dct:title>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/dffeb933-4a7b-4566-8bb8-0d87aa2a8dcd">
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>Progettate</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+    <dct:title xml:lang="it">Progettate</dct:title>
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/base/progettate.geojson"/>
+    <dct:description>File in formato geografico per le strade la cui manutenzione è in progettazione</dct:description>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato geografico per le strade la cui manutenzione è in progettazione</dct:description>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/65103063-8651-4c25-95db-bdd5572829c9/resource/02adc002-7e0a-40ca-9bec-ec530aab570f">
+    <dct:title xml:lang="it">Mappa densità</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>Mappa densità</dct:title>
+    <dct:description>Mappa che visualizza la densità dei sinistri</dct:description>
+    <dct:description xml:lang="it">Mappa che visualizza la densità dei sinistri</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML"/>
+    <dcat:accessURL rdf:resource="https://umap.openstreetmap.fr/it/map/incidenti-anno-2021-comune-di-copertino_788444"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/62bbf2dc-b56d-4356-9eef-c00dcf192c32">
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/base/aqp.geojson"/>
+    <dct:title>Accordo quadro AQP</dct:title>
+    <dct:title xml:lang="it">Accordo quadro AQP</dct:title>
+    <dct:description>File in formato geografico per le strade oggetto di accordo quadro Acquedotto Pugliese</dct:description>
+    <dct:description xml:lang="it">File in formato geografico per le strade oggetto di accordo quadro Acquedotto Pugliese</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/c1bcf84e-4bd8-41e8-8183-1344e51bd9c5">
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=405086637&amp;single=true&amp;output=csv"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Gennaio</dct:title>
+    <dct:title>InfrazioniCds2021Gennaio</dct:title>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/8cc7e156-6ec1-4f80-9672-94c6aedece1a">
+    <dct:description>File in formato GeoJson con proiezione EPSG 4326.&#13;
+&#13;
+La struttura dei file è la seguente: IDAG Codice univoco dell’Aggregato Strutturale Label ID Sequenziale nell’ambito del Comune. Comune Nome ISTAT del Comune.&#13;
+&#13;
+</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title xml:lang="it">Copertino_Aggregati_StrutturaliGeoJson</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+    <dct:description xml:lang="it">File in formato GeoJson con proiezione EPSG 4326.&#13;
+&#13;
+La struttura dei file è la seguente: IDAG Codice univoco dell’Aggregato Strutturale Label ID Sequenziale nell’ambito del Comune. Comune Nome ISTAT del Comune.&#13;
+&#13;
+</dct:description>
+    <dct:license>
+      <dct:LicenseDocument rdf:about="https://www.dati.gov.it/content/italian-open-data-license-v20">
+        <owl:versionInfo>2.0</owl:versionInfo>
+        <foaf:name xml:lang="de">Italienische Open Data Lizenz 2.0 (IODL 2.0)</foaf:name>
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#LicenseDocument"/>
+        <foaf:name xml:lang="it">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
+        <dct:type rdf:resource="http://purl.org/adms/licencetype/Attribution"/>
+        <foaf:name xml:lang="fr">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
+        <foaf:name xml:lang="en">Italian Open Data License 2.0 (IODL 2.0)</foaf:name>
+      </dct:LicenseDocument>
+    </dct:license>
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/8cc7e156-6ec1-4f80-9672-94c6aedece1a/download/copertino.geojson"/>
+    <dct:title>Copertino_Aggregati_StrutturaliGeoJson</dct:title>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/a0b125f5-573f-43a0-8d46-4d56b26c6fda">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:title>InfrazioniCds2021Settembre</dct:title>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Settembre</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=1558458236&amp;single=true&amp;output=csv"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/4ea7fb37-d09c-46b7-8c96-fa7fe47a478b/resource/1da68dc7-bd1c-448c-8069-5dbe711f411c">
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_Ph4f7i-8Paa1LkUlHtTjnLEYSJxmzFxbfmlDT7y3zGamLPAwKK14yAk4j0zcpS99FdkWC-5bayal/pub?output=xlsx"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:title xml:lang="it">Differenziata2022XLS</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>Differenziata2022XLS</dct:title>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/4d244117-d831-40ca-84fa-338b50ff5803">
+    <dct:title xml:lang="it">ANNCSU</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description>File in formato CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:title>ANNCSU</dct:title>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAvpMQ0kzO0rSmiHykrO2Dh2t7BtY3SiEypA186-QGHYFT9PoSaqNd9Am3q68nYt9aTwzVzqxnoBqo/pub?gid=0&amp;single=true&amp;output=csv"/>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/a9850268-8c25-4272-b43d-4e1bc885cad6">
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:title xml:lang="it">InfrazioniCds2021Agosto</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=1818856352&amp;single=true&amp;output=csv"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>InfrazioniCds2021Agosto</dct:title>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/0f954653-5547-438b-8dc7-b8ac5e754e16">
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:title>InfrazioniCds2021Giugno</dct:title>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Giugno</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=485354325&amp;single=true&amp;output=csv"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/3e21925a-4b42-4e73-b61c-dd3aab399c19">
+    <dct:title>InfrazioniCds2021Aprile</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Aprile</dct:title>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=1329735543&amp;single=true&amp;output=csv"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/856d222e-0f4b-457d-b865-8da2bb3774dd/resource/36055f2d-09d3-4e64-8670-e3b885919edd">
+    <dct:description>File in formato CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vSl5iAsALzPGBcPXcxGA4knxtft7ya0RVe9GcynOxBHtnQRXmb7b8SCKaWTy22ikT-ETQkT2HGGr83n/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:title>Differenziata2021CSV</dct:title>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+    <dct:title xml:lang="it">Differenziata2021CSV</dct:title>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/f818dade-c590-4854-9f98-85569aa44553">
+    <dct:title>InfrazioniCds2021Marzo</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=628625586&amp;single=true&amp;output=csv"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:title xml:lang="it">InfrazioniCds2021Marzo</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/4731eca6-ad9b-463f-837b-850a041b0adc">
+    <dct:description>File in formato geografico per le strade completate</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON"/>
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/base/coperte.geojson"/>
+    <dct:title xml:lang="it">Completate</dct:title>
+    <dct:description xml:lang="it">File in formato geografico per le strade completate</dct:description>
+    <dct:title>Completate</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/3a6e3e8f-8b34-4c9a-a678-23cddb2f70b2">
+    <dct:description xml:lang="it">Lavori pubblici in XLSX</dct:description>
+    <dct:description>Lavori pubblici in XLSX</dct:description>
+    <dct:title xml:lang="it">LavoripubbliciXLSX</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RQuJCAHUxl9OXxJ-CedooRTPfGI-Kn9lKGZ4mLtVU-wlpZ2NWRg64c5fhQEo6WJ-NtiL_q41tJpK/pub?output=xlsx"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>LavoripubbliciXLSX</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/46d27675-4f1d-4f27-994f-c94815fb13fd">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6RQuJCAHUxl9OXxJ-CedooRTPfGI-Kn9lKGZ4mLtVU-wlpZ2NWRg64c5fhQEo6WJ-NtiL_q41tJpK/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description>Lavori pubblici in formato CSV</dct:description>
+    <dct:description xml:lang="it">Lavori pubblici in formato CSV</dct:description>
+    <dct:title xml:lang="it">LavoripubbliciCSV</dct:title>
+    <dct:title>LavoripubbliciCSV</dct:title>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100229">
+    <skos:prefLabel xml:lang="fr">4021 gestion administrative</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">4021 gestione amministrativa</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">4021 Unternehmensverwaltung</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">4021 management</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/40999e6b-563c-42b4-9784-16914c10ff95/resource/ddf731ee-db0f-494f-950b-a28cce1f6f0a">
+    <dct:description xml:lang="it">Mappa delle strade con l'indicazione dei lavori completati, in corso, in progettazione</dct:description>
+    <dct:title>MappaStrade</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML_SIMPL"/>
+    <dct:title xml:lang="it">MappaStrade</dct:title>
+    <dct:description>Mappa delle strade con l'indicazione dei lavori completati, in corso, in progettazione</dct:description>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dcat:accessURL rdf:resource="https://umap.openstreetmap.fr/it/map/manutenzione-strade-comune-di-copertino_757197"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/d99657a6-2bf7-434c-a259-8179722e2ef2">
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=831548257&amp;single=true&amp;output=csv"/>
+    <dct:title>InfrazioniCds2021Luglio</dct:title>
+    <dct:title xml:lang="it">InfrazioniCds2021Luglio</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/f26891a2-7106-4a27-b312-0a23ec3747ba">
+    <dct:description>File in formato XLSX per la visualizzazione</dct:description>
+    <dct:title>CensimentoArboreoXLSX</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQMMp8d5WxvRd-bF-usuJumzFrPzbcbMgvPyTuD9qY-a-mdn04UVEitQUg2tuiRQzh-vrFFIVM-1-yd/pub?output=xlsx"/>
+    <dct:description xml:lang="it">File in formato XLSX per la visualizzazione</dct:description>
+    <dct:title xml:lang="it">CensimentoArboreoXLSX</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/JUST">
+    <skos:prefLabel xml:lang="fr">Justice, système juridique et sécurité publique</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Justice, legal system and public safety</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Justicia, sistema judicial y seguridad pública</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Justiz, Rechtssystem und öffentliche Sicherheit</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Giustizia, sistema giuridico e sicurezza pubblica</skos:prefLabel>
+  </skos:Concept>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/433df1cb-89bd-4578-bc1a-abd01c976e9b">
+    <dct:title>Copertino_Aggregati-Strutturali</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dcat:accessURL rdf:resource="http://dati.comune.copertino.le.it/dataset/84cbb330-e46e-4dce-91fd-728c5787022d/resource/433df1cb-89bd-4578-bc1a-abd01c976e9b/download/copertino.zip"/>
+    <dct:description>Il formato dei dati è shape. Ogni shape è formato da 4 file con le seguenti estensioni: .dbf, .prj, .shp, .shx. con proiezione EPSG 7794&#13;
+&#13;
+La struttura dei file è la seguente: IDAG Codice univoco dell’Aggregato Strutturale Label ID Sequenziale nell’ambito del Comune. Comune Nome ISTAT del Comune.</dct:description>
+    <dct:license rdf:resource="https://www.dati.gov.it/content/italian-open-data-license-v20"/>
+    <dct:title xml:lang="it">Copertino_Aggregati-Strutturali</dct:title>
+    <dct:description xml:lang="it">Il formato dei dati è shape. Ogni shape è formato da 4 file con le seguenti estensioni: .dbf, .prj, .shp, .shx. con proiezione EPSG 7794&#13;
+&#13;
+La struttura dei file è la seguente: IDAG Codice univoco dell’Aggregato Strutturale Label ID Sequenziale nell’ambito del Comune. Comune Nome ISTAT del Comune.</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/ZIP"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/925f47ea-32ba-488c-ade9-f266b65e6b05">
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=139965243&amp;single=true&amp;output=csv"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:title>InfrazioniCds2021Febbraio</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Febbraio</dct:title>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/d8aa5aff-a9e2-4e16-9448-a7901bb236b9">
+    <dct:title>InfrazioniCds2021Maggio</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=1959870053&amp;single=true&amp;output=csv"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Maggio</dct:title>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/6c0ed489-8531-403e-bf91-7bc057d59f9e">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML"/>
+    <dct:title xml:lang="it">Mappa</dct:title>
+    <dcat:accessURL rdf:resource="https://umap.openstreetmap.fr/it/map/censimento-arboreo-comune-di-copertino_803053#14/40.2703/18.0471"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>Mappa</dct:title>
+    <dct:description>Mappa per la visualizzazione geografica</dct:description>
+    <dct:description xml:lang="it">Mappa per la visualizzazione geografica</dct:description>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/19d9c628-e2f8-4607-aeb1-e684b398e697/resource/d4767679-8d60-4d29-adab-0775c8d3070d">
+    <dct:title>FeedCSV</dct:title>
+    <dct:title xml:lang="it">FeedCSV</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTXbfH05U-NeX2807I_pP0AmjlYm1qUVgSU0cJ0sk3WnIKv8V3o4l9lWZaD86pgOsAWZ4k4DyI42poi/pub?gid=1370528632&amp;single=true&amp;output=csv"/>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description>File in formato CSV</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/SOCI">
+    <skos:prefLabel xml:lang="it">Popolazione e società</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Población y sociedad</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Bevölkerung und Gesellschaft</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">Population et société</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Population and society</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100282">
+    <skos:prefLabel xml:lang="de">7231 Wirtschaftsgeografie</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">7231 geografia economica</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">7231 géographie économique</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">7231 economic geography</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/6810fa9c-a72f-4156-8262-a779eeb935f8">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:description>File in formato XLSX per la visualizzazione</dct:description>
+    <dct:description xml:lang="it">File in formato XLSX per la visualizzazione</dct:description>
+    <dct:title>InfrazioniCds2021</dct:title>
+    <dct:title xml:lang="it">InfrazioniCds2021</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?output=xlsx"/>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/8056172a-62c1-444b-98db-d7ad417216ac">
+    <dct:title xml:lang="it">raccoltadifferenziata2021</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:description>File in formato PDF</dct:description>
+    <dct:title>raccoltadifferenziata2021</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7lVLrbC3qFIwaoGXFdDyvCBwwYdLpWQCBB0jOqw0AVHZumTgHnytysQJ0hAM7Lh2kIBORDWpVR-Nb/pub?output=pdf"/>
+    <dct:description xml:lang="it">File in formato PDF</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFUA"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6da12471-df0f-4bf7-be47-80a0c8a9a0be/resource/e815d711-0fdc-4f00-8279-0bff180c5214">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description xml:lang="it">File in formato aperto CSV</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>CensimentoArboreoCSV</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQMMp8d5WxvRd-bF-usuJumzFrPzbcbMgvPyTuD9qY-a-mdn04UVEitQUg2tuiRQzh-vrFFIVM-1-yd/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:title xml:lang="it">CensimentoArboreoCSV</dct:title>
+    <dct:description>File in formato aperto CSV</dct:description>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/ecd47447-026d-4895-b205-f5fc6c28b025">
+    <dct:title>ImmobilidestrinatiXLS</dct:title>
+    <dct:description>File per la visualizzazione XLS</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLS"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:title xml:lang="it">ImmobilidestrinatiXLS</dct:title>
+    <dcat:accessURL rdf:resource="http://openregio.anbsc.it/statistiche/export/5/immobili/16/75/75022/xls"/>
+    <dct:description xml:lang="it">File per la visualizzazione XLS</dct:description>
+    <dct:license rdf:resource="https://www.dati.gov.it/content/italian-open-data-license-v20"/>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100273">
+    <skos:prefLabel xml:lang="en">6831 building and public works</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">6831 bâtiment et travaux publics</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">6831 edilizia e lavori pubblici</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">6831 Bauindustrie und öffentliches Bauwesen</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/34152faa-deb5-4b58-9c7b-078b30fc0640/resource/fad41ed5-74d4-4b78-8c28-8d487cec231e">
+    <dct:description>File per la visualizzazione XLSX&#13;
+--------&#13;
+Clicca [__VISUALIZZA RISORSA__](https://docs.google.com/spreadsheets/d/e/2PACX-1vTDkBAVXk1uCcFeckfoFllOc3ID_jr5_h6t6ntaA6D3jeO-oxrigCb43yTUrfPhyXNaiOwQKLGDSofC/pub?output=xlsx) per il download</dct:description>
+    <dct:title>OpenPNRRXLSX</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTDkBAVXk1uCcFeckfoFllOc3ID_jr5_h6t6ntaA6D3jeO-oxrigCb43yTUrfPhyXNaiOwQKLGDSofC/pub?output=xlsx"/>
+    <dct:title xml:lang="it">OpenPNRRXLSX</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description xml:lang="it">File per la visualizzazione XLSX&#13;
+--------&#13;
+Clicca [__VISUALIZZA RISORSA__](https://docs.google.com/spreadsheets/d/e/2PACX-1vTDkBAVXk1uCcFeckfoFllOc3ID_jr5_h6t6ntaA6D3jeO-oxrigCb43yTUrfPhyXNaiOwQKLGDSofC/pub?output=xlsx) per il download</dct:description>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100210">
+    <skos:prefLabel xml:lang="it">2816 demografia e popolazione</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">2816 démographie et population</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">2816 Demografie und Bevölkerung</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">2816 demography and population</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100169">
+    <skos:prefLabel xml:lang="it">0436 potere esecutivo e amministrazione pubblica</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">0436 executive power and public service</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">0436 pouvoir exécutif et administration publique</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">0436 exekutive Gewalt und öffentliche Verwaltung</skos:prefLabel>
+  </skos:Concept>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/75f3380d-2301-436b-a129-d14ef39c22ca">
+    <dct:title xml:lang="it">ImmobilidestrinatiXML</dct:title>
+    <dct:title>ImmobilidestrinatiXML</dct:title>
+    <dct:description xml:lang="it">File in formato interoperabile XML</dct:description>
+    <dct:license rdf:resource="https://www.dati.gov.it/content/italian-open-data-license-v20"/>
+    <dct:description>File in formato interoperabile XML</dct:description>
+    <dcat:accessURL rdf:resource="https://openregio.anbsc.it/statistiche/export/5/immobili/16/75/75022/xml"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XML"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/354c822a-13c2-47ae-99aa-9e9098555b0c">
+    <dct:title>ImmobilidestrinatiCSV</dct:title>
+    <dct:description xml:lang="it">File interoperabile in formato CSV</dct:description>
+    <dct:title xml:lang="it">ImmobilidestrinatiCSV</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description>File interoperabile in formato CSV</dct:description>
+    <dcat:accessURL rdf:resource="http://openregio.anbsc.it/statistiche/export/5/immobili/16/75/75022/csv"/>
+    <dct:license rdf:resource="https://www.dati.gov.it/content/italian-open-data-license-v20"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100202">
+    <skos:prefLabel xml:lang="de">2426 Investition und Finanzierung</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">2426 investissement et financement</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">2426 investimenti e finanziamenti</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">2426 financing and investment</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/457caaf4-bdb0-4b6a-b240-1fc6c6efe87f">
+    <dct:title xml:lang="it">ElencoAreeVerdiDisponibiliXLSX</dct:title>
+    <dct:description xml:lang="it">File in formato XLSX per la visualizzazione</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTq4IjEHVjTLP-ASK9Nw0azMIirWmiRaiZowVMR-pNdV7xoInBFhNwYHsUJRMRCKY5wU0m46N4QxkoA/pub?output=xlsx"/>
+    <dct:title>ElencoAreeVerdiDisponibiliXLSX</dct:title>
+    <dct:description>File in formato XLSX per la visualizzazione</dct:description>
+  </dcat:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/c7469a63-04fd-4246-b1a5-e30a36aed647/resource/e4b0597d-277a-433b-86ce-980db462573d">
+    <dct:description>File in formato CSV</dct:description>
+    <dct:title xml:lang="it">PraticheSuap20182021</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTw6K8Fl53PSuikdXQ7aoLDgLd3nXukNeoRMbycpQuAJgL6TYuCpJEk1hChHpqPNLoAZVruSebB4Pwg/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:title>PraticheSuap20182021</dct:title>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/TRAN">
+    <skos:prefLabel xml:lang="fr">Transports</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Transporte</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Transport</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Verkehr</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Trasporti</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100181">
+    <skos:prefLabel xml:lang="en">1221 justice</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">1221 Gerichtswesen</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">1221 justice</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">1221 giustizia</skos:prefLabel>
+  </skos:Concept>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf/resource/a84c52dc-7bcb-4a9f-acac-e11d23a93227">
+    <dct:title>Mappa</dct:title>
+    <dct:description xml:lang="it">Mappa per favorire la visualizzazione geografica</dct:description>
+    <dcat:accessURL rdf:resource="https://umap.openstreetmap.fr/it/map/elenco-aree-verdi-disponibili-comune-di-copertino_830635"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML_SIMPL"/>
+    <dct:description>Mappa per favorire la visualizzazione geografica</dct:description>
+    <dct:title xml:lang="it">Mappa</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcat:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/77126238-165b-4244-baf7-df8ee8c4d5fe/resource/0f5a2d6d-f5d8-4651-bd2b-c3ad2a93e475">
+    <dct:description>File in formato CSV</dct:description>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+    <dct:title>Occupazione2018-2021</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv-xfvYePDjTV_1lRRJK8NE9VR8Y5qT9P3LinYUQk5_4nDLr9Wh1JpKynSq42A88cTF7-htXV1DDNU/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:title xml:lang="it">Occupazione2018-2021</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/4ea7fb37-d09c-46b7-8c96-fa7fe47a478b/resource/e6755ba3-2bf8-472d-b202-a69c1879aa13">
+    <dct:title xml:lang="it">Differenziata2022CSV</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_Ph4f7i-8Paa1LkUlHtTjnLEYSJxmzFxbfmlDT7y3zGamLPAwKK14yAk4j0zcpS99FdkWC-5bayal/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:title>Differenziata2022CSV</dct:title>
+    <dct:description>File in formato CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description xml:lang="it">File in formato CSV</dct:description>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/856d222e-0f4b-457d-b865-8da2bb3774dd/resource/a697267a-4399-4dde-a5f0-167a9c2d83bb">
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vSl5iAsALzPGBcPXcxGA4knxtft7ya0RVe9GcynOxBHtnQRXmb7b8SCKaWTy22ikT-ETQkT2HGGr83n/pub?output=xlsx"/>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>Differenziata2021XLS</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:title xml:lang="it">Differenziata2021XLS</dct:title>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/23a2d0b9-7e44-4b70-a34b-1b2d15df3300">
+    <dct:title>InfrazioniCds2021Ottobre</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=915364427&amp;single=true&amp;output=csv"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Ottobre</dct:title>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/74d8ba27-e244-44e7-8d0a-32331bbe653a">
+    <dct:title>InfrazioniCds2021Dicembre</dct:title>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=266648156&amp;single=true&amp;output=csv"/>
+    <dct:title xml:lang="it">InfrazioniCds2021Dicembre</dct:title>
+  </dcat:Distribution>
+  <vcard:Kind rdf:about="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1">
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Organization"/>
+    <vcard:fn>comune-di-copertino</vcard:fn>
+    <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    <vcard:hasTelephone>+390832933522</vcard:hasTelephone>
+    <foaf:name>Redazione OD</foaf:name>
+    <vcard:hasURL rdf:resource="https://www.comune.copertino.le.it/"/>
+    <vcard:hasEmail rdf:resource="dirigenteat@comune.copertino.le.it"/>
+  </vcard:Kind>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/76d83d51-7796-4874-8daa-537428e781d9/resource/0126b9dc-88e4-41c8-9e65-0ba281c4aace">
+    <dct:title xml:lang="it">ANNCSU</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>ANNCSU</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAvpMQ0kzO0rSmiHykrO2Dh2t7BtY3SiEypA186-QGHYFT9PoSaqNd9Am3q68nYt9aTwzVzqxnoBqo/pub?output=xlsx"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/19d9c628-e2f8-4607-aeb1-e684b398e697/resource/925664bc-33b3-4c8c-bc4c-cb2a13b9f74b">
+    <dct:description xml:lang="it">Feed RSS XML</dct:description>
+    <dcat:accessURL rdf:resource="https://script.google.com/macros/s/AKfycbyvZJdW0vJzBldsV46VYMwPG4k650UGoLTqencD6tTsNvUZt4kq/exec"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/RSS"/>
+    <dct:title>FeedRSS</dct:title>
+    <dct:title xml:lang="it">FeedRSS</dct:title>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    <dct:description>Feed RSS XML</dct:description>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON">
+    <skos:prefLabel xml:lang="fr">Économie et finances</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Wirtschaft und Finanzen</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Economia e finanze</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Economía y finanzas</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Economy and finance</skos:prefLabel>
+  </skos:Concept>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/b1dab1c1-56bc-40e5-a0dc-8bf3dec22d10">
+    <dct:description xml:lang="it">File in formato</dct:description>
+    <dct:title>raccoltadifferenziata2021</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title xml:lang="it">raccoltadifferenziata2021</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7lVLrbC3qFIwaoGXFdDyvCBwwYdLpWQCBB0jOqw0AVHZumTgHnytysQJ0hAM7Lh2kIBORDWpVR-Nb/pub?gid=0&amp;single=true&amp;output=csv"/>
+    <dct:description>File in formato</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/77126238-165b-4244-baf7-df8ee8c4d5fe/resource/56e1b089-ca10-4c3d-afcc-b9deb491c5a0">
+    <dct:title xml:lang="it">Occupazione2018-2021</dct:title>
+    <dct:description>File in formato XLSX</dct:description>
+    <dct:description xml:lang="it">File in formato XLSX</dct:description>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:title>Occupazione2018-2021</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQv-xfvYePDjTV_1lRRJK8NE9VR8Y5qT9P3LinYUQk5_4nDLr9Wh1JpKynSq42A88cTF7-htXV1DDNU/pub?output=xlsx"/>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ENVI">
+    <skos:prefLabel xml:lang="fr">Environnement</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Medio ambiente</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Environment</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Ambiente</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Umwelt</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/GOVE">
+    <skos:prefLabel xml:lang="fr">Gouvernement et secteur public</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">Government and public sector</skos:prefLabel>
+    <skos:prefLabel xml:lang="es">Gobierno y sector público</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">Governo e settore pubblico</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Regierung und öffentlicher Sektor</skos:prefLabel>
+  </skos:Concept>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/e0b17f44-97eb-4dab-9d12-35f1f523aa3e/resource/675228f3-4664-4f47-80e8-63a5b5cb7900">
+    <dct:description xml:lang="it">File in formato interoperabile CSV</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV"/>
+    <dct:description>File in formato interoperabile CSV</dct:description>
+    <dct:title xml:lang="it">InfrazioniCds2021Novembre</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:title>InfrazioniCds2021Novembre</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vTZysIJiYwFNS7LsFu1b5tk_I3F-C5Dr8yWkkjd3L_OT5iidTF07hQVmm1VG6pXAYftjfLylNd-r_My/pub?gid=1185325791&amp;single=true&amp;output=csv"/>
+  </dcatapit:Distribution>
+  <dcat:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/7c0c3f55-dd53-405f-a8f3-593d760e1225/resource/8c6337a9-899e-44cb-a983-a130c61a0fed">
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/JSON"/>
+    <dct:description xml:lang="it">File in formato interoperabile JSON</dct:description>
+    <dct:title xml:lang="it">ImmobilidestrinatiJSON</dct:title>
+    <dcat:accessURL rdf:resource="http://openregio.anbsc.it/statistiche/export/5/immobili/16/75/75022/json"/>
+    <dct:description>File in formato interoperabile JSON</dct:description>
+    <dct:title>ImmobilidestrinatiJSON</dct:title>
+    <dct:license rdf:resource="https://www.dati.gov.it/content/italian-open-data-license-v20"/>
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+  </dcat:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100168">
+    <skos:prefLabel xml:lang="de">0431 Politisches Leben und öffentliche Sicherheit</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">0431 vie politique et sécurité publique</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">0431 politics and public safety</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">0431 vita politica e sicurezza pubblica</skos:prefLabel>
+  </skos:Concept>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/6ba3fdef-107b-4bf4-b29b-cc02d6acfca4/resource/d61ef489-8e1a-414a-ab8e-e7472514a476">
+    <dct:title xml:lang="it">DataViz</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:description>Piattaforma BDAP con visualizzazione. Cliccare l'url per accedere</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML_SIMPL"/>
+    <dcat:accessURL rdf:resource="https://openbdap.rgs.mef.gov.it/BO/OpenDocument?modalita=link&amp;docID=FgAUHFlfxgsAFwYAAACHAiUbeOO1D67w&amp;T=BusinessObject&amp;idType=CUID&amp;noDetailsPanel=true&amp;X_Ente=80008830756"/>
+    <dct:title>DataViz</dct:title>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dct:description xml:lang="it">Piattaforma BDAP con visualizzazione. Cliccare l'url per accedere</dct:description>
+  </dcatapit:Distribution>
+  <dcatapit:Distribution rdf:about="http://dati.comune.copertino.le.it/dataset/22632eca-1bfd-4924-9114-b088bcf1b8ab/resource/5ad2bcd7-d160-43ff-95d2-7533ec9ce9ac">
+    <dct:title>raccoltadifferenziata2021</dct:title>
+    <rdf:type rdf:resource="http://www.w3.org/ns/dcat#Distribution"/>
+    <dct:description xml:lang="it">File in formato xlsx</dct:description>
+    <dct:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX"/>
+    <dct:description>File in formato xlsx</dct:description>
+    <dct:title xml:lang="it">raccoltadifferenziata2021</dct:title>
+    <dcat:accessURL rdf:resource="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7lVLrbC3qFIwaoGXFdDyvCBwwYdLpWQCBB0jOqw0AVHZumTgHnytysQJ0hAM7Lh2kIBORDWpVR-Nb/pub?output=xlsx"/>
+    <dct:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </dcatapit:Distribution>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100239">
+    <skos:prefLabel xml:lang="en">4816 land transport</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">4816 trasporti terrestri</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">4816 Landverkehr</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">4816 transport terrestre</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://eurovoc.europa.eu/100242">
+    <skos:prefLabel xml:lang="de">5206 Umweltpolitik</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">5206 politique de l'environnement</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">5206 environmental policy</skos:prefLabel>
+    <skos:prefLabel xml:lang="it">5206 politica dell'ambiente</skos:prefLabel>
+  </skos:Concept>
 </rdf:RDF>
