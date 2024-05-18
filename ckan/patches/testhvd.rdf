@@ -39,7 +39,6 @@
     <dct:description>This dataset provides the population of bees based on a yearly inquiry held among beekeepers and farmers in spring.</dct:description>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
-    <dct:publisher rdf:nodeID="genid1"/>
     <dct:identifier>1T2p3o4B</dct:identifier>
     <dct:rightsHolder>
           <dcatapit:Agent rdf:nodeID="N7b3d1c2a5a7a4d50887cda1c27d6aeca">
