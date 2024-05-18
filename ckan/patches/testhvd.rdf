@@ -57,11 +57,20 @@
     <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
 
     <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3"/>
-    
+    <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
   </dcat:Dataset>
 
   <foaf:Agent rdf:nodeID="genid1">
     <foaf:name>MS Environmental Agency</foaf:name>
   </foaf:Agent>
-
+  <vcard:Kind rdf:about="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1">
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Organization"/>
+    <vcard:fn>comune-di-copertino</vcard:fn>
+    <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    <vcard:hasTelephone>+390832933522</vcard:hasTelephone>
+    <foaf:name>Redazione OD</foaf:name>
+    <vcard:hasURL rdf:resource="https://www.comune.copertino.le.it/"/>
+    <vcard:hasEmail rdf:resource="dirigenteat@comune.copertino.le.it"/>
+  </vcard:Kind>
 </rdf:RDF>
