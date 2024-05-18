@@ -789,7 +789,7 @@ Per agevolare l'utenza, si propone un [grafico interattivo](https://docs.google.
       </dcatapit:Dataset>
     </dcat:dataset>
     <dcat:service>
-      <dcat:DataService rdf:about="https://data.exampleMS.gov/id/dataset/EAMS-APIplatform">
+      <dcat:DataService rdf:about="http://dati.comune.copertino.le.it/dataset/d07c1ca5-a254-4a5e-9d63-be8ef741bbbf">
         <dct:title xml:lang="en">EA API platform</dct:title>
         <dct:description xml:lang="en">The EA API platform provides a uniform access to the real-time data collected by EA</dct:description>
         <dcat:endpointURL rdf:resource="https://orgea.exampleMS.gov/api/v2/"/>
