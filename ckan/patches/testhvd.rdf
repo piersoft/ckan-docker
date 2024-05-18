@@ -42,7 +42,6 @@
     <dct:publisher rdf:nodeID="genid1"/>
     <dct:identifier>pippo:1T2p3o4B</dct:identifier>
     <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL"/>
-    <dct:conformsTo rdf:resource="https://orgea.exampleMS.gov/applicationprofile/populationOfInsects"/>
     <dcat:distribution>
       <dcat:Distribution rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-SHP">
         <dcat:accessURL rdf:resource="https://orgea.exampleMS.gov/files/1T2p3o4B.shp"/>
