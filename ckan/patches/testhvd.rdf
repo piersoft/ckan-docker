@@ -42,7 +42,6 @@
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
     <dct:publisher rdf:nodeID="genid1"/>
     <dct:identifier>pippo:1T2p3o4B</dct:identifier>
-    <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
     <dct:rightsHolder>
           <dcatapit:Agent rdf:nodeID="N7b3d1c2a5a7a4d50887cda1c27d6aeca">
             <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
@@ -54,6 +53,7 @@
     <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
     <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
     <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+    <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
   </dcat:Dataset>
 
   <foaf:Agent rdf:nodeID="genid1">
