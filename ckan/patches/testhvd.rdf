@@ -40,8 +40,13 @@
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
     <dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/dir/2007/2/2019-06-26"/>
     <dct:publisher rdf:nodeID="genid1"/>
+    <dcat:contactPoint rdf:resource="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1"/>
     <dct:identifier>pippo:1T2p3o4B</dct:identifier>
     <dct:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL"/>
+    <dcat:keyword>censimento</dcat:keyword>
+    <dcat:landingPage rdf:resource="http://dati.comune.copertino.le.it/dataset/censimento-arboreo-comune-di-copertino"/>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-01-10T00:00:00</dct:modified>
+    <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
     <dcat:distribution>
       <dcat:Distribution rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-SHP">
         <dcat:accessURL rdf:resource="https://orgea.exampleMS.gov/files/1T2p3o4B.shp"/>
@@ -50,6 +55,15 @@
       </dcat:Distribution>
     </dcat:distribution>
   </dcat:Dataset>
-
+  <vcard:Kind rdf:about="http://dati.comune.copertino.le.it/organization/3249a0b5-2807-4d41-8e4d-645b99a1ddb1">
+    <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Organization"/>
+    <vcard:fn>comune-di-copertino</vcard:fn>
+    <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+    <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    <vcard:hasTelephone>+390832933522</vcard:hasTelephone>
+    <foaf:name>Redazione OD</foaf:name>
+    <vcard:hasURL rdf:resource="https://www.comune.copertino.le.it/"/>
+    <vcard:hasEmail rdf:resource="dirigenteat@comune.copertino.le.it"/>
+  </vcard:Kind>
 
 </rdf:RDF>
