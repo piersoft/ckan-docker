@@ -17,6 +17,7 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcatap: <http://data.europa.eu/r5r/> .
 
 exampleMS:HVD-reporting-2023  a dcat:Catalogue;
   dct:title "MS HVD Reporting 2023"@en;
