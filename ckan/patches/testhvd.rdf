@@ -58,7 +58,7 @@
       </rdf:Description>
     </ns1:identifier>
 
-    <dc:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL"/>
+    <dc:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
     <dc:conformsTo rdf:resource="https://orgea.exampleMS.gov/applicationprofile/populationOfInsects"/>
     <dcat:distribution>
       <dcat:Distribution rdf:about="https://data.exampleMS.gov/id/dataset/1T2p3o4B-dist-SHP">
