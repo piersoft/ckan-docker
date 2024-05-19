@@ -1135,7 +1135,7 @@ class ItalianDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it")
               distribution=URIRef(distribution)
             if 'r_marche' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
               distribution=URIRef(distribution)
                 #  log.info('resource_distribution_it %s',distribution)
             if 'r_emiro' in dataset_dict.get('holder_identifier'):
