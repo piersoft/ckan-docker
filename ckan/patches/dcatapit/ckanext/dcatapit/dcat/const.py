@@ -57,6 +57,7 @@ format_mapping = {
     'XML': 'XML',
     'xlsx': 'XLSX',
     'GeoJson': 'GEOJSON',
+    'GeoJSON': 'GEOJSON',
     'API': 'API',
     'WCS': 'MAP_SRVC',
     'PDF': 'PDF',
