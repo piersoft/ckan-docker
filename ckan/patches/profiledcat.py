@@ -1498,7 +1498,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                  resource_dict['format']='DOC'
             if 'ARC' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
-                
+            if 'GEOJSON' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)       
+                 resource_dict['format']='GEOJSON'
             mimetype = resource_dict.get('mimetype')
             fmt = resource_dict.get('format')
 
