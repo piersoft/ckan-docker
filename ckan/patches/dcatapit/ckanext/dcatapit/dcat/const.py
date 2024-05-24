@@ -65,5 +65,6 @@ format_mapping = {
     'RDF': 'RDF_XML',
     'shp': 'SHP',
     'kml': 'KML',
+    'JSON_LD': 'JSON_LD',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
