@@ -69,8 +69,8 @@ format_mapping = {
     'kml': 'KML',
     'rdf': 'RDF',
     'RDF': 'RDF',
-    'ttl': 'TTL',
-    'TTL': 'TTL',
+    'ttl': 'RDF_TURTLE',
+    'TTL': 'RDF_TURTLE',
     'kml': 'KML',
     'KML': 'KML',
     'kmz': 'KMZ',
@@ -81,5 +81,10 @@ format_mapping = {
     'txt': 'TXT',
     'TSV': 'TSV',
     'tsv': 'TSV',
+    'gpx': 'GPX',
+    'jsonl': 'JSON',
+    'n3': 'N3',
+    'rdfxml': 'RDF_XML',
+    'turtle': 'RDF_TURTLE',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
