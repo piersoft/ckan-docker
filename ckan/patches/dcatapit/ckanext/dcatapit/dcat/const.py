@@ -93,5 +93,7 @@ format_mapping = {
     'turtle': 'RDF_TURTLE',
     'dwg': 'DWG',
     'DWG': 'DWG',
+    'GPKG': 'GPKG',
+    'gpkg': 'GPKG',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
