@@ -82,9 +82,14 @@ format_mapping = {
     'TSV': 'TSV',
     'tsv': 'TSV',
     'gpx': 'GPX',
+    'GPX': 'GPX',
+    'JSONL': 'JSON',
     'jsonl': 'JSON',
     'n3': 'N3',
+    'N3': 'N3',
+    'RDFXML': 'RDF_XML',
     'rdfxml': 'RDF_XML',
+    'TURTLE': 'RDF_TURTLE',
     'turtle': 'RDF_TURTLE',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
