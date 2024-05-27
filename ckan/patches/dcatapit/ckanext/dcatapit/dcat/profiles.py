@@ -799,6 +799,9 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'p_TN' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.trentino.it")
+         if 'cvtiap' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.anticorruzione.it/opendata")
          if 'c_f052' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.comune.matera.it")
