@@ -91,5 +91,7 @@ format_mapping = {
     'rdfxml': 'RDF_XML',
     'TURTLE': 'RDF_TURTLE',
     'turtle': 'RDF_TURTLE',
+    'dwg': 'DWG',
+    'DWG': 'DWG',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
