@@ -78,5 +78,8 @@ format_mapping = {
     'JSON_LD': 'JSON_LD',
     'jsonld': 'JSON_LD',
     'TXT': 'TXT',
+    'txt': 'TXT',
+    'TSV': 'TSV',
+    'tsv': 'TSV',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
