@@ -76,5 +76,7 @@ format_mapping = {
     'kmz': 'KMZ',
     'KMZ': 'KMZ',
     'JSON_LD': 'JSON_LD',
+    'jsonld': 'JSON_LD',
+    'TXT': 'TXT',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
