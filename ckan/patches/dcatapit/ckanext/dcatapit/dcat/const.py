@@ -89,6 +89,7 @@ format_mapping = {
     'N3': 'N3',
     'RDFXML': 'RDF_XML',
     'rdfxml': 'RDF_XML',
+    'rdf+xml': 'RDF_XML',
     'TURTLE': 'RDF_TURTLE',
     'turtle': 'RDF_TURTLE',
     'RDF_TURTLE': 'RDF_TURTLE',
