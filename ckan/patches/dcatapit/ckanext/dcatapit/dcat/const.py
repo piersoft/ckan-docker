@@ -105,5 +105,6 @@ format_mapping = {
     'dBase': 'DBF',
     'png': 'PNG',
     'PNG': 'PNG',
+    'OData': 'XML',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
