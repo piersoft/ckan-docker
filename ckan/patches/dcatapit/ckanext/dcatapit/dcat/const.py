@@ -101,5 +101,6 @@ format_mapping = {
     'RDF_XML': 'RDF_XML',
     'DOCX': 'DOCX',
     'DBF': 'DBF',
+    'dBase': 'DBF',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
