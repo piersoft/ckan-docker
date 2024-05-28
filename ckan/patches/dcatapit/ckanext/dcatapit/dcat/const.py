@@ -99,5 +99,7 @@ format_mapping = {
     'RDF_N_TRIPLES': 'RDF_N_TRIPLES',
     'OWL': 'OWL',
     'RDF_XML': 'RDF_XML',
+    'DOCX': 'DOCX',
+    'DBF': 'DBF',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
