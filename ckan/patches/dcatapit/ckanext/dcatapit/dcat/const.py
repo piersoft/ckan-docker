@@ -97,5 +97,6 @@ format_mapping = {
     'GPKG': 'GPKG',
     'gpkg': 'GPKG',
     'RDF_N_TRIPLES': 'RDF_N_TRIPLES',
+    'OWL': 'OWL',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
