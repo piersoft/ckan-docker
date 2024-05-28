@@ -253,8 +253,7 @@ class RDFSerializer(RDFProcessor):
                     break
 
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
-        if 'm_lps' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
+
         if 'm_lps' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
         if 'r_emiro' in dataset_dict.get('holder_identifier'):
@@ -275,14 +274,15 @@ class RDFSerializer(RDFProcessor):
         if 'cr_campa' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
         if '00304260409' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://opendata.comune.rimini.it")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
         if 'c_a345' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
         if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
         if 'm_it' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://www.interno.gov.it/")
-
+        if '00514490010' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
 
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
@@ -332,20 +332,6 @@ class RDFSerializer(RDFProcessor):
             output = self.g.serialize(format=_format)
 
         return output
-        
-    def serialize_datasets(self, dataset_dicts, _format='xml'):
-        '''
-        Given a list of CKAN dataset dicts, returns an RDF serialization
-        The serialization format can be defined using the `_format` parameter.
-        It must be one of the ones supported by RDFLib, defaults to `xml`.
-        Returns a string with the serialized datasets
-        '''
-        out = []
-        for dataset_dict in dataset_dicts:
-            out.append(self.serialize_dataset(dataset_dict, _format))
-        return '\n'.join(out)
-
-
 
     def serialize_catalog(self, catalog_dict=None, dataset_dicts=None,
                           _format='xml', pagination_info=None):
@@ -404,8 +390,6 @@ class RDFSerializer(RDFProcessor):
                     return ex['value']
 
         # patch per harvesting marche e emilia-romagna per hasPart Catalog
-        if 'inps' in dataset_dict.get('holder_identifier'):
-            source_uri='https://www.inps.it/nuovoportaleinps/default.aspx?sPathID=%3b0%3b46292%3b&lastMenu=46292&iMenu=12&p4=2/'
         if 'r_marche' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.regione.marche.it/'
         elif 'r_emiro' in dataset_dict.get('holder_identifier'):
@@ -468,9 +452,9 @@ class RDFSerializer(RDFProcessor):
                 if value:
                  if key == 'source_catalog_homepage' and value.endswith("/#"):
                    value = value + '/#'
-                 if key == 'source_catalog_homepage' and not value.endswith("/"):
-                   value = value + '/'
                    value = value.replace('/#/#','')
+                 if key == 'source_catalog_homepage' and not value.endswith("/#"):
+                   value = value + '/'
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
