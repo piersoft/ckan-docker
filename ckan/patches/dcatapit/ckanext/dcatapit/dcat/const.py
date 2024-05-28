@@ -103,5 +103,7 @@ format_mapping = {
     'DOCX': 'DOCX',
     'DBF': 'DBF',
     'dBase': 'DBF',
+    'png': 'PNG',
+    'PNG': 'PNG',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
