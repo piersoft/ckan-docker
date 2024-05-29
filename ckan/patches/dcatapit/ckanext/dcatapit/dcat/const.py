@@ -47,6 +47,7 @@ lang_mapping_ckan_to_xmllang = {
 format_mapping = {
     'WMS': 'MAP_SRVC',
     'HTML': 'HTML_SIMPL',
+    'HTML_SIMPL': 'HTML_SIMPL',
     'CSV': 'CSV',
     'XLS': 'XLS',
     'ODS': 'ODS',
