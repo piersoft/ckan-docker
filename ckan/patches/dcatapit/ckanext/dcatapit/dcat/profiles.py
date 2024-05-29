@@ -290,6 +290,18 @@ class ItalianDCATAPProfile(RDFProfile):
             if 'PDF' in resource_dict['url']:
                  resource_dict.pop('format', None) 
                  resource_dict['format']='PDF'
+            if 'zip' in resource_dict['url']:
+                 resource_dict.pop('format', None) 
+                 resource_dict['format']='ZIP'
+            if 'wms' in resource_dict['url']:
+                 resource_dict.pop('format', None) 
+                 resource_dict['format']='WMS'
+            if 'kml' in resource_dict['url']:
+                 resource_dict.pop('format', None) 
+                 resource_dict['format']='kml'
+            if 'shp' in resource_dict['url']:
+                 resource_dict.pop('format', None) 
+                 resource_dict['format']='SHP'
             # URI 0..1
             for predicate, key, base_uri in (
                     (DCT['format'], 'format', FORMAT_BASE_URI),  # Format
