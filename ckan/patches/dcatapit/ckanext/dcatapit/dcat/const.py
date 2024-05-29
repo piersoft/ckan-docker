@@ -106,6 +106,7 @@ format_mapping = {
     'OWL': 'OWL',
     'RDF_XML': 'RDF_XML',
     'DOCX': 'DOCX',
+    'ODT': 'ODT',
     'DBF': 'DBF',
     'dBase': 'DBF',
     'png': 'PNG',
