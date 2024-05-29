@@ -49,6 +49,7 @@ format_mapping = {
     'HTML': 'HTML_SIMPL',
     'HTML_SIMPL': 'HTML_SIMPL',
     'WMS_SRVC': 'WMS_SRVC',
+    'MAP_SRVC': 'MAP_SRVC',
     'CSV': 'CSV',
     'XLS': 'XLS',
     'ODS': 'ODS',
