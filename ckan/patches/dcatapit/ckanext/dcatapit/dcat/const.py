@@ -48,6 +48,7 @@ format_mapping = {
     'WMS': 'MAP_SRVC',
     'HTML': 'HTML_SIMPL',
     'HTML_SIMPL': 'HTML_SIMPL',
+    'URL': 'HTML_SIMPL',
     'WMS_SRVC': 'WMS_SRVC',
     'MAP_SRVC': 'MAP_SRVC',
     'CSV': 'CSV',
@@ -96,6 +97,7 @@ format_mapping = {
     'TURTLE': 'RDF_TURTLE',
     'turtle': 'RDF_TURTLE',
     'RDF_TURTLE': 'RDF_TURTLE',
+    'RDF_turtle': 'RDF_TURTLE',
     'dwg': 'DWG',
     'DWG': 'DWG',
     'GPKG': 'GPKG',
@@ -109,5 +111,6 @@ format_mapping = {
     'png': 'PNG',
     'PNG': 'PNG',
     'OData': 'XML',
+    'BWF': 'BWF',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
