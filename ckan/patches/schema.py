@@ -146,8 +146,8 @@ def get_custom_package_schema():
             'validator': ['ignore_missing'],
             'element': 'input',
             'type': 'text',
-            'label': _('HVD Category'),
-            'placeholder': _('Es: http://data.europa.eu/bna/asd487ae75 (Metereologia)'),
+            'label': 'Categoria High Value Dataset. Esempio: http://data.europa.eu/bna/ seguito dal codice asd487ae75 (Metereologia), c_a9135398 (Dati relativi alle imprese e alla proprietà delle imprese), c_ac64a52d (Dati geospaziali), c_b79e35eb (Dati relativi alla mobilità), c_dd313021 (Dati relativi a osservazione della terra e ad ambiente), c_e1da4e07 (Dati statistici)',
+            'placeholder': 'http://data.europa.eu/bna/c_e1da4e07',
             'is_required': False,
             'help': _(u"""Proprietà che confluisce in dcatap:hvdCategory""")
         },
