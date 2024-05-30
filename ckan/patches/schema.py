@@ -142,6 +142,16 @@ def get_custom_package_schema():
             'help': _(u"""Proprietà che confluisce in dcat:accessRights""")
         },
         {
+            'name': 'hvd_category',
+            'validator': ['ignore_missing'],
+            'element': 'input',
+            'type': 'text',
+            'label': _('HVD Category'),
+            'placeholder': _('Es: http://data.europa.eu/bna/asd487ae75 (Metereologia)'),
+            'is_required': False,
+            'help': _(u"""Proprietà che confluisce in dcatap:hvdCategory""")
+        },
+        {
             'name': 'alternate_identifier',
             'validator': ['ignore_missing', 'no_number', 'dcatapit_alternate_identifier'],
             'element': 'alternate_identifier',
