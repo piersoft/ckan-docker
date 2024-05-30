@@ -16,7 +16,7 @@ RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=
 RUN pip3 install pylons
 RUN pip3 install routes
 ### DCAT ###
-RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@master#egg=ckanext-dcat && \
+RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@56-tmp#egg=ckanext-dcat && \
      pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
 
 # Install ckanext-dcatapit
