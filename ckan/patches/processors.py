@@ -127,6 +127,11 @@ class RDFParser(RDFProcessor):
         Returns the URL of the next page or None if there is no next page
         '''
         for pagination_node in self.g.subjects(RDF.type, HYDRA.PagedCollection):
+            # Try to find HYDRA.next first
+            for o in self.g.objects(pagination_node, HYDRA.next):
+                return str(o)
+
+            # If HYDRA.next is not found, try HYDRA.nextPage (deprecated)
             for o in self.g.objects(pagination_node, HYDRA.nextPage):
                 return str(o)
         return None
@@ -221,19 +226,19 @@ class RDFSerializer(RDFProcessor):
         self.g.add((pagination_ref, RDF.type, HYDRA.PagedCollection))
 
         items = [
-            ('next', HYDRA.nextPage),
-            ('previous', HYDRA.previousPage),
-            ('first', HYDRA.firstPage),
-            ('last', HYDRA.lastPage),
-            ('count', HYDRA.totalItems),
-            ('items_per_page', HYDRA.itemsPerPage),
+            ('next', [HYDRA.nextPage, HYDRA.next]),
+            ('previous', [HYDRA.previousPage, HYDRA.previous]),
+            ('first', [HYDRA.firstPage, HYDRA.first]),
+            ('last', [HYDRA.lastPage, HYDRA.last]),
+            ('count', [HYDRA.totalItems]),
+            ('items_per_page', [HYDRA.itemsPerPage]),
         ]
         for item in items:
-            key, predicate = item
+            key, predicates = item
             if paging_info.get(key):
-                self.g.add((pagination_ref, predicate,
-                            Literal(paging_info[key])))
-
+                for predicate in predicates:
+                    self.g.add((pagination_ref, predicate,
+                                Literal(paging_info[key])))
         return pagination_ref
 
     def graph_from_dataset(self, dataset_dict):
@@ -291,6 +296,19 @@ class RDFSerializer(RDFProcessor):
             profile.graph_from_dataset(dataset_dict, dataset_ref)
 
         return dataset_ref
+        
+    def serialize_datasets(self, dataset_dicts, _format='xml'):
+        '''
+        Given a list of CKAN dataset dicts, returns an RDF serialization
+        The serialization format can be defined using the `_format` parameter.
+        It must be one of the ones supported by RDFLib, defaults to `xml`.
+        Returns a string with the serialized datasets
+        '''
+        out = []
+        for dataset_dict in dataset_dicts:
+            out.append(self.serialize_dataset(dataset_dict, _format))
+        return '\n'.join(out)
+
 
     def graph_from_catalog(self, catalog_dict=None):
         '''
