@@ -1,0 +1,18 @@
+[babel.extractors]
+ckan = ckan.lib.extract:extract_ckan
+
+[ckan.plugins]
+dcat = ckanext.dcat.plugins:DCATPlugin
+dcat_json_harvester = ckanext.dcat.harvesters:DCATJSONHarvester
+dcat_json_interface = ckanext.dcat.plugins:DCATJSONInterface
+dcat_rdf_harvester = ckanext.dcat.harvesters:DCATRDFHarvester
+dcat_xml_harvester = ckanext.dcat.harvesters:DCATXMLHarvester
+structured_data = ckanext.dcat.plugins:StructuredDataPlugin
+test_rdf_exception_harvester = ckanext.dcat.tests.test_harvester:TestRDFExceptionHarvester
+test_rdf_harvester = ckanext.dcat.tests.test_harvester:TestRDFHarvester
+test_rdf_null_harvester = ckanext.dcat.tests.test_harvester:TestRDFNullHarvester
+
+[ckan.rdf.profiles]
+euro_dcat_ap = ckanext.dcat.profiles:EuropeanDCATAPProfile
+euro_dcat_ap_2 = ckanext.dcat.profiles:EuropeanDCATAP2Profile
+schemaorg = ckanext.dcat.profiles:SchemaOrgProfile

@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: ckanext-dcat
+Version: 1.7.0
+Summary: Plugins for exposing and consuming DCAT metadata on CKAN
+Home-page: https://github.com/okfn/ckanext-dcat
+Author: Open Knowledge Foundation
+Author-email: info@ckan.org
+License: AGPL
+
+    
