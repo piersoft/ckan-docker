@@ -15,13 +15,15 @@ RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=
 
 RUN pip3 install pylons
 RUN pip3 install routes
-### DCAT ###
-RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@56-tmp#egg=ckanext-dcat && \
+
+# Install ckanext-dcat HVD
+#RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@56-tmp#egg=ckanext-dcat && \
+COPY patches/ckanext-dcatap ${APP_DIR}/src/ckanext-dcatap
      pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/master/requirements.txt
 
 # Install ckanext-dcatapit
-COPY patches/dcatapit ${APP_DIR}/src/ckanext-dcatapit
-RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/ 
+COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
+RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
 # Install ckanext-multilang
 RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.git@master#egg=ckanext-multilang  && \
@@ -41,24 +43,14 @@ RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
 
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
-COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py           
+COPY patches/package_form.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
+COPY patches/package_basic_fields ${APP_DIR}/src/ckan/ckan/templates/package/snippets
+COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py
 COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
 COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
 COPY patches/supervisord.conf /etc/supervisord.conf
 COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/images"
-COPY patches/vocabulary.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/commands/vocabulary.py
-COPY patches/processors.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/processors.py
-COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
-COPY patches/profiledcat.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/profiles.py
-#docker cp managed-schema solr:/var/solr/data/ckan/conf/managed-schema
-
-# Copy custom patch for access_rights and rights and custom harvesting for ISPRA, r_emiro, r_marche, BDAP
-COPY patches/schema.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/schema.py
-COPY patches/interfaces.py ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/interfaces.py
-COPY patches/rdf.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/rdf.py
-COPY patches/_json.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/_json.py
 COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
-COPY patches/baseharv.py ${APP_DIR}/src/ckanext-dcat/ckanext/dcat/harvesters/base.py
 
 # Min length resource = 5
 COPY patches/validators.py ${APP_DIR}/src/ckan/ckan/logic/validators.py
