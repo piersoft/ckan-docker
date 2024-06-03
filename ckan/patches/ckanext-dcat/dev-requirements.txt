@@ -1,0 +1,4 @@
+responses==0.20.0
+mock
+pytest-ckan
+pytest-cov
