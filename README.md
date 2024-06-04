@@ -1,3 +1,6 @@
+# 01.06.2024 VERSIONE NON STABILE E CON MOLTI ERRORI: DA NON USARE. STO AGGIORNANDO E INTEGRANDO IL DCAT PER GLI HVD 
+
+
 # PREMESSA
 Questa versione dockerizzata è a scopo dimostrativo. Non è una repository ufficiale. Le varie patch che in continuazione si stanno applicando, scaturiscono dall'analisi degli harvesting dei cataloghi nazionali, regionali e comunali, presenti su dati.gov.it. Ogni harvesting ha le sue peculiarietà e quindi necessita di avere patch nei file processors.py e profile.py presenti nella dir patches e profiles.py presente nell'estensione dcatapit customizzata che trovate [__qui__](https://github.com/piersoft/dcatapit).
 Motivo per cui in questi files ci sono delle sostituzioni anche della radice delle url (www.piersoftckan.biz sostituito ad esempio con dati.toscana.it se holder_identifier è r_toscan).
