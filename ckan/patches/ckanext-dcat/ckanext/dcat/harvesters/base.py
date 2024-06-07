@@ -1,3 +1,22 @@
+import ssl
+import urllib3
+import requests
+from urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+ssl._create_default_https_context = ssl._create_unverified_context
+from urllib3.util.ssl_ import create_urllib3_context
+from requests.adapters import HTTPAdapter
+
+class CustomSslContextHttpAdapter(HTTPAdapter):
+        """"Transport adapter" that allows us to use a custom ssl context object with the requests."""
+        def init_poolmanager(self, connections, maxsize, block=False):
+            ctx = create_urllib3_context()
+            ctx.load_default_certs()
+            ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
+            self.poolmanager = urllib3.PoolManager(ssl_context=ctx)
+
+
+
 import os
 import logging
 
@@ -62,6 +81,8 @@ class DCATHarvester(HarvesterBase):
 
             # get the `requests` session object
             session = requests.Session()
+            session.mount(url, CustomSslContextHttpAdapter())
+         
             for harvester in p.PluginImplementations(IDCATRDFHarvester):
                 session = harvester.update_session(session)
 
@@ -70,7 +91,7 @@ class DCATHarvester(HarvesterBase):
             r = session.head(url)
 
             if r.status_code == 405 or r.status_code == 400:
-                r = session.get(url, stream=True)
+                r = session.get(url, stream=True, verify=False)
                 did_get = True
             r.raise_for_status()
 
@@ -84,7 +105,7 @@ class DCATHarvester(HarvesterBase):
                 return None, None
 
             if not did_get:
-                r = session.get(url, stream=True)
+                r = session.get(url, stream=True, verify=False)
 
             length = 0
             content = b''
@@ -134,6 +155,9 @@ class DCATHarvester(HarvesterBase):
         '''
         for extra in harvest_object.extras:
             if extra.key == key:
+                if 'file-type' in extra.value:
+                 log.debug('prova disperata in _get_object_extra')
+                 extra.value=extra.value.replace('http://publications.europa.eu/resource/authority/file-type/','')
                 return extra.value
         return None
 

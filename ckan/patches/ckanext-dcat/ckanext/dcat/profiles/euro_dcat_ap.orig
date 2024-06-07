@@ -1,9 +1,8 @@
 import json
-import logging
-log = logging.getLogger(__name__)
+
 from rdflib import term, URIRef, BNode, Literal
 import ckantoolkit as toolkit
-import ckan.logic as logic
+
 from ckan.lib.munge import munge_tag
 
 from ckanext.dcat.utils import (
@@ -38,7 +37,7 @@ config = toolkit.config
 
 
 DISTRIBUTION_LICENSE_FALLBACK_CONFIG = "ckanext.dcat.resource.inherit.license"
-PREF_LANDING= config.get('ckanext.dcat.base_uri')
+
 
 class EuropeanDCATAPProfile(RDFProfile):
     """
@@ -64,14 +63,6 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
-                if 'opendata.marche.camcom.it' in value:
-              
-                   log.debug('sono in CamCom Marche')
-              #    dataset_dict[key] = value
-                   log.debug('value landing: %s',value)
-                else:
-                    if 'onsiglio' or 'CONSIGLIO' in value:
-                     value=''
                 dataset_dict[key] = value
 
         if not dataset_dict.get("version"):
@@ -103,7 +94,6 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
-                log.debug('value freq: %s',value)
                 dataset_dict["extras"].append({"key": key, "value": value})
 
         #  Lists
@@ -121,8 +111,8 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             values = self._object_value_list(dataset_ref, predicate)
             if values:
-                 # log.debug('values in list eurodcat %s',values)
-                  dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
+                dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
+
         # Contact details
         contact = self._contact_details(dataset_ref, DCAT.contactPoint)
         if not contact:
@@ -196,18 +186,6 @@ class EuropeanDCATAPProfile(RDFProfile):
             ):
                 value = self._object_value(distribution, predicate)
                 if value:
-                    # applico patch alle licenze specifiche e per evitare duplicati in dct:license
-                    value=value.replace("deed.it","")
-                    value=value.replace('https://sparql-noipa.mef.gov.it/metadata/Licenza','https://creativecommons.org/licenses/by/4.0/')
-                    value=value.replace('https://api.smartdatanet.it/metadataapi/api/license/CCBY','https://creativecommons.org/licenses/by/4.0/')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10','https://creativecommons.org/publicdomain/zero/1.0/')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
-                    value=value.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")              
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40','https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10','https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10')
-                    value=value.replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','https://creativecommons.org/licenses/by/4.0/')
-
-                    log.info('valuelic: %s',value)
                     resource_dict[key] = value
 
             resource_dict["url"] = self._object_value(
@@ -238,10 +216,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                 resource_dict["mimetype"] = imt
 
             if label:
-                # log.debug('resource format %s',label)
-                 #label=label.replace('http://publications.europa.eu/resource/authority/file-type/','')
                 resource_dict["format"] = label
-
             elif imt:
                 resource_dict["format"] = imt
 
@@ -336,8 +311,6 @@ class EuropeanDCATAPProfile(RDFProfile):
             ("source", DCT.source, None, URIRefOrLiteral),
             ("sample", ADMS.sample, None, URIRefOrLiteral),
         ]
-        
-       # log.debug('in euro2 theme %s',dataset_dict.get('theme'))
         self._add_list_triples_from_dict(dataset_dict, dataset_ref, items)
 
         # Contact details
@@ -360,38 +333,17 @@ class EuropeanDCATAPProfile(RDFProfile):
                 contact_details = BNode()
 
             g.add((contact_details, RDF.type, VCARD.Organization))
-             #g.add((dataset_ref, DCAT.contactPoint, contact_details))
-            # get orga info
-            org_show = logic.get_action('organization_show')
-            org_id = dataset_dict.get('owner_org')
-            org_dict = {}
-            if org_id:
-             try:
-                org_dict = org_show({'ignore_auth': True},
-                                    {'id': org_id,
-                                     'include_datasets': False,
-                                     'include_tags': False,
-                                     'include_users': False,
-                                     'include_groups': False,
-                                     'include_extras': True,
-                                     'include_followers': False}
-                                    )
-             except Exception as err:
-                log.warning('Cannot get org for %s: %s', org_id, err, exc_info=err)
+            g.add((dataset_ref, DCAT.contactPoint, contact_details))
 
-            if not org_dict.get('name'):
-# prova contactpoint a lasciarlo solo al dcatapit
-             self._add_triple_from_dict(
+            self._add_triple_from_dict(
                 dataset_dict,
                 contact_details,
                 VCARD.fn,
                 "contact_name",
                 ["maintainer", "author"],
-             )
-
-            if not org_dict.get('email'):
+            )
             # Add mail address as URIRef, and ensure it has a mailto: prefix
-             self._add_triple_from_dict(
+            self._add_triple_from_dict(
                 dataset_dict,
                 contact_details,
                 VCARD.hasEmail,
@@ -399,7 +351,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ["maintainer_email", "author_email"],
                 _type=URIRef,
                 value_modifier=self._add_mailto,
-             )
+            )
 
         # Publisher
         if any(
@@ -419,11 +371,10 @@ class EuropeanDCATAPProfile(RDFProfile):
                 # neither URI nor name are available, use organization as fallback
                 publisher_details = CleanedURIRef(publisher_uri_fallback)
             else:
-                log.debug('No publisher_uri')
                 # No publisher_uri
                 publisher_details = BNode()
 
- #            g.add((publisher_details, RDF.type, FOAF.Organization))
+            g.add((publisher_details, RDF.type, FOAF.Organization))
             g.add((dataset_ref, DCT.publisher, publisher_details))
 
             # In case no name and URI are available, again fall back to organization.
@@ -435,8 +386,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                 and dataset_dict.get("organization")
             ):
                 publisher_name = dataset_dict["organization"]["title"]
- # provo a lasciare il dcatapit solo
- #            g.add((publisher_details, FOAF.name, Literal(publisher_name)))
+
+            g.add((publisher_details, FOAF.name, Literal(publisher_name)))
             # TODO: It would make sense to fallback these to organization
             # fields but they are not in the default schema and the
             # `organization` object in the dataset_dict does not include
@@ -492,68 +443,11 @@ class EuropeanDCATAPProfile(RDFProfile):
         # Resources
         for resource_dict in dataset_dict.get("resources", []):
 
-           distribution = CleanedURIRef(resource_uri(resource_dict))
-           if dataset_dict.get('holder_identifier'):
-            if 'cmna' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
-              distribution=CleanedURIRef(distribution)
-            if '00514490010' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'r_lazio' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
-              distribution=CleanedURIRef(distribution)
-            if 'r_basili' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog")
-              distribution=CleanedURIRef(distribution)
-            if 'r_marche' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'aci' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it/")
-              distribution=CleanedURIRef(distribution)
-               # log.info('resource_distribution_it %s',distribution)
-            if 'r_emiro' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace("dati.comune.fe.it","https://dati.comune.fe.it")
-              distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'cr_campa' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
-              distribution=CleanedURIRef(distribution)
-               # log.info('resource_distribution_it %s',distribution)
-            if 'r_toscan' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'm_lps' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it/")
-              distribution=CleanedURIRef(distribution)
-               # log.info('resource_distribution_it %s',distribution)
-            if '00304260409' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'c_a345' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://ckan.opendatalaquila.it")
-              distribution=CleanedURIRef(distribution)
-            if 'uds_ca' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://data.tdm-project.it")
-              distribution=CleanedURIRef(distribution)
-            if 'm_it' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
-              distribution=CleanedURIRef(distribution)
-            if 'piersoft' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://www.piersoft.it")
-              distribution=CleanedURIRef(distribution)
-            if 'c_e506' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.comune.lecce.it")
-              distribution=CleanedURIRef(distribution)
-            if distribution is not None:
-             g.add((dataset_ref, DCAT.distribution, distribution))
+            distribution = CleanedURIRef(resource_uri(resource_dict))
 
-             g.add((distribution, RDF.type, DCAT.Distribution))
+            g.add((dataset_ref, DCAT.distribution, distribution))
 
- #            g.add((dataset_ref, DCAT.distribution, distribution))
- 
-  #           g.add((distribution, RDF.type, DCAT.Distribution))
+            g.add((distribution, RDF.type, DCAT.Distribution))
 
             #  Simple values
             items = [
@@ -571,8 +465,6 @@ class EuropeanDCATAPProfile(RDFProfile):
             if not resource_dict.get('access_url'):
              if resource_dict.get('url'):
               resource_dict['access_url']=resource_dict['url']
-            if resource_dict.get('license'):
-             resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
             self._add_triples_from_dict(resource_dict, distribution, items)
 
             #  Lists
@@ -594,30 +486,6 @@ class EuropeanDCATAPProfile(RDFProfile):
                 )
 
             # Format
-            if 'CSV' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='CSV'
-            if 'csv' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='CSV'
-            if 'link' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='HTML_SIMPL'
-            if 'ZIP' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='ZIP'
-            if 'pdf' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='PDF'
-            if 'PDF' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='PDF'
-            if 'doc' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='DOC'
-            if 'GEOJSON' in resource_dict.get('format'):
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='GEOJSON'
             mimetype = resource_dict.get("mimetype")
             fmt = resource_dict.get("format")
 
@@ -633,25 +501,14 @@ class EuropeanDCATAPProfile(RDFProfile):
                     # output format value as dcat:mediaType instead of dct:format
                     mimetype = fmt
                     fmt = None
-                if 'CSV' in fmt:
-                    mimetype = 'text/csv'
-                if 'JSON' in fmt:
-                    mimetype = 'application/json'
-                if 'ZIP' in fmt:
-                    mimetype = 'application/zip'
-                if 'XML' in fmt:
-                    mimetype = 'text/xml'
-                if 'RDF_XML' in fmt:
-                    mimetype = 'application/rdf+xml'
-  #                else:
+                else:
                     # Use dct:format
-     #                 mimetype = None
+                    mimetype = None
 
             if mimetype:
                 g.add((distribution, DCAT.mediaType, URIRefOrLiteral(mimetype)))
 
             if fmt:
-              if 'http' in fmt:
                 g.add((distribution, DCT["format"], URIRefOrLiteral(fmt)))
 
             # URL fallback and old behavior
@@ -716,8 +573,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             g.bind(prefix, namespace)
 
         g.add((catalog_ref, RDF.type, DCAT.Catalog))
-        catalogosenzaslash=config.get("ckan.site_url")
-        catalogosenzaslash=catalogosenzaslash+'/#'
+
         # Basic fields
         items = [
             ("title", DCT.title, config.get("ckan.site_title"), Literal),
@@ -727,11 +583,11 @@ class EuropeanDCATAPProfile(RDFProfile):
                 config.get("ckan.site_description"),
                 Literal,
             ),
-            ("homepage", FOAF.homepage, catalogosenzaslash, URIRef),
+            ("homepage", FOAF.homepage, config.get("ckan.site_url"), URIRef),
             (
                 "language",
                 DCT.language,
-                config.get("ckan.locale_default", "it"),
+                config.get("ckan.locale_default", "en"),
                 URIRefOrLiteral,
             ),
         ]

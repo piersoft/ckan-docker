@@ -134,18 +134,35 @@ def get_custom_package_schema():
 	{
             'name': 'access_rights',
             'validator': ['ignore_missing'],
-            'element': 'input',
+            'element': 'select',
             'type': 'text',
             'label': _('Access Rights'),
             'placeholder': _('http://publications.europa.eu/resource/authority/access-right/PUBLIC'),
             'is_required': False,
-            'help': _(u"""Proprietà che confluisce in dcat:accessRights""")
+            'help': _(u"""Proprietà che confluisce in dcat:accessRights"""),
+            'options': [
+                {   'text': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC',
+                    'name': 'accessrights',
+                    'validator': ['ignore_missing'],
+                    'label': 'Access Rights',
+                    'placeholder': 'Access Rights',
+                    'localized': True,
+                    'value': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                }
+            ],
         },
         {
             'name': 'hvd_category',
             'validator': ['ignore_missing'],
             'element': 'select',
             'options': [
+                {   'text': 'Not HVD Category',
+                    'name': 'nonhvd',
+                    'validator': ['ignore_missing'],
+                    'label': 'nonhhvd',
+                    'placeholder': 'Non HVD',
+                    'localized': True
+                },
                 {   'text': 'Metereologia',
                     'name': 'Metereologia',
                     'validator': ['ignore_missing'],
@@ -206,10 +223,27 @@ def get_custom_package_schema():
         {
             'name': 'applicable_legislation',
             'validator': ['ignore_missing'],
-            'element': 'input',
+            'element': 'select',
             'label': _('Applicable legislation'),
             'placeholder': _('http://data.europa.eu/eli/reg_impl/2023/138/oj'),
             'is_required': False,
+            'options': [
+                {   'text': 'Not Applicable legislation',
+                    'name': 'nonapleg',
+                    'validator': ['ignore_missing'],
+                    'label': 'noapleg',
+                    'placeholder': 'Non AppLeg',
+                    'localized': True
+                },
+                {   'text': 'http://data.europa.eu/eli/reg_impl/2023/138/oj',
+                    'name': 'applicable_legislation',
+                    'validator': ['ignore_missing'],
+                    'label': 'EU Applicable Legislation',
+                    'value': 'http://data.europa.eu/eli/reg_impl/2023/138/oj',
+                    'placeholder': 'Metereologia',
+                    'localized': True
+                }
+             ],
             'help': _(u"""Questa proprietà si riferisce alla licenza con cui viene """
                       u"""pubblicato il dataset. Scegliere una delle due licenze """
                       u"""Creative Commons proposte.""")
@@ -482,7 +516,17 @@ def get_custom_resource_schema():
         {
             'name': 'rights',
             'validator': ['ignore_missing'],
-            'element': 'input',
+            'element': 'select',
+            'options': [
+                {   'text': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC',
+                    'name': 'rights',
+                    'validator': ['ignore_missing'],
+                    'label': 'rights',
+                    'placeholder': 'Rights',
+                    'localized': True,
+                    'value': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                }
+            ],
             'label': _('Rights'),
             'placeholder': _('http://publications.europa.eu/resource/authority/access-right/PUBLIC'),
             'is_required': False,

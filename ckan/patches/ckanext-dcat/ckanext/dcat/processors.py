@@ -413,7 +413,8 @@ class RDFSerializer(RDFProcessor):
                 if ex['key'] == key:
                     return ex['value']
 
-        source_uri = _get_from_extra('source_catalog_homepage')
+        source_uri = _get_from_extra('source_catalog_homepage') 
+
         log.debug('source_uri pre patch %s',source_uri)
         # patch per harvesting per hasPart Catalog
         if dataset_dict.get('holder_identifier'):
@@ -497,6 +498,9 @@ class RDFSerializer(RDFProcessor):
             for item in sources:
                 key, predicate, _type = item
                 value = _get_from_extra(key)
+                if key == 'source_catalog_description':
+                   if not value:
+                     value='Portale Dati Aperti'
                 if value:
                  log.debug('value in base catalog struct %s',value)
                  if key == 'source_catalog_homepage' and value.endswith("/#"):
@@ -509,7 +513,6 @@ class RDFSerializer(RDFProcessor):
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
-                   
                    g.add((catalog_ref, predicate, _type(_date.isoformat(),
                                                   datatype=XSD.dateTime)))
                  else:
@@ -551,7 +554,8 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": ""}'
             if 'aci' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": ""}'
-
+            if 'r_basili' in identifier:
+              _pub= '{"uri": "", "name": "Regione Lazio", "email": "", "url": "https://dati.lazio.it/", "type": ""}'
 
 
 

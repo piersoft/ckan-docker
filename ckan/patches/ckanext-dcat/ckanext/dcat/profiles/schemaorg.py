@@ -312,8 +312,10 @@ class SchemaOrgProfile(RDFProfile):
 
     def _distribution_format_graph(self, distribution, resource_dict):
         if resource_dict.get("format"):
+            #patch dcat hvd per format
+            formatclean=resource_dict.get("format")
             self.g.add(
-                (distribution, SCHEMA.encodingFormat, Literal(resource_dict["format"]))
+                (distribution, SCHEMA.encodingFormat, Literal(formatclean))
             )
         elif resource_dict.get("mimetype"):
             self.g.add(

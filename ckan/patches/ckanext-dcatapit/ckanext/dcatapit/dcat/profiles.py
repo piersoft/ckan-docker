@@ -342,6 +342,7 @@ class ItalianDCATAPProfile(RDFProfile):
             # License
             setlic=0
             license = self._object(distribution, DCT.license)
+            log.debug('license in dcatpit %s',license)
             #applico patch alle licenze specifiche e per evitare duplicati in dct:license e patch ad hoc per Reg Campania
             if license:
                 license=license.replace("https://w3id.org/italia/env/ld/catalog/license/ccby40","https://creativecommons.org/licenses/by/4.0/")
@@ -515,7 +516,7 @@ class ItalianDCATAPProfile(RDFProfile):
     def _parse_themes(self, dataset, ref):
 
 # prova remove theme
-#        self._remove_from_extra(dataset, 'theme')
+        self._remove_from_extra(dataset, 'theme')
         themes = list(self.g.objects(ref, DCAT.theme))  
         log.warning('themes in _parse_themes %s',themes)
         subthemes04 = list(self.g.objects(ref, DCATAPIT.subTheme)) # dcatapit v0.4 only
@@ -722,15 +723,19 @@ class ItalianDCATAPProfile(RDFProfile):
 
         # replace themes
          #log.warning('prima del _add_themes: %s', self._get_dict_value(dataset_dict, 'theme'))
-        if 'http' not in self._get_dict_value(dataset_dict, 'theme'):
-         themecleaned=self._get_dict_value(dataset_dict, 'theme')
-         themecleaned=themecleaned.replace('["','')
-         themecleaned=themecleaned.replace('"]','')
-         themecleaned=THEME_BASE_URI+themecleaned
-         themecleaned='["'+themecleaned+'"]'
+        if self._get_dict_value(dataset_dict, 'theme'):
+         themecleaned='["GOVE"]' 
+         if 'http' not in self._get_dict_value(dataset_dict, 'theme'):
+          themecleaned=self._get_dict_value(dataset_dict, 'theme')
+          themecleaned=themecleaned.replace('["','')
+          themecleaned=themecleaned.replace('"]','')
+          themecleaned=THEME_BASE_URI+themecleaned
+          themecleaned='["'+themecleaned+'"]'
           #log.debug('themecleaned %s', themecleaned)
          # dataset_dict.pop('theme', None)
-         self._add_themes(dataset_ref,
+        else:
+         themecleaned='["GOVE"]' 
+        self._add_themes(dataset_ref,
                          self._get_dict_value(dataset_dict, THEME_BASE_URI+FIELD_THEMES_AGGREGATE),
                          themecleaned)
 
@@ -791,7 +796,7 @@ class ItalianDCATAPProfile(RDFProfile):
         # self._add_concept(FREQ_CONCEPTS, dataset_dict.get('frequency', DEFAULT_VOCABULARY_KEY))
 
         landing_page_url=""
-#        self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
+       # self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
         # replace landing page
         if dataset_dict.get('holder_identifier'):
          if 'cciaan' in dataset_dict.get('holder_identifier'):
@@ -871,7 +876,7 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'r_campan' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.regione.campania.it")
-            noaddsl=1
+            noaddsl=0
          if 'uni_ba' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://opendata.uniba.it")
@@ -939,7 +944,7 @@ class ItalianDCATAPProfile(RDFProfile):
             self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
             landing_page_uri = None
             landing_page_uri = dataset_uri(dataset_dict)
-            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://www.piersoft.it")
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://www.piersoft.it/")
             noaddsl=0
          if 'm_lps' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
@@ -947,13 +952,27 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'c_d171' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=0
-
+         if 'agcm_' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            noaddsl=0
+            landing_page_uri=landing_page_uri.replace("/catalog","")
          if noaddsl==0:
            landing_page_uri += '/'
 
-         if 'http' in landing_page_uri:
-          self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
+         landing_page_uri_f=""
+         if landing_page_uri.endswith("/"):
+            landing_page_uri_f = landing_page_uri[:-1]
+         else:
+            landing_page_uri_f = landing_page_uri
 
+         landing_page_uri_f += '#'
+
+#         self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri_f)))
+
+         self.g.remove((dataset_ref, DCAT.landingPage,None))
+         if 'http' in landing_page_uri:
+          self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri_f)))
+ 
         # conformsTo
         self.g.remove((dataset_ref, DCT.conformsTo, None))
         value = self._get_dict_value(dataset_dict, 'conforms_to')
@@ -965,23 +984,23 @@ class ItalianDCATAPProfile(RDFProfile):
                 conforms_to = []
 
             for item in conforms_to:
-                standard = URIRef(item['uri']) if item.get('uri') else BNode()
+                log.debug('conforms_to: %s',conforms_to)
+                if not isinstance(item,str) :
+                 standard = URIRef(item['uri']) if item.get('uri') else BNode()
+                 self.g.add((dataset_ref, DCT.conformsTo, standard))
+                 self.g.add((standard, RDF['type'], DCT.Standard))
+                 self.g.add((standard, RDF['type'], DCATAPIT.Standard))
+                 self.g.add((standard, DCT.identifier, Literal(item['identifier'])))
 
-                self.g.add((dataset_ref, DCT.conformsTo, standard))
-                self.g.add((standard, RDF['type'], DCT.Standard))
-                self.g.add((standard, RDF['type'], DCATAPIT.Standard))
-
-                self.g.add((standard, DCT.identifier, Literal(item['identifier'])))
-
-                for lang, val in (item.get('title') or {}).items():
+                 for lang, val in (item.get('title') or {}).items():
                     if lang in OFFERED_LANGS:
                         self.g.add((standard, DCT.title, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
-                for lang, val in (item.get('description') or {}).items():
+                 for lang, val in (item.get('description') or {}).items():
                     if lang in OFFERED_LANGS:
                         self.g.add((standard, DCT.description, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
-                for reference_document in (item.get('referenceDocumentation') or []):
+                 for reference_document in (item.get('referenceDocumentation') or []):
                     self.g.add((standard, DCATAPIT.referenceDocumentation, URIRef(reference_document)))
 
         # ADMS:identifier alternative identifiers
@@ -1165,25 +1184,31 @@ class ItalianDCATAPProfile(RDFProfile):
             #log.debug('Debug formato %s',resource_dict.get('url'))
             if 'csv' in resource_dict.get('url'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='CSV'
+                 resource_dict['format']=FORMAT_BASE_URI+'CSV'
                  resource_dict['distribution_format']='CSV'
             if 'link' in resource_dict.get('url'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='HTML_SIMPL'
+                 resource_dict['format']=FORMAT_BASE_URI+'HTML_SIMPL'
                  resource_dict['distribution_format']='HTML_SIMPL'
             if 'ZIP' in resource_dict.get('url'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='ZIP'
+                 resource_dict['format']=FORMAT_BASE_URI+'ZIP'
                  resource_dict['distribution_format']='ZIP'
             if 'pdf' in resource_dict.get('url'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='PDF'
+                 resource_dict['format']=FORMAT_BASE_URI+'PDF'
                  resource_dict['distribution_format']='PDF'
             if 'PDF' in resource_dict.get('url'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='PDF'
+                 resource_dict['format']=FORMAT_BASE_URI+'PDF'
                  resource_dict['distribution_format']='PDF'
-
+            guessed_format = guess_format(resource_dict)
+            if guessed_format:
+             if guessed_format.casefold() in resource_dict.get('url').casefold():
+                 resource_dict.pop('format', None)
+                 resource_dict.pop('distribution_format', None)
+                 resource_dict['format']=FORMAT_BASE_URI+guessed_format
+                 resource_dict['distribution_format']=guessed_format
             distribution = URIRef(resource_uri(resource_dict))  # TODO: preserve original info if harvested
             if dataset_dict.get('holder_identifier'):
              if 'cmna' in dataset_dict.get('holder_identifier'):
@@ -1291,13 +1316,15 @@ class ItalianDCATAPProfile(RDFProfile):
 
             license_info = interfaces.get_license_for_dcat(resource_dict.get('license_type'))
             dcat_license, license_title, license_url, license_version, dcatapit_license, names = license_info
-
+             #log.debug('license_info dcatapit dist %s', license_info)
             # be lenient about license existence
             license_maybe = license_url or dcatapit_license
             if license_maybe:
                 license_maybe=license_maybe.replace("deed.it","")
                 license = URIRef(license_maybe)
-                #log.debug('provo a patchare la licenza deed.it : %s',license)
+                if 'C1_Unknown' in license:
+                    license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
+                log.debug('provo a patchare la licenza: %s',license)
                 g.add((license, RDF.type, DCATAPIT.LicenseDocument))
                 g.add((license, RDF.type, DCT.LicenseDocument))
                 g.add((license, DCT.type, URIRef(dcat_license)))
@@ -1305,8 +1332,11 @@ class ItalianDCATAPProfile(RDFProfile):
                     g.add((license, OWL.versionInfo, Literal(license_version)))
                 for lang, name in names.items():
                     g.add((license, FOAF.name, Literal(name, lang=lang)))
-
-                g.add((distribution, DCT.license, license))
+                if resource_dict.get('license'):
+                  if resource_dict['license'] == license_url:
+                    g.add((distribution, DCT.license, license))
+                else:
+                    g.add((distribution, DCT.license, URIRef('http://creativecommons.org/licenses/by/4.0/it/')))
             else:
                 log.error('*** License not set')
 
@@ -1696,7 +1726,7 @@ def remove_unused_object(g, o, oname='object'):
 
 def guess_format(resource_dict):
     f = resource_dict.get('format')
-
+    f = f.replace(FORMAT_BASE_URI,'')
     if not f:
         log.info('No format found')
         return None

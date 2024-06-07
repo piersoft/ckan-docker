@@ -37,6 +37,7 @@ def dcat_to_ckan(dcat_dict):
 
     package_dict['resources'] = []
     for distribution in dcat_dict.get('distribution', []):
+        distribution['format']=distribution['format'].replace('http://publications.europa.eu/resource/authority/file-type/','')
         resource = {
             'name': distribution.get('title'),
             'description': distribution.get('description'),
@@ -49,6 +50,9 @@ def dcat_to_ckan(dcat_dict):
                 resource['size'] = int(distribution.get('byteSize'))
             except ValueError:
                 pass
+        if distribution.get('format'):
+            distribution['format']=distribution['format'].replace('http://publications.europa.eu/resource/authority/file-type/','')
+#patch dcathvd
         package_dict['resources'].append(resource)
 
     return package_dict
@@ -93,6 +97,8 @@ def ckan_to_dcat(package_dict):
 
     dcat_dict['distribution'] = []
     for resource in package_dict.get('resources', []):
+# TODO: prova dcathvd patch url format
+        resource['url']=resource['url'].replace('http://publications.europa.eu/resource/authority/file-type/','')
         distribution = {
             'title': resource.get('name'),
             'description': resource.get('description'),

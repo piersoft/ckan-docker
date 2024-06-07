@@ -44,11 +44,11 @@ lang_mapping_ckan_to_xmllang = {
     'en_AU': 'en',
     'es_AR': 'es',
 }
+
 format_mapping = {
     'WMS': 'MAP_SRVC',
-    'HTML': 'HTML_SIMPL',
-    'HTML_SIMPL': 'HTML_SIMPL',
-    'URL': 'HTML_SIMPL',
+    'HTML': 'HTML',
+    'URL': 'HTML',
     'WMS_SRVC': 'WMS_SRVC',
     'MAP_SRVC': 'MAP_SRVC',
     'CSV': 'CSV',
@@ -81,12 +81,14 @@ format_mapping = {
     'KMZ': 'KMZ',
     'JSON_LD': 'JSON_LD',
     'jsonld': 'JSON_LD',
+    'JSONLD': 'JSON_LD',
     'TXT': 'TXT',
     'txt': 'TXT',
     'TSV': 'TSV',
     'tsv': 'TSV',
     'gpx': 'GPX',
     'GPX': 'GPX',
+    'json': 'JSON',
     'JSONL': 'JSON',
     'jsonl': 'JSON',
     'n3': 'N3',
@@ -115,3 +117,4 @@ format_mapping = {
     'BWF': 'BWF',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
+

@@ -1,5 +1,3 @@
-import logging
-log = logging.getLogger(__name__)
 import datetime
 import json
 from urllib.parse import quote
@@ -46,8 +44,6 @@ namespaces = {
 PREFIX_MAILTO = u"mailto:"
 
 GEOJSON_IMT = "https://www.iana.org/assignments/media-types/application/vnd.geo+json"
-DISTRIBUTION_LICENSE_FALLBACK_CONFIG = 'ckanext.dcat.resource.inherit.license'
-PREF_LANDING= config.get('ckanext.dcat.base_uri')
 
 
 class URIRefOrLiteral(object):
@@ -180,7 +176,7 @@ class RDFProfile(object):
 
         If found, the string representation is returned, else an empty string
         """
-        default_lang = config.get("ckan.locale_default", "it")
+        default_lang = config.get("ckan.locale_default", "en")
         fallback = ""
         for o in self.g.objects(subject, predicate):
             if isinstance(o, Literal):
@@ -542,7 +538,6 @@ class RDFProfile(object):
             # If distribution has a license, attach it to the dataset
             license = self._object(distribution, DCT.license)
             if license:
-                log.debug('In base.py licenza trovata nella dist %s', license)
                 # Try to find a matching license comparing URIs, then titles
                 license_id = license_uri2id.get(license.toPython())
                 if not license_id:
@@ -619,7 +614,6 @@ class RDFProfile(object):
                 imt = str(_format)
             else:
                 label = str(_format)
-                 #label = label.replace('http://publications.europa.eu/resource/authority/file-type/','')
         elif isinstance(_format, (BNode, URIRef)):
             if self._object(_format, RDF.type) == DCT.IMT:
                 if not imt:
@@ -633,7 +627,6 @@ class RDFProfile(object):
                     imt = format_uri
                 else:
                     label = format_uri
-                   #  label = label.replace('http://publications.europa.eu/resource/authority/file-type/','')
 
         if (imt or label) and normalize_ckan_format:
 
@@ -805,15 +798,8 @@ class RDFProfile(object):
                 object = _type(value, datatype=_datatype)
             else:
                 object = _type(value)
-        #        log.debug('add_triple debug %s %s',object,predicate)
-                if 'accrualPeriodicity' in predicate:
-                 if 'frequency' not in object:
-                  object='http://publications.europa.eu/resource/authority/frequency/'+object
-                  self.g.add((subject, predicate, URIRef(object)))
-                 else:
-                  self.g.add((subject, predicate, object))
-                else:
-                  self.g.add((subject, predicate, object))
+            self.g.add((subject, predicate, object))
+
     def _add_list_triple(
         self, subject, predicate, value, _type=Literal, _datatype=None
     ):
@@ -825,7 +811,7 @@ class RDFProfile(object):
         commas, to support legacy fields.
         """
         items = self._read_list_value(value)
-        #log.debug('items in _add_list_triple %s %s %s',items,subject, predicate)
+
         for item in items:
             # ensure URIRef items are preprocessed (space removal/url encoding)
             if _type == URIRef:
@@ -834,24 +820,8 @@ class RDFProfile(object):
                 object = _type(item, datatype=_datatype)
             else:
                 object = _type(item)
-                if 'theme' in predicate:
-                 if 'data-theme' not in object:
-                  object=object.replace('["','')
-                  object=object.replace('"]','')
-                  object='http://publications.europa.eu/resource/authority/data-theme/'+object
-                  self.g.add((subject, predicate, URIRef(object)))
-                 else:
-                  self.g.add((subject, predicate, object))
-                elif 'language' in predicate:
-                 if 'authority' not in object:
-                  object=object.replace('["','')
-                  object=object.replace('"]','')
-                  object='http://publications.europa.eu/resource/authority/language/'+object
-                  self.g.add((subject, predicate, URIRef(object)))
-                 else:
-                  self.g.add((subject, predicate, object))
-                else:
-                  self.g.add((subject, predicate, object))
+            self.g.add((subject, predicate, object))
+
     def _add_date_triple(self, subject, predicate, value, _type=Literal):
         """
         Adds a new triple with a date object
