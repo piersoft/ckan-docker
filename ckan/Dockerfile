@@ -18,8 +18,8 @@ RUN pip3 install routes
 
 # Install ckanext-dcat HVD
 #RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@56-tmp#egg=ckanext-dcat && \
-COPY patches/ckanext-dcatap ${APP_DIR}/src/ckanext-dcatap && \
-     pip3 install -r ${APP_DIR}/src/ckanext-dcatap/requirements.txt
+COPY patches/ckanext-dcatap ${APP_DIR}/src/ckanext-dcatap 
+RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcatap/requirements.txt
 
 # Install ckanext-dcatapit
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
