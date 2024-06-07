@@ -82,7 +82,7 @@ To start the containers:
 
 **PS: if CKAN failed (unhealty) launch docker start ckan and after 2-3 minutes launch docker start nginx.**
 
-**IMPORTANT AFTER CKAN IS RUNNING HEALTY:**
+**IMPORTANT AFTER CKAN IS RUNNING HEALTY (ONLY FIRST TIME):**
 
 *Go to into docker:*
 
