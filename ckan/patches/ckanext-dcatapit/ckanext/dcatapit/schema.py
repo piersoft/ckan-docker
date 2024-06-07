@@ -163,7 +163,7 @@ def get_custom_package_schema():
                     'placeholder': 'Non HVD',
                     'localized': True
                 },
-                {   'text': 'Dati Metereologici',
+                {   'text': 'Dati metereologici',
                     'name': 'Metereologia',
                     'validator': ['ignore_missing'],
                     'label': 'Metereologia',
