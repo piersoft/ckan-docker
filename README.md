@@ -85,8 +85,11 @@ To start the containers:
 **IMPORTANT AFTER CKAN IS RUNNING HEALTY:**
 
 Go to into docker:
+
 docker exec -it ckan bash 
+
 Go to cd /dockerentry-point 
+
 launch --> sh 03.ckan_group.sh
 
 After creating all groups --> mv 03.ckan_group.sh 03.ckan_group.end
