@@ -195,7 +195,7 @@ class ItalianDCATAPProfile(RDFProfile):
             dataset_dict['geographical_name'] = value
 
         if geonames_url:
-            dataset_dict['geographical_geonames_url'] = geonames_url
+            dataset_dict['geographical_s_url'] = s_url
 
         # Collect strings from multilang fields
 
@@ -786,6 +786,12 @@ class ItalianDCATAPProfile(RDFProfile):
             dct_location = BNode()
             self.g.add((dataset_ref, DCT.spatial, dct_location))
 
+            self.g.add((dct_location, RDF['type'], DCT.Location))
+            self.g.add((dct_location, DCATAPIT.geographicalIdentifier, Literal(value)))
+        else:
+            value='http://publications.europa.eu/resource/authority/country/ITA'
+            dct_location = BNode()
+            self.g.add((dataset_ref, DCT.spatial, dct_location))
             self.g.add((dct_location, RDF['type'], DCT.Location))
             self.g.add((dct_location, DCATAPIT.geographicalIdentifier, Literal(value)))
 
