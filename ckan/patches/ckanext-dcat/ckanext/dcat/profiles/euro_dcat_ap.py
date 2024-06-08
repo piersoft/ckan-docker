@@ -72,6 +72,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                 else:
                     if 'onsiglio' or 'CONSIGLIO' in value:
                      value=''
+                    if 'servizieducativi' in value:
+                     value=''                  
                 dataset_dict[key] = value
 
         if not dataset_dict.get("version"):
