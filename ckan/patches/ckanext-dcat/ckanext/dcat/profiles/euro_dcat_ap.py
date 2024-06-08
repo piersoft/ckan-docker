@@ -312,7 +312,13 @@ class EuropeanDCATAPProfile(RDFProfile):
             ("dcat_type", DCT.type, None, Literal),
             ("provenance", DCT.provenance, None, Literal),
         ]
-        self._add_triples_from_dict(dataset_dict, dataset_ref, items)
+        if 'www.comune.torino.it/servizieducativi/' in dataset_dict['url']:
+               log.debug('trovata doppia langingpage nel Comune di Torino')
+               dataset_dict.pop('url', None)
+        else:
+               self._add_triples_from_dict(dataset_dict, dataset_ref, items)
+
+          #self._add_triples_from_dict(dataset_dict, dataset_ref, items)
 
         # Tags
         for tag in dataset_dict.get("tags", []):
