@@ -2,13 +2,13 @@ import json
 import logging
 
 from rdflib import BNode, Literal, URIRef
-from rdflib.namespace import RDF, SKOS, Namespace
+from rdflib.namespace import RDF, SKOS
 
 import ckan.logic as logic
 from ckan.common import config
 from ckan.lib.i18n import get_lang, get_locales
 
-from ckanext.dcat.profiles.base import (
+from ckanext.dcat.profiles import (
     ADMS,
     DCAT,
     DCT,
@@ -168,7 +168,6 @@ class ItalianDCATAPProfile(RDFProfile):
             value = ','.join(valueList)
             if len(valueList) > 1:
                 value = '{' + value + '}'
-            log.debug('dct.language value %s', value)
             dataset_dict[key] = value
 
         self._parse_themes(dataset_dict, dataset_ref)
@@ -195,7 +194,7 @@ class ItalianDCATAPProfile(RDFProfile):
             dataset_dict['geographical_name'] = value
 
         if geonames_url:
-            dataset_dict['geographical_s_url'] = s_url
+            dataset_dict['geographical_geonames_url'] = geonames_url
 
         # Collect strings from multilang fields
 
@@ -276,9 +275,6 @@ class ItalianDCATAPProfile(RDFProfile):
             resource_dict['url'] = (self._object_value(distribution, DCAT.downloadURL) or
                                     self._object_value(distribution, DCAT.accessURL))
 
-            if 'CSV' in resource_dict['url']: 
-                 resource_dict.pop('format', None)
-                 resource_dict['format']='CSV'
             if 'csv' in resource_dict['url']: 
                  resource_dict.pop('format', None)
                  resource_dict['format']='CSV'
@@ -302,7 +298,7 @@ class ItalianDCATAPProfile(RDFProfile):
                  resource_dict['format']='WMS'
             if 'kml' in resource_dict['url']:
                  resource_dict.pop('format', None) 
-                 resource_dict['format']='kml'
+                 resource_dict['format']='KML'
             if 'shp' in resource_dict['url']:
                  resource_dict.pop('format', None) 
                  resource_dict['format']='SHP'
@@ -312,9 +308,6 @@ class ItalianDCATAPProfile(RDFProfile):
             ):
                 valueRef = self._object_value(distribution, predicate)
                 if valueRef:
-                    if 'CSV' in resource_dict['url']:
-                     resource_dict.pop('format', None)
-                     resource_dict['format']='CSV'
                     if 'csv' in resource_dict['url']:
                      resource_dict.pop('format', None)
                      resource_dict['format']='CSV'
@@ -342,7 +335,6 @@ class ItalianDCATAPProfile(RDFProfile):
             # License
             setlic=0
             license = self._object(distribution, DCT.license)
-            log.debug('license in dcatpit %s',license)
             #applico patch alle licenze specifiche e per evitare duplicati in dct:license e patch ad hoc per Reg Campania
             if license:
                 license=license.replace("https://w3id.org/italia/env/ld/catalog/license/ccby40","https://creativecommons.org/licenses/by/4.0/")
@@ -514,20 +506,14 @@ class ItalianDCATAPProfile(RDFProfile):
                 base_dict[key] = value
 
     def _parse_themes(self, dataset, ref):
-
-# prova remove theme
-        self._remove_from_extra(dataset, 'theme')
-        themes = list(self.g.objects(ref, DCAT.theme))  
-        log.warning('themes in _parse_themes %s',themes)
+        # self._remove_from_extra(dataset, 'theme')
+        themes = list(self.g.objects(ref, DCAT.theme))
         subthemes04 = list(self.g.objects(ref, DCATAPIT.subTheme)) # dcatapit v0.4 only
         subthemes10 = list(self.g.objects(ref, DCT.subject))
 
         out = []
         for t in themes:
             theme_name = str(t).split('/')[-1]
-            #log.warning('ATTENZIONE theme_name %s',theme_name)
-            #if 'data-theme' not in theme_name:
-            # theme_name=THEME_BASE_URI+theme_name
             row = {'theme': theme_name, 'subthemes': []}
 
             try:
@@ -540,7 +526,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 if s in subthemes_for_theme:
                     row['subthemes'].append(s)
             out.append(row)
-        log.warning('ATTENZIONE row %s',row)
+
         dataset[FIELD_THEMES_AGGREGATE] = json.dumps(out)
 
     def _remove_from_extra(self, dataset_dict, key):
@@ -722,22 +708,9 @@ class ItalianDCATAPProfile(RDFProfile):
         g.add((dataset_ref, RDF.type, DCATAPIT.Dataset))
 
         # replace themes
-         #log.warning('prima del _add_themes: %s', self._get_dict_value(dataset_dict, 'theme'))
-        if self._get_dict_value(dataset_dict, 'theme'):
-         themecleaned='["GOVE"]' 
-         if 'http' not in self._get_dict_value(dataset_dict, 'theme'):
-          themecleaned=self._get_dict_value(dataset_dict, 'theme')
-          themecleaned=themecleaned.replace('["','')
-          themecleaned=themecleaned.replace('"]','')
-          themecleaned=THEME_BASE_URI+themecleaned
-          themecleaned='["'+themecleaned+'"]'
-          #log.debug('themecleaned %s', themecleaned)
-         # dataset_dict.pop('theme', None)
-        else:
-         themecleaned='["GOVE"]' 
         self._add_themes(dataset_ref,
-                         self._get_dict_value(dataset_dict, THEME_BASE_URI+FIELD_THEMES_AGGREGATE),
-                         themecleaned)
+                         self._get_dict_value(dataset_dict, FIELD_THEMES_AGGREGATE),
+                         self._get_dict_value(dataset_dict, 'theme'))
 
         # replace languages
         value = self._get_dict_value(dataset_dict, 'language')
@@ -752,9 +725,8 @@ class ItalianDCATAPProfile(RDFProfile):
                 lang = lang.replace('[', '').replace(']', '')
                 lang = lang.replace('"it"', '')
                 self.g.remove((dataset_ref, DCT.language, Literal(lang)))
-                if 'authority/language' in lang:
-                 self.g.add((dataset_ref, DCT.language, URIRef(LANG_BASE_URI + lang)))
-            #      self._add_concept(LANG_CONCEPTS, lang)
+                self.g.add((dataset_ref, DCT.language, URIRef(LANG_BASE_URI + lang)))
+                # self._add_concept(LANG_CONCEPTS, lang)
 
         # add spatial (EU URI)
         value = self._get_dict_value(dataset_dict, 'geographical_name')
@@ -789,7 +761,50 @@ class ItalianDCATAPProfile(RDFProfile):
             self.g.add((dct_location, RDF['type'], DCT.Location))
             self.g.add((dct_location, DCATAPIT.geographicalIdentifier, Literal(value)))
         else:
-            value='http://publications.europa.eu/resource/authority/country/ITA'
+            value='https://www.geonames.org/3175395'
+            if dataset_dict.get('holder_identifier'):
+              if 'r_abruzz' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3183560'
+              if 'regcal' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/2525468'
+              if 'r_campan' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3181042'
+              if 'r_emiro' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3177401'
+              if 'r_friuve' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3176525'
+              if 'r_lazio' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3174976'
+              if 'r_liguri' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3174725'
+              if 'r_lombar' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3174618'
+              if 'r_marche' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3174004'
+              if 'r_molise' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3173222'
+              if 'r_piemon' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3170831'
+              if 'p_bz' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3181912'
+              if 'p_TN' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3165241'
+              if 'r_sicili' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/2523119'
+              if 'r_basili' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3182306'
+              if 'r_toscan' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3165361'
+              if 'r_umbria' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3165048'
+              if 'r_vda' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3164857'
+              if 'r_veneto' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3164604'
+              if 'r_puglia' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/3169778'
+              if 'r_sardeg' in dataset_dict.get('holder_identifier'):
+               value='https://www.geonames.org/2523228'
             dct_location = BNode()
             self.g.add((dataset_ref, DCT.spatial, dct_location))
             self.g.add((dct_location, RDF['type'], DCT.Location))
@@ -797,27 +812,49 @@ class ItalianDCATAPProfile(RDFProfile):
 
         # replace periodicity
         self._remove_node(dataset_dict, dataset_ref, ('frequency', DCT.accrualPeriodicity, None, Literal))
-       # self._add_uri_node(dataset_dict, dataset_ref, ('frequency', DCT.accrualPeriodicity, DEFAULT_FREQ_CODE, URIRef),
-        #                   FREQ_BASE_URI)
+        if dataset_dict.get('frequency'):
+          if 'continuo' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='OTHER'
+          if 'Dato non disponibile' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='OTHER'
+          if 'mai' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='NEVER'
+          if 'Annuale' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='ANNUAL'
+          if 'Giornaliera' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='DAILY'
+          if 'Sconosciuta' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='UNKNOWN'
+          if 'Settimanale' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='WEEKLY'
+          if 'annually' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='ANNUAL'
+          if 'irregolare' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='IRREG'
+          if 'mensile' in dataset_dict.get('frequency'):
+            dataset_dict['frequency']='MONTHLY'
+        else:
+            dataset_dict['frequency']='UNKNOWN'
+        
+        self._add_uri_node(dataset_dict, dataset_ref, ('frequency', DCT.accrualPeriodicity, DEFAULT_FREQ_CODE, URIRef),
+                           FREQ_BASE_URI)
         # self._add_concept(FREQ_CONCEPTS, dataset_dict.get('frequency', DEFAULT_VOCABULARY_KEY))
 
         landing_page_url=""
-       # self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
         # replace landing page
-        if dataset_dict.get('holder_identifier'):
-         if 'cciaan' in dataset_dict.get('holder_identifier'):
+        if 'cciaan' in dataset_dict.get('holder_identifier'):
           landing_page_uri = dataset_dict.get('url')
+          landing_page_url = dataset_dict.get('url')
           log.debug('url originale: %s',landing_page_uri)
           self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
-         else:
-          dataset_dict.pop('url',None)
-          self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
-          landing_page_uri = None
-        if dataset_dict.get('name'):
-            landing_page_uri = '{0}/dataset/{1}'.format(catalog_uri().rstrip('/'), dataset_dict['name'])
         else:
+         self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
+         landing_page_uri = None
+         if dataset_dict.get('name'):
+            landing_page_uri = '{0}/dataset/{1}'.format(catalog_uri().rstrip('/'), dataset_dict['name'])
+         else:
             landing_page_uri = dataset_uri(dataset_dict)  # TODO: preserve original URI if harvested
-        if dataset_dict.get('holder_identifier'):
+
          noaddsl=0
          if 'cciaan' in dataset_dict.get('holder_identifier'):
             landing_page_uri = landing_page_url
@@ -835,6 +872,9 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
          if 'c_a944' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
+         if 'c_d969' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.comune.genova.it")
          if 'aci' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://lod.aci.it/")
          if 'r_marche' in dataset_dict.get('holder_identifier'):
@@ -846,6 +886,12 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'p_TN' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.trentino.it")
+         if 'c_g273' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://opendata.comune.palermo.it")
+         if 'anac' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.anticorruzione.it/opendata")
          if 'c_f052' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.comune.matera.it")
@@ -946,18 +992,9 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'ispra_rm' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=1
-         if 'piersoft' in dataset_dict.get('holder_identifier'):
-            self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
-            landing_page_uri = None
-            landing_page_uri = dataset_uri(dataset_dict)
-            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://www.piersoft.it/")
-            noaddsl=0
          if 'm_lps' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
-            noaddsl=1
-         if 'c_d171' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = dataset_uri(dataset_dict)
-            noaddsl=0
+            noaddsl=1  
          if 'agcm_' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=0
@@ -975,10 +1012,9 @@ class ItalianDCATAPProfile(RDFProfile):
 
 #         self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri_f)))
 
-         self.g.remove((dataset_ref, DCAT.landingPage,None))
          if 'http' in landing_page_uri:
           self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri_f)))
- 
+
         # conformsTo
         self.g.remove((dataset_ref, DCT.conformsTo, None))
         value = self._get_dict_value(dataset_dict, 'conforms_to')
@@ -990,23 +1026,23 @@ class ItalianDCATAPProfile(RDFProfile):
                 conforms_to = []
 
             for item in conforms_to:
-                log.debug('conforms_to: %s',conforms_to)
-                if not isinstance(item,str) :
-                 standard = URIRef(item['uri']) if item.get('uri') else BNode()
-                 self.g.add((dataset_ref, DCT.conformsTo, standard))
-                 self.g.add((standard, RDF['type'], DCT.Standard))
-                 self.g.add((standard, RDF['type'], DCATAPIT.Standard))
-                 self.g.add((standard, DCT.identifier, Literal(item['identifier'])))
+                standard = URIRef(item['uri']) if item.get('uri') else BNode()
 
-                 for lang, val in (item.get('title') or {}).items():
+                self.g.add((dataset_ref, DCT.conformsTo, standard))
+                self.g.add((standard, RDF['type'], DCT.Standard))
+                self.g.add((standard, RDF['type'], DCATAPIT.Standard))
+
+                self.g.add((standard, DCT.identifier, Literal(item['identifier'])))
+
+                for lang, val in (item.get('title') or {}).items():
                     if lang in OFFERED_LANGS:
                         self.g.add((standard, DCT.title, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
-                 for lang, val in (item.get('description') or {}).items():
+                for lang, val in (item.get('description') or {}).items():
                     if lang in OFFERED_LANGS:
                         self.g.add((standard, DCT.description, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
-                 for reference_document in (item.get('referenceDocumentation') or []):
+                for reference_document in (item.get('referenceDocumentation') or []):
                     self.g.add((standard, DCATAPIT.referenceDocumentation, URIRef(reference_document)))
 
         # ADMS:identifier alternative identifiers
@@ -1062,7 +1098,6 @@ class ItalianDCATAPProfile(RDFProfile):
             g.remove((s, p, o))
             remove_unused_object(g, o, "publisher")  # if the publisher node is not used elsewhere, remove it
 
-
         publisher_ref = self._add_agent(dataset_dict, dataset_ref, 'publisher', DCT.publisher, use_default_lang=True)
 
         # Autore : Agent
@@ -1081,14 +1116,10 @@ class ItalianDCATAPProfile(RDFProfile):
         # </dcatapit:Organization>
 
         # TODO: preserve original info if harvested
-        def _add_mailto(self, mail_addr):
-         if mail_addr:
-            return PREFIX_MAILTO + self._without_mailto(mail_addr)
-         else:
-            return mail_addr
+
         # retrieve the contactPoint added by the euro serializer
         euro_poc = g.value(subject=dataset_ref, predicate=DCAT.contactPoint, object=None, any=False)
-        log.debug('contactPoint preesistente %s',euro_poc)
+
         # euro poc has this format:
         # <dcat:contactPoint>
         #    <vcard:Organization rdf:nodeID="Nfcd06f452bcd41f48f33c45b0c95979e">
@@ -1098,12 +1129,10 @@ class ItalianDCATAPProfile(RDFProfile):
         # </dcat:contactPoint>
 
         if euro_poc:
-             g.remove((dataset_ref, DCAT.contactPoint, euro_poc))
-             self.log_remove('contactPoint', DCAT.contactPoint)
-             remove_unused_object(g, euro_poc, "contactPoint")
-        g.remove((dataset_ref, DCAT.contactPoint, euro_poc))
-        self.log_remove('remove contactPoint', DCAT.contactPoint)
-        remove_unused_object(g, euro_poc, "contactPoint")
+            g.remove((dataset_ref, DCAT.contactPoint, euro_poc))
+            self.log_remove('contactPoint', DCAT.contactPoint)
+            remove_unused_object(g, euro_poc, "contactPoint")
+
         org_id = dataset_dict.get('owner_org')
 
         # get orga info
@@ -1127,29 +1156,19 @@ class ItalianDCATAPProfile(RDFProfile):
         org_uri = organization_uri(org_dict)
 
         poc = URIRef(org_uri)
-        log.debug('poc %s',poc)
-        for extra in dataset_dict["extras"]:
-          if 'contact_uri' in extra["key"]:
-             log.debug('trovato contact_uri in extras: %s',extra.get("value"))
-             value=extra.get("value")
-             poc=URIRef(value)
-#             g.add((dataset_ref, DCAT.contactPoint, URIRef(value)))
-          else:
-             log.debug('NON trovato contact_uri in extras')
         g.add((dataset_ref, DCAT.contactPoint, poc))
         g.add((poc, RDF.type, DCATAPIT.Organization))
         g.add((poc, RDF.type, VCARD.Kind))
-    #     g.add((poc, RDF.type, VCARD.Organization))
+        g.add((poc, RDF.type, VCARD.Organization))
 
-        g.add((poc,  VCARD.fn, Literal(org_dict.get('name'))))
+        g.add((poc, VCARD.fn, Literal(org_dict.get('name'))))
 
         if 'email' in org_dict.keys():  # this element is mandatory for dcatapit, but it may not have been filled for imported datasets
-             g.add((poc, VCARD.hasEmail, URIRef(self._add_mailto(org_dict.get('email')))))
-             log.debug('email in org_dict.get(email) %s', URIRef(self._add_mailto(org_dict.get('email'))))
+            g.add((poc, VCARD.hasEmail, URIRef(org_dict.get('email'))))
         if 'telephone' in org_dict.keys():
-             g.add((poc, VCARD.hasTelephone, Literal(org_dict.get('telephone'))))
+            g.add((poc, VCARD.hasTelephone, Literal(org_dict.get('telephone'))))
         if 'site' in org_dict.keys():
-             g.add((poc, VCARD.hasURL, URIRef(org_dict.get('site'))))
+            g.add((poc, VCARD.hasURL, URIRef(org_dict.get('site'))))
 
         # Rights holder : Agent,
         # holder_ref keeps graph reference to holder subject
@@ -1215,59 +1234,56 @@ class ItalianDCATAPProfile(RDFProfile):
                  resource_dict.pop('distribution_format', None)
                  resource_dict['format']=FORMAT_BASE_URI+guessed_format
                  resource_dict['distribution_format']=guessed_format
+
             distribution = URIRef(resource_uri(resource_dict))  # TODO: preserve original info if harvested
-            if dataset_dict.get('holder_identifier'):
-             if 'cmna' in dataset_dict.get('holder_identifier'):
+            
+            if 'cmna' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=URIRef(distribution)
-             if '00514490010' in dataset_dict.get('holder_identifier'):
+            if '00514490010' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
               distribution=URIRef(distribution)
-             if 'r_marche' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it")
+            if 'r_marche' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
               distribution=URIRef(distribution)
                 #  log.info('resource_distribution_it %s',distribution)
-             if 'r_emiro' in dataset_dict.get('holder_identifier'):
+            if 'r_emiro' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace("dati.comune.fe.it","https://dati.comune.fe.it")
               distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
               distribution=URIRef(distribution)
                  #  log.info('resource_distribution_it %s',distribution)
-             if 'm_it' in dataset_dict.get('holder_identifier'):
+            if 'm_it' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=URIRef(distribution)
-             if 'r_toscan' in dataset_dict.get('holder_identifier'):
+            if 'r_toscan' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
               distribution=URIRef(distribution)
-             if 'r_basili' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog")
+            if 'r_basili' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
               distribution=URIRef(distribution)
-             if 'r_lazio' in dataset_dict.get('holder_identifier'):
+            if 'r_lazio' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
               distribution=URIRef(distribution)
-             if 'm_lps' in dataset_dict.get('holder_identifier'):
+            if 'm_lps' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it/")
               distribution=URIRef(distribution)
-             if 'cr_campa' in dataset_dict.get('holder_identifier'):
+            if 'cr_campa' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
               distribution=URIRef(distribution)
-             if '00304260409' in dataset_dict.get('holder_identifier'):
+            if '00304260409' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
               distribution=URIRef(distribution)
-             if 'c_a345' in dataset_dict.get('holder_identifier'):
+            if 'c_a345' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"ckan.opendatalaquila.it")
               distribution=URIRef(distribution)
-             if 'uds_ca' in dataset_dict.get('holder_identifier'):
+            if 'uds_ca' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"data.tdm-project.it")
               distribution=URIRef(distribution)
-             if 'aci' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it")
+            if 'aci' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it/")
               distribution=URIRef(distribution)
-             if 'piersoft' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://www.piersoft.it")
-              distribution=URIRef(distribution)
-             if 'c_e506' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.comune.lecce.it")
-              distribution=URIRef(distribution)
+
+
             # Add the DCATAPIT type
             g.add((distribution, RDF.type, DCATAPIT.Distribution))
 
@@ -1284,7 +1300,7 @@ class ItalianDCATAPProfile(RDFProfile):
                     if 'ZIP' in resource_dict['url']:
                        guessed_format='ZIP'
                     if 'link' in resource_dict['url']:
-                       guessed_format='HTML_SIMPL'
+                       guessed_format='HTML_SIMPL'   
                     if 'pdf' in resource_dict['url']:
                        guessed_format='PDF'
                     if 'PDF' in resource_dict['url']:
@@ -1298,11 +1314,10 @@ class ItalianDCATAPProfile(RDFProfile):
                     if 'wfs' in resource_dict['url']:
                        guessed_format='WFS'
                     if 'zip' in resource_dict['url']:
-                       guessed_format='ZIP'
-
+                       guessed_format='ZIP'           
+                       
                     self.g.add((distribution, DCT['format'], URIRef(FORMAT_BASE_URI + guessed_format)))
                 else:
-                    log.warning('Formato in uri %s',resource_dict['url'])
                     log.warning('No format for resource: %s / %s', dataset_dict.get('title', 'N/A'), resource_dict.get('description', 'N/A'))
                     self.g.add((distribution, DCT['format'], URIRef(FORMAT_BASE_URI + DEFAULT_FORMAT_CODE)))
 
@@ -1322,7 +1337,7 @@ class ItalianDCATAPProfile(RDFProfile):
 
             license_info = interfaces.get_license_for_dcat(resource_dict.get('license_type'))
             dcat_license, license_title, license_url, license_version, dcatapit_license, names = license_info
-             #log.debug('license_info dcatapit dist %s', license_info)
+
             # be lenient about license existence
             license_maybe = license_url or dcatapit_license
             if license_maybe:
@@ -1440,19 +1455,12 @@ class ItalianDCATAPProfile(RDFProfile):
                 # theme_name = theme['theme']
                 # subthemes = theme.get('subthemes') or []
                 # theme_ref = URIRef(theme_name)
- # prova theme per imporre solo uri pub
-   #           self.g.remove((dataset_ref, DCAT.theme, theme))
-              if 'http' in theme:
-                themecleaned=theme
-                theme = None
-                self.g.remove((dataset_ref, DCAT.theme, None))
-                #log.debug('prova themes list: %s',themecleaned)
-                self.g.add((dataset_ref, DCAT.theme, URIRef(themecleaned)))
-                self._add_concept(THEME_CONCEPTS, uri=themecleaned)
-                #self._add_subthemes(dataset_ref, subthemes)
+                # self.g.remove((dataset_ref, DCAT.theme, theme_ref))
+
+                self.g.add((dataset_ref, DCAT.theme, URIRef(theme)))
+                self._add_concept(THEME_CONCEPTS, uri=theme)
+                # self._add_subthemes(dataset_ref, subthemes)
         else:
-           if 'http' in theme:
-            #log.debug('prova themes')
             self.g.add((dataset_ref, DCAT.theme, URIRef(theme_name_to_uri(DEFAULT_THEME_KEY))))
             self._add_concept(THEME_CONCEPTS, DEFAULT_THEME_KEY)
 
@@ -1522,28 +1530,19 @@ class ItalianDCATAPProfile(RDFProfile):
             Returns the ref to the agent node
         '''
 
-
         try:
             agent_name, agent_id = agent_data
         except (TypeError, ValueError, IndexError,):
-            log.debug('sono in except')
-            agent_name = self._get_dict_value(_dict, basekey + '_name', 'Redazione OD')
+            agent_name = self._get_dict_value(_dict, basekey + '_name', 'N/A')
             agent_id = self._get_dict_value(_dict, basekey + '_identifier', 'N/A')
 
-
-        
         agent = BNode()
         rlang = get_lang() or DEFAULT_LANG
         rlang = rlang.split('_')[0]
+
         self.g.add((agent, RDF['type'], DCATAPIT.Agent))
         self.g.add((agent, RDF['type'], FOAF.Agent))
-         #if 'N/A' in agent_name:
-           #   agent_name = agent_name.replace('N/A','Redazione OD')
-             # agent_name = self._get_dict_value(_dict, basekey + '_name', 'Redazione OD')
-              #agent_name = 'Redazione OD'
-
         self.g.add((ref, _type, agent))
-
 
         def _found_no_lang():
             found_no_lang = False
@@ -1553,24 +1552,19 @@ class ItalianDCATAPProfile(RDFProfile):
                     break
             return found_no_lang
         if isinstance(agent_name, dict):
-            # log.debug('agent_name dict %s', agent_name)
             for lang, aname in agent_name.items():
-               #  log.debug('aname in for %s',aname)
                 if lang in OFFERED_LANGS:
                     self.g.add((agent, FOAF.name, Literal(aname, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
                     if lang == rlang and not _found_no_lang():
                         self.g.add((agent, FOAF.name, Literal(aname)))
         else:
-             #log.debug('agent_name in else %s', agent_name)
-           #  if basekey == 'publisher':
-             #   agent_name='Redazione OD'
-               # agent_name=agent_name.replace('N/A','Redazione OD')
             if use_default_lang:
                 # we may use web context language or lang from config
                 self.g.add((agent, FOAF.name, Literal(agent_name, lang=rlang)))
             else:
                 self.g.add((agent, FOAF.name, Literal(agent_name)))
         self.g.add((agent, DCT.identifier, Literal(agent_id)))
+
         return agent
 
     def _add_uri_node(self, _dict, ref, item, base_uri=''):
@@ -1641,15 +1635,8 @@ class ItalianDCATAPProfile(RDFProfile):
         # Replace homepage
         # Try to avoid to have the Catalog URIRef identical to the homepage URI
         g.remove((catalog_ref, FOAF.homepage, URIRef(config.get('ckan.site_url'))))
-        g.remove((catalog_ref, FOAF.homepage, URIRef(catalog_uri())))
-        catalog_foafhomepage=catalog_uri().rstrip('/')
-        g.remove((catalog_ref, FOAF.homepage,URIRef(catalog_foafhomepage)))
-        log.debug('catalog_foafhomepage %s',catalog_foafhomepage)
-        if not catalog_foafhomepage.endswith('/'):
-          catalog_foafhomepage=catalog_foafhomepage+'/'
-          g.remove((catalog_ref, FOAF.homepage,URIRef(catalog_foafhomepage)))
-      #  g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri() + '/#')))
-      #  g.add((catalog_ref, FOAF.homepage, URIRef(catalog_foafhomepage)))
+        g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri() + '/#')))
+ #        g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri())))
 
         # publisher
         pub_agent_name = config.get('ckanext.dcatapit_configpublisher_name', 'unknown')
@@ -1733,6 +1720,7 @@ def remove_unused_object(g, o, oname='object'):
 def guess_format(resource_dict):
     f = resource_dict.get('format')
     f = f.replace(FORMAT_BASE_URI,'')
+    
     if not f:
         log.info('No format found')
         return None
