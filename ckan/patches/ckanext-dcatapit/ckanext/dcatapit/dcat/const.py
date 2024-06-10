@@ -44,11 +44,11 @@ lang_mapping_ckan_to_xmllang = {
     'en_AU': 'en',
     'es_AR': 'es',
 }
-
 format_mapping = {
     'WMS': 'MAP_SRVC',
-    'HTML': 'HTML',
-    'URL': 'HTML',
+    'HTML': 'HTML_SIMPL',
+    'HTML_SIMPL': 'HTML_SIMPL',
+    'URL': 'HTML_SIMPL',
     'WMS_SRVC': 'WMS_SRVC',
     'MAP_SRVC': 'MAP_SRVC',
     'CSV': 'CSV',
@@ -62,6 +62,8 @@ format_mapping = {
     'xlsx': 'XLSX',
     'GeoJson': 'GEOJSON',
     'GeoJSON': 'GEOJSON',
+    'GEO JSON': 'GEOJSON',
+    'geo json': 'GEOJSON',
     'API': 'API',
     'WCS': 'MAP_SRVC',
     'PDF': 'PDF',
@@ -73,6 +75,7 @@ format_mapping = {
     'kml': 'KML',
     'rdf': 'RDF',
     'RDF': 'RDF',
+    'OpenData': 'XML',
     'ttl': 'RDF_TURTLE',
     'TTL': 'RDF_TURTLE',
     'kml': 'KML',
@@ -88,7 +91,6 @@ format_mapping = {
     'tsv': 'TSV',
     'gpx': 'GPX',
     'GPX': 'GPX',
-    'json': 'JSON',
     'JSONL': 'JSON',
     'jsonl': 'JSON',
     'n3': 'N3',
@@ -104,6 +106,8 @@ format_mapping = {
     'DWG': 'DWG',
     'GPKG': 'GPKG',
     'gpkg': 'GPKG',
+    'Documentazione': 'DOC',
+    'Link':'HTML',
     'RDF_N_TRIPLES': 'RDF_N_TRIPLES',
     'OWL': 'OWL',
     'RDF_XML': 'RDF_XML',
@@ -115,6 +119,11 @@ format_mapping = {
     'PNG': 'PNG',
     'OData': 'XML',
     'BWF': 'BWF',
+    'grib': 'GRIB',
+    'json_ld': 'JSON_LD',
+    'public folder': 'HTML',
+    'rtf': 'RTF',
+    'web': 'HTML',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
