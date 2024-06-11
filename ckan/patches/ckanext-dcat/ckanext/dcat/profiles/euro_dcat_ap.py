@@ -321,8 +321,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                self._add_triples_from_dict(dataset_dict, dataset_ref, items)
         if dataset_dict.get('identifier'):
            if ' ' in dataset_dict.get('identifier'):
-              dataset_dict["identifier"]=re.sub(r'[^a-zA-Z0-9:_]',r'',dataset_dict["identifier"])
-              dataset_dict["identifier"]=re.sub('\W+','', dataset_dict["identifier"])
+              identifier='';
+              identifier=re.sub(r'[^a-zA-Z0-9:_]',r'',dataset_dict["identifier"])
+              identifier=re.sub('\W+','', dataset_dict["identifier"])
+              dataset_dict.pop('identifier', None)
+              dataset_dict["identifier"]=identifier
+              log.debug('sanitazed identifier')
         self._add_triples_from_dict(dataset_dict, dataset_ref, items)
 
 
