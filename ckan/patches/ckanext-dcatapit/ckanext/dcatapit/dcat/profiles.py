@@ -76,6 +76,9 @@ class ItalianDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                if ' ' in value:
+                  value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
+                  value=re.sub('\W+','', value)
                 self._remove_from_extra(dataset_dict, key)
                 dataset_dict[key] = value
             else:
