@@ -1,3 +1,4 @@
+import re
 import json
 import logging
 log = logging.getLogger(__name__)
@@ -318,6 +319,10 @@ class EuropeanDCATAPProfile(RDFProfile):
                dataset_dict.pop('url', None)
          else:
                self._add_triples_from_dict(dataset_dict, dataset_ref, items)
+        if dataset_dict.get('identifier'):
+           if ' ' in dataset_dict.get('identifier'):
+              dataset_dict["identifier"]=re.sub(r'[^a-zA-Z0-9:_]',r'',dataset_dict["identifier"])
+              dataset_dict["identifier"]=re.sub('\W+','', dataset_dict["identifier"])
         self._add_triples_from_dict(dataset_dict, dataset_ref, items)
 
 
