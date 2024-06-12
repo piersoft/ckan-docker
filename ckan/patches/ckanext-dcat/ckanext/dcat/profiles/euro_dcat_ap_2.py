@@ -285,7 +285,7 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
                             "endpoint_description",
                             DCAT.endpointDescription,
                             None,
-                            Literal,
+                            URIRef,
                         ),
                         ("description", DCT.description, None, Literal),
                     ]
