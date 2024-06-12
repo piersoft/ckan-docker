@@ -315,13 +315,13 @@ class EuropeanDCATAPProfile(RDFProfile):
         ]
         if dataset_dict.get('url'):
          if 'www.comune.torino.it/servizieducativi/' in dataset_dict['url']:
-               log.debug('trovata doppia langingpage nel Comune di Torino')
+               log.debug('trovata doppia landingpage nel Comune di Torino')
                dataset_dict.pop('url', None)
-         if 'http' in dataset_dict['url']:
-               log.debug('trovata doppia landingpage per datasetmodificato in locale')
-               dataset_dict.pop('url', None)
-         if 'serviziocontratti' in dataset_dict['url']:
+         elif 'serviziocontratti' in dataset_dict['url']:
                log.debug('trovata doppia landingpage nel M_INF')
+               dataset_dict.pop('url', None)
+         elif 'http' not in dataset_dict['url']:
+               log.debug('trovata doppia landingpage per datasetmodificato in locale')
                dataset_dict.pop('url', None)
          else:
                self._add_triples_from_dict(dataset_dict, dataset_ref, items)
