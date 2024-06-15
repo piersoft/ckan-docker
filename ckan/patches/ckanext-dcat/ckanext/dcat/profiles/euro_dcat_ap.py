@@ -729,6 +729,14 @@ class EuropeanDCATAPProfile(RDFProfile):
                             URIRefOrLiteral(resource_dict["hash_algorithm"]),
                         )
                     )
+                else:
+                    g.add(
+                        (
+                            checksum,
+                            SPDX.algorithm,
+                            URIRefOrLiteral("http://spdx.org/rdf/terms#checksumAlgorithm_sha1"),
+                        )
+                    )
 
                 g.add((distribution, SPDX.checksum, checksum))
 
