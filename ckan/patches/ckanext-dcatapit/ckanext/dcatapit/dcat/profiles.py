@@ -848,8 +848,9 @@ class ItalianDCATAPProfile(RDFProfile):
         if 'cciaan' in dataset_dict.get('holder_identifier'):
           landing_page_uri = dataset_dict.get('url')
           landing_page_url = dataset_dict.get('url')
+          # landing_page_uri = 'https://opendata.marche.camcom.it'
           log.debug('url originale: %s',landing_page_uri)
-          self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
+          # self.g.add((dataset_ref, DCAT.landingPage, URIRef(landing_page_uri)))
         else:
          self._remove_node(dataset_dict, dataset_ref, ('url', DCAT.landingPage, None, URIRef))
          landing_page_uri = None
