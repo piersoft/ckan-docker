@@ -463,6 +463,9 @@ class RDFSerializer(RDFProcessor):
           elif 'm_it' in dataset_dict.get('holder_identifier'):
             source_uri='https://www.interno.gov.it/'
             source_catalog_homepage=source_uri
+          elif 'uni_ba' in dataset_dict.get('holder_identifier'):
+            source_uri='http://opendata.uniba.it/'
+
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
@@ -508,6 +511,9 @@ class RDFSerializer(RDFProcessor):
                    value = value.replace('/#/#','')
                  if key == 'source_catalog_homepage' and not value.endswith("/#"):
                    value = value + '/#'
+                 if 'uni_ba' in dataset_dict.get('holder_identifier'):
+                    value = 'http://opendata.uniba.it/'
+
  #                 if key == 'source_catalog_homepage' and not value.endswith("/"):
    #                 value = value + '/'
                  if key == 'source_catalog_modified':
