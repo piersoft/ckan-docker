@@ -688,8 +688,8 @@ class RDFProfile(object):
         """
         Adds spatial triples to the graph.
         """
-        # GeoJSON
-        self.g.add((spatial_ref, predicate, Literal(value, datatype=GEOJSON_IMT)))
+        # GeoJSON - Provo ad eliminare seconda geometry non conforme DCAT 2.2.1 HVD lasciando solo WKT
+        # self.g.add((spatial_ref, predicate, Literal(value, datatype=GEOJSON_IMT)))
         # WKT, because GeoDCAT-AP says so
         try:
             self.g.add(
