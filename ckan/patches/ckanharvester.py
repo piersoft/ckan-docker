@@ -682,7 +682,7 @@ class CKANHarvester(HarvesterBase):
                   if 'frequency' in extra:
                  #   Dato non disponibile nel catalog della Regione Lazio. Spacca il catalog. Sostituisco
                         if 'Dato' in extra['value']:
-                              extra['value']="UNKNOW"
+                              extra['value']="UNKNOWN"
                   if 'url' in extra:
                  #   if (('Ragioneria' in extra['value']) or ('DD PP' in extra['value']) or ('Interno' in extra['value'])):
                         if ' ' in resource['url']:
