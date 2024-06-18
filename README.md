@@ -90,11 +90,7 @@ docker exec -it ckan bash
 
 cd /dockerentry-point 
 
-sh 03.ckan_group.sh
-
-*After creating all groups:*
-
-mv 03.ckan_group.sh 03.ckan_group.end
+sh 03.ckan_group.end
 
 exit
 
