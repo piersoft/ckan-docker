@@ -543,7 +543,7 @@ class CKANHarvester(HarvesterBase):
 #            if not freq:
 #                   package_dict['frequency']="UNKNOW"
             if package_dict.get('frequency') is not None:
-                package_dict['frequency']=package_dict['frequency'].replace("Dato non disponibile","UNKNOW")
+                package_dict['frequency']=package_dict['frequency'].replace("Dato non disponibile","UNKNOWN")
 
             regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
@@ -673,7 +673,7 @@ class CKANHarvester(HarvesterBase):
                    resource['license_type']=resource['license_type'].replace("http://www.opendefinition.org/licenses/cc-by","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
                    resource['license_type']=resource['license_type'].replace("http://www.opendefinition.org/licenses/odc-odbl","https://w3id.org/italia/controlled-vocabulary/licences/A310_ODBL")
                 else:
-                   resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknow"
+                   resource['license_type'] = "https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown"
                    resource['license_id'] = 'Licenza sconosciuta'
                 if len(resource['id'])<=5 :
                  #    resource.pop('id', None)
