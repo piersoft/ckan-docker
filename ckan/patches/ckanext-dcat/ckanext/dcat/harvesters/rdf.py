@@ -396,7 +396,7 @@ class DCATRDFHarvester(DCATHarvester):
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
                 if not freq:
-                    dataset['frequency']="UNKNOW"
+                    dataset['frequency']="UNKNOWN"
 
                 harvester_tmp_dict = {}
 
@@ -541,7 +541,7 @@ class DCATRDFHarvester(DCATHarvester):
                     dataset['tags']=self._clean_tags(tags)
                 freq = dataset.get('frequency')
                 if not freq:
-                    dataset['frequency']="UNKNOW"
+                    dataset['frequency']="UNKNOWN"
                 packid=dataset.get('package_id')
                 if packid:
                      del dataset['package_id']
