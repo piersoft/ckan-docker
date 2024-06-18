@@ -58,7 +58,7 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
 
 Copy the included `.env.example` and rename it to `.env`. Modify it depending on your own needs.
 
-ATTENTION!!! substitute every www.piersoftckan.biz in .env file and in each files into ckan/docker-entrypoint.d/ dir. Change in .env ckan_admin password..
+ATTENTION!!! substitute every www.piersoftckan.biz in .env file (in example https://192.168.0.67:8443) and in each files into ckan/docker-entrypoint.d/ dir. Change in .env ckan_admin password..
 
 Please note that when accessing CKAN directly (via a browser) ie: not going through NGINX you will need to make sure you have "ckan" set up
 to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for CKAN_SITE_URL
@@ -104,6 +104,6 @@ At the end of the container start sequence there should be 6 containers running
 
 ![Screenshot 2022-12-12 at 10 36 21 am](https://user-images.githubusercontent.com/54408245/207012236-f9571baa-4d99-4ffe-bd93-30b11c4829e0.png)
 
-After this step, CKAN should be running at `CKAN_SITE_URL`. (example https://192.168.0.67:8443)
+After this step, CKAN should be running at `CKAN_SITE_URL`. (example https://192.168.0.67:8443 instead https://www.piersoftckan.biz)
 
 For complete README, go to [__official repo__](https://github.com/ckan/ckan-docker)
