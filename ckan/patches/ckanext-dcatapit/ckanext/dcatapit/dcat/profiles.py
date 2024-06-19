@@ -1112,7 +1112,13 @@ class ItalianDCATAPProfile(RDFProfile):
              dataset_dict['publisher_name'] = dataset_dict['organization']['title']
            if dataset_dict.get('holder_identifier'):
              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier')
-               
+        else:
+            if len(dataset_dict.get('publisher_name'))<1:
+             if dataset_dict.get('organization'):
+              dataset_dict['publisher_name'] = dataset_dict['organization']['title']
+             if dataset_dict.get('holder_identifier'):
+              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier') 
+                 
         publisher_ref = self._add_agent(dataset_dict, dataset_ref, 'publisher', DCT.publisher, use_default_lang=True)
 
         # Autore : Agent
