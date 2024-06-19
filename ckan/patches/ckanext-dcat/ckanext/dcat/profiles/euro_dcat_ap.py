@@ -106,6 +106,15 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                if 'r_lazio' in dataset_dict.get('holder_identifier'):
+                  dataset_dict.pop('frequency', None)
+                  dataset_dict['frequency']='UNKNOWN'
+                if key=="identifier":
+                  log.debug('value identifier: %s',value)
+                  if ' ' in value:
+                      value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
+                      value=re.sub('\W+','', value)
+
                 log.debug('value freq: %s',value)
                 dataset_dict["extras"].append({"key": key, "value": value})
 
