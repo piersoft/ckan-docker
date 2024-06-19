@@ -474,6 +474,24 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
                 label = interfaces.get_localized_tag_name(tag_name=name, lang=lang)
                 item['display_name'] = label
                 ##log.warning('search facets in plugin %s',themes)
+        if 'hvd_category' in facets:
+            hvdcat=facets['hvd_category']
+            for item in hvdcat['items']:
+                name = item['name']
+                if 'c_b79e35eb' in name:
+                 name = name.replace('http://data.europa.eu/bna/c_b79e35eb','Dati relativi alla mobilità')
+                if 'asd487ae75' in name: 
+                 name = name.replace('http://data.europa.eu/bna/asd487ae75','Dati metereologici')
+                if 'c_a9135398' in name:
+                 name = name.replace('http://data.europa.eu/bna/c_a9135398','Dati relativi alle imprese e alla proprietà delle imprese')
+                if 'c_ac64a52d' in name:
+                 name = name.replace('http://data.europa.eu/bna/c_ac64a52d','Dati geospaziali')
+                if 'c_dd313021' in name:
+                 name = name.replace('http://data.europa.eu/bna/c_dd313021','Dati relativi a osservazione della terra e ad ambiente')
+                if 'c_e1da4e07' in name:
+                 name = name.replace('http://data.europa.eu/bna/c_e1da4e07','Dati statistici')
+                label = interfaces.get_localized_tag_name(tag_name=name, lang=lang)
+                item['display_name'] = label
         return search_results
 
     def manage_extras_for_search(self, field, _dict, _dict_extras):
@@ -614,6 +632,7 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
         facets_dict['resource_license_{}'.format(lang)] = toolkit._('Resources licenses')
         facets_dict['dcat_theme'] = toolkit._('Dataset Themes')
         facets_dict['dcat_subtheme_{}'.format(lang)] = toolkit._('Subthemes')
+        facets_dict['hvd_category'] = toolkit._('Categorie HVD')
         #facets_dict.update({
          #  'resource_license': toolkit._('Resources licenses'),
          #  'dcat_theme': toolkit._('Dataset Themes'),
