@@ -4,7 +4,7 @@ import logging
 from hashlib import sha1
 import traceback
 import uuid
-
+import ckan.lib.plugins as lib_plugins
 import requests
 
 from ckan import model
@@ -14,11 +14,30 @@ from ckanext.harvest.model import HarvestObject, HarvestObjectExtra
 from ckanext.harvest.logic.schema import unicode_safe
 from ckanext.dcat import converters
 from ckanext.dcat.harvesters.base import DCATHarvester
+from ckanext.dcat.interfaces import IDCATRDFHarvester
+from ckan.lib.munge import munge_title_to_name, munge_tag
 
 log = logging.getLogger(__name__)
 
 
 class DCATJSONHarvester(DCATHarvester):
+    def _clean_tags(self, tags):
+        try:
+            def _update_tag(tag_dict, key, newvalue):
+                # update the dict and return it
+                tag_dict[key] = newvalue
+                return tag_dict
+
+            # assume it's in the package_show form
+            tags = [_update_tag(t, 'name', munge_tag(t['name'])) for t in tags if munge_tag(t['name']) != '']
+
+        except TypeError:  # a TypeError is raised if `t` above is a string
+            # REST format: 'tags' is a list of strings
+            tags = [munge_tag(t) for t in tags if munge_tag(t) != '']
+            tags = list(set(tags))
+            return tags
+
+        return tags
 
     def info(self):
         return {
@@ -59,7 +78,8 @@ class DCATJSONHarvester(DCATHarvester):
         dcat_dict = json.loads(content)
 
         package_dict = converters.dcat_to_ckan(dcat_dict)
-
+         #log.debug('package_dict %s',package_dict)
+         #log.debug('dcat_dict %s',dcat_dict)
         return package_dict, dcat_dict
 
     def gather_stage(self, harvest_job):
@@ -184,7 +204,9 @@ class DCATJSONHarvester(DCATHarvester):
         if not harvest_object:
             log.error('No harvest object received')
             return False
-
+        else:
+ #            log.debug('harvest_object %s', harvest_object)
+             log.debug('harvest_object.package_id %s', harvest_object.package_id)
         if self.force_import:
             status = 'change'
         else:
@@ -245,8 +267,10 @@ class DCATJSONHarvester(DCATHarvester):
             source_dataset = model.Package.get(harvest_object.source.id)
             if source_dataset.owner_org:
                 package_dict['owner_org'] = source_dataset.owner_org
-
+        # if not package_dict.get('access_rights'):
+          #       package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
         # Flag this object as the current one
+
         harvest_object.current = True
         harvest_object.add()
 
@@ -264,7 +288,10 @@ class DCATJSONHarvester(DCATHarvester):
                 # We need to explicitly provide a package ID
                 package_dict['id'] = str(uuid.uuid4())
                 package_schema['id'] = [unicode_safe]
-
+                # if package_dict.get('access_rights'):
+                  #     if 'access_rights' in package_schema:
+                    #       del package_schema['access_rights']
+           #      package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                 # Save reference to the package on the object
                 harvest_object.package_id = package_dict['id']
                 harvest_object.add()
@@ -277,15 +304,190 @@ class DCATJSONHarvester(DCATHarvester):
                 model.Session.flush()
 
             elif status == 'change':
-                package_dict['id'] = harvest_object.package_id
+                package_dict = self.modify_package_dict(package_dict, {}, harvest_object)
 
-            if status in ['new', 'change']:
+                if harvest_object.package_id:
+                 package_dict['id'] = harvest_object.package_id
+                else: 
+                 package_dict['id'] = harvest_object.guid
+            if status in ['new']:
+                package_schema = logic.schema.default_update_package_schema()
+                context['schema'] = package_schema
                 action = 'package_create' if status == 'new' else 'package_update'
                 message_status = 'Created' if status == 'new' else 'Updated'
-
                 package_id = p.toolkit.get_action(action)(context, package_dict)
                 log.info('%s dataset with id %s', message_status, package_id)
+            if status in ['change']:
+# Check if a dataset with the same guid exists
+             existing_dataset = self._get_existing_dataset(harvest_object.guid)
+             package_plugin = lib_plugins.lookup_package_plugin(package_dict.get('type', None))
+             if existing_dataset:
+                package_schema = package_plugin.update_package_schema()
+                for harvester in p.PluginImplementations(IDCATRDFHarvester):
+                    package_schema = harvester.update_package_schema_for_update(package_schema)
+                context['schema'] = package_schema
+#                 if dataset.get('access_rights'):
+  #                 if dataset['access_rights']=='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
+    #                 log.warning('1. esiste access_rights')
+      #               if 'access_rights' in package_schema:
+        #               del package_schema['access_rights']
+          #             dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
 
+
+                # Don't change the dataset name even if the title has
+                package_dict['name'] = existing_dataset['name']
+                package_dict['id'] = existing_dataset['id']
+                if 'lod.aci' in package_dict.get('url'):
+                            existing_dataset.pop('id',None)
+                            del package_schema['identifier']
+                            # log.warning('2.3 cancello package_schema per aci')
+                if 'access_rights' in existing_dataset:
+#                    dataset['access_rights'] = existing_dataset['access_rights']
+                  existing_dataset.pop('access_rights',None)
+                #  dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                   #log.debug('in existing dataset è presente access_right')
+                if 'applicableLegislation' in existing_dataset:
+                  existing_dataset.pop('applicableLegislation',None)
+                  existing_dataset.pop('applicable_legislation',None)
+                  # dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                   #log.debug('in existing dataset è presente applicableLegislation')
+                if 'applicable_legislation' in existing_dataset:
+                  existing_dataset.pop('applicableLegislation',None)
+                  existing_dataset.pop('applicable_legislation',None)
+                  # dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                   #log.debug('in existing dataset è presente applicableLegislation')
+                if 'hvd_category' in existing_dataset:
+                  existing_dataset.pop('hvd_category',None)
+                  # dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                   #log.debug('in existing dataset è presente hvd_category')
+                #log.debug('existing_dataset: %s',existing_dataset)
+                if not package_dict.get('identifier'):
+                    package_dict['identifier']=package_dict['id']
+
+                if not package_dict.get('notes'):
+                    package_dict['notes']="N/A"
+
+                if not package_dict.get('theme'):
+                    package_dict['theme']="GOVE"
+                if not package_dict.get('themes_aggregate'):
+                    package_dict['themes_aggregate']='[{"theme": "GOVE", "subthemes": []}]'
+                if not package_dict.get('modified'):
+                    package_dict['modified']="2024-01-01"
+                if not package_dict.get('tags',[]):
+                    package_dict['tags']=[{"display_name": "N_A", "id": "b8907f2e-928c-4a83-a24e-51c0c0fc6d39", "name": "N_A", "state": "active"}]
+                else:
+                    tags=package_dict.get('tags',[])
+                    package_dict['tags']=self._clean_tags(tags)
+                if not package_dict.get('frequency'):
+                    package_dict['frequency']="UNKNOWN"
+                if not package_dict.get('publisher_name'):
+                  if 'lod.aci' in package_dict.get('url'):
+                    package_dict['publisher_name']="ACI"
+                    package_dict['publisher_identifier']="aci"
+                    package_dict['language']="ITA"
+                harvester_tmp_dict = {}
+
+                # check if resources already exist based on their URI
+                existing_resources =  existing_dataset.get('resources')
+                resource_mapping = {r.get('uri'): r.get('id') for r in existing_resources if r.get('uri')}
+                for resource in package_dict.get('resources'):
+                    res_uri = resource.get('uri')
+                    res_disform = resource.get('distribution_format')
+                    if not res_disform:
+                      resource['distribution_format']=resource['format']
+                    if res_uri and res_uri in resource_mapping:
+                        resource['id'] = resource_mapping[res_uri]
+                        if not 'rights' in resource:
+                           resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                        else:
+                           resource.pop('rights')
+                           resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+ #                           if not dataset['access_rights']:
+   #                          dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+   #                         if 'license' in resource:
+      #                        if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40':
+      #                         resource['license'] = 'https://creativecommons.org/licenses/by/4.0/'
+      #                        if resource['license']=='https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20':
+      #                         resource['license'] = 'https://www.dati.gov.it/content/italian-open-data-license-v20' 
+                for harvester in p.PluginImplementations(IDCATRDFHarvester):
+                    harvester.before_update(harvest_object, package_dict, harvester_tmp_dict)
+                    package_schema = harvester.update_package_schema_for_update(package_schema)
+                    context['schema'] = package_schema
+                     #log.warning('package_dict prima di lod.aci %s',package_dict)
+                    if 'lod.aci' in package_dict.get('url'):
+                                    package_dict.pop('id',None)
+                                     #log.warning('2.3.1 cancello package_schema per aci')
+                       #dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                try:
+                    if package_dict:
+                        package_schema = package_plugin.update_package_schema()
+                        for harvester in p.PluginImplementations(IDCATRDFHarvester):
+                             package_schema = harvester.update_package_schema_for_update(package_schema)
+                        context['schema'] = package_schema
+                        if 'lod.aci' in existing_dataset.get('url'):
+                             package_dict.pop('extras',None)
+                             existing_dataset.pop('extras',None)
+                              #log.warning('2.4 cancello package_schema per aci %s',existing_dataset.get('extras')) 
+                        if 'access_rights' in package_schema:
+ #                            del package_schema['access_rights']
+                             #log.warning('2.1 esiste access_rights')
+                            package_dict.pop('access_rights',None)
+                            package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                            existing_dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                             #log.debug('controllo dataset.get access_right %s',package_dict.get('access_rights'))
+                            checkar=package_dict.get('access_rights')
+                            if 'http://publications.europa.eu/resource/authority/access-right/PUBLIC' in checkar:
+                              #log.warning('2.2 esiste access_rights ma provo a riscriverlo')
+# alcuni cataloghi ad oggi espongono gia' access_right                             
+                             if package_dict.get('holder_identifier')=='ispra_rm':
+                               del package_schema['access_rights']
+                             if package_dict.get('publisher_identifier')=='lispa':
+                               del package_schema['access_rights']
+                             if package_dict.get('publisher_identifier')=='cciaan':
+                               del package_schema['access_rights']
+                             if package_dict.get('publisher_identifier')=='piersoft':
+                               del package_schema['access_rights']
+                             package_dict.pop('access_rights',None)
+                             existing_dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                             package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                        if 'applicable_legislation' in package_schema:
+                            del package_schema['applicable_legislation']
+                            # log.warning('2.1 esiste applicable_legislation')
+                            package_dict.pop('applicable_legislation',None)
+                        if 'hvd_category' in package_schema:
+                             #log.warning('2.0  esiste hvd_category')
+                            del package_schema['hvd_category']
+                        if 'applicableLegislation' in package_schema:
+                            del package_schema['applicableLegislation']
+                             #log.warning('2.1 esiste applicableLegislation')
+                            package_dict.pop('applicableLegislation',None)
+ #                            dataset['extras'].append({'key':'applicableLegislation','value':'http://data.europa.eu/eli/reg_impl/2023/138/oj'})
+                        # Save reference to the package on the object
+                        harvest_object.package_id = package_dict['identifier']
+                        harvest_object.add()
+
+                        #p.toolkit.get_action('package_update')(context, dataset)
+          #               if package_dict.get('access_rights') !='http://publications.europa.eu/resource/authority/access-right/PUBLIC':
+                        #if dataset.get('access_rights'):
+            #                   package_dict['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                        p.toolkit.get_action('package_update')(context, package_dict)
+                    else:
+                        log.info('Ignoring dataset %s' % existing_dataset['name'])
+                        return 'unchanged'
+                except p.toolkit.ValidationError as e:
+                    self._save_object_error('Update validation Error: %s' % str(e.error_summary), harvest_object, 'Import')
+                    return False
+
+                for harvester in p.PluginImplementations(IDCATRDFHarvester):
+                    err = harvester.after_update(harvest_object, package_dict, harvester_tmp_dict)
+
+                    if err:
+                         self._save_object_error('RDFHarvester plugin error: %s' % err, harvest_object, 'Import')
+                         return False
+
+            log.info('Updated dataset %s' % package_dict['name'])
+
+ #                log.info('%s dataset with id %s', message_status, package_id)
         except Exception as e:
             dataset = json.loads(harvest_object.content)
             dataset_name = dataset.get('name', '')
@@ -294,7 +496,7 @@ class DCATJSONHarvester(DCATHarvester):
             return False
 
         finally:
-            model.Session.commit()
+             model.Session.commit()
 
         return True
 
@@ -340,9 +542,15 @@ def copy_across_resource_ids(existing_dataset, harvested_dataset):
                 matching_existing_resource = \
                     existing_resource_identities[identity]
                 resource['id'] = matching_existing_resource['id']
+ #                if not 'rights' in resource:
+   #                 resource['rights'] ='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+     #            if not 'license' in resource:
+       #             resource['license']='https://creativecommons.org/licenses/by/4.0/'
+         #           resource['license_type']='https://creativecommons.org/licenses/by/4.0/'
                 # make sure we don't match this existing_resource again
                 del existing_resource_identities[identity]
                 existing_resources_still_to_match.remove(
                     matching_existing_resource)
         if not existing_resources_still_to_match:
             break
+
