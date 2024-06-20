@@ -542,8 +542,8 @@ def copy_across_resource_ids(existing_dataset, harvested_dataset):
                 matching_existing_resource = \
                     existing_resource_identities[identity]
                 resource['id'] = matching_existing_resource['id']
- #                if not 'rights' in resource:
-   #                 resource['rights'] ='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                if not 'rights' in resource:
+                  resource['rights'] ='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
      #            if not 'license' in resource:
        #             resource['license']='https://creativecommons.org/licenses/by/4.0/'
          #           resource['license_type']='https://creativecommons.org/licenses/by/4.0/'
