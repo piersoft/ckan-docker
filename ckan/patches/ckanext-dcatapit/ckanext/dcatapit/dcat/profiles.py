@@ -1,3 +1,4 @@
+import re
 import json
 import logging
 
@@ -860,8 +861,8 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)  # TODO: preserve original URI if harvested
 
          noaddsl=0
-         if 'cciaan' in dataset_dict.get('holder_identifier'):
-            landing_page_uri = landing_page_url
+        #   if 'cciaan' in dataset_dict.get('holder_identifier'):
+          #    landing_page_uri = landing_page_url
          if 'KH5RHFCV' in dataset_dict.get('holder_identifier'):
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati-ustat.mur.gov.it/")
          if 'cmna' in dataset_dict.get('holder_identifier'):
@@ -890,6 +891,9 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'p_TN' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"http://dati.trentino.it")
+         if 'r_veneto' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.veneto.it")
          if 'c_g273' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://opendata.comune.palermo.it")
@@ -1003,6 +1007,10 @@ class ItalianDCATAPProfile(RDFProfile):
          if 'm_lps' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=1  
+         if 'm_inf' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.mit.gov.it")
+            noaddsl=1 
          if 'agcm_' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=0
@@ -1063,6 +1071,7 @@ class ItalianDCATAPProfile(RDFProfile):
              if ' ' in dataset_dict.get('identifier'):
               dataset_dict["identifier"]=re.sub(r'[^a-zA-Z0-9:_]',r'',dataset_dict["identifier"])
               dataset_dict["identifier"]=re.sub('\W+','', dataset_dict["identifier"])
+              
             dataset_dict['alternate_identifier']=dataset_dict['alternate_identifier'].replace('[','').replace(']','')
             dataset_dict['alternate_identifier']=dataset_dict['alternate_identifier'].replace('["','').replace('"]','')
             dataset_dict['alternate_identifier']=dataset_dict['alternate_identifier'].replace('"','').replace('"','')
@@ -1109,7 +1118,6 @@ class ItalianDCATAPProfile(RDFProfile):
             self.log_remove('publisher', DCT.publisher)
             g.remove((s, p, o))
             remove_unused_object(g, o, "publisher")  # if the publisher node is not used elsewhere, remove it
-        
         # il publisher del dataset non esiste. impongo il nome di org e id di holder_identifier
         if dataset_dict.get('publisher_name') is None:
            if dataset_dict.get('organization'):
@@ -1122,8 +1130,8 @@ class ItalianDCATAPProfile(RDFProfile):
               dataset_dict.pop('publisher_name', None)
               dataset_dict['publisher_name'] = dataset_dict['organization']['title']
              if dataset_dict.get('holder_identifier'):
-              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier') 
-                 
+              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier')  
+              
         publisher_ref = self._add_agent(dataset_dict, dataset_ref, 'publisher', DCT.publisher, use_default_lang=True)
 
         # Autore : Agent
@@ -1223,6 +1231,11 @@ class ItalianDCATAPProfile(RDFProfile):
         if holder_use_dataset and holder_ref:
             loc_package_mapping['holder_name'] = (holder_ref, FOAF.name, dataset_is_local)
 
+        if loc_dict.get('publisher_name'):
+          if len(loc_dict.get('publisher_name'))<2:
+             loc_dict.pop('publisher_name',None)
+             log.debug('sto facendo pop pub_name perchè empty')
+
         self._add_multilang_values(loc_dict, loc_package_mapping)
 
         if not holder_use_dataset and holder_ref:
@@ -1298,6 +1311,9 @@ class ItalianDCATAPProfile(RDFProfile):
               distribution=URIRef(distribution)
             if '00304260409' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
+              distribution=URIRef(distribution)
+            if 'm_inf' in dataset_dict.get('holder_identifier'):
+              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/")
               distribution=URIRef(distribution)
             if 'c_a345' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"ckan.opendatalaquila.it")
