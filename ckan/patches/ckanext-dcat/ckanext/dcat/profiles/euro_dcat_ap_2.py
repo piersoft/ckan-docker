@@ -40,19 +40,19 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
         ):
             values = self._object_value_list(dataset_ref, predicate)
             if values:
+              # la specifica DCAT 2 HVD ha cardinalità 1..n ma imposto solo un valore possibile per hvd_category e applicable_legislation
               if key=='hvd_category':
                  hvdcat=json.dumps(values)
                  hvdcat=hvdcat.replace("[","").replace("]","")
                  hvdcat=hvdcat.replace("'","")
                  hvdcat=hvdcat.replace('"','')
                  dataset_dict["extras"].append({"key": key, "value": hvdcat})
-            # se si vuole bloccare ad una sola AppLeg decommentare
-              #  elif key=='applicable_legislation':
-                #   hvdap=json.dumps(values)
-                 #  hvdap=hvdap.replace("[","").replace("]","")
-                   #hvdap=hvdap.replace("'","")
-                   #hvdap=hvdap.replace('"','')
-                   #dataset_dict["extras"].append({"key": key, "value": hvdap})
+              elif key=='applicable_legislation':
+                   hvdap=json.dumps(values)
+                   hvdap=hvdap.replace("[","").replace("]","")
+                   hvdap=hvdap.replace("'","")
+                   hvdap=hvdap.replace('"','')
+                   dataset_dict["extras"].append({"key": key, "value": hvdap})
               else:
                  dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
              
