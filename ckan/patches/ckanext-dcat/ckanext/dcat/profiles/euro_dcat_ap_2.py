@@ -46,6 +46,12 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
                  hvdcat=hvdcat.replace("'","")
                  hvdcat=hvdcat.replace('"','')
                  dataset_dict["extras"].append({"key": key, "value": hvdcat})
+              elif key=='applicable_legislation':
+                 hvdap=json.dumps(values)
+                 hvdap=hvdap.replace("[","").replace("]","")
+                 hvdap=hvdap.replace("'","")
+                 hvdap=hvdap.replace('"','')
+                 dataset_dict["extras"].append({"key": key, "value": hvdap})
               else:
                  dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
              
