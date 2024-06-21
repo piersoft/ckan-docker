@@ -187,12 +187,12 @@ def get_custom_package_schema():
                     'placeholder': _('publisher name'),
                     'localized': True
                 },
-                {   'text': 'Dati relativi alla mobilità',
-                    'name': 'http://data.europa.eu/bna/c_b79e35eb',
+                {   'text': _('Dati relativi alla mobilità'),
+                    'name': _('http://data.europa.eu/bna/c_b79e35eb'),
                     'validator': ['ignore_missing'],
                     'label': _('Dati relativi alla mobilità'),
                     'value': 'http://data.europa.eu/bna/c_b79e35eb',
-                    'placeholder': _('publisher name'),
+                    'placeholder': _('Dati relativi alla mobilità'),
                     'localized': True
                 },
                 {   'text': 'Dati relativi a osservazione della terra e ad ambiente',
@@ -216,8 +216,9 @@ def get_custom_package_schema():
 #            'vocabulary_name': 'dcatapit_hvdcategory',
             'label': 'Categoria HVD',
 #            'label': 'Categoria High Value Dataset. Esempio: http://data.europa.eu/bna/ seguito dal codice asd487ae75 (Metereologia), c_a9135398 (Dati relativi alle imprese e alla proprietà delle imprese), c_ac64a52d (Dati geospaziali), c_b79e35eb (Dati relativi alla mobilità), c_dd313021 (Dati relativi a osservazione della terra e ad ambiente), c_e1da4e07 (Dati statistici)',
-            'placeholder': 'http://data.europa.eu/bna/c_e1da4e07',
+            'placeholder': _('hvd_category'),
             'is_required': False,
+            'localized': True,
             'help': _(u"""Proprietà che confluisce in dcatap:hvdCategory""")
         },
         {
