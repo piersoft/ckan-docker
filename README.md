@@ -105,11 +105,6 @@ exit
 docker restart ckan
 
 
-**THERE IS A BUG into:
-https://github.com/piersoft/ckan-docker/blob/3af1db93d4b5b468c0ce770e1057f84931a8671b/ckan/patches/ckanext-dcatapit/ckanext/dcatapit/mapping.py#L284
-Insert manually the path of theme_to_group.ini file (example /etc/ckan/default/theme_to_group.ini)
-
-
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. 
 
