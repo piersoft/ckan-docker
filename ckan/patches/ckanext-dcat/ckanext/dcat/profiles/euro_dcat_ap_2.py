@@ -40,7 +40,15 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
         ):
             values = self._object_value_list(dataset_ref, predicate)
             if values:
-                dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
+              if key=='hvd_category':
+                 hvdcat=json.dumps(values)
+                 hvdcat=hvdcat.replace("[","").replace("]","")
+                 hvdcat=hvdcat.replace("'","")
+                 hvdcat=hvdcat.replace('"','')
+                 dataset_dict["extras"].append({"key": key, "value": hvdcat})
+              else:
+                 dataset_dict["extras"].append({"key": key, "value": json.dumps(values)})
+             
         # Temporal
         start, end = self._time_interval(dataset_ref, DCT.temporal, dcat_ap_version=2)
         if start:
