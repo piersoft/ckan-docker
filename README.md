@@ -72,7 +72,7 @@ Using the default values on the `.env.example` file will get you a working CKAN 
 
 	git clone https://github.com/piersoft/ckan-docker.git
 
-To build the images:
+To build the images (remember before to rename and configure .env.example file) :
 
 	docker compose build
 
