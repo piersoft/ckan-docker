@@ -9,7 +9,7 @@ import ckan.logic as logic
 from ckan.common import config
 from ckan.lib.i18n import get_lang, get_locales
 
-from ckanext.dcat.profiles import (
+from ckanext.dcat.profiles.base import (
     ADMS,
     DCAT,
     DCT,
