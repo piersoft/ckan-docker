@@ -22,6 +22,14 @@ msgstr ""
 msgid "Resources licenses"
 msgstr "Licenze sulle risorse"
 
+#: ckanext/dcat/hvd_category:5544
+msgid "hvd_category"
+msgstr "Categoria HVD"
+
+#: ckanext/dcat/hvd_category:55445
+msgid "http://data.europa.eu/bna/c_b79e35eb"
+msgstr "Dati relativi alla mobilità"
+
 #: ckanext/dcatapit/plugin.py:555 ckanext/dcatapit/schema.py:146
 msgid "Subthemes"
 msgstr "Sottotemi"
