@@ -97,6 +97,7 @@
             dcat:theme   <http://publications.europa.eu/resource/authority/data-theme/ECON> .
 
         <https://www.piersoft.it/dataset/guide-turistiche/resource/4dd9b299-d375-4290-924a-4ea608126821/API> a dcat:DataService ;
+            dcatap:availability <http://publications.europa.eu/resource/authority/distribution-availability/experimental> ;
             dct:description "The EA API platform provides a uniform access to the real-time data collected by EA" ;
             dct:license <https://orgea.exampleMS.gov/api/documentation/TermsOfUse> ;
             dct:title "EA API platform" ;
