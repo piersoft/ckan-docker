@@ -281,7 +281,7 @@ def get_theme_to_groups():
   # non riesce a caricare la configurazione del ckan.ini per ckanext.dcatapit.theme_group_mapping.file
   # patch per inserimento manuale. da risolvere.
  #   fname = config.get(DCATAPIT_THEME_TO_MAPPING_SOURCE)
-    fname = '/usr/lib/ckan/default/src/ckanext-dcatapit/vocabularies/theme_to_group.ini'
+    fname = '/srv/app/patches/theme_to_group.ini'
     if not fname:
         return
     if not os.path.exists(fname):
