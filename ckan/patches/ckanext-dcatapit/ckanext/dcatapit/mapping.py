@@ -397,7 +397,7 @@ def populate_theme_groups(instance, clean_existing=False):
             # dont break the for loop: if aggregates are there, they get precedence
 
     if not themes:
-        log.debug('no theme from %s', instance)
+        #log.debug('no theme from %s', instance)
         return instance
     theme_map = get_theme_to_groups()
 
