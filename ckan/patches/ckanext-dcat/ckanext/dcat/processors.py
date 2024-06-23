@@ -260,7 +260,7 @@ class RDFSerializer(RDFProcessor):
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
         if dataset_dict.get('holder_identifier'):
          if 'm_lps' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.it/")
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
          if 'r_emiro' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
            dataset_ref1=dataset_ref1.replace("dati.comune.fe.it","https://dati.comune.fe.it")
@@ -443,7 +443,7 @@ class RDFSerializer(RDFProcessor):
             source_uri='http://lod.aci.it/'
             source_catalog_homepage=source_uri
           elif 'm_lps' in dataset_dict.get('holder_identifier'):
-            source_uri='http://dati.lavoro.it/'
+            source_uri='http://dati.lavoro.gov.it/'
             source_catalog_homepage=source_uri
           elif 'c_l219' in dataset_dict.get('holder_identifier'):
             source_uri='http://aperto.comune.torino.it/'
@@ -547,7 +547,7 @@ class RDFSerializer(RDFProcessor):
             if 'r_basili' in identifier:
               _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": ""}'
             if 'm_lps' in identifier:
-              _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.gov.it/", "type": ""}'
             if 'c_l219' in identifier:
               _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": ""}'
             if 'cr_campa' in identifier:
