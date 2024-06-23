@@ -1304,7 +1304,7 @@ class ItalianDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
               distribution=URIRef(distribution)
             if 'm_lps' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it/")
+              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
               distribution=URIRef(distribution)
             if 'cr_campa' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
