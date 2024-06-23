@@ -559,7 +559,7 @@ class EuropeanDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
               distribution=CleanedURIRef(distribution)
             if 'm_lps' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.it/")
+              distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
             if '00304260409' in dataset_dict.get('holder_identifier'):
