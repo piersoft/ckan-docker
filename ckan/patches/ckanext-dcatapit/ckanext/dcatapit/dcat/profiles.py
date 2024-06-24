@@ -1388,6 +1388,8 @@ class ItalianDCATAPProfile(RDFProfile):
                 if 'C1_Unknown' in license:
                     license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
                 log.debug('provo a patchare la licenza: %s',license)
+                if 'http' in license:
+                    license=URIRef(license)
                 g.add((license, RDF.type, DCATAPIT.LicenseDocument))
                 g.add((license, RDF.type, DCT.LicenseDocument))
                 g.add((license, DCT.type, URIRef(dcat_license)))
