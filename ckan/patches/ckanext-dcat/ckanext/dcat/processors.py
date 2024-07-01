@@ -512,7 +512,8 @@ class RDFSerializer(RDFProcessor):
                  if key == 'source_catalog_homepage' and not value.endswith("/#"):
                    value = value + '/#'
                  if 'uni_ba' in dataset_dict.get('holder_identifier'):
-                    value = 'http://opendata.uniba.it/#'
+                    if key == 'source_catalog_homepage':
+                     value = 'http://opendata.uniba.it/#'
 
  #                 if key == 'source_catalog_homepage' and not value.endswith("/"):
    #                 value = value + '/'
