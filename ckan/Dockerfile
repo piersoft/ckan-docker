@@ -54,7 +54,7 @@ COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jso
 COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
 COPY patches/supervisord.conf /etc/supervisord.conf
 COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/images"
-COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
+#COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
 # patch per user not auth to show in harvesting
 COPY patches/__init__.py ${APP_DIR}/src/ckan/ckan/logic/__init__.py
 
