@@ -1,7 +1,6 @@
 # generic
 .DS_Store
 .vagrant
-ckan/patches/ckanext-harvest/
 
 # code & config
 _service-provider/*
