@@ -48,6 +48,7 @@ RUN chmod 666 "${APP_DIR}/patches/topics.json"
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 #COPY patches/package_form.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
 #COPY patches/package_basic_fields.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
+COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
 COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py
 COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
 COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
