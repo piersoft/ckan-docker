@@ -9,7 +9,7 @@ import ckan.logic as logic
 from ckan.common import config
 from ckan.lib.i18n import get_lang, get_locales
 
-from ckanext.dcat.profiles.base import (
+from ckanext.dcat.profiles import (
     ADMS,
     DCAT,
     DCT,
@@ -350,6 +350,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21:CCBY40","https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40")
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A11:CCO10","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A29_IODL20","https://www.dati.gov.it/content/italian-open-data-license-v20")
+                license=license.replace("http://www.dati.gov.it/iodl/2.0/","https://www.dati.gov.it/content/italian-open-data-license-v20")
                 license=license.replace("https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40","https://creativecommons.org/licenses/by/4.0/")
                 license=license.replace("http://www.opendefinition.org/licenses/cc-zero","https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10")
                 license=license.replace("C1_Unknown","A21_CCBY40")
@@ -404,7 +405,9 @@ class ItalianDCATAPProfile(RDFProfile):
                   if 'r_campan' in dataset_dict.get('holder_identifier'):
                     license_type.document_uri = 'https://creativecommons.org/licenses/by/4.0/'
                     license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-
+                  if 'r_lazio' in dataset_dict.get('holder_identifier'):
+                    license_type.document_uri = 'https://www.dati.gov.it/content/italian-open-data-license-v20'
+                    license_name = 'Italian Open Data License 2.0'
                 try:
                     #log.info('License Name: %s', names)
                     license_name = names['it']
@@ -876,6 +879,8 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
          if 'c_a944' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+         if 'r_friuve' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
          if 'c_d969' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
@@ -1390,9 +1395,9 @@ class ItalianDCATAPProfile(RDFProfile):
                 log.debug('provo a patchare la licenza: %s',license)
                 if 'http' in license:
                     license=URIRef(license)
-                g.add((license, RDF.type, DCATAPIT.LicenseDocument))
-                g.add((license, RDF.type, DCT.LicenseDocument))
-                g.add((license, DCT.type, URIRef(dcat_license)))
+                g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
+                g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
+                g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
                 if license_version:
                     g.add((license, OWL.versionInfo, Literal(license_version)))
                 for lang, name in names.items():
