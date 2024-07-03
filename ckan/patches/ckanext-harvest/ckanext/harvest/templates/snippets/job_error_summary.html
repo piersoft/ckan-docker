@@ -1,0 +1,32 @@
+{#
+Displays a table with a summary of the most common errors for a job
+
+error_summary        - List of dicts with message and error_count
+
+Example:
+
+  {% snippet 'snippets/job_error_summary.html', summary=job.object_error_summary %}
+
+#}
+<table class="table table-striped table-bordered table-condensed harvest-error-summary">
+  <colgroup>
+    <col width="8">
+    <col width="92">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="count">{{ _('Count') }}</th>
+      <th>{{ _('Message') }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for error in summary %}
+    <tr>
+      <td class="count">{{ error["error_count"] }}</td>
+      <td>{{ error["message"] }}</td>
+    </tr>
+  {% endfor %}
+   </tbody>
+</table>
+
+
