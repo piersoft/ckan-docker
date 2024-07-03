@@ -42,7 +42,7 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
             if values:
               # la specifica DCAT 2 HVD ha cardinalità 1..n ma imposto solo un valore possibile per hvd_category e applicable_legislation
               if key=='hvd_category':      
-                 lod.debug('json_data hvd %s',json_data['values'][0]) 
+                 log.debug('json_data hvd %s',json_data['values'][0]) 
                  hvdcat=json.dumps(values)
                  hvdcat=hvdcat.replace("[","").replace("]","")
                  hvdcat=hvdcat.replace("'","")
