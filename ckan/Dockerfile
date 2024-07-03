@@ -5,8 +5,8 @@ FROM ckan/ckan-base:2.10.3
 ### Harvester ###
 #RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest' && \
 COPY patches/ckanext-harvest ${APP_DIR}/src/ckanext-harvest
-RUN    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
-
+RUN    pip3 install -e ${APP_DIR}/src/ckanext-harvest/
+RUN    pip3 install -r ${APP_DIR}/src/ckanext-harvest/requirements.txt
 # will also require gather_consumer and fetch_consumer processes running (please see https://github.com/ckan/ckanext-harvest)
 
 ### Scheming ###
