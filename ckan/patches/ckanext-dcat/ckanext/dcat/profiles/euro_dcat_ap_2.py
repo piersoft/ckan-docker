@@ -14,8 +14,8 @@ from .base import (
 )
 
 from .euro_dcat_ap import EuropeanDCATAPProfile
-
-
+import logging
+log = logging.getLogger(__name__)
 class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
     """
     An RDF profile based on the DCAT-AP 2 for data portals in Europe
