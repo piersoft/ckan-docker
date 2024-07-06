@@ -589,9 +589,11 @@ class ItalianDCATAPProfile(RDFProfile):
             if start:
                 _added = True
                 self._add_date_triple(temporal_extent, DCATAPIT.startDate, start)
+                self._add_date_triple(temporal_extent, DCAT.startDate, start)
             if end:
                 _added = True
                 self._add_date_triple(temporal_extent, DCATAPIT.endDate, end)
+                self._add_date_triple(temporal_extent, DCAT.endDate, end)
             if _added:
                 g.add((dataset_ref, DCT.temporal, temporal_extent))
 
