@@ -683,6 +683,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/vnd.ms-excel'
                 if 'GEOJSON' in fmt:
                     mimetype = 'application/geo+json'
+                if 'PARQUET' in fmt:
+                    mimetype = 'application/vnd.apache.parquet'
   #                else:
                     # Use dct:format
      #                 mimetype = None
