@@ -124,6 +124,7 @@ format_mapping = {
     'public folder': 'HTML',
     'rtf': 'RTF',
     'web': 'HTML',
+    'PARQUET': 'PARQUET',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
