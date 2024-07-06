@@ -677,6 +677,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'text/xml'
                 if 'RDF_XML' in fmt:
                     mimetype = 'application/rdf+xml'
+                if 'SPARQL' in fmt:
+                    mimetype = 'application/sparql-query'
+                if 'XLS' in fmt:
+                    mimetype = 'application/vnd.ms-excel'
+                if 'GEOJSON' in fmt:
+                    mimetype = 'application/geo+json'
   #                else:
                     # Use dct:format
      #                 mimetype = None
