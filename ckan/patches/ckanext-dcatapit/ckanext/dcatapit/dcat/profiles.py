@@ -139,7 +139,8 @@ class ItalianDCATAPProfile(RDFProfile):
         if conform_list:
             dataset_dict['conforms_to'] = json.dumps(conform_list)
         else:
-            log.debug('No DCT.conformsTo found for dataset "%s"', dataset_dict.get('title', '---'))
+            log.debug('No DCT.conformsTo found for dataset "%s" , set DCATAPIT by default', dataset_dict.get('title', '---'))
+            dataset_dict['conforms_to']=DCATAPIT
 
         # Temporal
         temporal_coverage = self._get_temporal_coverage(dataset_ref)
@@ -1059,13 +1060,22 @@ class ItalianDCATAPProfile(RDFProfile):
 
                 for lang, val in (item.get('title') or {}).items():
                     if lang in OFFERED_LANGS:
-                        self.g.add((standard, DCT.title, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
+                        if 'dcatapit' in item['identifier']:
+                         self.g.add((standard, DCT.title, Literal('DCAT-AP_IT')))
+                        else:
+                         self.g.add((standard, DCT.title, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
                 for lang, val in (item.get('description') or {}).items():
                     if lang in OFFERED_LANGS:
+                       if 'dcatapit' in item['identifier']:
+                        self.g.add((standard, DCT.description, Literal('Profilo metadatazione DCAT-AP_IT')))
+                       else:
                         self.g.add((standard, DCT.description, Literal(val, lang=lang_mapping_ckan_to_xmllang.get(lang, lang))))
 
                 for reference_document in (item.get('referenceDocumentation') or []):
+                   if 'dcatapit' in item['identifier']:
+                    self.g.add((standard, DCATAPIT.referenceDocumentation, URIRef('https://www.dati.gov.it/onto/dcatapit')))
+                   else:
                     self.g.add((standard, DCATAPIT.referenceDocumentation, URIRef(reference_document)))
 
         # ADMS:identifier alternative identifiers
