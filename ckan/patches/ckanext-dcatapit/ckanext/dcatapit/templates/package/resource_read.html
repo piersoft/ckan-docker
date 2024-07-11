@@ -30,8 +30,6 @@
               </tr>
             </tbody>
           </table>
-
-
           <h2>{{ _('Additional Information') }}</h2>
           <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
             <thead>
@@ -43,7 +41,7 @@
             <tbody>
               <tr>
                 <th scope="row">{{ _('Last updated') }}</th>
-                <td>{{ h.render_datetime(res.last_modified) or h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}</td>
+                <td>{{ h.render_datetime(res.metadata_modified) or h.render_datetime(res.revision_timestamp) or h.render_datetime(res.created) or _('unknown') }}</td>
               </tr>
               <tr>
                 <th scope="row">{{ _('Created') }}</th>
@@ -56,7 +54,73 @@
               {% for key, value in h.format_resource_items(res.items()) %}
                 <tr class="toggle-more"><th scope="row">{{ key }}</th><td>{{ value }}</td></tr>
               {% endfor %}
+                </td>
+              </tr>
+            </tbody>
+            {% if 'access_services' in res %}
+             <table class="table table-striped table-bordered table-condensed" data-module="table-toggle-more">
+             <h2>{{ _('Access Service') }}</h2>
+              <thead>
+               <tr>
+                <th scope="col">{{ _('Field') }}</th>
+                <th scope="col">{{ _('Value') }}</th>
+               </tr>
+              </thead>
+            {% endif %}
+            <tbody>
             </tbody>
           </table>
         </div>
-        {% endblock %}
+        {% if 'access_services' in res %}
+         <script>
+          document.addEventListener('DOMContentLoaded', (event) => {
+        // Function to decode HTML entities
+        function decodeHTMLEntities(text) {
+            const textArea = document.createElement('textarea');
+            textArea.innerHTML = text;
+            return textArea.value;
+        }
+            // Function to capitalize the first letter of a string
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+        // Decode the JSON string
+          const decodedJson = {{h.literal(h.dump_json(res.access_services)) }};
+
+          var accessServices=JSON.parse(decodedJson);
+        function appendRow(tableBody, key, value) {
+            const row = document.createElement('tr');
+            const keyCell = document.createElement('td');
+            keyCell.textContent = capitalizeFirstLetter(key);
+            keyCell.style.fontWeight = 'bold'; // Inline style for bold
+            keyCell.style.textTransform = 'capitalize'; // Inline style for capitalizing
+            const valueCell = document.createElement('td');
+            valueCell.textContent = value;
+            row.appendChild(keyCell);
+            row.appendChild(valueCell);
+            tableBody.appendChild(row);
+        }
+
+        // Get the table body element
+//        const tableBody1 = document.getElementById("dumpTable");
+        const tableBodies= document.querySelectorAll("tbody");
+        const tableBody = tableBodies[2];
+        // Populate the table with data
+        for (const item of accessServices) {
+            for (const key in item) {
+                if (Array.isArray(item[key])) {
+                    for (const subItem of item[key]) {
+                        appendRow(tableBody, key, subItem);
+                    }
+                } else {
+                    appendRow(tableBody, key, item[key]);
+                }
+            }
+        }
+        });
+         </script>
+        {% endif %}
+    </div>
+ {% endblock %}
+
+
