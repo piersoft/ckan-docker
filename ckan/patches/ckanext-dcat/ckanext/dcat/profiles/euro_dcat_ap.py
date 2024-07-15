@@ -685,6 +685,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/geo+json'
                 if 'PARQUET' in fmt:
                     mimetype = 'application/vnd.apache.parquet'
+                if 'SHP' in fmt:
+                    mimetype = 'application/vnd.shp'
+
   #                else:
                     # Use dct:format
      #                 mimetype = None
