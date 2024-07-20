@@ -652,6 +652,30 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'GEOJSON' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='GEOJSON'
+            if 'OP_DATPRO' in resource_dict.get('format'):
+                if resource_dict.get('url'):
+                 if 'rdf' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='RDF'
+                 if 'sparql' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='SPARQLQ'
+                 if 'xlsx' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='XLSX'
+                 if 'zip' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='ZIP'
+                 if 'ttl' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='RDF_TURTLE'
+                 if 'xsd' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='XML'
+                 if 'json' in resource_dict.get('url')
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='JSON'
+                    
             mimetype = resource_dict.get("mimetype")
             fmt = resource_dict.get("format")
 
