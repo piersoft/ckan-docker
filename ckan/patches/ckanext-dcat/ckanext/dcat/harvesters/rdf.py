@@ -267,8 +267,8 @@ class DCATRDFHarvester(DCATHarvester):
             except Exception as e:
                 setlic=1
                 log.debug('ha dato error ma continuo')
- #                self._save_gather_error('Error when processsing dataset: %r / %s' % (e, traceback.format_exc()),
- #                                        harvest_job)
+                self._save_gather_error('Error when processsing dataset: %r / %s' % (e, traceback.format_exc()),
+                                         harvest_job)
                 return []
            
 
