@@ -578,6 +578,11 @@ class ItalianDCATAPProfile(RDFProfile):
             if d.get('temporal_end'):
                 temporal_coverage_item.update({'temporal_end': d['temporal_end']})
             temp_cov.append(temporal_coverage_item)
+        else: # non essendoci, setto dct:temporal con startDate il campo modified
+          if d.get('modified'):
+            temporal_coverage_item = {'temporal_start': d['modified']}
+            temp_cov.append(temporal_coverage_item)
+              
         if not temp_cov:
             return
 
