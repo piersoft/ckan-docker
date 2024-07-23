@@ -1144,8 +1144,8 @@ class ItalianDCATAPProfile(RDFProfile):
             g.remove((s, p, o))
             remove_unused_object(g, o, "publisher")  # if the publisher node is not used elsewhere, remove it
         # il publisher del dataset non esiste. impongo il nome di org e id di holder_identifier
-        if dataset_dict.get('publisher_name') is None:
-           if dataset_dict.get('holder_name'):
+        if dataset_dict.get('holder_name') is None:
+           if dataset_dict.get('organization'):
              dataset_dict['publisher_name'] = dataset_dict['holder_name']
            if dataset_dict.get('holder_identifier'):
              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier')
