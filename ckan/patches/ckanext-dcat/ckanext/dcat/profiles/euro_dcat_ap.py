@@ -675,7 +675,16 @@ class EuropeanDCATAPProfile(RDFProfile):
                  if 'json' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='JSON'
-                    
+                 if 'ov2' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='BIN'                     
+                 if 'turtle' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='RDF_TURTLE'     
+                 if 'fgb' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='SHP'
+                     
             mimetype = resource_dict.get("mimetype")
             fmt = resource_dict.get("format")
 
