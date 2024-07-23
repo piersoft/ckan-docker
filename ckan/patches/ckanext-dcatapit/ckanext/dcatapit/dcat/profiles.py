@@ -742,7 +742,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 lang = lang.replace('it', 'ITA').replace('aA', 'A')
                 lang = lang.replace('[', '').replace(']', '')
                 lang = lang.replace('"it"', '')
-                self.g.remove((dataset_ref, DCT.language, Literal(lang)))
+                self.g.remove((dataset_ref, DCT.language, None))
                 self.g.add((dataset_ref, DCT.language, URIRef(LANG_BASE_URI + lang)))
                 # self._add_concept(LANG_CONCEPTS, lang)
 
