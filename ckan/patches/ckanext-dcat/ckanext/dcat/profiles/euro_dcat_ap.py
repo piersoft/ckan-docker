@@ -699,7 +699,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/zip'
                 if 'XML' in fmt:
                     mimetype = 'text/xml'
-                if 'RDF_XML' in fmt:
+                if 'RDF' in fmt:
                     mimetype = 'application/rdf+xml'
                 if 'SPARQL' in fmt:
                     mimetype = 'application/sparql-query'
@@ -711,6 +711,15 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/vnd.apache.parquet'
                 if 'SHP' in fmt:
                     mimetype = 'application/vnd.shp'
+                if 'KML' in fmt:
+                    mimetype = 'application/vnd.google-earth.kml+xml'
+                if 'RDF_TURTLE' in fmt:
+                    mimetype = 'text/turtle'
+                if 'GPX' in fmt:
+                    mimetype = 'application/vnd.gpxsee.map+xml'
+                if 'N3' in fmt:
+                    mimetype = 'text/n3'
+
 
   #                else:
                     # Use dct:format
