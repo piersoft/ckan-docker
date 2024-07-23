@@ -717,7 +717,8 @@ class EuropeanDCATAPProfile(RDFProfile):
      #                 mimetype = None
 
             if mimetype:
-                mimetype = "http://iana.org/assignments/media-types/"+mimetype
+                if 'http' not in mimetype:
+                 mimetype = "https://iana.org/assignments/media-types/"+mimetype
                 mimetype = URIRef(mimetype)
                 g.add((distribution, DCAT.mediaType, URIRefOrLiteral(mimetype)))
 
