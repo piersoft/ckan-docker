@@ -125,6 +125,9 @@ format_mapping = {
     'rtf': 'RTF',
     'web': 'HTML',
     'PARQUET': 'PARQUET',
+    'ov2': 'BIN',
+    'OV2': 'BIN',
+    'FGB': 'SHP',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
