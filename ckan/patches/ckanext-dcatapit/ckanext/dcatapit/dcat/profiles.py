@@ -9,7 +9,7 @@ import ckan.logic as logic
 from ckan.common import config
 from ckan.lib.i18n import get_lang, get_locales
 
-from ckanext.dcat.profiles.base import (
+from ckanext.dcat.profiles import (
     ADMS,
     DCAT,
     DCT,
@@ -568,8 +568,11 @@ class ItalianDCATAPProfile(RDFProfile):
 
         temp_cov = dataset_dict.get('temporal_coverage')
 
+        startemp = False
+
         if temp_cov:
             temp_cov = json.loads(temp_cov)
+            startemp = True
         else:
             temp_cov = []
 
@@ -579,10 +582,10 @@ class ItalianDCATAPProfile(RDFProfile):
                 temporal_coverage_item.update({'temporal_end': d['temporal_end']})
             temp_cov.append(temporal_coverage_item)
         else: # non essendoci, setto dct:temporal con startDate il campo modified
-          if d.get('modified'):
+          if d.get('modified') and startemp == False:
             temporal_coverage_item = {'temporal_start': d['modified']}
             temp_cov.append(temporal_coverage_item)
-              
+            
         if not temp_cov:
             return
 
@@ -1141,8 +1144,8 @@ class ItalianDCATAPProfile(RDFProfile):
             g.remove((s, p, o))
             remove_unused_object(g, o, "publisher")  # if the publisher node is not used elsewhere, remove it
         # il publisher del dataset non esiste. impongo il nome di org e id di holder_identifier
-        if dataset_dict.get('holder_name') is None:
-           if dataset_dict.get('organization'):
+        if dataset_dict.get('publisher_name') is None:
+           if dataset_dict.get('holder_name'):
              dataset_dict['publisher_name'] = dataset_dict['holder_name']
            if dataset_dict.get('holder_identifier'):
              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier')
@@ -1220,7 +1223,7 @@ class ItalianDCATAPProfile(RDFProfile):
         g.add((poc, VCARD.fn, Literal(org_dict.get('name'))))
 
         if 'email' in org_dict.keys():  # this element is mandatory for dcatapit, but it may not have been filled for imported datasets
-            g.add((poc, VCARD.hasEmail, URIRef(org_dict.get('email'))))
+            g.add((poc, VCARD.hasEmail, URIRef('mailto:'+org_dict.get('email'))))
         if 'telephone' in org_dict.keys():
             g.add((poc, VCARD.hasTelephone, Literal(org_dict.get('telephone'))))
         if 'site' in org_dict.keys():
