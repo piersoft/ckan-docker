@@ -48,6 +48,7 @@ if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
    echo "Set up ckanext.dcat.rdf.profiles in the CKAN config file"
    ckan config-tool $CKAN_INI "ckanext.dcat.rdf.profiles=euro_dcat_ap_2 it_dcat_ap"
    ckan config-tool $CKAN_INI "ckanext.dcat.base_uri=$CKAN_SITE_URL"
+   ckan config-tool $CKAN_INI "solr_timeout=500"
 fi
 
 ckan config-tool $CKAN_INI "ckan.locale_default = it"
@@ -56,7 +57,7 @@ ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
 ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
 ckan config-tool $CKAN_INI "ckanext.dcat.normalize_ckan_format = true"
 ckan config-tool $CKAN_INI "geonames.username = demo"
-ckan config-tool $CKAN_INI "solr_timeout=500"
+
 
 
 
