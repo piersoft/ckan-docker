@@ -652,6 +652,19 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'GEOJSON' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='GEOJSON'
+            if 'ov2' in resource_dict.get('format'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='BIN'    
+            if 'OV2' in resource_dict.get('format'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='BIN'                 
+            if 'turtle' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='RDF_TURTLE'     
+            if 'fgb' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='SHP'
+                
             if 'OP_DATPRO' in resource_dict.get('format') or 'ARC' in resource_dict.get('format'):
                 if resource_dict.get('url'):
                  if 'rdf' in resource_dict.get('url'):
