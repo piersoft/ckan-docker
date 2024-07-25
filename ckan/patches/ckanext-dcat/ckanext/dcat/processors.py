@@ -542,25 +542,26 @@ class RDFSerializer(RDFProcessor):
             if 'r_marche' in identifier:
               _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'r_emiro' in identifier:
-              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it/", "type": "http://purl.org/adms/publishertype/RegionalAuth>
+              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'r_toscan' in identifier:
               _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'r_basili' in identifier:
-              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": "http://purl.org/adms/publishertype/RegionalAuth>
+              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'm_lps' in identifier:
               _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.gov.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
             if 'c_l219' in identifier:
               _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'cr_campa' in identifier:
-              _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": "http://purl.org/adms/publishertype>
+              _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if '00304260409' in identifier:
-              _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority">
+              _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'c_a345' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'uds_ca' in identifier:
-              _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": "http://purl.org>
+              _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'aci' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
+
 
 
 
