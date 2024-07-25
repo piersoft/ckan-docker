@@ -581,14 +581,16 @@ class RDFSerializer(RDFProcessor):
                     val = pub.get(src_key)
                     if src_key == 'type':
                        if dataset_dict.get('holder_identifier'):
-                          if 'r_' in dataset_dict.get('holder_identifier'):
+                          if 'r_' in dataset_dict.get('holder_identifier') or 'p_' in dataset_dict.get('holder_identifier') :
                            val="http://purl.org/adms/publishertype/RegionalAuthority"
                           if 'm_' in dataset_dict.get('holder_identifier'):
                            val="http://purl.org/adms/publishertype/NationalAuthority"
                           if 'c_' in dataset_dict.get('holder_identifier'):
                            val="http://purl.org/adms/publishertype/LocalAuthority"
-                          if 'inail' in dataset_dict.get('holder_identifier') or 'inps' in dataset_dict.get('holder_identifier') or 'agid' in dataset_dict.get('holder_identifier') or 'agcm' in dataset_dict.get('holder_identifier'):
-                           val="http://purl.org/adms/publishertype/NationalAuthority"                              
+                          if 'inail' in dataset_dict.get('holder_identifier') or 'inps' in dataset_dict.get('holder_identifier') or 'agid' in datase>
+                           val="http://purl.org/adms/publishertype/NationalAuthority"
+                          if 'anac' in dataset_dict.get('holder_identifier') or 'ispra' in dataset_dict.get('holder_identifier') or 'pcm' in dataset>
+                           val="http://purl.org/adms/publishertype/NationalAuthority"                            
                     if src_key == 'url':
                         homepage=_get_from_extra('source_catalog_homepage')
                         if dataset_dict.get('holder_identifier'):
