@@ -538,7 +538,7 @@ class RDFSerializer(RDFProcessor):
 
             # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
             if 'm_it' in identifier:
-              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "interno.gov.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Ministero degli Interni", "email": "", "url": "interno.gov.it/", "type": ""}'
             if 'r_marche' in identifier:
               _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": ""}'
             if 'r_emiro' in identifier:
