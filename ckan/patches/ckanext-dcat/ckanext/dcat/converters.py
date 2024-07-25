@@ -37,7 +37,8 @@ def dcat_to_ckan(dcat_dict):
 
     package_dict['resources'] = []
     for distribution in dcat_dict.get('distribution', []):
-        distribution['format']=distribution['format'].replace('http://publications.europa.eu/resource/authority/file-type/','')
+        if distribution.get('format'):
+         distribution['format']=distribution['format'].replace('http://publications.europa.eu/resource/authority/file-type/','')
         resource = {
             'name': distribution.get('title'),
             'description': distribution.get('description'),
