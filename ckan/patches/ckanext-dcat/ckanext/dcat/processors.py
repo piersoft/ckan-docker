@@ -538,31 +538,31 @@ class RDFSerializer(RDFProcessor):
 
             # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
             if 'm_it' in identifier:
-              _pub= '{"uri": "", "name": "Ministero degli Interni", "email": "", "url": "interno.gov.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Ministero degli Interni", "email": "", "url": "interno.gov.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
             if 'r_marche' in identifier:
-              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Marche", "email": "", "url": "https://dati.regione.marche.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'r_emiro' in identifier:
-              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Emilia-Romagna", "email": "", "url": "https://dati.emilia-romagna.it/", "type": "http://purl.org/adms/publishertype/RegionalAuth>
             if 'r_toscan' in identifier:
-              _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Toscana", "email": "", "url": "https://dati.toscana.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'r_basili' in identifier:
-              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Regione Basilicata", "email": "", "url": "https://dati.regione.basilicata.it/", "type": "http://purl.org/adms/publishertype/RegionalAuth>
             if 'm_lps' in identifier:
-              _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.gov.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Ministero del Lavoro", "email": "", "url": "http://dati.lavoro.gov.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
             if 'c_l219' in identifier:
-              _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Comune di Torino", "email": "", "url": "http://aperto.comune.torino.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'cr_campa' in identifier:
-              _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Consiglio Regionale della Campania", "email": "", "url": "http://opendata-crc.di.unisa.it/", "type": "http://purl.org/adms/publishertype>
             if '00304260409' in identifier:
-              _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Comune di Rimini", "email": "", "url": "https://opendata.comune.rimini.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority">
             if 'c_a345' in identifier:
-              _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "OpenData Aquila", "email": "", "url": "https://ckan.opendatalaquila.it/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'uds_ca' in identifier:
-              _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": "http://purl.org>
             if 'aci' in identifier:
-              _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": ""}'
-            if 'r_basili' in identifier:
-              _pub= '{"uri": "", "name": "Regione Lazio", "email": "", "url": "https://dati.lazio.it/", "type": ""}'
+              _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
+
+
 
 
 
@@ -579,6 +579,16 @@ class RDFSerializer(RDFProcessor):
 
                 for src_key, _type, predicate, required in publisher_sources:
                     val = pub.get(src_key)
+                    if src_key == 'type':
+                       if dataset_dict.get('holder_identifier'):
+                          if 'r_' in dataset_dict.get('holder_identifier'):
+                           val="http://purl.org/adms/publishertype/RegionalAuthority"
+                          if 'm_' in dataset_dict.get('holder_identifier'):
+                           val="http://purl.org/adms/publishertype/NationalAuthority"
+                          if 'c_' in dataset_dict.get('holder_identifier'):
+                           val="http://purl.org/adms/publishertype/LocalAuthority"
+                          if 'inail' in dataset_dict.get('holder_identifier') or 'inps' in dataset_dict.get('holder_identifier') or 'agid' in dataset_dict.get('holder_identifier') or 'agcm' in dataset_dict.get('holder_identifier'):
+                           val="http://purl.org/adms/publishertype/NationalAuthority"                              
                     if src_key == 'url':
                         homepage=_get_from_extra('source_catalog_homepage')
                         if dataset_dict.get('holder_identifier'):
