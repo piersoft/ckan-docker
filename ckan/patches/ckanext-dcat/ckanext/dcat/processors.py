@@ -530,7 +530,7 @@ class RDFSerializer(RDFProcessor):
                                  ('name', Literal, FOAF.name, True,),
                                  ('email', Literal, FOAF.mbox, False,),
                                  ('url', URIRef, FOAF.homepage,False,),
-                                 ('type', Literal, DCT.type, False,))
+                                 ('type', URIRef, DCT.type, False,))
             if dataset_dict.get('holder_identifier'):
              identifier=dataset_dict.get('holder_identifier')
 
