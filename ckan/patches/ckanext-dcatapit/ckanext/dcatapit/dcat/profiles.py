@@ -1150,7 +1150,7 @@ class ItalianDCATAPProfile(RDFProfile):
            if dataset_dict.get('holder_identifier'):
              dataset_dict['publisher_identifier'] = dataset_dict.get('holder_identifier')
         else:
-            if len(dataset_dict.get('publisher_name')) or 'N/A' in dataset_dict.get('publisher_name'):
+            if len(dataset_dict.get('publisher_name'))<1 or 'N/A' in dataset_dict.get('publisher_name'):
              if dataset_dict.get('holder_name'):
               dataset_dict.pop('publisher_name', None)
               dataset_dict['publisher_name'] = dataset_dict['holder_name']
