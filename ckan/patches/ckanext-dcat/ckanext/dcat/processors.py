@@ -531,9 +531,13 @@ class RDFSerializer(RDFProcessor):
                                  ('email', Literal, FOAF.mbox, False,),
                                  ('url', URIRef, FOAF.homepage,False,),
                                  ('type', URIRef, DCT.type, False,))
+            
             if dataset_dict.get('holder_identifier'):
              identifier=dataset_dict.get('holder_identifier')
-
+                
+            if dataset_dict.get('holder_name'):
+             nameid=dataset_dict.get('holder_name')
+                
             _pub = _get_from_extra('source_catalog_publisher')
 
             # patch patch per Marche perchè non ha metadati in extra per il catalogo d'origine.
@@ -561,6 +565,9 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Università di Cagliari - Dataset relativi al progetto TDM", "email": "", "url": "https://data.tdm-project.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
             if 'aci' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
+            if 'BDAP' in nameid:
+              _pub= '{"uri": "", "name": "OpenData BDAP", "email": "", "url": "https://bdap-opendata.rgs.mef.gov.it/", "type": "publishertype/NationalAuthority"}'
+
 
 
 
