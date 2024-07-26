@@ -807,7 +807,10 @@ class RDFProfile(object):
                 object = _type(value)
         #        log.debug('add_triple debug %s %s',object,predicate)
                 if 'accrualPeriodicity' in predicate:
-                 if 'frequency' not in object:
+                 if 'Sconosciuta' in object:
+                  object='http://publications.europa.eu/resource/authority/frequency/UNKNOWN'
+                  self.g.add((subject, predicate, URIRef(object)))
+                 elif 'frequency' not in object:
                   object='http://publications.europa.eu/resource/authority/frequency/'+object
                   self.g.add((subject, predicate, URIRef(object)))
                  else:
