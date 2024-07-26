@@ -741,6 +741,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/vnd.gpxsee.map+xml'
                 if 'N3' in fmt:
                     mimetype = 'text/n3'
+                if 'BIN' in fmt:
+                    mimetype = 'text/csv'
 
 
   #                else:
