@@ -106,6 +106,11 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                if dataset_dict.get('holder_name'):
+                  if 'BDAP' in dataset_dict.get('holder_name'):
+                   dataset_dict.pop('frequency', None)
+                   dataset_dict['frequency']='UNKNOWN'
+                   log.debug('Patch Freq per BDAP')
                 if dataset_dict.get('holder_identifier'):
                  if 'r_lazio' in dataset_dict.get('holder_identifier'):
                   dataset_dict.pop('frequency', None)
