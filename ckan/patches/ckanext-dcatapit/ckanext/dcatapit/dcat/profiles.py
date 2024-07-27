@@ -833,23 +833,24 @@ class ItalianDCATAPProfile(RDFProfile):
         if dataset_dict.get('frequency'):
           if 'continuo' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='OTHER'
-          if 'Dato non disponibile' in dataset_dict.get('frequency'):
+          elif 'Dato non disponibile' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='OTHER'
-          if 'mai' in dataset_dict.get('frequency'):
+          elif 'mai' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='NEVER'
-          if 'Annuale' in dataset_dict.get('frequency'):
+          elif 'Annuale' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='ANNUAL'
-          if 'Giornaliera' in dataset_dict.get('frequency'):
+          elif 'Giornaliera' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='DAILY'
-          if 'Sconosciuta' in dataset_dict.get('frequency'):
+          elif 'Sconosciuta' in dataset_dict.get('frequency'):
+            dataset_dict.pop('frequency', None)
             dataset_dict['frequency']='UNKNOWN'
-          if 'Settimanale' in dataset_dict.get('frequency'):
+          elif 'Settimanale' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='WEEKLY'
-          if 'annually' in dataset_dict.get('frequency'):
+          elif 'annually' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='ANNUAL'
-          if 'irregolare' in dataset_dict.get('frequency'):
+          elif 'irregolare' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='IRREG'
-          if 'mensile' in dataset_dict.get('frequency'):
+          elif 'mensile' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='MONTHLY'
         else:
             dataset_dict['frequency']='UNKNOWN'
