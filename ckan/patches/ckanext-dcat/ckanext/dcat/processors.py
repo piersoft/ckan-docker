@@ -566,7 +566,7 @@ class RDFSerializer(RDFProcessor):
             if 'aci' in identifier:
               _pub= '{"uri": "", "name": "OpenData Aci", "email": "", "url": "http://lod.aci.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
             if 'BDAP' in nameid:
-              _pub= '{"uri": "", "name": "OpenData BDAP", "email": "", "url": "https://bdap-opendata.rgs.mef.gov.it/", "type": "publishertype/NationalAuthority"}'
+              _pub= '{"uri": "", "name": "OpenData BDAP", "email": "", "url": "https://bdap-opendata.rgs.mef.gov.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
 
 
 
