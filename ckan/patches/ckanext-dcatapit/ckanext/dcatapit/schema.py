@@ -555,5 +555,31 @@ def get_custom_resource_schema():
             'help': _(u"""Questa proprietà si riferisce alla licenza con cui viene """
                       u"""pubblicato il dataset. Scegliere una delle due licenze """
                       u"""Creative Commons proposte.""")
+        },
+        {
+            'name': 'availability',
+            'label': 'Disponibilità del dato nel tempo',
+            'validator': ['ignore_missing'],
+            'element': 'select',
+            'options': [
+                {   'text': 'Stabile a lungo termine',
+                    'name': 'Stabile',
+                    'validator': ['ignore_missing'],
+                    'label': 'Dati relativi disponibilità a lungo termine',
+                    'value': 'https://publications.europa.eu/resource/authority/planned-availability/STABLE',
+                    'placeholder': 'Dati relativi disponibilità a lungo termine',
+                    'localized': True
+                },
+                {   'text': 'Disponibile a medio termine',
+                    'name': 'http://data.europa.eu/bna/c_a9135398',
+                    'validator': ['ignore_missing'],
+                    'label': _('Dati relativi disponibilità a medio termine'),
+                    'value': 'https://publications.europa.eu/resource/authority/planned-availability/AVAILABLE',
+                    'placeholder': _('Dati relativi disponibilità a medio termine'),
+                    'localized': True
+                },
+             ],
+            'help': _(u"""Questa proprietà si riferisce alla disponibilità con cui viene """
+                      u"""pubblicato il dato. diventa dcat:availability""")
         }
     ]
