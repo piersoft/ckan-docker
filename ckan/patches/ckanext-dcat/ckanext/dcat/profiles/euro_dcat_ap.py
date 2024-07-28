@@ -754,6 +754,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'text/n3'
                 if 'BIN' in fmt:
                     mimetype = 'text/csv'
+                if 'TSV' in fmt:
+                    mimetype = 'text/tab-separated-values'
 
 
   #                else:
