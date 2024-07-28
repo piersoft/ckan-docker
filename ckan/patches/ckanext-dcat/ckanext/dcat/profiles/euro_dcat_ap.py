@@ -702,6 +702,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                  if 'fgb' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SHP'
+                 if 'shp' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='SHP'
+                 if 'kml' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='KML'
                      
             mimetype = resource_dict.get("mimetype")
             fmt = resource_dict.get("format")
