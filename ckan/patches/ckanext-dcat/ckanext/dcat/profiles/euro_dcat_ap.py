@@ -604,6 +604,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ("access_url", DCAT.accessURL, None, URIRef),
                 ("download_url", DCAT.downloadURL, None, URIRef),
             ]
+            if not resource_dict.get('name') or len(resource_dict.get('name'))<2:
+               resource_dict['name']="N/A"
             if not resource_dict.get('download_url'):
              if resource_dict.get('url'):
               resource_dict['download_url']=resource_dict['url']
