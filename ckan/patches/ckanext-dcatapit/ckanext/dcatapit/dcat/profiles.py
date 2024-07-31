@@ -458,6 +458,11 @@ class ItalianDCATAPProfile(RDFProfile):
                     ('name', DCT.title),
                     ('description', DCT.description),
             ):
+                if resource_dict.get('name') is None:
+                  resource_dict['name']="N/A"
+                elif len(resource_dict.get('name'))<2:
+                  resource_dict['name']="N/A"
+
                 self._collect_multilang_strings(resource_dict, key, distribution, predicate, loc_dict)
 
             if len(loc_dict) > 0:
