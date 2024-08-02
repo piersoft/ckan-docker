@@ -103,8 +103,9 @@ def harvest_source_url_validator(key, data, errors, context):
             conf = None
 
         if url == new_url and conf == new_config:
-            raise Invalid('There already is a Harvest Source for this URL (& '
-                          'config): url=%s config=%s' % (new_url, new_config))
+#            raise Invalid('There already is a Harvest Source for this URL (& '
+ #                         'config): url=%s config=%s' % (new_url, new_config))
+             log.debug('There already is a Harvest Source for this URL')
 
     return data[key]
 
