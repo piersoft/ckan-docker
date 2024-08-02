@@ -439,12 +439,15 @@ class DCATRDFHarvester(DCATHarvester):
                     if 'hvd_category' in package_schema:
                        log.warning('2.0  esiste hvdCategory')
                        del package_schema['hvd_category']
+                schemaexist=False
                 try:
                     if dataset:
                         package_schema = package_plugin.update_package_schema()
                         for harvester in p.PluginImplementations(IDCATRDFHarvester):
                              package_schema = harvester.update_package_schema_for_update(package_schema)
                         context['schema'] = package_schema
+                        extras_alt_identifiers = None
+                        extras_alt_idx = None
                         if 'access_rights' in package_schema:
  #                            del package_schema['access_rights']
                             log.warning('2.1 esiste access_rights')
@@ -482,6 +485,14 @@ class DCATRDFHarvester(DCATHarvester):
                             dataset.pop('applicableLegislation',None)
  #                            dataset['extras'].append({'key':'applicableLegislation','value':'http://data.europa.eu/eli/reg_impl/2023/138/oj'})
                         # Save reference to the package on the object
+                        for eidx, ex in enumerate(dataset.get('extras') or []):
+                           #log.debug('controllo negli extra le key: %s', ex['key'])
+                           if ex['key'] == 'access_rights' or ex['key'] == 'hvd_category' or ex['key'] == 'applicable_legislation':
+                             extras_alt_identifiers = ex['value']
+                             schemaexist=True
+                             log.debug('ho cancellato negli extra il value: %s', ex['value'])
+                             extras_alt_idx = eidx
+                             break
                         harvest_object.package_id = dataset['id']
                         harvest_object.add()
 
@@ -494,6 +505,7 @@ class DCATRDFHarvester(DCATHarvester):
                         log.info('Ignoring dataset %s' % existing_dataset['name'])
                         return 'unchanged'
                 except p.toolkit.ValidationError as e:
+                  if schemaexist==False:
                     self._save_object_error('Update validation Error: %s' % str(e.error_summary), harvest_object, 'Import')
                     return False
 
