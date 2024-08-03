@@ -128,6 +128,8 @@ format_mapping = {
     'ov2': 'BIN',
     'OV2': 'BIN',
     'FGB': 'SHP',
+    'xsd': 'XML',
+    'XSD': 'XML',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
