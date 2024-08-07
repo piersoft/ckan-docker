@@ -504,19 +504,32 @@ class RDFSerializer(RDFProcessor):
                 if key == 'source_catalog_description':
                    if not value:
                      value='Portale Dati Aperti'
+                if key == 'source_catalog_title':
+                   if not value:
+                     value='Portale Dati Aperti'
+                if key == 'source_catalog_modified':
+                   if not value:
+                     value='2024-01-01'
+                if key == 'source_catalog_homepage':
+                   if not value:
+                    if 'c_c621' in dataset_dict.get('holder_identifier'):
+                     value='https://www.opendata.maggioli.cloud/organization/comune-di-chiavari/#'
                 if value:
-                 log.debug('value in base catalog struct %s',value)
+                 if key == 'source_catalog_homepage':
+                    value = value.replace('##','')
                  if key == 'source_catalog_homepage' and value.endswith("/#"):
                    value = value + '/#'
                    value = value.replace('/#/#','')
                  if key == 'source_catalog_homepage' and not value.endswith("/#"):
-                   value = value + '/#'
-                 if 'uni_ba' in dataset_dict.get('holder_identifier'):
+                   value = value + '/'
+                   if 'uni_ba' in dataset_dict.get('holder_identifier'):
                     if key == 'source_catalog_homepage':
                      value = 'http://opendata.uniba.it/#'
-
- #                 if key == 'source_catalog_homepage' and not value.endswith("/"):
-   #                 value = value + '/'
+                   if 'cciaan' in dataset_dict.get('holder_identifier'):
+                    value = 'https://opendata.marche.camcom.it'
+                   if 'aci' in dataset_dict.get('holder_identifier'):
+                      dataset_dict['extras'].append({'key': 'source_catalog_modified', 'value': _get_from_extra('dcat_modified')})
+                      dataset_dict['extras'].append({'key': 'source_catalog_language', 'value': 'ITA'})
                  if key == 'source_catalog_modified':
                    default_datetime = datetime.datetime(1, 1, 1, 0, 0, 0)
                    _date = parse_date(value, default=default_datetime)
