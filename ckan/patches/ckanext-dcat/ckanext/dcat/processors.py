@@ -465,6 +465,8 @@ class RDFSerializer(RDFProcessor):
             source_catalog_homepage=source_uri
           elif 'uni_ba' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata.uniba.it/'
+          elif 'c_c621' in dataset_dict.get('holder_identifier'):
+            source_uri='https://www.opendata.maggioli.cloud/'
 
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
