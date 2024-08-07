@@ -808,6 +808,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                     g.add((distribution, DCAT.byteSize, Literal(resource_dict["size"])))
             # Checksum
             if resource_dict.get("hash"):
+              if not 'r_emiro' in dataset_dict.get('holder_identifier'):
                 checksum = BNode()
                 g.add((checksum, RDF.type, SPDX.Checksum))
                 g.add(
