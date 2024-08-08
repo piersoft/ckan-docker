@@ -743,7 +743,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                 if 'GEOJSON' in fmt:
                     mimetype = 'application/geo+json'
                 if 'PARQUET' in fmt:
-                    mimetype = 'text/csv'
+                    mimetype = 'application/vnd.apache.parquet'
                 #parquet è application/vnd.apache.parquet ma dataEU  non lo riconosce
                 if 'SHP' in fmt:
                     mimetype = 'application/zip'
