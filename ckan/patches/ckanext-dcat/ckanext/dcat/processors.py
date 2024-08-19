@@ -417,57 +417,40 @@ class RDFSerializer(RDFProcessor):
 
         log.debug('source_uri pre patch %s',source_uri)
         # patch per harvesting per hasPart Catalog
-        if dataset_dict.get('holder_identifier'):
-          if 'r_marche' in dataset_dict.get('holder_identifier'):
+        if 'r_marche' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.regione.marche.it/'
-            source_catalog_homepage=source_uri
-          elif 'piersoft' in dataset_dict.get('holder_identifier'):
-            source_uri='https://www.piersoft.it'
-            source_catalog_homepage=source_uri
-          elif 'c_e506' in dataset_dict.get('holder_identifier'):
-            source_uri='http://dati.comune.lecce.it'
-            source_catalog_homepage=source_uri
-          elif 'r_emiro' in dataset_dict.get('holder_identifier'):
+        elif 'r_emiro' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.emilia-romagna.it'
             source_catalog_homepage=source_uri
-          elif 'r_toscan' in dataset_dict.get('holder_identifier'):
+        elif 'r_toscan' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.toscana.it'
-            source_catalog_homepage=source_uri
-          elif 'r_lazio' in dataset_dict.get('holder_identifier'):
+        elif 'r_lazio' in dataset_dict.get('holder_identifier'):
             source_uri='http://dati.regione.lazio.it'
-            source_catalog_homepage=source_uri
-          elif 'r_basili' in dataset_dict.get('holder_identifier'):
+        elif 'r_basili' in dataset_dict.get('holder_identifier'):
             source_uri='https://dati.regione.basilicata.it'
-            source_catalog_homepage=source_uri
-          elif 'aci' in dataset_dict.get('holder_identifier'):
+        elif 'aci' in dataset_dict.get('holder_identifier'):
             source_uri='http://lod.aci.it/'
             source_catalog_homepage=source_uri
-          elif 'm_lps' in dataset_dict.get('holder_identifier'):
+        elif 'm_lps' in dataset_dict.get('holder_identifier'):
             source_uri='http://dati.lavoro.gov.it/'
-            source_catalog_homepage=source_uri
-          elif 'c_l219' in dataset_dict.get('holder_identifier'):
+        elif 'c_l219' in dataset_dict.get('holder_identifier'):
             source_uri='http://aperto.comune.torino.it/'
-            source_catalog_homepage=source_uri
-          elif 'cr_campa' in dataset_dict.get('holder_identifier'):
+        elif 'cr_campa' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata-crc.di.unisa.it/'
-            source_catalog_homepage=source_uri
-          elif '00304260409' in dataset_dict.get('holder_identifier'):
+        elif '00304260409' in dataset_dict.get('holder_identifier'):
             source_uri='https://opendata.comune.rimini.it/'
-            source_catalog_homepage=source_uri
-          elif 'c_a345' in dataset_dict.get('holder_identifier'):
+        elif 'c_a345' in dataset_dict.get('holder_identifier'):
             source_uri='https://ckan.opendatalaquila.it/'
-            source_catalog_homepage=source_uri
-          elif 'uds_ca' in dataset_dict.get('holder_identifier'):
+        elif 'uds_ca' in dataset_dict.get('holder_identifier'):
             source_uri='https://data.tdm-project.it'
-            source_catalog_homepage=source_uri
-          elif 'm_it' in dataset_dict.get('holder_identifier'):
+        elif 'm_it' in dataset_dict.get('holder_identifier'):
             source_uri='https://www.interno.gov.it/'
-            source_catalog_homepage=source_uri
-          elif 'uni_ba' in dataset_dict.get('holder_identifier'):
+        elif 'm_inf' in dataset_dict.get('holder_identifier'):
+            source_uri='https://dati.mit.gov.it/'
+        elif 'uni_ba' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata.uniba.it/'
-          elif 'c_c621' in dataset_dict.get('holder_identifier'):
+        elif 'c_c621' in dataset_dict.get('holder_identifier'):
             source_uri='https://www.opendata.maggioli.cloud/'
-
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
 
