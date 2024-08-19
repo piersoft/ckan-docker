@@ -596,7 +596,7 @@ class CKANHarvester(HarvesterBase):
                         if 'ODataProxy':
                               resource['url']=resource['url'].replace("'","%27")
                         if ' ' in resource['url']:
-                              resource['url']=resource['url'].replace(" ","")
+                              resource['url']=resource['url'].replace(" ","%20")
                         if 'ZIP(' in resource['url']:
                               resource.pop('format', None)
                               resource['format'] = 'ZIP'
