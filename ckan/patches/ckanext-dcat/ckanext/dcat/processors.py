@@ -258,40 +258,39 @@ class RDFSerializer(RDFProcessor):
                     break
 
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
-        if dataset_dict.get('holder_identifier'):
-         if 'm_lps' in dataset_dict.get('holder_identifier'):
+
+        if 'm_lps' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
-         if 'r_emiro' in dataset_dict.get('holder_identifier'):
+        if 'r_emiro' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
            dataset_ref1=dataset_ref1.replace("dati.comune.fe.it","https://dati.comune.fe.it")
-         if 'r_marche' in dataset_dict.get('holder_identifier'):
+        if 'r_marche' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.marche.it/")
-         if 'r_toscan' in dataset_dict.get('holder_identifier'):
+        if 'r_toscan' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.toscana.it")
-         if 'r_basili' in dataset_dict.get('holder_identifier'):
+        if 'r_basili' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
-         if 'r_lazio' in dataset_dict.get('holder_identifier'):
+        if 'r_lazio' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
-         if 'aci' in dataset_dict.get('holder_identifier'):
+        if 'aci' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
-         if 'c_l219' in dataset_dict.get('holder_identifier'):
+        if 'c_l219' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
-         if 'cr_campa' in dataset_dict.get('holder_identifier'):
+        if 'cr_campa' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
-         if '00304260409' in dataset_dict.get('holder_identifier'):
+        if '00304260409' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
-         if 'c_a345' in dataset_dict.get('holder_identifier'):
+        if 'c_a345' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
-         if 'uds_ca' in dataset_dict.get('holder_identifier'):
+        if 'uds_ca' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
-         if 'm_it' in dataset_dict.get('holder_identifier'):
+        if 'm_it' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://www.interno.gov.it/")
-         if '00514490010' in dataset_dict.get('holder_identifier'):
+        if '00514490010' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
-         if 'piersoft' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://www.piersoft.it/")
-         if 'c_e506' in dataset_dict.get('holder_identifier'):
-           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.comune.lecce.it")
+        if 'm_inf' in dataset_dict.get('holder_identifier'):
+           dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.mit.gov.it/")
+
 
         dataset_ref = URIRef(dataset_ref1)
         log.info('dataset_ref in graph_from_dataset %s',dataset_ref)
