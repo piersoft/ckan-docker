@@ -1344,7 +1344,7 @@ class ItalianDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
               distribution=URIRef(distribution)
             if 'm_inf' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it")
               distribution=URIRef(distribution)
             if 'c_a345' in dataset_dict.get('holder_identifier'):
               distribution = distribution.replace(PREF_LANDING,"ckan.opendatalaquila.it")
