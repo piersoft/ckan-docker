@@ -580,7 +580,7 @@ class EuropeanDCATAPProfile(RDFProfile):
               distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=CleanedURIRef(distribution)
             if 'm_inf' in dataset_dict.get('holder_identifier'):
-              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it/")
+              distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it")
               distribution=CleanedURIRef(distribution)
 
  #            if 'piersoft' in dataset_dict.get('holder_identifier'):
