@@ -130,6 +130,13 @@ format_mapping = {
     'FGB': 'SHP',
     'xsd': 'XML',
     'XSD': 'XML',
+    'gml': 'GML',
+    'GML': 'GML',
+    'excel': 'XLSX',
+    'WFS_SRVC': 'WFS_SRVC',
+    'WMS_SRVC': 'WMS_SRVC',
+    'Moka': 'HTML',
+    'MOKA': 'HTML',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
