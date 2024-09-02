@@ -58,7 +58,8 @@ class DCATHarvester(HarvesterBase):
         '''
         url = url.replace("https://dati.regione.calabria.it", "http://dati.regione.calabria.it/opendata")
         url = url.replace("https://opendata.uniba.it", "http://opendata.uniba.it")
-
+        url = url.replace("https://dati.regione.campania.it/", "http://dati.regione.campania.it/")
+                                      
         if not url.lower().startswith('http'):
             # Check local file
             if os.path.exists(url):
