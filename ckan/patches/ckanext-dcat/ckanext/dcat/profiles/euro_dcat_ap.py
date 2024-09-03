@@ -763,7 +763,8 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'text/csv'
                 if 'TSV' in fmt:
                     mimetype = 'text/tab-separated-values'
-
+                if 'HTML' in fmt:
+                    mimetype = 'text/html'
 
   #                else:
                     # Use dct:format
