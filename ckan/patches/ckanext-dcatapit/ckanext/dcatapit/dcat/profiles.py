@@ -577,7 +577,8 @@ class ItalianDCATAPProfile(RDFProfile):
 
         if temp_cov:
             temp_cov = json.loads(temp_cov)
-            startemp = True
+            if len(temp_cov)>8:
+             startemp = True
         else:
             temp_cov = []
 
