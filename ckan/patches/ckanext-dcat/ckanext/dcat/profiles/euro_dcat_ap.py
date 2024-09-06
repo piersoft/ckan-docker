@@ -765,7 +765,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'text/tab-separated-values'
                 if 'HTML' in fmt:
                     mimetype = 'text/html'
-
+                if 'ODS' in fmt:
+                    mimetype = 'application/vnd.oasis.opendocument.spreadsheet'
+                if 'PDF' in fmt:
+                    mimetype = 'application/pdf'
+                if 'GPKG' in fmt:
+                    mimetype = 'application/vnd.gentoo.gpkg'
   #                else:
                     # Use dct:format
      #                 mimetype = None
