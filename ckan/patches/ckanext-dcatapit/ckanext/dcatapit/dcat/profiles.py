@@ -565,11 +565,19 @@ class ItalianDCATAPProfile(RDFProfile):
         g = graph
         d = dataset_dict
 
+        if d.get('holder_identifier'):
+         if 'm_inf' not in d.get('holder_identifier'):
         # clean from dcat's data, to avoid duplicates
-        for obj in g.objects(dataset_ref, DCT.temporal):
+          for obj in g.objects(dataset_ref, DCT.temporal):
             self.log_remove('temporal', DCT.temporal)
             g.remove((dataset_ref, DCT.temporal, obj,))
             remove_unused_object(g, obj, "temporal")
+        else:
+          for obj in g.objects(dataset_ref, DCT.temporal):
+            self.log_remove('temporal', DCT.temporal)
+            g.remove((dataset_ref, DCT.temporal, obj,))
+            remove_unused_object(g, obj, "temporal")
+
 
         temp_cov = dataset_dict.get('temporal_coverage')
 
