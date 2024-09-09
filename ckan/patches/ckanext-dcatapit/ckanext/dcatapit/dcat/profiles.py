@@ -1568,7 +1568,9 @@ class ItalianDCATAPProfile(RDFProfile):
             self.g.add((sref, RDF.type, DCATAPIT.subTheme))  # only for dcatapit 0.4, not in 1.0
             for lang, label in labels.items():
                 if lang in OFFERED_LANGS:
-                    self.g.add((sref, SKOS.prefLabel, Literal(label, lang=lang)))
+                    labelnonmb=label[5:].strip()
+                    self.g.add((sref, SKOS.prefLabel, Literal(labelnonmb, lang=lang)))
+                 #   self.g.add((sref, SKOS.prefLabel, Literal(label, lang=lang)))
             self.g.add((ref, DCT.subject, sref))
 
     def _add_creators(self, dataset_dict, ref):
