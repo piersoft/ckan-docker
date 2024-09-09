@@ -496,9 +496,9 @@ class EuropeanDCATAPProfile(RDFProfile):
 
             g.add((temporal_extent, RDF.type, DCT.PeriodOfTime))
             if start:
-                self._add_date_triple(temporal_extent, SCHEMA.startDate, start)
+                self._add_date_triple(temporal_extent, DCAT.startDate, start)
             if end:
-                self._add_date_triple(temporal_extent, SCHEMA.endDate, end)
+                self._add_date_triple(temporal_extent, DCAT.endDate, end)
             g.add((dataset_ref, DCT.temporal, temporal_extent))
 
         # Spatial
