@@ -321,8 +321,8 @@ class RDFProfile(object):
         start_date = end_date = None
 
         for interval in self.g.objects(subject, predicate):
-            start_date = self._object_value(interval, DCAT.startDate)
-            end_date = self._object_value(interval, DCAT.endDate)
+            start_date = self._object_value(interval, SCHEMA.startDate)
+            end_date = self._object_value(interval, SCHEMA.endDate)
 
             if start_date or end_date:
                 return start_date, end_date
