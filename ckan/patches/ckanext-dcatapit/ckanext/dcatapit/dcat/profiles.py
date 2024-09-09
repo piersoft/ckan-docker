@@ -587,6 +587,13 @@ class ItalianDCATAPProfile(RDFProfile):
             temp_cov = json.loads(temp_cov)
             if len(temp_cov)>8:
              startemp = True
+        elif 'temporal_start' in d.get('extras'):
+            if d.get('holder_identifier'):
+             if 'm_inf' not in d.get('holder_identifier'): 
+              if d.get('modified'):
+                temporal_coverage_item = {'temporal_start': d.get('modified')}
+                temp_cov.append(temporal_coverage_item)
+
         else:
             temp_cov = []
 
@@ -594,10 +601,6 @@ class ItalianDCATAPProfile(RDFProfile):
             temporal_coverage_item = {'temporal_start': d['temporal_start']}
             if d.get('temporal_end'):
                 temporal_coverage_item.update({'temporal_end': d['temporal_end']})
-            temp_cov.append(temporal_coverage_item)
-        else: # non essendoci, setto dct:temporal con startDate il campo modified
-          if d.get('modified') and startemp == False:
-            temporal_coverage_item = {'temporal_start': d['modified']}
             temp_cov.append(temporal_coverage_item)
             
         if not temp_cov:
