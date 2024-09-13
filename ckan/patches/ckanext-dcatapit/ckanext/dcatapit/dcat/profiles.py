@@ -1051,6 +1051,12 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri=landing_page_uri.replace("/catalog","")
          if noaddsl==0:
            landing_page_uri += '/'
+             
+         for extra in dataset_dict.get('extras', []):
+             if extra['key'] == 'landingpage':
+                landing_page_uri = extra['value']
+                 
+         landing_page_uri = landing_page_uri.replace('documento:pubblico','documento_pubblico')  
 
          landing_page_uri_f=""
          if landing_page_uri.endswith("/"):
