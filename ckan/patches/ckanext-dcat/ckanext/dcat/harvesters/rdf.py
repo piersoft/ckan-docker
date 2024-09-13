@@ -577,6 +577,10 @@ class DCATRDFHarvester(DCATHarvester):
                        dataset['applicableLegislation']='http://data.europa.eu/eli/reg_impl/2023/138/oj'
   #                if dataset.get('hvd_category'):
   #                      del package_schema['hvd_category']
+                for item in dataset["extras"]:
+                   if item["key"] == "landingpage":
+                       dataset["url"] = item["value"]  # Aggiorna il valore
+                       break
                 try:
                     if dataset:
                         log.debug('dataset in rdf')
