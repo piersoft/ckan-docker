@@ -65,6 +65,9 @@ class EuropeanDCATAPProfile(RDFProfile):
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
+                if key == 'url':
+                   log.debug('CERCO DCATLANDINGPAGE: %s', value)
+                   dataset_dict["extras"].append({"key": "landingpage", "value": value})
                 if 'opendata.marche.camcom.it' in value:
               
                    log.debug('sono in CamCom Marche')
