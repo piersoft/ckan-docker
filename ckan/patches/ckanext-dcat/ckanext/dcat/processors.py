@@ -448,9 +448,11 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://dati.mit.gov.it/'
         elif 'uni_ba' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata.uniba.it/'
-        elif 'C_C621' in dataset_dict.get('holder_identifier'):
+        elif 'c_c621' in dataset_dict.get('holder_identifier'):
             source_uri='https://www.opendata.maggioli.cloud/'
         elif 'C_D634' in dataset_dict.get('holder_identifier'):
+            source_uri='https://www.opendata.maggioli.cloud/'
+        elif 'c_i225' in dataset_dict.get('holder_identifier'):
             source_uri='https://www.opendata.maggioli.cloud/'
 
         else:
@@ -499,10 +501,12 @@ class RDFSerializer(RDFProcessor):
                      value='2024-01-01'
                 if key == 'source_catalog_homepage':
                    if not value:
-                    if 'C_C621' in dataset_dict.get('holder_identifier'):
+                    if 'c_c621' in dataset_dict.get('holder_identifier'):
                      value='https://www.opendata.maggioli.cloud/organization/comune-di-chiavari/#'
                     if 'C_D634' in dataset_dict.get('holder_identifier'):
                      value='https://www.opendata.maggioli.cloud/organization/comune-di-flero/#'
+                    if 'c_i225' in dataset_dict.get('holder_identifier'):
+                     value='https://www.opendata.maggioli.cloud/organization/comune-di-santa-margherita-ligure/#'
 
                 if value:
                  if key == 'source_catalog_homepage':
@@ -574,8 +578,13 @@ class RDFSerializer(RDFProcessor):
               _pub= '{"uri": "", "name": "Open data Comune di Flero", "email": "protocollo@comune.flero.bs.it", "url": "https://www.opendata.maggioli.cloud/organization/comune-di-flero/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
             if 'r_lazio' in identifier:
               _pub= '{"uri": "", "name": "Regione Lazio", "email": "", "url": "http://dati.lazio.it/", "type": "http://purl.org/adms/publishertype/RegionalAuthority"}'
-            if 'C_C621' in identifier:
+            if 'c_c621' in identifier:
               _pub= '{"uri": "", "name": "Open data Comune di Chiavari", "email": "info@comune.chiavari.ge.it", "url": "https://www.opendata.maggioli.cloud/organization/comune-di-chiavari/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
+            if 'c_i225' in identifier:
+              _pub= '{"uri": "", "name": "Open data Comune di Santa Margherita Ligure", "email": "informatica@comunesml.it", "url": "https://www.opendata.maggioli.cloud/organization/comune-di-santa-margherita-ligure/", "type": "http://purl.org/adms/publishertype/LocalAuthority"}'
+            if 'm_inf' in identifier:
+             _pub= '{"uri": "", "name": "Ministero delle Infrastrutture e dei Trasporti", "email": "", "url": "https://dati.mit.gov.it/", "type": "http://purl.org/adms/publishertype/NationalAuthority"}'
+
 
             if _pub:
                 pub = json.loads(_pub)
