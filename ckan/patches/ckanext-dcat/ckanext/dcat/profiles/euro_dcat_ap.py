@@ -717,7 +717,13 @@ class EuropeanDCATAPProfile(RDFProfile):
                  if 'kml' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='KML'
-                     
+                 if 'umap.openstreetmap' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='HTML_SIMPL'
+                 if 'infogram.com' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='HTML_SIMPL'
+
             mimetype = resource_dict.get("mimetype")
             fmt = resource_dict.get("format")
 
