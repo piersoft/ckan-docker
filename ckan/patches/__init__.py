@@ -388,7 +388,7 @@ def check_access(action: str,
         logic_authorization = authz.is_authorized(action, context, data_dict)
         if not logic_authorization['success']:
             msg = cast(str, logic_authorization.get('msg', ''))
-            if 'package_show' not in action:
+            if 'package_show' not in action or 'package_search' not in action:
               raise NotAuthorized(msg)
     except NotAuthorized as e:
         log.debug(u'check access NotAuthorized - %s user=%s "%s"',
