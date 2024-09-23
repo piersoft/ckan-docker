@@ -584,24 +584,35 @@ class ItalianDCATAPProfile(RDFProfile):
         startemp = False
 
         if temp_cov:
+            if len(temp_cov)>6:
+              startemp = True
             temp_cov = json.loads(temp_cov)
-            if len(temp_cov)>8:
-             startemp = True
-        elif 'temporal_start' in d.get('extras'):
-            if d.get('holder_identifier'):
-             if 'm_inf' not in d.get('holder_identifier'): 
-              if d.get('modified'):
-                temporal_coverage_item = {'temporal_start': d.get('modified')}
-                temp_cov.append(temporal_coverage_item)
-
         else:
             temp_cov = []
 
+        if 'temporal_start' in d.get('extras'):
+            for eidx, ex in enumerate(d.get('extras') or []):
+             if ex['key'] == 'temporal_start':
+                extras_alt_identifiers = ex['value']
+                extras_alt_idx = eidx
+                if len(extras_alt_identifiers)>4:
+                   temporal_coverage_item = {'temporal_start': extras_alt_identifiers}
+                   temp_cov.append(temporal_coverage_item)
+                   
         if d.get('temporal_start'):
             temporal_coverage_item = {'temporal_start': d['temporal_start']}
             if d.get('temporal_end'):
                 temporal_coverage_item.update({'temporal_end': d['temporal_end']})
             temp_cov.append(temporal_coverage_item)
+        elif d.get('holder_identifier'):
+         if 'm_inf' not in d.get('holder_identifier'): # non essendoci, setto dct:temporal con startDate il campo modified
+          if startemp == False:
+           if d.get('modified'):
+             temporal_coverage_item = {'temporal_start': d.get('modified')}
+             temp_cov.append(temporal_coverage_item)
+
+
+
             
         if not temp_cov:
             return
