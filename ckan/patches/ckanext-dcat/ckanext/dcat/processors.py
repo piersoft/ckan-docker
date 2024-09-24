@@ -499,7 +499,7 @@ class RDFSerializer(RDFProcessor):
                 if key == 'source_catalog_homepage':
                    if not value:
                     if 'opendata.maggioli.cloud' in _get_from_extra('uri'):
-                     value='https://www.opendata.maggioli.cloud/organization/'+dataset_dict['organization']['name']+'/'
+                     value='https://www.opendata.maggioli.cloud/organization/'+dataset_dict['organization']['name']
                      log.debug('setto homepage org Maggioli: %s',value)
 
                 if value:
