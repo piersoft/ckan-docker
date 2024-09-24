@@ -448,12 +448,9 @@ class RDFSerializer(RDFProcessor):
             source_uri='https://dati.mit.gov.it/'
         elif 'uni_ba' in dataset_dict.get('holder_identifier'):
             source_uri='http://opendata.uniba.it/'
-        elif 'c_c621' in dataset_dict.get('holder_identifier'):
+        elif 'opendata.maggioli.cloud' in _get_from_extra('uri'):
             source_uri='https://www.opendata.maggioli.cloud/'
-        elif 'C_D634' in dataset_dict.get('holder_identifier'):
-            source_uri='https://www.opendata.maggioli.cloud/'
-        elif 'c_i225' in dataset_dict.get('holder_identifier'):
-            source_uri='https://www.opendata.maggioli.cloud/'
+            log.debug('setto source_uri per Maggioli')
 
         else:
             source_uri = _get_from_extra('source_catalog_homepage')
@@ -501,12 +498,9 @@ class RDFSerializer(RDFProcessor):
                      value='2024-01-01'
                 if key == 'source_catalog_homepage':
                    if not value:
-                    if 'c_c621' in dataset_dict.get('holder_identifier'):
-                     value='https://www.opendata.maggioli.cloud/organization/comune-di-chiavari/#'
-                    if 'C_D634' in dataset_dict.get('holder_identifier'):
-                     value='https://www.opendata.maggioli.cloud/organization/comune-di-flero/#'
-                    if 'c_i225' in dataset_dict.get('holder_identifier'):
-                     value='https://www.opendata.maggioli.cloud/organization/comune-di-santa-margherita-ligure/#'
+                    if 'opendata.maggioli.cloud' in _get_from_extra('uri'):
+                     value='https://www.opendata.maggioli.cloud/organization/'+dataset_dict['organization']['name']+'/'
+                     log.debug('setto homepage org Maggioli: %s',value)
 
                 if value:
                  if key == 'source_catalog_homepage':
