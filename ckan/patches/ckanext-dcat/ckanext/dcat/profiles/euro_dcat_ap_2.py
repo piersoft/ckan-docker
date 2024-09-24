@@ -213,6 +213,10 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
             temporal_extent = BNode()
             self.g.add((temporal_extent, RDF.type, DCT.PeriodOfTime))
             self._add_date_triple(temporal_extent, DCAT.startDate, dataset_dict.get('modified'))
+          elif dataset_dict.get('metadata_modified'):
+            temporal_extent = BNode()
+            self.g.add((temporal_extent, RDF.type, DCT.PeriodOfTime))
+            self._add_date_triple(temporal_extent, DCAT.startDate, dataset_dict.get('metadata_modified'))
 
         # spatial
         spatial_bbox = self._get_dataset_value(dataset_dict, "spatial_bbox")
