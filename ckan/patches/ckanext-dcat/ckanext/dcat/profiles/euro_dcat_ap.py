@@ -621,6 +621,8 @@ class EuropeanDCATAPProfile(RDFProfile):
               resource_dict['access_url']=resource_dict['url']
             if resource_dict.get('license'):
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
+            if 'c_g273' in dataset_dict.get('holder_identifier'):
+              resource_dict['access_url']=resource_dict['download_url']    
             self._add_triples_from_dict(resource_dict, distribution, items)
 
             #  Lists
