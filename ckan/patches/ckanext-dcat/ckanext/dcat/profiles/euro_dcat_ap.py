@@ -612,7 +612,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                 ("download_url", DCAT.downloadURL, None, URIRef),
             ]
             if not resource_dict.get('name') or len(resource_dict.get('name'))<2:
-               resource_dict['name']="N/A"
+                 resource_dict['name']="N/A"
             if not resource_dict.get('download_url'):
              if resource_dict.get('url'):
               resource_dict['download_url']=resource_dict['url']
@@ -620,10 +620,14 @@ class EuropeanDCATAPProfile(RDFProfile):
              if resource_dict.get('url'):
               resource_dict['access_url']=resource_dict['url']
             if resource_dict.get('license'):
-             resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
+             resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/')
+             resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
             if 'c_g273' in dataset_dict.get('holder_identifier'):
-              resource_dict['access_url']=resource_dict['download_url']    
+              resource_dict['access_url']=resource_dict['download_url']
+            if 'inps' in dataset_dict.get('holder_identifier'):
+              resource_dict['access_url']=resource_dict['download_url']
             self._add_triples_from_dict(resource_dict, distribution, items)
+
 
             #  Lists
             items = [
