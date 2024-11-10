@@ -831,6 +831,15 @@ class EuropeanDCATAPProfile(RDFProfile):
                     )
                 except (ValueError, TypeError):
                     g.add((distribution, DCAT.byteSize, Literal(resource_dict["size"])))
+            else:
+                   g.add(
+                        (
+                            distribution,
+                            DCAT.byteSize,
+                            Literal(float("1024"), datatype=XSD.decimal),
+                        )
+                    )
+
             # Checksum
             if resource_dict.get("hash"):
               if not 'r_emiro' in dataset_dict.get('holder_identifier'):
