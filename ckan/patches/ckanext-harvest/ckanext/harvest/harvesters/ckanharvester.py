@@ -557,6 +557,7 @@ class CKANHarvester(HarvesterBase):
 
             if package_dict.get('url') is not None:
              url_dataset = package_dict.get('url')
+             url_dataset=url_dataset.replace("http://bdap-opendata.rgs.mef.gov.it/","https://bdap-opendata.rgs.mef.gov.it/")
              if url_dataset:
               if "onsiglio" in url_dataset or "ONSIGLIO" in url_dataset:
                  package_dict['url']=""        
