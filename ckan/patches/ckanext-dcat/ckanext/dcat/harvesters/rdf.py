@@ -256,7 +256,7 @@ class DCATRDFHarvester(DCATHarvester):
                         continue
 
                     dataset['extras'].append({'key': 'guid', 'value': guid})
-                    log.debug('dataset extras in gather rdf %s',dataset['extras'])
+                    #log.debug('dataset extras in gather rdf %s',dataset['extras'])
                     guids_in_source.append(guid)
 
                     obj = HarvestObject(guid=guid, job=harvest_job,
