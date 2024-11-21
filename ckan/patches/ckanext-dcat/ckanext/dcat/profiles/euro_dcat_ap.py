@@ -626,6 +626,9 @@ class EuropeanDCATAPProfile(RDFProfile):
               resource_dict['access_url']=resource_dict['download_url']
             if 'inps' in dataset_dict.get('holder_identifier'):
               resource_dict['access_url']=resource_dict['download_url']
+            if not resource_dict.get('rights'):
+                resource_dict['rights']="http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+
             self._add_triples_from_dict(resource_dict, distribution, items)
 
 
