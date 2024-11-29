@@ -1255,7 +1255,7 @@ class ItalianDCATAPProfile(RDFProfile):
         g.add((poc, RDF.type, VCARD.Kind))
         g.add((poc, RDF.type, VCARD.Organization))
 
-        g.add((poc, VCARD.fn, Literal(org_dict.get('name'))))
+        g.add((poc, VCARD.fn, Literal(org_dict.get('display_name'))))
 
         if 'email' in org_dict.keys():  # this element is mandatory for dcatapit, but it may not have been filled for imported datasets
             g.add((poc, VCARD.hasEmail, URIRef('mailto:'+org_dict.get('email'))))
