@@ -17,8 +17,7 @@ services:
       - webnet
       - ckannet
     depends_on:
-      ckan:
-        condition: service_healthy
+      - ckan
     ports:
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
 
