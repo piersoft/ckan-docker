@@ -619,6 +619,9 @@ class EuropeanDCATAPProfile(RDFProfile):
             if not resource_dict.get('access_url'):
              if resource_dict.get('url'):
               resource_dict['access_url']=resource_dict['url']
+            if resource_dict.get('access_url'):
+             if 'view-dataset' in resource_dict.get('access_url'):
+               resource_dict['access_url']=resource_dict['url']
             if resource_dict.get('license'):
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/')
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
