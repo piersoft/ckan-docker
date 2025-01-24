@@ -639,7 +639,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             items = [
                 ("documentation", FOAF.page, None, URIRefOrLiteral),
                 ("language", DCT.language, None, URIRefOrLiteral),
-                ("conforms_to", DCT.conformsTo, None, Literal),
+                ("conforms_to", DCT.conformsTo, None, URIRefOrLiteral),
             ]
             self._add_list_triples_from_dict(resource_dict, distribution, items)
 
