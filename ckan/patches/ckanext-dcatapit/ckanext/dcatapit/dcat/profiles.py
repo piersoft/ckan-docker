@@ -1450,6 +1450,11 @@ class ItalianDCATAPProfile(RDFProfile):
                 log.debug('provo a patchare la licenza: %s',license)
                 if 'http' in license:
                     license=URIRef(license)
+                for lang, name in names.items():
+                  if 'Creative Commons Attribuzione' in name:
+                    license=URIRef('https://creativecommons.org/licenses/by/4.0/')
+                  if 'Italian Open Data License 2.0' in name:
+                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
                 g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
                 g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
                 g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
