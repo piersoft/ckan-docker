@@ -137,6 +137,7 @@ format_mapping = {
     'WMS_SRVC': 'WMS_SRVC',
     'Moka': 'HTML',
     'MOKA': 'HTML',
+    'SDMX': 'SDMX',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
