@@ -138,6 +138,7 @@ format_mapping = {
     'Moka': 'HTML',
     'MOKA': 'HTML',
     'SDMX': 'SDMX',
+    'tif': 'TIFF',
     'ZIP': 'ZIP',  # requires to be more specific, can't infer
 }
 
