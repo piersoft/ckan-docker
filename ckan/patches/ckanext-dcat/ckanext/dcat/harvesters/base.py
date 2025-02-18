@@ -40,7 +40,7 @@ log = logging.getLogger(__name__)
 
 class DCATHarvester(HarvesterBase):
 
-    DEFAULT_MAX_FILE_SIZE_MB = 50
+    DEFAULT_MAX_FILE_SIZE_MB = 80
     CHUNK_SIZE = 1024 * 512
 
     force_import = False
