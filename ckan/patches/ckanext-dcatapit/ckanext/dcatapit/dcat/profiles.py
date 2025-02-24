@@ -1451,7 +1451,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 if 'http' in license:
                     license=URIRef(license)
                 for lang, name in names.items():
-                  if 'Creative Commons Attribuzione' in name:
+                  if 'Creative Commons Attribuzione 4.0' in name:
                     license=URIRef('https://creativecommons.org/licenses/by/4.0/')
                   if 'Italian Open Data License 2.0' in name:
                     license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
