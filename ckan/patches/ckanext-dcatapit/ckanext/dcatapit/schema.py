@@ -141,13 +141,21 @@ def get_custom_package_schema():
             'is_required': False,
             'help': _(u"""Proprietà che confluisce in dcat:accessRights"""),
             'options': [
-                {   'text': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC',
+                {   'text': 'PUBBLICO',
                     'name': 'accessrights',
                     'validator': ['ignore_missing'],
                     'label': 'Access Rights',
                     'placeholder': 'Access Rights',
                     'localized': True,
                     'value': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                },
+                {   'text': 'RISERVATO',
+                    'name': 'accessrights',
+                    'validator': ['ignore_missing'],
+                    'label': 'Access Rights',
+                    'placeholder': 'Access Rights',
+                    'localized': True,
+                    'value': 'http://publications.europa.eu/resource/authority/access-right/RESTRICTED'
                 }
             ],
         },
