@@ -708,6 +708,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                  if 'ttl' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF_TURTLE'
+                 if 'xml' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='XML'
                  if 'xsd' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='XML'
