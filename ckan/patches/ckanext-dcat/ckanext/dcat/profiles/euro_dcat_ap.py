@@ -123,7 +123,11 @@ class EuropeanDCATAPProfile(RDFProfile):
                   if ' ' in value:
                       value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
                       value=re.sub('\W+','', value)
-
+                      value = value.replace('//', '')
+                  if 'http' in value:
+                      value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
+                      value=re.sub('\W+','', value)
+                      value = value.replace('//', '')
                 log.debug('value freq: %s',value)
                 dataset_dict["extras"].append({"key": key, "value": value})
 
