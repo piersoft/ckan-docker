@@ -80,6 +80,11 @@ class ItalianDCATAPProfile(RDFProfile):
                 if ' ' in value:
                   value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
                   value=re.sub('\W+','', value)
+                  value = value.replace('//', '')
+                if 'http' in value:
+                      value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
+                      value=re.sub('\W+','', value)
+                      value = value.replace('//', '')
                 self._remove_from_extra(dataset_dict, key)
                 dataset_dict[key] = value
             else:
