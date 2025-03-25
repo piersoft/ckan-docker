@@ -313,7 +313,7 @@ def get_custom_package_schema():
             'element': 'input',
             'type': 'date',
             'label': _('Release Date'),
-            'format': '%d-%m-%Y',
+            'format': '%Y-%m-%d',
             'placeholder': _('release date'),
             'is_required': False,
             'help': _('package_issued_help'),
@@ -324,7 +324,7 @@ def get_custom_package_schema():
             'element': 'input',
             'type': 'date',
             'label': _('Modification Date'),
-            'format': '%d-%m-%Y',
+            'format': '%Y-%m-%d',
             'placeholder': _('modification date'),
             'is_required': True,
             'help': _('package_modified_help')
