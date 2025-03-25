@@ -190,11 +190,11 @@ msgstr ""
 
 #: ckanext/dcatapit/schema.py:181
 msgid "Release Date"
-msgstr "Data di rilascio"
+msgstr "Data di rilascio (Anno-Mese-Giorno)"
 
 #: ckanext/dcatapit/schema.py:183
 msgid "release date"
-msgstr "Data di rilascio"
+msgstr "Data di rilascio (Anno-Mese-Giorno)"
 
 #: ckanext/dcatapit/schema.py:185
 msgid "package_issued_help"
@@ -204,11 +204,11 @@ msgstr ""
 
 #: ckanext/dcatapit/schema.py:192
 msgid "Modification Date"
-msgstr "Data di modifica"
+msgstr "Data di modifica (Anno-Mese-Giorno)"
 
 #: ckanext/dcatapit/schema.py:194
 msgid "modification date"
-msgstr "Data di modifica"
+msgstr "Data di modifica (Anno-Mese-Giorno)"
 
 #: ckanext/dcatapit/schema.py:196
 msgid "package_modified_help"
