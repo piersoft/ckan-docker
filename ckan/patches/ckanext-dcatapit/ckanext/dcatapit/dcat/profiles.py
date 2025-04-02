@@ -1472,7 +1472,7 @@ class ItalianDCATAPProfile(RDFProfile):
                   license=license.replace('by-nc','by')
                   if resource_dict['license'] == license_url:
                     log.debug('dct.license in dcatapit: %s',license)
-                    g.add((distribution, DCT.license, URIRef(license)))
+                    #g.add((distribution, DCT.license, URIRef(license)))
                 else:
                     g.add((distribution, DCT.license, URIRef('http://creativecommons.org/licenses/by/4.0/')))
             else:
