@@ -1468,8 +1468,11 @@ class ItalianDCATAPProfile(RDFProfile):
                 for lang, name in names.items():
                     g.add((license, FOAF.name, Literal(name, lang=lang)))
                 if resource_dict.get('license'):
+                  license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4>
+                  license=license.replace('by-nc','by')
                   if resource_dict['license'] == license_url:
-                    g.add((distribution, DCT.license, license))
+                    log.debug('dct.license in dcatapit: %s',license)
+                    g.add((distribution, DCT.license, URIRef(license)))
                 else:
                     g.add((distribution, DCT.license, URIRef('http://creativecommons.org/licenses/by/4.0/it/')))
             else:
