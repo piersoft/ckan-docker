@@ -1460,6 +1460,7 @@ class ItalianDCATAPProfile(RDFProfile):
                     license=URIRef('https://creativecommons.org/licenses/by/4.0/')
                   if 'Italian Open Data License 2.0' in name:
                     license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
+                #qui è presente ancora il bug. se il dataset ha una licenza diversa dalla distribuzione, il dct.licensedocument segue il dataset 
                 g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
                 g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
                 g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
