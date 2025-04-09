@@ -12,6 +12,12 @@
 
 **27.09.2024** Il codice è al 99,999% pronto per una installazione stand alone. le patch che ogni tanto aggiorno sono per harvesting di cataloghi remoti. Se non è il vostro caso, credo che si possa considerare stabile.
 
+**09.04.2025** nel file euro_dcat_ap.py è inserita una patch delicata. l'accessURL viene sostituito con la landingpage della risorsa sul CKAN e il downloadURL viene popolato con il valore di download della risorsa (ex accessURL). Sostituire il path del dominio con il proprio portale CKAN:
+
+# PATCH MOLTO DELICATA: SOSTITUISCE accessURL con la url della risorsa del CKAN e inserisce in downloadURL (campo opzionale per il DCAT)  la vecchia acce>
+            if dataset_dict.get('id'):
+               resource_dict['access_url']='https://www.piersoftckan.biz/dataset/'+dataset_dict['id']+'/resource/'+resource_dict['id']
+	       
 Versione beta, stabile
 
 
