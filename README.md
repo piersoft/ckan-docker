@@ -17,6 +17,8 @@
 	    if dataset_dict.get('id'):
                resource_dict['access_url']='https://www.piersoftckan.biz/dataset/'+dataset_dict['id']+'/resource/'+resource_dict['id']
 	       
+**DATA.EUROPA.EU** richiede che le accessURL e i downloadURL siano raggiunbili in HEAD con risposta 200. Testare le proprie risorse con CURL -I URL 
+
 Versione beta, stabile
 
 
