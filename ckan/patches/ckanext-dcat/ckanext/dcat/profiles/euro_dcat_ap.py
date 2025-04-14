@@ -661,6 +661,12 @@ class EuropeanDCATAPProfile(RDFProfile):
                 )
 
             # Format
+            if 'application' in resource_dict.get('format'):
+                 valueres=resource_dict.get('format')
+                 valueres=valueres.replace('application/','')
+                 resource_dict.pop('format', None)
+                 valueresu = valueres.upper()
+                 resource_dict['format']=valueresu
             if 'CSV' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='CSV'
@@ -685,6 +691,12 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'GEOJSON' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='GEOJSON'
+            if 'esri' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='SHP'
+            if 'kml' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='KML'
             if 'ov2' in resource_dict.get('format'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='BIN'    
@@ -697,7 +709,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'fgb' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SHP'
-                
+
             if 'OP_DATPRO' in resource_dict.get('format') or 'ARC' in resource_dict.get('format'):
                 if resource_dict.get('url'):
                  if 'rdf' in resource_dict.get('url'):
@@ -743,6 +755,9 @@ class EuropeanDCATAPProfile(RDFProfile):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='HTML_SIMPL'
                  if 'infogram.com' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='HTML_SIMPL'
+                 if 'pubhtml' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='HTML_SIMPL'
 
