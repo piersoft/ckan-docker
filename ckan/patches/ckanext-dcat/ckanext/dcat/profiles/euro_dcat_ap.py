@@ -661,12 +661,6 @@ class EuropeanDCATAPProfile(RDFProfile):
                 )
 
             # Format
-            if 'application' in resource_dict.get('format'):
-                 valueres=resource_dict.get('format')
-                 valueres=valueres.replace('application/','')
-                 resource_dict.pop('format', None)
-                 valueresu = valueres.upper()
-                 resource_dict['format']=valueresu
             if 'CSV' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='CSV'
