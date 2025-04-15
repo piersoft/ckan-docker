@@ -355,6 +355,13 @@ class EuropeanDCATAPProfile(RDFProfile):
               dataset_dict.pop('identifier', None)
               dataset_dict["identifier"]=identifier
               log.debug('sanitazed identifier')
+        if  dataset_dict.get('access_rights') is not None:
+              log.debug('esiste accessrights PUBLIC nel dcat')
+        else:
+              dataset_dict.pop('access_rights', None)
+              dataset_dict["access_rights"]= 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+              log.debug('non esiste accessrights PUBLIC nel dcat e lo aggiungo')
+            
         self._add_triples_from_dict(dataset_dict, dataset_ref, items)
 
 
