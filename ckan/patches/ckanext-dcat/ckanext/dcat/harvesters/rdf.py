@@ -458,17 +458,17 @@ class DCATRDFHarvester(DCATHarvester):
                             checkar=dataset.get('access_rights')
                             if 'http://publications.europa.eu/resource/authority/access-right/PUBLIC' in checkar:
                              log.warning('2.2 esiste access_rights ma provo a riscriverlo')
+                             del package_schema['access_rights']
+                             schemaexist=True                             
 # alcuni cataloghi ad oggi espongono gia' access_right                             
-                             if dataset.get('holder_identifier')=='ispra_rm':
-                               del package_schema['access_rights']
-                             if dataset.get('publisher_identifier')=='lispa':
-                               del package_schema['access_rights']
-                             if dataset.get('publisher_identifier')=='cciaan':
-                               del package_schema['access_rights']
-                             if dataset.get('publisher_identifier')=='piersoft':
-                               del package_schema['access_rights']
-
-
+#                             if dataset.get('holder_identifier')=='ispra_rm':
+#                               del package_schema['access_rights']
+#                             if dataset.get('publisher_identifier')=='lispa':
+#                               del package_schema['access_rights']
+#                             if dataset.get('publisher_identifier')=='cciaan':
+#                               del package_schema['access_rights']
+#                             if dataset.get('publisher_identifier')=='piersoft':
+#                               del package_schema['access_rights']
                              dataset.pop('access_rights',None)
                              existing_dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                              dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
