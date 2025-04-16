@@ -45,12 +45,11 @@ lang_mapping_ckan_to_xmllang = {
     'es_AR': 'es',
 }
 format_mapping = {
-    'WMS': 'MAP_SRVC',
     'HTML': 'HTML_SIMPL',
     'HTML_SIMPL': 'HTML_SIMPL',
     'URL': 'HTML_SIMPL',
     'WMS_SRVC': 'WMS_SRVC',
-    'MAP_SRVC': 'MAP_SRVC',
+    'MAP_SRVC': 'WMS_SRVC',
     'CSV': 'CSV',
     'XLS': 'XLS',
     'ODS': 'ODS',
@@ -134,7 +133,6 @@ format_mapping = {
     'GML': 'GML',
     'excel': 'XLSX',
     'WFS_SRVC': 'WFS_SRVC',
-    'WMS_SRVC': 'WMS_SRVC',
     'Moka': 'HTML',
     'MOKA': 'HTML',
     'SDMX': 'SDMX',
