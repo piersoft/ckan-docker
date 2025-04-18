@@ -44,7 +44,7 @@ RUN chmod 666 "${APP_DIR}/patches/topics.json"
 COPY patches/regions.rdf "${APP_DIR}/patches/regions.rdf"
 RUN chmod 666 "${APP_DIR}/patches/topics.json"
 
-
+COPY patches/model_dictize.py ${APP_DIR}/src/ckan/ckan/lib/dictization/model_dictize.py
 COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 #COPY patches/package_form.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
 #COPY patches/package_basic_fields.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
