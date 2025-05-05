@@ -24,7 +24,7 @@
         dct:issued "2023-08-01T00:00:00"^^xsd:dateTime ;
         dct:language <http://publications.europa.eu/resource/authority/language/ITA> ;
         dcat:themeTaxonomy <http://publications.europa.eu/resource/authority/data-theme> ;
-        dcat:dataset <https://www.piersoft.it/dataset/guide-turistiche>.
+        dcat:dataset <https://www.piersoft.it/dataset/meteo>.
 
         <http://eurovoc.europa.eu/100202> a skos:Concept ;
             skos:prefLabel "2426 Investition und Finanzierung"@de,
@@ -52,31 +52,31 @@
                 dcat:Distribution ;
             dcatap:applicableLegislation <http://data.europa.eu/eli/reg_impl/2023/138/oj> ;
             dct:description "This dataset provides a test." ;
+            dcatap:availability <https://publications.europa.eu/resource/authority/planned-availability/STABLE>;
             dcterms:format <http://publications.europa.eu/resource/authority/file-type/CSV>;
             dct:issued "2024-06-01T19:26:46.118566"^^xsd:dateTime ;
-            dct:license <https://creativecommons.org/licenses/by/4.0/>,
-             <https://w3id.org/italia/controlled-vocabulary/licences/A1_PublicDomain> ;
+            dct:license <https://creativecommons.org/licenses/by/4.0/> ;
             dct:modified "2024-06-01T19:29:32.163986"^^xsd:dateTime ;
-            dct:title "Guide turistiche CSV" ;
-            dcat:accessService <https://www.piersoft.it/dataset/guide-turistiche/resource/4dd9b299-d375-4290-924a-4ea608126821/API> ;
-            dcat:accessURL <https://orgea.exampleMS.gov/files/1T2p3o4B.csv> ;
+            dct:rights           <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
+            dct:title "Meteo 2024 CSV" ;
+            dcat:accessService <https://www.piersoft.it/dataset/meteo/resource/4dd9b299-d375-4290-924a-4ea608126821/API> ;
+            dcat:accessURL <http://old.arpa.puglia.it/Meteo/dati.jsp?id_station=4&year=2024> ;
+            dcatap:availability <http://publications.europa.eu/resource/authority/distribution-availability/STABLE>;
             dcat:byteSize 1024.0 ;
+            dct:type "http://publications.europa.eu/resource/authority/dataset-type/HVD" ;
             dcat:mediaType "text/csv" .
 
-        <https://www.piersoft.it/dataset/guide-turistiche> a dcatapit:Dataset,
+        <https://www.piersoft.it/dataset/meteo> a dcatapit:Dataset,
                 dcat:Dataset ;
             dcatap:applicableLegislation <http://data.europa.eu/eli/reg_impl/2023/138/oj> ;
-            dcatap:hvdCategory <http://data.europa.eu/bna/asd487ae75> ;
+            dcatap:hvdCategory <http://data.europa.eu/bna/asd487ae75>;
             dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
-            dcterms:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/TRIENNIAL>;
-            dct:language <http://publications.europa.eu/resource/authority/language/ITA> ;
+            dcterms:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/DAILY>;
             dct:description "This dataset provides a test." ;
-            dct:identifier "c_c999:1T2p3o4B - Civiltà" ;
+            dct:identifier "c_c999:1T2p3o4B" ;
             dct:issued "2022-09-11T00:00:00"^^xsd:dateTime ;
             dct:modified "2022-09-11T00:00:00"^^xsd:dateTime ;
-            dct:publisher [ a foaf:Organization ;
-                    foaf:name "Redazione OD" ],
-                [ a dcatapit:Agent,
+            dct:publisher [ a dcatapit:Agent,
                         foaf:Agent ;
                     dct:identifier "piersoft" ;
                     foaf:name "Redazione OD"@it ] ;
@@ -84,26 +84,33 @@
                         foaf:Agent ;
                     dct:identifier "piersoft" ;
                     foaf:name "Catalogo di prova"@it ] ;
-            dct:spatial [ a dct:Location ;
-                    dcatapit:geographicalIdentifier "https://geonames.org/3174953" ] ;
+            dct:spatial <http://publications.europa.eu/resource/authority/country/ITA> ;
+            dct:temporal [ a dct:PeriodOfTime ;
+                            dcatapit:endDate "2024-12-31T00:00:00"^^xsd:dateTime ;
+                            dcatapit:startDate "2024-01-01T00:00:00"^^xsd:dateTime ;
+                            dcat:endDate "2024-12-31T00:00:00"^^xsd:dateTime ;
+                            dcat:startDate "2024-01-01T00:00:00"^^xsd:dateTime ] ;
             dct:subject <http://eurovoc.europa.eu/100202> ;
-            dct:title "Guide turistiche" ;
+            dct:title "Meteo Test API" ;
             dct:type "http://publications.europa.eu/resource/authority/dataset-type/HVD" ;
             dcat:contactPoint <https://www.piersoft.it/organization/f123a49e-9008-44fb-8835-05fe89f7b9b1> ;
             dcat:distribution <https://www.piersoft.it/dataset/761e68bc-cf46-447b-b46a-f7afbc4abc85/resource/abc763eb-1b8e-4a19-a40c-a8f6bcbbcc9f> ;
-            dcat:keyword "Istruzione",
-                "Laureati" ;
-            dcat:landingPage   <https://www.piersoft.it/dataset/guide-turistiche/> ;
+            dcat:keyword "Meteo",
+                "Test" ;
+            dcat:landingPage   <https://www.piersoft.it/dataset/meteo/> ;
             dcat:theme   <http://publications.europa.eu/resource/authority/data-theme/ECON> .
 
-        <https://www.piersoft.it/dataset/guide-turistiche/resource/4dd9b299-d375-4290-924a-4ea608126821/API> a dcat:DataService ;
-            dcatap:availability <http://publications.europa.eu/resource/authority/distribution-availability/experimental> ;
-            dct:description "The EA API platform provides a uniform access to the real-time data collected by EA" ;
-            dct:license <https://orgea.exampleMS.gov/api/documentation/TermsOfUse> ;
-            dct:title "EA API platform" ;
-            dcat:endpointDescription <https://orgea.exampleMS.gov/api/openAPI/index.html> ;
-            dcat:endpointURL <https://orgea.exampleMS.gov/api/v2/> ;
-            dcat:servesDataset <https://www.piersoft.it/dataset/guide-turistiche> .
+        <https://www.piersoft.it/dataset/meteo/resource/4dd9b299-d375-4290-924a-4ea608126821/API> a dcat:DataService ;
+            dct:description "The Meteo ArpaPuglia API platform provides a uniform access to data collected" ;
+            dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+            dct:title "Test Meteo API platform" ;
+            dcat:endpointDescription <https://dati.puglia.it/ckan/dataset/dati-meteo-2024/resource/6eb809d0-65bd-45a2-b8c8-50f22d96c94b> ;
+            dcat:endpointURL <http://old.arpa.puglia.it/Meteo/dati.jsp> ;
+            dcatap:availability <http://publications.europa.eu/resource/authority/distribution-availability/STABLE>;
+            dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+            dct:type "http://publications.europa.eu/resource/authority/dataset-type/HVD" ;
+            dcatap:hvdCategory "['http://data.europa.eu/bna/c_e1da4e07']";
+            dcat:servesDataset <https://www.piersoft.it/dataset/meteo> .
 
         <https://www.piersoft.it/organization/f123a49e-9008-44fb-8835-05fe89f7b9b1> a dcatapit:Organization,
                 vcard:Kind,
@@ -115,3 +122,10 @@
 
         <http://publications.europa.eu/resource/authority/data-theme> a skos:ConceptScheme ;
                 dct:title "Il Vocabolario Data Theme"@it .
+
+        <http://publications.europa.eu/resource/authority/access-right/PUBLIC>
+                a       dct:RightsStatement .
+
+        <http://publications.europa.eu/resource/authority/country/ITA> a dct:Location ;
+                    skos:prefLabel "Italia" ;
+                    locn:Geometry "POLYGON ((6.6270 35.4930, 18.5210 35.4930, 18.5210 47.0920, 6.6270 47.0920, 6.6270 35.4930))"^^gsp:wktLiteral .
