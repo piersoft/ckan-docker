@@ -9,6 +9,7 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
 
 <https://www.piersoft.it> a dcatapit:Catalog,
             dcat:Catalog ;
