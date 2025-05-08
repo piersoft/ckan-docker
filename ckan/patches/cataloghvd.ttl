@@ -10,6 +10,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
 
 <https://www.piersoft.it> a dcatapit:Catalog,
             dcat:Catalog ;
@@ -66,6 +68,10 @@
             dcat:byteSize 1024.0 ;
             dct:type "http://publications.europa.eu/resource/authority/dataset-type/HVD" ;
             dcat:mediaType "text/csv" .
+
+            <http://publications.europa.eu/resource/authority/country/ITA> a dct:Location ;
+                skos:prefLabel "Italia" ;
+                locn:geometry "POLYGON ((6.6270 35.4930, 18.5210 35.4930, 18.5210 47.0920, 6.6270 47.0920, 6.6270 35.4930))"^^gsp:wktLiteral .
 
         <https://www.piersoft.it/dataset/meteo> a dcatapit:Dataset,
                 dcat:Dataset ;
@@ -126,7 +132,3 @@
 
         <http://publications.europa.eu/resource/authority/access-right/PUBLIC>
                 a       dct:RightsStatement .
-
-        <http://publications.europa.eu/resource/authority/country/ITA> a dct:Location ;
-                    skos:prefLabel "Italia" ;
-                    locn:Geometry "POLYGON ((6.6270 35.4930, 18.5210 35.4930, 18.5210 47.0920, 6.6270 47.0920, 6.6270 35.4930))"^^gsp:wktLiteral .
