@@ -382,11 +382,11 @@ class DCATRDFHarvester(DCATHarvester):
                   # dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
                   log.debug('in existing dataset è presente hvd_category')
                 #log.debug('existing_dataset: %s',existing_dataset)
-                identif = dataset['identifier']
+                identif = dataset.get('identifier')
                 if not identif:
                     dataset['identifier']=dataset['id']
 
-                notes = dataset['notes']
+                notes = dataset.get('notes')
                 if not notes:
                     dataset['notes']="N_A"
                 tags = dataset.get('tags',[])
@@ -544,10 +544,10 @@ class DCATRDFHarvester(DCATHarvester):
                 harvester_tmp_dict = {}
 
                 name = dataset['name']
-                identif = dataset['identifier']
+                identif = dataset.get('identifier')
                 if not identif:
                     dataset['identifier']=dataset['id']
-                notes = dataset['notes']
+                notes = dataset.get('notes')
                 if not notes:
                     dataset['notes']="N_A"
                 tags = dataset.get('tags',[]) 
