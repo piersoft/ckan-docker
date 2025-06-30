@@ -175,7 +175,7 @@ def get_custom_package_schema():
                     'name': 'Metereologia',
                     'validator': ['ignore_missing'],
                     'label': 'Metereologia',
-                    'value': 'http://data.europa.eu/bna/asd487ae75',
+                    'value': 'http://data.europa.eu/bna/c_164e0bf5',
                     'placeholder': 'Metereologia',
                     'localized': True
                 },
