@@ -76,7 +76,7 @@
         <https://www.piersoft.it/dataset/meteo> a dcatapit:Dataset,
                 dcat:Dataset ;
             dcatap:applicableLegislation <http://data.europa.eu/eli/reg_impl/2023/138/oj> ;
-            dcatap:hvdCategory <http://data.europa.eu/bna/asd487ae75>;
+            dcatap:hvdCategory <http://data.europa.eu/bna/c_164e0bf5>;
             dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
             dcterms:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/DAILY>;
             dct:description "This dataset provides a test." ;
