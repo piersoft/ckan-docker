@@ -480,8 +480,8 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
                 name = item['name']
                 if 'c_b79e35eb' in name:
                  name = name.replace('http://data.europa.eu/bna/c_b79e35eb','Dati relativi alla mobilità')
-                if 'asd487ae75' in name: 
-                 name = name.replace('http://data.europa.eu/bna/asd487ae75','Dati metereologici')
+                if 'c_164e0bf5' in name: 
+                 name = name.replace('http://data.europa.eu/bna/c_164e0bf5','Dati metereologici')
                 if 'c_a9135398' in name:
                  name = name.replace('http://data.europa.eu/bna/c_a9135398','Dati relativi alle imprese e alla proprietà delle imprese')
                 if 'c_ac64a52d' in name:
