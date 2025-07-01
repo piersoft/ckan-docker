@@ -171,12 +171,12 @@ def get_custom_package_schema():
                     'placeholder': 'Non HVD',
                     'localized': True
                 },
-                {   'text': 'Dati metereologici',
-                    'name': 'Metereologia',
+                {   'text': 'Dati meteorologici',
+                    'name': 'Meteorologia',
                     'validator': ['ignore_missing'],
-                    'label': 'Metereologia',
+                    'label': 'Meteorologia',
                     'value': 'http://data.europa.eu/bna/c_164e0bf5',
-                    'placeholder': 'Metereologia',
+                    'placeholder': 'Meteorologia',
                     'localized': True
                 },
                 {   'text': 'Dati relativi alle imprese e alla proprietà delle imprese',
