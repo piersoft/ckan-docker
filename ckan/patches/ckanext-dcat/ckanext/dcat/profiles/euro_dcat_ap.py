@@ -818,6 +818,10 @@ class EuropeanDCATAPProfile(RDFProfile):
                     mimetype = 'application/pdf'
                 if 'GPKG' in fmt:
                     mimetype = 'application/vnd.gentoo.gpkg'
+                if 'GRIB' in fmt:
+                    mimetype = 'application/grib'
+                if 'BUFR' in fmt:
+                    mimetype = 'application/bufr'
   #                else:
                     # Use dct:format
      #                 mimetype = None
