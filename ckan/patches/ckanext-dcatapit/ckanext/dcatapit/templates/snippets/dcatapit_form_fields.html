@@ -19,7 +19,7 @@
                                  help=field.help) }}
 
             {% elif field.element == 'select' %}
-                  {% set attrs =  {} %}
+                  {% set attrs = {} %}
                   {% if field.name == "distribution_format" %}
                       {% set attrs =  {'class': 'form-control', 'style': 'width:50%'} %}
                   {% endif %}
@@ -27,7 +27,14 @@
                       {% set attrs =  {'class': 'form-control', 'style': 'width:50%'} %}
                   {% endif %}
                   {% set attrs = field.attrs or {} %}
-                  {% set options = h.get_vocabulary_items(field.vocabulary_name) if field.type == 'vocabulary' else field.options %}
+                  {# Recupero delle opzioni ordinate #}
+                  {% if field.name == "distribution_format" %}
+                     {% set options = h.get_vocabulary_items(field.vocabulary_name) | sort(attribute='value') %}
+                  {% elif field.type == 'vocabulary' %}
+                     {% set options = h.get_vocabulary_items(field.vocabulary_name) | sort(attribute='name') %}
+                  {% else %}
+                     {% set options = field.options %}
+                  {% endif %}
 
                   {{ dform.select(field.name,
                                   label=field.label,
