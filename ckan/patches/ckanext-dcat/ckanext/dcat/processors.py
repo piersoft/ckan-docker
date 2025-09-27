@@ -471,10 +471,12 @@ class RDFSerializer(RDFProcessor):
             dataset_reftmp=dataset_ref.replace(PREF_LANDING,source_uri)
             dataset_refok=URIRef(dataset_reftmp)
             log.info('dataset_ref %s',dataset_ref)
-
+            created_str = dataset_dict['organization']['created'].split('.')[0]  # taglia microsecondi
+            dt = datetime.datetime.strptime(created_str, "%Y-%m-%dT%H:%M:%S")
             g.add((root_catalog_ref, DCT.hasPart, catalog_ref))
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
             g.add((catalog_ref, RDF.type, DCAT.Catalog))
+            g.add((catalog_ref, DCT.issued, Literal(dt.isoformat(), datatype=XSD.dateTime)))
             g.add((catalog_ref, DCAT.dataset, dataset_refok))
             taxonomy = URIRef('http://publications.europa.eu/resource/authority/data-theme')
             g.add((catalog_ref, DCAT.themeTaxonomy, taxonomy))
