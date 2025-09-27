@@ -476,6 +476,8 @@ class RDFSerializer(RDFProcessor):
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
             g.add((catalog_ref, RDF.type, DCAT.Catalog))
             g.add((catalog_ref, DCAT.dataset, dataset_refok))
+            taxonomy = URIRef('http://publications.europa.eu/resource/authority/data-theme')
+            g.add((catalog_ref, DCAT.themeTaxonomy, taxonomy))
             sources = (('source_catalog_title', DCT.title, Literal,),
                        ('source_catalog_description', DCT.description, Literal,),
                        ('source_catalog_homepage', FOAF.homepage, URIRef,),
