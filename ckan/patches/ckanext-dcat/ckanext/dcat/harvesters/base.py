@@ -120,7 +120,13 @@ class DCATHarvester(HarvesterBase):
                                             harvest_job)
                     return None, None
 
-            content = content.decode('utf-8')
+            # utf-8 non è la sola codifica. patch 
+            if isinstance(content, bytes):
+                 try:
+                    content = content.decode('utf-8')
+                 except UnicodeDecodeError:
+                    content = content.decode('windows-1252', errors='ignore')
+           # content = content.decode('utf-8')
 
             if content_type is None and r.headers.get('content-type'):
                 content_type = r.headers.get('content-type').split(";", 1)[0]
