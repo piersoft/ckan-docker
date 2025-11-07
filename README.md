@@ -73,9 +73,9 @@ more information.
 
 	```sh
 	# Go to into docker
-	docker exec -it ckan bash 
+	docker exec -it ckan bash
 
-	cd /dockerentry-point 
+	cd /docker-entrypoint.d
 
 	sh 03_ckan_groups.end
 
