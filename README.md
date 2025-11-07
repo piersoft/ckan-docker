@@ -46,7 +46,7 @@ more information.
 
 1. Modifica `.env` sulla base delle tue necessità.
 
-1. Sostituisci tutte le stringhe del tipo `www.piersoftckan.biz` nel file `.env` con, ad esempio, `https://192.168.0.67:8443` .
+1. Sostituisci tutte le stringhe del tipo `www.piersoftckan.biz` nel file `.env` con, ad esempio, `https://127.0.0.1:8443` .
 
 1. Change in `.env` values for `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`. Default values are:
 
