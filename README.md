@@ -77,7 +77,7 @@ more information.
 
 	cd /dockerentry-point 
 
-	sh 03.ckan_group.end
+	sh 03_ckan_groups.end
 
 	exit
 
