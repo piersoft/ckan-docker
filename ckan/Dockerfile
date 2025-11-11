@@ -60,6 +60,8 @@ COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/ima
 #COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
 # patch per user not auth to show in harvesting
 COPY patches/__init__.py ${APP_DIR}/src/ckan/ckan/logic/__init__.py
+# patch per avere il rating dal portale europeo dei dati aperti. Decommentare se si vuole il punteggio
+#COPY patches/read.html "${APP_DIR}/src/ckan/ckan/templates/package/read.html"
 
 # Min length resource = 5
 COPY patches/validators.py ${APP_DIR}/src/ckan/ckan/logic/validators.py
