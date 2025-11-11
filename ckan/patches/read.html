@@ -1,0 +1,145 @@
+{% extends "package/read_base.html" %}
+
+{% block primary_content_inner %}
+  {{ super() }}
+  {% block package_description %}
+    {% if pkg.private %}
+      <span class="dataset-private badge badge-inverse pull-right">
+        <i class="fa fa-lock"></i>
+        {{ _('Private') }}
+      </span>
+    {% endif %}
+    <h1>
+      {% block page_heading %}
+        {{ h.dataset_display_name(pkg) }}
+        {% if pkg.state.startswith('draft') %}
+          [{{ _('Draft') }}]
+        {% endif %}
+        {% if pkg.state == 'deleted' %}
+          [{{ _('Deleted') }}]
+        {% endif %}
+      {% endblock %}
+    </h1>
+    {% block package_notes %}
+      {% if pkg.notes %}
+        <div class="notes embedded-content">
+          {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
+        </div>
+      {% endif %}
+    {% endblock %}
+  {% endblock %}
+
+  {% block package_resources %}
+    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources,
+      can_edit=h.check_access('package_update', {'id':pkg.id }) %}
+{# Container per mostrare la quality measure dall'API GAL --- #}
+<div id="quality_meas_container" style="margin:1em 0; padding:0.5em; border:1px solid #ccc; background:#f9f9f9;">
+  <strong>
+    <a href="https://data.europa.eu/mqa/methodology?locale=it" target="_blank" style="text-decoration:none; color:#0066cc;">
+      Punteggio qualità dal portale europeo <span title="Scopri la metodologia">ℹ️</span>
+    </a>:
+  </strong>
+  <span class="qm-value">Caricamento…</span>
+</div>
+  {% endblock %}
+
+  {% block package_tags %}
+    {% snippet "package/snippets/tags.html", tags=pkg.tags %}
+  {% endblock %}
+
+  {% block package_additional_info %}
+    {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
+  {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+function getDatasetIdentifier() {
+  var rows = document.querySelectorAll("tr");
+  for (var i = 0; i < rows.length; i++) {
+    var th = rows[i].querySelector("th.dataset-label");
+    var td = rows[i].querySelector("td.dataset-details");
+    if (th && th.textContent.trim() === "Identifier" && td) {
+      return td.textContent.trim();
+    }
+  }
+  return null;
+}
+
+  function updateQuality(identifier) {
+    var elem = document.querySelector("#quality_meas_container .qm-value");
+    if (!elem || !identifier) return;
+
+// costruzione URL dinamica, encodeURIComponent solo sulla q
+  var apiUrl = "https://data.europa.eu/api/hub/search/search" +
+               "?filters=dataset" +
+               "&field=quality_meas" +
+               "&q=" + encodeURIComponent('"' + identifier + '"');
+// +
+  //             "&facets=" + encodeURIComponent('{"publisher":["GAL Terra dei Messapi"]}');
+//
+
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+//        console.log("Risposta API:", data); // <-- aggiunto log completo
+        console.log(apiUrl)
+        var qm = data?.result?.results?.[0]?.quality_meas?.scoring;
+//        console.log("Quality measure scoring:", qm);
+ if (qm !== undefined) {
+          let label = "";
+          let color = "black";
+
+          if (qm >= 351 && qm <= 405) {
+            color = "green";
+            label = "Eccellente";
+          } else if (qm >= 221 && qm <= 350) {
+            color = "goldenrod";
+            label = "Buono";
+          } else if (qm >= 121 && qm <= 220) {
+            color = "red";
+            label = "Sufficiente";
+          } else if (qm >= 0 && qm <= 120) {
+            color = "red";
+            label = "Scarso";
+          }
+
+          elem.innerHTML = `<span style="color:${color}; font-weight:bold;">${qm} (${label})</span>`;
+        } else {
+          elem.textContent = "non ancora censito";
+          elem.style.color = "black";
+        }
+      })
+      .catch(err => {
+        console.error("Errore fetch quality_meas:", err);
+        elem.textContent = "Errore API";
+      });
+  }
+  function init() {
+    var identifier = getDatasetIdentifier();
+    if (identifier) {
+  //    console.warn("Identifier:", identifier);
+      updateQuality(identifier);
+    } else {
+  //    console.warn("Identifier non trovato nella pagina");
+      var elem = document.querySelector("#quality_meas_container .qm-value");
+      if (elem) elem.textContent = "Identifier non trovato";
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+{% endblock %}
+
+{% endblock %}
