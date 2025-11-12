@@ -58,7 +58,7 @@
 (function(){
   "use strict";
 
-function getDatasetIdentifier() {
+function getDatasetIdentifiernew() {
   var rows = document.querySelectorAll("tr");
   for (var i = 0; i < rows.length; i++) {
     var th = rows[i].querySelector("th.dataset-label");
@@ -69,7 +69,11 @@ function getDatasetIdentifier() {
   }
   return null;
 }
-
+function getDatasetIdentifier() {
+  var td = document.querySelector("td.dataset-details"); // ← dichiarata con var
+  if (td) return td.textContent.trim();
+  return null;
+}
   function updateQuality(identifier) {
     var elem = document.querySelector("#quality_meas_container .qm-value");
     if (!elem || !identifier) return;
