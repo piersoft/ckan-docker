@@ -111,3 +111,5 @@ Perchè non si importa anche la Toscana o Emilia-Romagna con il catalog.rdf? per
 Se fossi il gestore del catalogo andrei a vedere i log. E' molto complicato "neutralizzare" gli errori nei cataloghi federati perchè non si è il proprietario della banca dati. Toscana importa ad esempio Firenze ma anche il Consorsio Lamma. Ci sono molti errori nei titoli, identificativi, tags ect e quindi le motivazioni per cui il `catalog.ttl` non viene generato possono essere molteplici. E' per questo che poi a sua volta, l'errore si propaga nel catalogo "centrale", in questo caso www.piersoftckan.biz. Ecco il motivo delle patch sui files su citati profiles, processors di dcat e profiles di dcatapit. Si possono vedere quelle patch e magari replicarle nel catalogo locale.
 
 Consiglio di osservare anche il file `rdf.py` sempre nella cartella `patches`.
+
+Il plugin originale DCATAP_IT è disponibile nella repo di github di [Geosolutions](https://github.com/geosolutions-it/ckanext-dcatapit), ed è stato adeguato alla versione 2.10.3 di CKAN
