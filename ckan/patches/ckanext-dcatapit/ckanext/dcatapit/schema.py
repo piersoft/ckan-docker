@@ -527,13 +527,21 @@ def get_custom_resource_schema():
             'validator': ['ignore_missing'],
             'element': 'select',
             'options': [
-                {   'text': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC',
+                {   'text': 'PUBBLICO',
                     'name': 'rights',
                     'validator': ['ignore_missing'],
                     'label': 'rights',
                     'placeholder': 'Rights',
                     'localized': True,
                     'value': 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+                },
+                {   'text': 'RISERVATO',
+                    'name': 'rights',
+                    'validator': ['ignore_missing'],
+                    'label': 'rights',
+                    'placeholder': 'Rights',
+                    'localized': True,
+                    'value': 'http://publications.europa.eu/resource/authority/access-right/RESTRICTED'
                 }
             ],
             'label': _('Rights'),
