@@ -714,6 +714,46 @@ class RDFProfile(object):
                 }
             )
 
+    def _add_statement_to_graph(self, data_dict, key, subject, predicate, _class=None):
+        """
+        Adds a statement property to the graph.
+        If it is a Literal value, it is added as a node (with a class if provided)
+        with a RDFS.label property, eg:
+
+            dct:accessRights [ a dct:RightsStatement ;
+                rdfs:label "Statement about access rights" ] ;
+
+        An URI can also be used:
+
+            dct:accessRights <https://example.org/vocab/access-right/TODO/PUBLIC> ;
+
+            [...]
+
+            <https://example.org/vocab/access-right/TODO/PUBLIC> a dct:RightsStatement .
+        """
+        value = self._get_dict_value(data_dict, key)
+        if value:
+            if isinstance(value, dict):
+                _objects = []
+                for lang in value:
+                    _objects.append(URIRefOrLiteral(value[lang], lang))
+            else:
+                _objects = [URIRefOrLiteral(value)]
+            statement_ref = None
+            for _object in _objects:
+                if isinstance(_object, Literal):
+                    if not statement_ref:
+                        statement_ref = BNode()
+                        self.g.add((subject, predicate, statement_ref))
+                        if _class:
+                            self.g.add((statement_ref, RDF.type, _class))
+                    self.g.add((statement_ref, RDFS.label, _object))
+                else:
+                    self.g.add((subject, predicate, _object))
+                    if _class:
+                        self.g.add((_object, RDF.type, _class))
+
+    
     def _get_dataset_value(self, dataset_dict, key, default=None):
         """
         Returns the value for the given key on a CKAN dict
