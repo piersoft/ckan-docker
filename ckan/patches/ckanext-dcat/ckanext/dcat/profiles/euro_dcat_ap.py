@@ -542,6 +542,23 @@ class EuropeanDCATAPProfile(RDFProfile):
             ):
                 resource_license_fallback = dataset_dict["license_url"]
 
+        # Statetements
+        self._add_statement_to_graph(
+            dataset_dict,
+            "access_rights",
+            dataset_ref,
+            DCT.accessRights,
+            DCT.RightsStatement
+        )
+
+        self._add_statement_to_graph(
+            dataset_dict,
+            "provenance",
+            dataset_ref,
+            DCT.provenance,
+            DCT.ProvenanceStatement
+        )
+        
         # Resources
         for resource_dict in dataset_dict.get("resources", []):
 
