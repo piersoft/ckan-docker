@@ -106,7 +106,7 @@ Questo è dovuto al fatto che i cataloghi non sono tutti harvestabili nello stes
 
 Questo perchè il catalogo finale presente su www.piersoftckan.biz viene poi esportato in [__Linked Open Data__](https://www.piersoftckan.biz/sparql) e l'associazione corretta dei dataset/cataloghi/risorse è fondamentale. 
 
-Perchè non si importa anche la Toscana o Emilia-Romagna con il catalog.rdf? perchè il loro portale da errore. Se digitate dati.emilia-romagna.it/catalog.ttl(o rdf) e poi magari a campione catalog.rdf?page=x vedrete che da errore. 
+Perchè non si importa anche la Toscana o Emilia-Romagna con il catalog.rdf? perchè il loro portale da errore. Se digitate dati.emilia-romagna.it/catalog.ttl(o rdf) e poi magari a campione catalog.rdf?page=x vedrete che da errore. (aggiornamento al 15.11.2025 ora Toscana , Marche e Emilia-Romagna funzionano correttamente in RDF per cui molte patch non si applicano più ai loro cataloghi)
 
 Se fossi il gestore del catalogo andrei a vedere i log. E' molto complicato "neutralizzare" gli errori nei cataloghi federati perchè non si è il proprietario della banca dati. Toscana importa ad esempio Firenze ma anche il Consorsio Lamma. Ci sono molti errori nei titoli, identificativi, tags ect e quindi le motivazioni per cui il `catalog.ttl` non viene generato possono essere molteplici. E' per questo che poi a sua volta, l'errore si propaga nel catalogo "centrale", in questo caso www.piersoftckan.biz. Ecco il motivo delle patch sui files su citati profiles, processors di dcat e profiles di dcatapit. Si possono vedere quelle patch e magari replicarle nel catalogo locale.
 
