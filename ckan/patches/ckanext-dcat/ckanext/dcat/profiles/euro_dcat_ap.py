@@ -563,61 +563,62 @@ class EuropeanDCATAPProfile(RDFProfile):
         for resource_dict in dataset_dict.get("resources", []):
 
            distribution = CleanedURIRef(resource_uri(resource_dict))
-           if dataset_dict.get('holder_identifier'):
-            if 'cmna' in (dataset_dict.get('holder_identifier') or ''):
+           holder_id = dataset_dict.get('holder_identifier') or ''
+           if holder_id:
+            if 'cmna' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=CleanedURIRef(distribution)
-            if '00514490010' in (dataset_dict.get('holder_identifier') or ''):
+            if '00514490010' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
               distribution=CleanedURIRef(distribution)
-            if 'r_lazio' in (dataset_dict.get('holder_identifier') or ''):
+            if 'r_lazio' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
               distribution=CleanedURIRef(distribution)
-            if 'r_basili' in (dataset_dict.get('holder_identifier') or ''):
+            if 'r_basili' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
               distribution=CleanedURIRef(distribution)
-            if 'r_marche' in (dataset_dict.get('holder_identifier') or ''):
+            if 'r_marche' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
               distribution=CleanedURIRef(distribution)
-            if 'aci' in (dataset_dict.get('holder_identifier') or ''):
+            if 'aci' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if 'r_emiro' in (dataset_dict.get('holder_identifier') or ''):
+            if 'r_emiro' in holder_id:
               distribution = distribution.replace("dati.comune.fe.it","https://dati.comune.fe.it")
               distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
               distribution=CleanedURIRef(distribution)
-            if 'cr_campa' in (dataset_dict.get('holder_identifier') or ''):
+            if 'cr_campa' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if 'r_toscan' in (dataset_dict.get('holder_identifier') or ''):
+            if 'r_toscan' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
               distribution=CleanedURIRef(distribution)
-            if 'm_lps' in (dataset_dict.get('holder_identifier') or ''):
+            if 'm_lps' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if '00304260409' in (dataset_dict.get('holder_identifier') or ''):
+            if '00304260409' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
               distribution=CleanedURIRef(distribution)
-            if 'c_a345' in (dataset_dict.get('holder_identifier') or ''):
+            if 'c_a345' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://ckan.opendatalaquila.it")
               distribution=CleanedURIRef(distribution)
-            if 'uds_ca' in dataset_dict.get('holder_identifier'):
+            if 'uds_ca' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://data.tdm-project.it")
               distribution=CleanedURIRef(distribution)
-            if 'm_it' in dataset_dict.get('holder_identifier'):
+            if 'm_it' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://www.interno.gov.it/")
               distribution=CleanedURIRef(distribution)
-            if 'm_inf' in dataset_dict.get('holder_identifier'):
+            if 'm_inf' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"https://dati.mit.gov.it")
               distribution=CleanedURIRef(distribution)
 
- #            if 'piersoft' in dataset_dict.get('holder_identifier'):
+ #            if 'piersoft' in holder_id:
   #             distribution = distribution.replace(PREF_LANDING,"https://www.piersoft.it")
    #            distribution=CleanedURIRef(distribution)
-            if 'c_e506' in dataset_dict.get('holder_identifier'):
+            if 'c_e506' in holder_id:
               distribution = distribution.replace(PREF_LANDING,"http://dati.comune.lecce.it")
               distribution=CleanedURIRef(distribution)
             if distribution is not None:
@@ -656,9 +657,9 @@ class EuropeanDCATAPProfile(RDFProfile):
             if resource_dict.get('license'):
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/')
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
-            if 'c_g273' in dataset_dict.get('holder_identifier'):
+            if 'c_g273' in holder_id:
               resource_dict['access_url']=resource_dict['download_url']
-            if 'inps' in dataset_dict.get('holder_identifier'):
+            if 'inps' in holder_id:
               resource_dict['access_url']=resource_dict['download_url']
             if not resource_dict.get('rights'):
                 resource_dict['rights']="http://publications.europa.eu/resource/authority/access-right/PUBLIC"
@@ -895,7 +896,7 @@ class EuropeanDCATAPProfile(RDFProfile):
 
             # Checksum
             if resource_dict.get("hash"):
-              if not 'r_emiro' in dataset_dict.get('holder_identifier'):
+              if not 'r_emiro' in holder_id:
                 checksum = BNode()
                 g.add((checksum, RDF.type, SPDX.Checksum))
                 g.add(
