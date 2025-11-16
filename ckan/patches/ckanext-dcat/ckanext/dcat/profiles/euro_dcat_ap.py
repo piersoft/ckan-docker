@@ -564,44 +564,44 @@ class EuropeanDCATAPProfile(RDFProfile):
 
            distribution = CleanedURIRef(resource_uri(resource_dict))
            if dataset_dict.get('holder_identifier'):
-            if 'cmna' in dataset_dict.get('holder_identifier'):
+            if 'cmna' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"https://dati.cittametropolitana.na.it/")
               distribution=CleanedURIRef(distribution)
-            if '00514490010' in dataset_dict.get('holder_identifier'):
+            if '00514490010' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
               distribution=CleanedURIRef(distribution)
-            if 'r_lazio' in dataset_dict.get('holder_identifier'):
+            if 'r_lazio' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
               distribution=CleanedURIRef(distribution)
-            if 'r_basili' in dataset_dict.get('holder_identifier'):
+            if 'r_basili' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
               distribution=CleanedURIRef(distribution)
-            if 'r_marche' in dataset_dict.get('holder_identifier'):
+            if 'r_marche' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"https://dati.regione.marche.it/")
               distribution=CleanedURIRef(distribution)
-            if 'aci' in dataset_dict.get('holder_identifier'):
+            if 'aci' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://lod.aci.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if 'r_emiro' in dataset_dict.get('holder_identifier'):
+            if 'r_emiro' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace("dati.comune.fe.it","https://dati.comune.fe.it")
               distribution = distribution.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
               distribution=CleanedURIRef(distribution)
-            if 'cr_campa' in dataset_dict.get('holder_identifier'):
+            if 'cr_campa' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if 'r_toscan' in dataset_dict.get('holder_identifier'):
+            if 'r_toscan' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"https://dati.toscana.it/")
               distribution=CleanedURIRef(distribution)
-            if 'm_lps' in dataset_dict.get('holder_identifier'):
+            if 'm_lps' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
               distribution=CleanedURIRef(distribution)
                # log.info('resource_distribution_it %s',distribution)
-            if '00304260409' in dataset_dict.get('holder_identifier'):
+            if '00304260409' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
               distribution=CleanedURIRef(distribution)
-            if 'c_a345' in dataset_dict.get('holder_identifier'):
+            if 'c_a345' in (dataset_dict.get('holder_identifier') or ''):
               distribution = distribution.replace(PREF_LANDING,"http://ckan.opendatalaquila.it")
               distribution=CleanedURIRef(distribution)
             if 'uds_ca' in dataset_dict.get('holder_identifier'):
