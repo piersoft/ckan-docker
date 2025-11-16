@@ -259,22 +259,23 @@ class RDFSerializer(RDFProcessor):
 
         dataset_ref1 = URIRef(dataset_uri(dataset_dict))
 
-        if 'm_lps' in dataset_dict.get('holder_identifier'):
+        holder_id = dataset_dict.get('holder_identifier') or ''
+        if 'm_lps' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lavoro.gov.it/")
-        if 'r_emiro' in dataset_dict.get('holder_identifier'):
+        if 'r_emiro' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.emilia-romagna.it/")
            dataset_ref1=dataset_ref1.replace("dati.comune.fe.it","https://dati.comune.fe.it")
-        if 'r_marche' in dataset_dict.get('holder_identifier'):
+        if 'r_marche' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.marche.it/")
-        if 'r_toscan' in dataset_dict.get('holder_identifier'):
+        if 'r_toscan' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.toscana.it")
-        if 'r_basili' in dataset_dict.get('holder_identifier'):
+        if 'r_basili' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.regione.basilicata.it/catalog/")
-        if 'r_lazio' in dataset_dict.get('holder_identifier'):
+        if 'r_lazio' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://dati.lazio.it/catalog/")
-        if 'aci' in dataset_dict.get('holder_identifier'):
+        if 'aci' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
-        if 'c_l219' in dataset_dict.get('holder_identifier'):
+        if 'c_l219' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
         if 'cr_campa' in dataset_dict.get('holder_identifier'):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
@@ -384,7 +385,8 @@ class RDFSerializer(RDFProcessor):
                 log.debug('catalog_ref in graph %s',catalog_ref)
                 cat_ref = self._add_source_catalog(catalog_ref, dataset_dict, dataset_ref)
                 if not cat_ref:
-                    org_site=self.g.objects(URIRef(str(catalog_ref)+"/organization/"+dataset_dict.get('owner_org')), VCARD.hasURL)
+                    owner_org_id = dataset_dict.get('owner_org') or ''
+                    org_site=self.g.objects(URIRef(str(catalog_ref)+"/organization/"+owner_org_id), VCARD.hasURL)
                     try:
                      self.g.add((next(org_site), DCAT.dataset, dataset_ref))
                     except StopIteration:
