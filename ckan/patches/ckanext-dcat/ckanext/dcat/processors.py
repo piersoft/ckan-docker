@@ -277,19 +277,19 @@ class RDFSerializer(RDFProcessor):
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://lod.aci.it")
         if 'c_l219' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
-        if 'cr_campa' in (dataset_dict.get('holder_identifier') or ''):
+        if 'cr_campa' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://opendata-crc.di.unisa.it/")
-        if '00304260409' in (dataset_dict.get('holder_identifier') or ''):
+        if '00304260409' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://opendata.comune.rimini.it/")
-        if 'c_a345' in (dataset_dict.get('holder_identifier') or ''):
+        if 'c_a345' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://ckan.opendatalaquila.it")
-        if 'uds_ca' in (dataset_dict.get('holder_identifier') or ''):
+        if 'uds_ca' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://data.tdm-project.it")
-        if 'm_it' in (dataset_dict.get('holder_identifier') or ''):
+        if 'm_it' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://www.interno.gov.it/")
-        if '00514490010' in (dataset_dict.get('holder_identifier') or ''):
+        if '00514490010' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"http://aperto.comune.torino.it/")
-        if 'm_inf' in (dataset_dict.get('holder_identifier') or ''):
+        if 'm_inf' in holder_id:
            dataset_ref1=dataset_ref1.replace(PREF_LANDING,"https://dati.mit.gov.it/")
 
 
