@@ -422,25 +422,59 @@ def read_dataset_page(_id, _format):
 
     return response
 
-def read_catalog_page(_format):
+def read_catalog_page(_format=None):
+    import logging
+    log = logging.getLogger(__name__)
+    from ckan.plugins import toolkit
+
     if not _format:
         _format = check_access_header()
 
     if not _format:
         return index_endpoint()
 
-    _profiles = toolkit.request.params.get('profiles')
+    _profiles = toolkit.request.args.get('profiles')
     if _profiles:
         _profiles = _profiles.split(',')
 
+    # -------------------------
+    # LETTURA MULTIPLA DI fq
+    # -------------------------
+    fq_list = toolkit.request.args.getlist('fq')
+    log.debug("[DCAT read_catalog_page] fq_list from request : %r", fq_list)
+    normalized_fq_list = []
+    for fq in fq_list:
+      if fq.startswith("-organization="):
+          fq = fq.replace("-organization=", "-organization:")
+      normalized_fq_list.append(fq)
+
+    fq_list = normalized_fq_list
+    # Esiste già un filtro su access_rights?
+    has_access_filter = any('access_rights' in fq for fq in fq_list)
+
+    # Riconosci organization sia ":" che "="
+    has_org_geodati = any(
+       fq.replace(" ", "").startswith("-organization") 
+       and "geodati-gov-it-rndt" in fq
+       for fq in fq_list
+    )
+
+
+    # Se geodati filtrato e non c’è un filtro specifico sugli access_rights
+    if has_org_geodati and not has_access_filter:
+        fq_list.append('-access_rights:*RESTRICTED*')
+        log.debug("[DCAT read_catalog_page] added filter: -access_rights:*RESTRICTED*")
+
     data_dict = {
-        'page': toolkit.request.params.get('page'),
-        'modified_since': toolkit.request.params.get('modified_since'),
-        'q': toolkit.request.params.get('q'),
-        'fq': toolkit.request.params.get('fq'),
+        'page': toolkit.request.args.get('page'),
+        'modified_since': toolkit.request.args.get('modified_since'),
+        'q': toolkit.request.args.get('q'),
+        'fq': fq_list if fq_list else None,
         'format': _format,
         'profiles': _profiles,
     }
+
+    log.debug("[DCAT read_catalog_page] final data_dict: %r", data_dict)
 
     try:
         response = toolkit.get_action('dcat_catalog_show')({}, data_dict)
@@ -452,6 +486,7 @@ def read_catalog_page(_format):
     response.headers['Content-type'] = CONTENT_TYPES[_format]
 
     return response
+
 
 
 def endpoints_enabled():
