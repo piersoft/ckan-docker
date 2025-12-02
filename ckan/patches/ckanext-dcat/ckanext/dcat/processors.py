@@ -380,17 +380,43 @@ class RDFSerializer(RDFProcessor):
         catalog_ref = self.graph_from_catalog(catalog_dict)
         if dataset_dicts:
             for dataset_dict in dataset_dicts:
+
+                # ------------------------------------------------------
+                # FIX ACCESS_RIGHTS PERSO IN package_search (catalog.ttl)
+                # ------------------------------------------------------
+                if not dataset_dict.get('access_rights'):
+                    extras = dataset_dict.get('extras', [])
+
+                    # CKAN extras come lista di dict
+                    if isinstance(extras, list):
+                        for e in extras:
+                            if e.get('key') == 'access_rights' and e.get('value'):
+                                dataset_dict['access_rights'] = e['value']
+                                break
+
+                    # CKAN extras come dict
+                    elif isinstance(extras, dict):
+                        if extras.get('access_rights'):
+                            dataset_dict['access_rights'] = extras['access_rights']
+                # ------------------------------------------------------
+                # FINE FIX
+                # ------------------------------------------------------
+
                 dataset_ref = self.graph_from_dataset(dataset_dict)
-                log.debug('catalog_ref in graph %s',catalog_ref)
+                log.debug('catalog_ref in graph %s', catalog_ref)
                 cat_ref = self._add_source_catalog(catalog_ref, dataset_dict, dataset_ref)
                 if not cat_ref:
-                    org_site=self.g.objects(URIRef(str(catalog_ref)+"/organization/"+dataset_dict.get('owner_org')), VCARD.hasURL)
+                    org_site = self.g.objects(
+                        URIRef(str(catalog_ref) + "/organization/" + dataset_dict.get('owner_org')),
+                        VCARD.hasURL
+                    )
                     try:
-                     self.g.add((next(org_site), DCAT.dataset, dataset_ref))
+                        self.g.add((next(org_site), DCAT.dataset, dataset_ref))
                     except StopIteration:
-                     log.debug("No more elements in org_site")
+                        log.debug("No more elements in org_site")
                 else:
                     self.g.add((cat_ref, DCAT.dataset, dataset_ref))
+
 
         if pagination_info:
             self._add_pagination_triples(pagination_info)
