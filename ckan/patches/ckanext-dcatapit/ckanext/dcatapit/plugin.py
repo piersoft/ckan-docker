@@ -492,6 +492,16 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
                  name = name.replace('http://data.europa.eu/bna/c_e1da4e07','Dati statistici')
                 label = interfaces.get_localized_tag_name(tag_name=name, lang=lang)
                 item['display_name'] = label
+        # --- FIX PER DRUPAL ---
+        # Mantieni 'issued' anche nella root del dataset,
+        # così package_search lo restituisce come CKAN package_show
+        for _dict in search_dicts:
+             if 'issued' not in _dict:
+                # prova a recuperarlo dagli extras
+                for e in _dict.get('extras', []):
+                   if e.get('key') == 'issued':
+                     _dict['issued'] = e.get('value')
+                     break
         return search_results
 
     def manage_extras_for_search(self, field, _dict, _dict_extras):
