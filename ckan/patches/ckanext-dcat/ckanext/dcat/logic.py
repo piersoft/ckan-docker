@@ -80,6 +80,9 @@ def dcat_datasets_list(context, data_dict):
 
 
 def _search_ckan_datasets(context, data_dict):
+    import logging
+    log = logging.getLogger(__name__)
+    from dateutil.parser import parse as dateutil_parse
 
     n = int(config.get('ckanext.dcat.datasets_per_page', DATASETS_PER_PAGE))
     page = data_dict.get('page', 1) or 1
@@ -103,22 +106,31 @@ def _search_ckan_datasets(context, data_dict):
         'rows': n,
         'start': n * (page - 1),
         'sort': 'metadata_modified desc',
+        'q': data_dict.get('q', '*:*'),
+        'fq_list': []
     }
 
-    search_data_dict['q'] = data_dict.get('q', '*:*')
-    search_data_dict['fq'] = data_dict.get('fq')
-    search_data_dict['fq_list'] = []
+    custom_fq = data_dict.get('fq')
+    log.debug("[DCAT] custom_fq received: %r", custom_fq)
 
-    # Exclude certain dataset types
+    # EVITA LISTE ANNIDATE
+    if isinstance(custom_fq, list):
+        search_data_dict['fq_list'].extend(custom_fq)
+    elif custom_fq:
+        search_data_dict['fq_list'].append(custom_fq)
+
+    # Filtri standard
     search_data_dict['fq_list'].append('-dataset_type:harvest')
     search_data_dict['fq_list'].append('-dataset_type:showcase')
 
     if modified_since:
         search_data_dict['fq_list'].append(
-            'metadata_modified:[{0} TO NOW]'.format(modified_since))
+            'metadata_modified:[{0} TO NOW]'.format(modified_since)
+        )
+
+    log.debug("[DCAT] FINAL search_data_dict: %r", search_data_dict)
 
     query = toolkit.get_action('package_search')(context, search_data_dict)
-
     return query
 
 
