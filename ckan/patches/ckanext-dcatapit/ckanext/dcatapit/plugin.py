@@ -30,6 +30,11 @@ except ImportError:
     class DefaultTranslation():
         pass
 
+ACCESS_MAP = {
+    'http://publications.europa.eu/resource/authority/access-right/PUBLIC': 'PUBBLICO',
+    'http://publications.europa.eu/resource/authority/access-right/RESTRICTED': 'LIMITATO',
+}
+
 LOCALIZED_RESOURCES_KEY = 'ckanext.dcatapit.localized_resources'
 LOCALIZED_RESOURCES_ENABLED = toolkit.asbool(config.get(LOCALIZED_RESOURCES_KEY, 'False'))
 MLR = None
@@ -474,6 +479,11 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
                 label = interfaces.get_localized_tag_name(tag_name=name, lang=lang)
                 item['display_name'] = label
                 ##log.warning('search facets in plugin %s',themes)
+        if 'access_rights' in facets:
+           for item in facets['access_rights']['items']:
+             uri = item['name']
+             if uri in ACCESS_MAP:
+               item['display_name'] = ACCESS_MAP[uri]
         if 'hvd_category' in facets:
             hvdcat=facets['hvd_category']
             for item in hvdcat['items']:
@@ -643,6 +653,7 @@ class DCATAPITPackagePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm,
         facets_dict['dcat_theme'] = toolkit._('Dataset Themes')
         facets_dict['dcat_subtheme_{}'.format(lang)] = toolkit._('Subthemes')
         facets_dict['hvd_category'] = toolkit._('Categorie HVD')
+        facets_dict['access_rights'] = toolkit._('Diritti di accesso')
         #facets_dict.update({
          #  'resource_license': toolkit._('Resources licenses'),
          #  'dcat_theme': toolkit._('Dataset Themes'),
