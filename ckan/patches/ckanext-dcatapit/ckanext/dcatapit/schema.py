@@ -244,11 +244,19 @@ def get_custom_package_schema():
                     'placeholder': 'Non AppLeg',
                     'localized': True
                 },
-                {   'text': 'http://data.europa.eu/eli/reg_impl/2023/138/oj',
+                {   'text': 'High Value Dataset',
                     'name': 'applicable_legislation',
                     'validator': ['ignore_missing'],
                     'label': 'EU Applicable Legislation',
                     'value': 'http://data.europa.eu/eli/reg_impl/2023/138/oj',
+                    'placeholder': 'Metereologia',
+                    'localized': True
+                },
+                {   'text': 'Altruismo dei dati',
+                    'name': 'applicable_legislation',
+                    'validator': ['ignore_missing'],
+                    'label': 'Altruismo dei dati',
+                    'value': 'http://data.europa.eu/eli/reg/2022/868/cpt_IV/oj',
                     'placeholder': 'Metereologia',
                     'localized': True
                 }
