@@ -161,7 +161,7 @@ def get_custom_package_schema():
         },
         {
             'name': 'hvd_category',
-            'validator': ['ignore_missing'],
+            'validator': ['ignore_missing','empty_string_to_none'],
             'element': 'select',
             'options': [
                 {   'text': 'Not HVD Category',
@@ -169,7 +169,8 @@ def get_custom_package_schema():
                     'validator': ['ignore_missing'],
                     'label': 'nonhhvd',
                     'placeholder': 'Non HVD',
-                    'localized': True
+                    'localized': True,
+				    'value': ''
                 },
                 {   'text': 'Dati meteorologici',
                     'name': 'Meteorologia',
