@@ -161,7 +161,7 @@ def get_custom_package_schema():
         },
         {
             'name': 'hvd_category',
-            'validator': ['ignore_missing','empty_string_to_none'],
+            'validator': ['empty_string_to_none','ignore_missing'],
             'element': 'select',
             'options': [
                 {   'text': 'Not HVD Category',
