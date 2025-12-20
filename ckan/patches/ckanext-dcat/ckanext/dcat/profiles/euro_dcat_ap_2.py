@@ -16,6 +16,14 @@ from .base import (
 from .euro_dcat_ap import EuropeanDCATAPProfile
 import logging
 log = logging.getLogger(__name__)
+
+FALLBACK_LICENSE = URIRef(
+    "http://creativecommons.org/licenses/by/4.0/"
+)
+
+FALLBACK_ACCESS_RIGHTS = URIRef(
+    "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+)
 class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
     """
     An RDF profile based on the DCAT-AP 2 for data portals in Europe
@@ -313,6 +321,13 @@ class EuropeanDCATAP2Profile(EuropeanDCATAPProfile):
                         ),
                         ("description", DCT.description, None, Literal),
                     ]
+                    # Fallback license
+                    if not access_service_dict.get("license"):
+                        access_service_dict["license"] = FALLBACK_LICENSE
+                    
+                    # Fallback access_rights
+                    if not access_service_dict.get("access_rights"):
+                        access_service_dict["access_rights"] = FALLBACK_ACCESS_RIGHTS
 
                     self._add_triples_from_dict(
                         access_service_dict, access_service_node, items
