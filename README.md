@@ -98,7 +98,7 @@ After this step, CKAN should be running at `CKAN_SITE_URL` (defined in `.env` fi
 to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
 
 ## Note sulle patch
-Le varie patch che in continuazione si stanno applicando, scaturiscono dall'analisi degli harvesting dei cataloghi nazionali, regionali e comunali, presenti su [dati.gov.it](https://dati.gov.it).
+Le varie patch che in continuazione si stanno applicando, scaturiscono dall'analisi degli harvesting dei cataloghi nazionali, regionali e comunali, presenti su [dati.gov.it](https://dati.gov.it). Vi consiglio di leggere il [CHANGELOG](https://github.com/piersoft/ckan-docker/blob/master/CHANGELOG.md) dove ci sono dei passaggi delicati da implementare o sostituire.
 
 Ogni harvesting ha le sue peculiarietà e quindi necessita di avere patch nei file `processors.py` e presenti nella dir `patches` e `profiles.py` presente nell'estensione `ckanext-dcatapit` customizzata che trovate inserita in questa repo, cosi come quella `ckanext-dcat` abilitata e patchata per i nuovi HVD (High Value Dataset). Motivo per cui in questi files ci sono delle sostituzioni anche della radice delle url (`www.piersoftckan.biz` sostituito ad esempio con `dati.toscana.it` se `holder_identifier` è `r_toscan`).
 
