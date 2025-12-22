@@ -559,6 +559,9 @@ class EuropeanDCATAPProfile(RDFProfile):
             DCT.ProvenanceStatement
         )
         
+        from ckan.common import config
+        site_url = config.get('ckan.site_url', '').rstrip('/')
+        
         # Resources
         for resource_dict in dataset_dict.get("resources", []):
 
@@ -650,9 +653,14 @@ class EuropeanDCATAPProfile(RDFProfile):
             if resource_dict.get('access_url'):
              if 'view-dataset' in resource_dict.get('access_url'):
                resource_dict['access_url']=resource_dict['url']
-# PATCH MOLTO DELICATA: SOSTITUISCE accessURL con la url della risorsa del CKAN e inserisce in downloadURL (campo opzionale per il DCAT)  la vecchia acce>
-            if dataset_dict.get('id'):
-               resource_dict['access_url']='https://www.piersoftckan.biz/dataset/'+dataset_dict['id']+'/resource/'+resource_dict['id']
+            #22.12.25 PATCH MOLTO DELICATA: SOSTITUISCE accessURL con la url della risorsa del CKAN e inserisce in downloadURL (campo opzionale per il DCAT)
+            if dataset_dict.get('id') and resource_dict.get('id') and site_url:
+                  resource_dict['access_url'] = (
+                    f"{site_url}/dataset/{dataset_dict['id']}/resource/{resource_dict['id']}"
+                  )
+            #22.12.25 DISATTIVAZIONE VECCHIA PATCH MOLTO DELICATA: LA SOSTITUZIONE E' MANUALE E MOLTI NON HANNO LETTO CHANGELOG
+            #if dataset_dict.get('id'):
+            #   resource_dict['access_url']='https://www.piersoftckan.biz/dataset/'+dataset_dict['id']+'/resource/'+resource_dict['id']
             if resource_dict.get('license'):
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/')
              resource_dict['license']=resource_dict['license'].replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
