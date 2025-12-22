@@ -1,7 +1,7 @@
 # Il docker CKAN per l'Italia
 
 > [!NOTE]  
-> Questa versione dockerizzata ha scopo dimostrativo: non è una repository ufficiale. 
+> Questa versione dockerizzata ha scopo dimostrativo: non è una repository ufficiale. Vi consiglio di leggere il [CHANGELOG](https://github.com/piersoft/ckan-docker/blob/master/CHANGELOG.md) dove ci sono dei passaggi delicati da implementare o sostituire.
 
 **Demo live**: https://www.piersoftckan.biz/
 
