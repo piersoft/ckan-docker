@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+## `2025-12-20`
+Risolto bug per HVD non valorizzati nelle modifiche manuali e che generavano extras hvd_category: "" al posto di non creare proprio la proprietà
+
 ## `2025-09-15`
 test per Postgres16 nativamente supportato. Modificati i files Docker e .yml. Beta
 
