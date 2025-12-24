@@ -83,5 +83,7 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
+RUN mkdir -p /var/run /var/log \
+ && chown -R ckan:ckan /var/run /var/log
 
 RUN apk add nano
