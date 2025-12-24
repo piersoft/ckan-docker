@@ -28,6 +28,12 @@ RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
+# Install xloader
+RUN pip3 install -U ckanext-xloader \
+    && pip3 install -U requests[security]
+RUN pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-xloader/master/requirements.txt
+
+
 # Install ckanext-multilang
 RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.git@master#egg=ckanext-multilang  && \
      pip3 install -e ${APP_DIR}/src/ckanext-multilang/
