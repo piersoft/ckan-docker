@@ -1,4 +1,6 @@
 # Changelog
+## `2025-12-24`
+Eliminato il Datapusher ed inserito di Xloader
 
 ## `2025-12-22`
 Patch del 2025-04-09 disattivata e abilitato il recepimento automatico della url tramite ckan_site_url
