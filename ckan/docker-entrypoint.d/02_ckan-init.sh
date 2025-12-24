@@ -59,8 +59,8 @@ ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
 ckan config-tool $CKAN_INI "ckanext.dcat.normalize_ckan_format = true"
 ckan config-tool $CKAN_INI "geonames.username = demo"
 ckan config-tool $CKAN_INI "ckanext.dcat.clean_tags = True"
-ckan config-tool $CKAN_INI "ckan.datapusher.url = http://datapusher:8800"
-ckan config-tool $CKAN_INI "ckan.datapusher.callback_url_base = http://ckan:5000"
+ckan config-tool $CKAN_INI "ckanext.xloader.jobs_db.uri = postgresql://ckan_default:pass@localhost/ckan_default"
+
 
 
 
