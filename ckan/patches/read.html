@@ -87,8 +87,9 @@ async function getIdentifierFromTTL() {
       // che NON appartengono a blank node → hanno ESATTAMENTE 4 spazi iniziali.
       const match = line.match(/^ {4}dct:identifier\s+"([^"]+)"/);
       if (match) {
-        console.log("Identifier estratto dal TTL:", match[1]);
-        return match[1];
+        const identifier = match[1].replace(/[:.]/g, '-');
+        console.log("Identifier estratto dal TTL e normalizzato secondo EDP:", identifier);
+        return identifier;
       }
     }
 
