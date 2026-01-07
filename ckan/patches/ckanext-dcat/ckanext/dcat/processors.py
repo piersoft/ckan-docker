@@ -536,11 +536,15 @@ class RDFSerializer(RDFProcessor):
             dataset_reftmp=dataset_ref.replace(PREF_LANDING,source_uri)
             dataset_refok=URIRef(dataset_reftmp)
             log.info('dataset_ref %s',dataset_ref)
-
+            created_str = dataset_dict['organization']['created'].split('.')[0]  # taglia microsecondi
+            dt = datetime.datetime.strptime(created_str, "%Y-%m-%dT%H:%M:%S")
             g.add((root_catalog_ref, DCT.hasPart, catalog_ref))
             g.add((catalog_ref, RDF.type, DCATAPIT.Catalog))
+            g.add((catalog_ref, DCT.issued, Literal(dt.isoformat(), datatype=XSD.dateTime)))
             g.add((catalog_ref, RDF.type, DCAT.Catalog))
             g.add((catalog_ref, DCAT.dataset, dataset_refok))
+            taxonomy = URIRef('http://publications.europa.eu/resource/authority/data-theme')
+            g.add((catalog_ref, DCAT.themeTaxonomy, taxonomy))
             sources = (('source_catalog_title', DCT.title, Literal,),
                        ('source_catalog_description', DCT.description, Literal,),
                        ('source_catalog_homepage', FOAF.homepage, URIRef,),
@@ -555,6 +559,17 @@ class RDFSerializer(RDFProcessor):
                 if key == 'source_catalog_description':
                    if not value:
                      value='Portale Dati Aperti'
+                if key == 'source_catalog_title':
+                   if not value:
+                     value='Portale Dati Aperti'
+                if key == 'source_catalog_modified':
+                   if not value:
+                     value='2024-01-01'
+                if key == 'source_catalog_homepage':
+                   if not value:
+                    if 'opendata.maggioli.cloud' in dataset_dict.get('extras', []):
+                     value='https://www.opendata.maggioli.cloud/organization/'+dataset_dict['organization']['name']+'#'
+                     log.debug('setto homepage org Maggioli: %s',value)
                 if value:
                  log.debug('value in base catalog struct %s',value)
                  if key == 'source_catalog_homepage' and value.endswith("/#"):
@@ -564,8 +579,13 @@ class RDFSerializer(RDFProcessor):
                    value = value + '/#'
                  if 'uni_ba' in dataset_dict.get('holder_identifier'):
                     if key == 'source_catalog_homepage':
-                     value = 'http://opendata.uniba.it/#'
-
+                      value = 'http://opendata.uniba.it/#'
+                 if 'cciaan' in dataset_dict.get('holder_identifier'):
+                     if key == 'source_catalog_homepage':
+                       value = 'https://opendata.marche.camcom.it'
+                 if 'aci' in dataset_dict.get('holder_identifier'):
+                       dataset_dict['extras'].append({'key': 'source_catalog_modified', 'value': _get_from_extra('dcat_modified')})
+                       dataset_dict['extras'].append({'key': 'source_catalog_language', 'value': 'ITA'})
  #                 if key == 'source_catalog_homepage' and not value.endswith("/"):
    #                 value = value + '/'
                  if key == 'source_catalog_modified':
