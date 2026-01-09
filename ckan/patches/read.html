@@ -62,11 +62,6 @@
     return parts[2] || null;  // /dataset/<name>
   }
 
-  // ----------------------
-  // 2️⃣ Legge SOLO il dct:identifier del BLOCCO dcat:Dataset dal TTL
-  //    - trova il subject con "a dcat:Dataset" (o dcatapit:Dataset)
-  //    - legge fino al "." di chiusura di quel subject
-  // ----------------------
   async function getIdentifierFromTTL() {
     try {
       const datasetName = getDatasetNameFromURL();
@@ -79,59 +74,60 @@
       const lines = ttl.split("\n");
 
       let inDatasetBlock = false;
-      const blockLines = [];
+      let bracketDepth = 0;
 
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const trimmed = line.trim();
 
-        // skip commenti e vuote
         if (!trimmed || trimmed.startsWith("#")) continue;
 
         if (!inDatasetBlock) {
-          // Inizio blocco dataset: "<...> a ... dcat:Dataset ... ;"
-          // (può contenere anche dcatapit:Dataset)
-          const startMatch = line.match(/^\s*<[^>]+>\s+a\s+.*\b(dcat:Dataset|dcatapit:Dataset)\b.*[;.]?\s*$/);
-          if (startMatch) {
+          // Trova l'inizio del subject Dataset
+          // es: <...> a dcatapit:Dataset, dcat:Dataset ;
+          const start = line.match(/^\s*<[^>]+>\s+a\s+.*\b(dcat:Dataset|dcatapit:Dataset)\b.*[;.]?\s*$/);
+          if (start) {
             inDatasetBlock = true;
-            blockLines.push(line);
+            bracketDepth = 0;
 
-            // Caso raro: soggetto chiuso sulla stessa riga con "."
+            // aggiorna bracketDepth anche sulla riga di start (di solito 0)
+            bracketDepth += (line.match(/\[/g) || []).length;
+            bracketDepth -= (line.match(/\]/g) || []).length;
+
+            // se chiude subito con "." (raro), finisce
             if (/\.\s*$/.test(line)) break;
           }
           continue;
         }
 
-        // Dentro blocco dataset: accumula fino al punto finale "."
-        blockLines.push(line);
+        // Siamo nel blocco Dataset: aggiorna profondità [] PRIMA di valutare match
+        bracketDepth += (line.match(/\[/g) || []).length;
+        bracketDepth -= (line.match(/\]/g) || []).length;
+
+        // Se siamo DENTRO un blank node, ignora eventuali dct:identifier (tipo creator/publisher)
+        if (bracketDepth === 0) {
+          const m = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
+          if (m) {
+            const raw = m[1].trim();
+            if (raw && raw !== "None") {
+              const identifier = raw
+                .replace(/[:.]/g, "-")
+                .replace(/-+/g, "-")
+                .replace(/^-+|-+$/g, "");
+
+              console.log("Identifier dataset estratto (fuori da blank node) e normalizzato:", identifier);
+              return identifier;
+            }
+          }
+        }
+
+        // Fine subject Dataset
         if (/\.\s*$/.test(line)) {
           break;
         }
       }
 
-      if (!inDatasetBlock || blockLines.length === 0) {
-        console.warn("Blocco dcat:Dataset non trovato nel TTL");
-        return null;
-      }
-
-      // Cerca dct:identifier SOLO nel blocco dataset
-      for (let line of blockLines) {
-        const match = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
-        if (match) {
-          const raw = match[1].trim();
-          if (!raw || raw === "None") continue;
-
-          const identifier = raw
-            .replace(/[:.]/g, "-")
-            .replace(/-+/g, "-")
-            .replace(/^-+|-+$/g, "");
-
-          console.log("Identifier estratto dal blocco Dataset e normalizzato:", identifier);
-          return identifier;
-        }
-      }
-
-      console.warn("dct:identifier non trovato dentro il blocco Dataset");
+      console.warn("Identifier dataset non trovato nel blocco Dataset (fuori da blank node)");
       return null;
 
     } catch (err) {
@@ -140,9 +136,7 @@
     }
   }
 
-  // ----------------------
-  // 3️⃣ Chiamata API qualità EU
-  // ----------------------
+  // 3️⃣ Chiamata API qualità EU (uguale a prima)
   function updateQuality(identifier) {
     const elem = document.querySelector("#quality_meas_container .qm-value");
     if (!elem || !identifier) return;
@@ -167,8 +161,7 @@
           else if (qm >= 121) { color = "red"; label = "Sufficiente"; }
           else { color = "red"; label = "Scarso"; }
 
-          elem.innerHTML =
-            `<span style="color:${color}; font-weight:bold;">${qm} (${label})</span>`;
+          elem.innerHTML = `<span style="color:${color}; font-weight:bold;">${qm} (${label})</span>`;
         } else {
           elem.textContent = "non ancora censito";
         }
@@ -198,6 +191,7 @@
 
 })();
 </script>
+
 
 
 {% endblock %}
