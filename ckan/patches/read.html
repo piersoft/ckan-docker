@@ -57,50 +57,88 @@
 (function(){
   "use strict";
 
-  // ----------------------
-  // 1️⃣ Ricava il nome del dataset dalla URL
-  // ----------------------
   function getDatasetNameFromURL() {
     const parts = window.location.pathname.split("/");
     return parts[2] || null;  // /dataset/<name>
   }
 
   // ----------------------
-  // 2️⃣ Legge SOLO il dct:identifier del dataset dal TTL
+  // 2️⃣ Legge SOLO il dct:identifier del BLOCCO dcat:Dataset dal TTL
+  //    - trova il subject con "a dcat:Dataset" (o dcatapit:Dataset)
+  //    - legge fino al "." di chiusura di quel subject
   // ----------------------
-async function getIdentifierFromTTL() {
-  try {
-    const datasetName = getDatasetNameFromURL();
-    if (!datasetName) return null;
+  async function getIdentifierFromTTL() {
+    try {
+      const datasetName = getDatasetNameFromURL();
+      if (!datasetName) return null;
 
-    const ttlUrl = "/dataset/" + datasetName + ".ttl";
-    console.log("Carico TTL:", ttlUrl);
+      const ttlUrl = "/dataset/" + datasetName + ".ttl";
+      console.log("Carico TTL:", ttlUrl);
 
-    const ttl = await fetch(ttlUrl).then(r => r.text());
-    const lines = ttl.split("\n");
+      const ttl = await fetch(ttlUrl).then(r => r.text());
+      const lines = ttl.split("\n");
 
-    for (let line of lines) {
-      const trimmed = line.trim();
+      let inDatasetBlock = false;
+      const blockLines = [];
 
-      // ⭐ Criterio chiave:
-      // prendiamo SOLO le righe con dct:identifier
-      // che NON appartengono a blank node → hanno ESATTAMENTE 4 spazi iniziali.
-      const match = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
-      if (match) {
-        const identifier = match[1].replace(/[:.]/g, '-').replace(/-+/g, '-');
-        console.log("Identifier estratto dal TTL e normalizzato secondo EDP:", identifier);
-        return identifier;
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        // skip commenti e vuote
+        if (!trimmed || trimmed.startsWith("#")) continue;
+
+        if (!inDatasetBlock) {
+          // Inizio blocco dataset: "<...> a ... dcat:Dataset ... ;"
+          // (può contenere anche dcatapit:Dataset)
+          const startMatch = line.match(/^\s*<[^>]+>\s+a\s+.*\b(dcat:Dataset|dcatapit:Dataset)\b.*[;.]?\s*$/);
+          if (startMatch) {
+            inDatasetBlock = true;
+            blockLines.push(line);
+
+            // Caso raro: soggetto chiuso sulla stessa riga con "."
+            if (/\.\s*$/.test(line)) break;
+          }
+          continue;
+        }
+
+        // Dentro blocco dataset: accumula fino al punto finale "."
+        blockLines.push(line);
+        if (/\.\s*$/.test(line)) {
+          break;
+        }
       }
+
+      if (!inDatasetBlock || blockLines.length === 0) {
+        console.warn("Blocco dcat:Dataset non trovato nel TTL");
+        return null;
+      }
+
+      // Cerca dct:identifier SOLO nel blocco dataset
+      for (let line of blockLines) {
+        const match = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
+        if (match) {
+          const raw = match[1].trim();
+          if (!raw || raw === "None") continue;
+
+          const identifier = raw
+            .replace(/[:.]/g, "-")
+            .replace(/-+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+          console.log("Identifier estratto dal blocco Dataset e normalizzato:", identifier);
+          return identifier;
+        }
+      }
+
+      console.warn("dct:identifier non trovato dentro il blocco Dataset");
+      return null;
+
+    } catch (err) {
+      console.error("Errore lettura TTL:", err);
+      return null;
     }
-
-    console.warn("Identifier dataset non trovato nelle righe principali");
-    return null;
-
-  } catch (err) {
-    console.error("Errore lettura TTL:", err);
-    return null;
   }
-}
 
   // ----------------------
   // 3️⃣ Chiamata API qualità EU
@@ -141,9 +179,6 @@ async function getIdentifierFromTTL() {
       });
   }
 
-  // ----------------------
-  // 4️⃣ Flusso principale (SOLO TTL, MAI Front-End)
-  // ----------------------
   async function init() {
     const identifier = await getIdentifierFromTTL();
 
@@ -163,6 +198,7 @@ async function getIdentifierFromTTL() {
 
 })();
 </script>
+
 
 {% endblock %}
 
