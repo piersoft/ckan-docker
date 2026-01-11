@@ -737,7 +737,7 @@ class EuropeanDCATAPProfile(RDFProfile):
                   resource_dict['format']='SHP'
 
             if 'OP_DATPRO' in resource_dict.get('format') or 'ARC' in resource_dict.get('format'):
-                if resource_dict.get('url'):
+                if resource_dict.get('url').lower():
                  if 'rdf' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF'
