@@ -2,6 +2,7 @@
 
 {% block primary_content_inner %}
   {{ super() }}
+
   {% block package_description %}
     {% if pkg.private %}
       <span class="dataset-private badge badge-inverse pull-right">
@@ -32,15 +33,28 @@
   {% block package_resources %}
     {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources,
       can_edit=h.check_access('package_update', {'id':pkg.id }) %}
-{# Container per mostrare la quality measure dall'API GAL --- #}
-<div id="quality_meas_container" style="margin:1em 0; padding:0.5em; border:1px solid #ccc; background:#f9f9f9;">
-  <strong>
-    <a href="https://data.europa.eu/mqa/methodology?locale=it" target="_blank" style="text-decoration:none; color:#0066cc;">
-      Punteggio qualità dal portale europeo <span title="Scopri la metodologia">ℹ️</span>
-    </a>:
-  </strong>
-  <span class="qm-value">Caricamento…</span>
-</div>
+
+    {# Container per mostrare la quality measure dall'API EDP #}
+    <div id="quality_meas_container" style="margin:1em 0; padding:0.5em; border:1px solid #ccc; background:#f9f9f9;">
+      <strong>
+        <a id="quality_meas_link"
+           href="https://data.europa.eu/data/datasets?locale=it"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="text-decoration:none; color:#0066cc;">
+          Punteggio qualità dal portale europeo <span title="Vai alla pagina qualità del dataset su data.europa.eu">ℹ️</span>
+        </a>:
+      </strong>
+      <span class="qm-value">Caricamento…</span>
+      <span style="margin-left:8px;">
+        <a href="https://data.europa.eu/mqa/methodology?locale=it"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="text-decoration:none;">
+          metodologia
+        </a>
+      </span>
+    </div>
   {% endblock %}
 
   {% block package_tags %}
@@ -51,149 +65,251 @@
     {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
   {% endblock %}
 
+{% endblock %}
+
 {% block scripts %}
   {{ super() }}
-<script>
-(function(){
-  "use strict";
+  <script>
+  (function(){
+    "use strict";
 
-  function getDatasetNameFromURL() {
-    const parts = window.location.pathname.split("/");
-    return parts[2] || null;  // /dataset/<name>
-  }
+    function getDatasetNameFromURL() {
+      const parts = window.location.pathname.split("/");
+      return parts[2] || null; // /dataset/<name>
+    }
 
-  async function getIdentifierFromTTL() {
-    try {
-      const datasetName = getDatasetNameFromURL();
-      if (!datasetName) return null;
+    // Estrae dct:identifier dal TTL del dataset, SOLO fuori da blank node (stesso criterio del tuo JS)
+    async function getIdentifierFromTTL() {
+      try {
+        const datasetName = getDatasetNameFromURL();
+        if (!datasetName) return null;
 
-      const ttlUrl = "/dataset/" + datasetName + ".ttl";
-      console.log("Carico TTL:", ttlUrl);
+        const ttlUrl = "/dataset/" + datasetName + ".ttl";
+        const resp = await fetch(ttlUrl, { credentials: "same-origin" });
+        if (!resp.ok) return null;
 
-      const ttl = await fetch(ttlUrl).then(r => r.text());
-      const lines = ttl.split("\n");
+        const ttl = await resp.text();
+        const lines = ttl.split("\n");
 
-      let inDatasetBlock = false;
-      let bracketDepth = 0;
+        let inDatasetBlock = false;
+        let bracketDepth = 0;
 
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        const trimmed = line.trim();
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const trimmed = line.trim();
 
-        if (!trimmed || trimmed.startsWith("#")) continue;
+          if (!trimmed || trimmed.startsWith("#")) continue;
 
-        if (!inDatasetBlock) {
-          // Trova l'inizio del subject Dataset
-          // es: <...> a dcatapit:Dataset, dcat:Dataset ;
-          const start = line.match(/^\s*<[^>]+>\s+a\s+.*\b(dcat:Dataset|dcatapit:Dataset)\b.*[;.]?\s*$/);
-          if (start) {
-            inDatasetBlock = true;
-            bracketDepth = 0;
+          if (!inDatasetBlock) {
+            const start = line.match(/^\s*<[^>]+>\s+a\s+.*\b(dcat:Dataset|dcatapit:Dataset)\b.*[;.]?\s*$/);
+            if (start) {
+              inDatasetBlock = true;
+              bracketDepth = 0;
 
-            // aggiorna bracketDepth anche sulla riga di start (di solito 0)
-            bracketDepth += (line.match(/\[/g) || []).length;
-            bracketDepth -= (line.match(/\]/g) || []).length;
+              bracketDepth += (line.match(/\[/g) || []).length;
+              bracketDepth -= (line.match(/\]/g) || []).length;
 
-            // se chiude subito con "." (raro), finisce
-            if (/\.\s*$/.test(line)) break;
+              if (/\.\s*$/.test(line)) break;
+            }
+            continue;
           }
-          continue;
-        }
 
-        // Siamo nel blocco Dataset: aggiorna profondità [] PRIMA di valutare match
-        bracketDepth += (line.match(/\[/g) || []).length;
-        bracketDepth -= (line.match(/\]/g) || []).length;
+          bracketDepth += (line.match(/\[/g) || []).length;
+          bracketDepth -= (line.match(/\]/g) || []).length;
 
-        // Se siamo DENTRO un blank node, ignora eventuali dct:identifier (tipo creator/publisher)
-        if (bracketDepth === 0) {
-          const m = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
-          if (m) {
-            const raw = m[1].trim();
-            if (raw && raw !== "None") {
-              const identifier = raw
-                .replace(/[:.]/g, "-")
-                .replace(/-+/g, "-")
-                .replace(/^-+|-+$/g, "");
-
-              console.log("Identifier dataset estratto (fuori da blank node) e normalizzato:", identifier);
-              return identifier;
+          if (bracketDepth === 0) {
+            const m = line.match(/^\s*dct:identifier\s+"([^"]+)"\s*[;.]?\s*$/);
+            if (m) {
+              const raw = (m[1] || "").trim();
+              if (raw && raw !== "None") return raw;
             }
           }
+
+          if (/\.\s*$/.test(line)) break;
         }
 
-        // Fine subject Dataset
-        if (/\.\s*$/.test(line)) {
-          break;
+        return null;
+      } catch (err) {
+        return null;
+      }
+    }
+
+    // Normalizzazione “CKAN-like” (coerente con quanto stai usando su Drupal):
+    // - lower
+    // - translit semplice (diacritici) via NFD
+    // - solo ":" "." -> "-"
+    // - spazi -> "-"
+    // - NON tocca underscore "_"
+    function normalizeEdpIdentifier(raw) {
+      if (!raw) return "";
+
+      let s = String(raw);
+
+      // normalizza virgolette/apostrofi “curvi”
+      s = s.replace(/[’‘´`]/g, "'");
+
+      // lower
+      s = s.toLowerCase();
+
+      // remove diacritics (ETA' ecc.) senza toccare underscore
+      try {
+        s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      } catch(e) {}
+
+      // solo : e . diventano -
+      s = s.replace(/[:.]/g, "-");
+
+      // spazi (solo whitespace) -> -
+      s = s.replace(/\s+/g, "-");
+
+      // compatta trattini
+      s = s.replace(/-+/g, "-").replace(/^-+|-+$/g, "");
+
+      return s;
+    }
+
+    function buildApiUrl(q) {
+      return (
+        "https://data.europa.eu/api/hub/search/search" +
+        "?filters=dataset" +
+        "&field=quality_meas" +
+        "&q=" + encodeURIComponent('"' + q + '"')
+      );
+    }
+
+    // Converte "resource" EDP (es: http://data.europa.eu/88u/dataset/p_bz-...~~1)
+    // in URL qualità UI: https://data.europa.eu/data/datasets/<slug>/quality?locale=it
+    function edpQualityUrlFromResource(resourceUrl) {
+      try {
+        const u = new URL(resourceUrl);
+        const parts = u.pathname.split("/").filter(Boolean);
+        const slug = parts[parts.length - 1] || "";
+        if (!slug) return null;
+        return "https://data.europa.eu/data/datasets/" + encodeURIComponent(slug) + "/quality?locale=it";
+      } catch(e) {
+        return null;
+      }
+    }
+
+    function labelForScore(qm) {
+      if (qm >= 351) return { label: "Eccellente", color: "green" };
+      if (qm >= 221) return { label: "Buono", color: "goldenrod" };
+      if (qm >= 121) return { label: "Sufficiente", color: "red" };
+      return { label: "Scarso", color: "red" };
+    }
+
+    // Prende BEST scoring non-null e si porta dietro la "resource" corrispondente
+    function pickBestResult(results) {
+      if (!Array.isArray(results) || results.length === 0) return null;
+
+      let best = null; // {score:int, resource:string|null}
+      for (const r of results) {
+        if (!r) continue;
+
+        let sc = null;
+        const qmNode = r.quality_meas;
+
+        if (qmNode && typeof qmNode === "object") {
+          if (typeof qmNode.scoring !== "undefined" && qmNode.scoring !== null) sc = qmNode.scoring;
+          else if (Array.isArray(qmNode) && qmNode[0] && qmNode[0].scoring != null) sc = qmNode[0].scoring;
+        }
+
+        if (sc == null) continue;
+        const scoreInt = parseInt(sc, 10);
+        if (Number.isNaN(scoreInt)) continue;
+
+        const resource = (typeof r.resource === "string" && r.resource) ? r.resource : null;
+
+        if (!best || scoreInt > best.score) {
+          best = { score: scoreInt, resource: resource };
         }
       }
 
-      console.warn("Identifier dataset non trovato nel blocco Dataset (fuori da blank node)");
-      return null;
-
-    } catch (err) {
-      console.error("Errore lettura TTL:", err);
-      return null;
+      return best;
     }
-  }
 
-  // 3️⃣ Chiamata API qualità EU (uguale a prima)
-  function updateQuality(identifier) {
-    const elem = document.querySelector("#quality_meas_container .qm-value");
-    if (!elem || !identifier) return;
+    async function queryEdpBest(candidates) {
+      // candidates: array di stringhe già “pronte”
+      // strategia: prova ciascun candidato con query ESATTA (q="..."), prende BEST tra i risultati
+      let globalBest = null; // {score, resource, usedCandidate}
 
-    const apiUrl =
-      "https://data.europa.eu/api/hub/search/search" +
-      "?filters=dataset" +
-      "&field=quality_meas" +
-      "&q=" + encodeURIComponent('"' + identifier + '"');
+      for (const cand of candidates) {
+        if (!cand) continue;
 
-    fetch(apiUrl)
-      .then(resp => resp.json())
-      .then(data => {
-        const qm = data?.result?.results?.[0]?.quality_meas?.scoring;
+        const apiUrl = buildApiUrl(cand);
+        try {
+          const resp = await fetch(apiUrl, { mode: "cors" });
+          const data = await resp.json();
 
-        if (qm !== undefined) {
-          let label = "";
-          let color = "black";
+          const results = data && data.result && Array.isArray(data.result.results) ? data.result.results : [];
+          const bestHere = pickBestResult(results);
 
-          if (qm >= 351) { color = "green"; label = "Eccellente"; }
-          else if (qm >= 221) { color = "goldenrod"; label = "Buono"; }
-          else if (qm >= 121) { color = "red"; label = "Sufficiente"; }
-          else { color = "red"; label = "Scarso"; }
-
-          elem.innerHTML = `<span style="color:${color}; font-weight:bold;">${qm} (${label})</span>`;
-        } else {
-          elem.textContent = "non ancora censito";
+          if (bestHere && (!globalBest || bestHere.score > globalBest.score)) {
+            globalBest = { score: bestHere.score, resource: bestHere.resource, usedCandidate: cand };
+          }
+        } catch(e) {
+          // ignora e prova prossimo candidato
         }
-      })
-      .catch(err => {
-        console.error("Errore API qualità:", err);
-        elem.textContent = "Errore API";
-      });
-  }
+      }
 
-  async function init() {
-    const identifier = await getIdentifierFromTTL();
-
-    if (identifier) {
-      updateQuality(identifier);
-    } else {
-      const elem = document.querySelector("#quality_meas_container .qm-value");
-      if (elem) elem.textContent = "Identifier non disponibile nel TTL";
+      return globalBest;
     }
-  }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+    async function init() {
+      const container = document.getElementById("quality_meas_container");
+      const valueEl = container ? container.querySelector(".qm-value") : null;
+      const linkEl = document.getElementById("quality_meas_link");
+      if (!container || !valueEl || !linkEl) return;
 
-})();
-</script>
+      const raw = await getIdentifierFromTTL();
+      if (!raw) {
+        valueEl.textContent = "Identifier non disponibile nel TTL";
+        linkEl.href = "https://data.europa.eu/data/datasets?locale=it";
+        return;
+      }
 
+      const norm = normalizeEdpIdentifier(raw);
 
+      // candidati: norm + raw (alcuni casi EDP sono case sensitive o “strani”)
+      const candidates = [];
+      if (norm) candidates.push(norm);
+      if (raw) candidates.push(raw.trim());
+      // dedup
+      const uniq = Array.from(new Set(candidates.filter(Boolean)));
 
-{% endblock %}
+      const best = await queryEdpBest(uniq);
 
+      if (!best) {
+        valueEl.textContent = "Non disponibile o identificativo non allineato";
+        linkEl.href = "https://data.europa.eu/data/datasets?locale=it";
+        return;
+      }
+
+      const info = labelForScore(best.score);
+      valueEl.innerHTML = `<span style="color:${info.color}; font-weight:bold;">${best.score} (${info.label})</span>`;
+
+      // Link Approfondisci: se ho resource, uso quella (coerente col best score)
+      let edpLink = null;
+      if (best.resource) {
+        edpLink = edpQualityUrlFromResource(best.resource);
+      }
+      // fallback: se non ho resource, provo con norm
+      if (!edpLink && norm) {
+        edpLink = "https://data.europa.eu/data/datasets/" + encodeURIComponent(norm) + "/quality?locale=it";
+      }
+      // fallback finale
+      if (!edpLink) {
+        edpLink = "https://data.europa.eu/data/datasets?locale=it";
+      }
+
+      linkEl.href = edpLink;
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  </script>
 {% endblock %}
