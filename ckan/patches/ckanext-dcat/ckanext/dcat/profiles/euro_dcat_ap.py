@@ -714,15 +714,18 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'doc' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='DOC'
-            if 'GEOJSON' in resource_dict.get('format'):
+            if 'zip' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
-                 resource_dict['format']='GEOJSON'
+                 resource_dict['format']='ZIP'
             if 'esri' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='SHP'
             if 'kml' in resource_dict.get('format'):
                  resource_dict.pop('format', None)
                  resource_dict['format']='KML'
+            if 'GEOJSON' in resource_dict.get('format'):
+                 resource_dict.pop('format', None)
+                 resource_dict['format']='GEOJSON'
             if 'ov2' in resource_dict.get('format'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='BIN'    
@@ -735,61 +738,63 @@ class EuropeanDCATAPProfile(RDFProfile):
             if 'fgb' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SHP'
-
             if 'OP_DATPRO' in resource_dict.get('format') or 'ARC' in resource_dict.get('format'):
-                if resource_dict.get('url').lower():
-                 if 'gml' in resource_dict.get('url'):
+                if resource_dict.get('url'):
+                 if 'gml' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='GML'
-                 if 'geojson' in resource_dict.get('url'):
+                 if 'geojson' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='GEOJSON'
-                 if 'rdf' in resource_dict.get('url'):
+                 if 'rdf' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF'
-                 if 'sparql' in resource_dict.get('url'):
+                 if 'sparql' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SPARQLQ'
-                 if 'xlsx' in resource_dict.get('url'):
+                 if 'xlsx' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='XLSX'
-                 if 'zip' in resource_dict.get('url'):
+                 if 'zip' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='ZIP'
-                 if 'ttl' in resource_dict.get('url'):
+                 if 'ttl' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF_TURTLE'
-                 if 'xml' in resource_dict.get('url'):
+                 if 'xsd' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='XML'
-                 if 'xsd' in resource_dict.get('url'):
+                 if 'xml' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='XML'
-                 if 'json' in resource_dict.get('url'):
+                 if 'download-metadata' in resource_dict.get('url').lower():
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='ZIP'
+                 if 'json' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='JSON'
-                 if 'ov2' in resource_dict.get('url'):
+                 if 'ov2' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='BIN'                     
-                 if 'turtle' in resource_dict.get('url'):
+                 if 'turtle' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF_TURTLE'     
-                 if 'fgb' in resource_dict.get('url'):
+                 if 'fgb' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SHP'
-                 if 'shp' in resource_dict.get('url'):
+                 if 'shp' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='SHP'
-                 if 'kml' in resource_dict.get('url'):
+                 if 'kml' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='KML'
-                 if 'umap.openstreetmap' in resource_dict.get('url'):
+                 if 'umap.openstreetmap' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='HTML_SIMPL'
-                 if 'infogram.com' in resource_dict.get('url'):
+                 if 'infogram.com' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='HTML_SIMPL'
-                 if 'pubhtml' in resource_dict.get('url'):
+                 if 'pubhtml' in resource_dict.get('url').lower():
                   resource_dict.pop('format', None)       
                   resource_dict['format']='HTML_SIMPL'
 
