@@ -738,6 +738,12 @@ class EuropeanDCATAPProfile(RDFProfile):
 
             if 'OP_DATPRO' in resource_dict.get('format') or 'ARC' in resource_dict.get('format'):
                 if resource_dict.get('url').lower():
+                 if 'gml' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='GML'
+                 if 'geojson' in resource_dict.get('url'):
+                  resource_dict.pop('format', None)       
+                  resource_dict['format']='GEOJSON'
                  if 'rdf' in resource_dict.get('url'):
                   resource_dict.pop('format', None)       
                   resource_dict['format']='RDF'
