@@ -674,6 +674,10 @@ class RDFSerializer(RDFProcessor):
 
                 for src_key, _type, predicate, required in publisher_sources:
                     val = pub.get(src_key)
+                    if src_key == 'name':
+                      if val is not None and 'Portale nazionale dei dati aperti' in val:
+                        homepage=_get_from_extra('source_catalog_homepage')
+                        homepage='https://www.dati.gov.it/'
                     if src_key == 'type':
                        if dataset_dict.get('holder_identifier'):
                           if 'r_' in dataset_dict.get('holder_identifier') or 'p_' in dataset_dict.get('holder_identifier') :
