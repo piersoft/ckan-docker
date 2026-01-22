@@ -5,7 +5,7 @@ import uuid
 import logging
 import hashlib
 import traceback
-
+from datetime import datetime
 import ckan.plugins as p
 import ckan.model as model
 
@@ -23,6 +23,68 @@ log = logging.getLogger(__name__)
 
 
 class DCATRDFHarvester(DCATHarvester):
+    def _normalize_date_only(self, value):
+        """
+        Turn ISO-ish datetime strings into YYYY-MM-DD.
+        Keeps YYYY-MM-DD as-is.
+        """
+        if value is None:
+            return value
+
+        # lists/tuples: normalize each element
+        if isinstance(value, (list, tuple)):
+            return [self._normalize_date_only(v) for v in value]
+
+        # dict: normalize dict values recursively
+        if isinstance(value, dict):
+            return {k: self._normalize_date_only(v) for k, v in value.items()}
+
+        # everything else -> string
+        v = str(value).strip()
+        if not v:
+            return v
+
+        # If it looks like ISO date/datetime, safest is to keep the first 10 chars (YYYY-MM-DD)
+        # This handles: 2025-06-04T18:17:21.787987, 2025-06-04T18:17:21Z, etc.
+        if len(v) >= 10 and v[4] == '-' and v[7] == '-':
+            return v[:10]
+
+        # Fallback parse
+        try:
+            v2 = v.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(v2)
+            return dt.date().isoformat()
+        except Exception:
+            return v
+
+    def _fix_temporal_anywhere(self, dataset_dict):
+        """
+        Normalize any dataset field whose key contains 'temporal' (case-insensitive),
+        including nested dict/list structures, plus extras where key contains 'temporal'.
+        """
+        if not dataset_dict:
+            return dataset_dict
+
+        # 1) top-level keys containing 'temporal'
+        for k in list(dataset_dict.keys()):
+            try:
+                if 'temporal' in str(k).lower():
+                    dataset_dict[k] = self._normalize_date_only(dataset_dict.get(k))
+            except Exception:
+                pass
+
+        # 2) extras with keys containing 'temporal'
+        extras = dataset_dict.get('extras') or []
+        for ex in extras:
+            try:
+                ek = ex.get('key')
+                if ek and 'temporal' in str(ek).lower():
+                    ex['value'] = self._normalize_date_only(ex.get('value'))
+            except Exception:
+                pass
+
+        return dataset_dict
+
     def _clean_tags(self, tags):
         try:
             def _update_tag(tag_dict, key, newvalue):
@@ -340,6 +402,7 @@ class DCATRDFHarvester(DCATHarvester):
         }
 
         dataset = self.modify_package_dict(dataset, {}, harvest_object)
+        dataset = self._fix_temporal_anywhere(dataset)
 
         # Check if a dataset with the same guid exists
         existing_dataset = self._get_existing_dataset(harvest_object.guid)
@@ -598,7 +661,66 @@ class DCATRDFHarvester(DCATHarvester):
                         # plugin)
                         model.Session.execute('SET CONSTRAINTS harvest_object_package_id_fkey DEFERRED')
                         model.Session.flush()
-                       # log.debug('context: %s',context)
+
+                        # --- FIX Temporal coverage (prima della validation) ---
+                        # Caso reale: temporal_coverage arriva come stringa JSON tipo:
+                        # '[{"temporal_start":"2025-06-04T...","temporal_end":""}]'
+                        # Lo normalizziamo a una singola data YYYY-MM-DD (temporal_start).
+                        # --- FIX Temporal coverage + dedup extras (prima della validation) ---
+                        # --- FIX Temporal coverage + dedup extras (prima della validation) ---
+                        import re
+ 
+                        def _to_date(s):
+                           if not s:
+                               return s
+                           s = str(s).strip()
+                           # taglia tutto a YYYY-MM-DD se parte con data ISO
+                           if re.match(r'^\d{4}-\d{2}-\d{2}', s):
+                               return s[:10]
+                           return s
+
+                        try:
+                           # 1) temporal_coverage: se è JSON-string/list di dict, normalizza temporal_start/end
+                           tc = dataset.get('temporal_coverage')
+                           parsed = None
+
+                           if isinstance(tc, list):
+                               parsed = tc
+                           elif isinstance(tc, str) and tc.strip().startswith('['):
+                               parsed = json.loads(tc)
+
+                           if parsed and isinstance(parsed, list):
+                               for item in parsed:
+                                   if isinstance(item, dict):
+                                       if 'temporal_start' in item:
+                                           item['temporal_start'] = _to_date(item.get('temporal_start'))
+                                       if 'temporal_end' in item:
+                                           item['temporal_end'] = _to_date(item.get('temporal_end'))
+
+                               # IMPORTANTISSIMO: rimetti il JSON (perché il tuo validator sembra aspettarlo così)
+                               dataset['temporal_coverage'] = json.dumps(parsed)
+
+                           log.error("TEMPORAL FIXED temporal_coverage = %r", dataset.get('temporal_coverage'))
+
+                           # 2) Dedup extras per evitare "Duplicate key"
+                           extras = dataset.get('extras') or []
+                           seen = set()
+                           deduped = []
+                           for ex in extras:
+                               k = ex.get('key')
+                               if not k:
+                                   continue
+                               if k in seen:
+                                   continue
+                               seen.add(k)
+                               deduped.append(ex)
+                           dataset['extras'] = deduped
+
+                        except Exception as e:
+                           log.error("TEMPORAL FIX failed: %r", e)
+                       # --- /FIX ---
+
+                        #log.debug('context: %s',context)
                         p.toolkit.get_action('package_create')(context, dataset)
                     else:
                         log.info('Ignoring dataset %s' % name)
