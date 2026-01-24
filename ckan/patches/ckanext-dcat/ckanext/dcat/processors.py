@@ -359,26 +359,11 @@ class RDFSerializer(RDFProcessor):
                           _format='xml', pagination_info=None):
         '''
         Returns an RDF serialization of the whole catalog
-
-        `catalog_dict` can contain literal values for the dcat:Catalog class
-        like `title`, `homepage`, etc. If not provided these would get default
-        values from the CKAN config (eg from `ckan.site_title`).
-
-        If passed a list of CKAN dataset dicts, these will be also serializsed
-        as part of the catalog.
-        **Note:** There is no hard limit on the number of datasets at this
-        level, this should be handled upstream.
-
-        The serialization format can be defined using the `_format` parameter.
-        It must be one of the ones supported by RDFLib, defaults to `xml`.
-
-        `pagination_info` may be a dict containing keys describing the results
-        pagination. See the `_add_pagination_triples()` method for details.
-
-        Returns a string with the serialized catalog
+        ...
         '''
 
         catalog_ref = self.graph_from_catalog(catalog_dict)
+
         if dataset_dicts:
             for dataset_dict in dataset_dicts:
 
@@ -405,18 +390,35 @@ class RDFSerializer(RDFProcessor):
 
                 dataset_ref = self.graph_from_dataset(dataset_dict)
                 log.debug('catalog_ref in graph %s', catalog_ref)
+
                 cat_ref = self._add_source_catalog(catalog_ref, dataset_dict, dataset_ref)
-                if not cat_ref:
+
+                # scegli UNA VOLTA il catalogo target
+                if cat_ref:
+                    target_catalog = cat_ref
+                else:
                     org_site = self.g.objects(
                         URIRef(str(catalog_ref) + "/organization/" + dataset_dict.get('owner_org')),
                         VCARD.hasURL
                     )
                     try:
-                        self.g.add((next(org_site), DCAT.dataset, dataset_ref))
+                        target_catalog = next(org_site)
                     except StopIteration:
-                        log.debug("No more elements in org_site")
-                else:
-                    self.g.add((cat_ref, DCAT.dataset, dataset_ref))
+                        target_catalog = catalog_ref  # fallback pulito
+
+                # collega il dataset
+                self.g.add((target_catalog, DCAT.dataset, dataset_ref))
+
+                # collega i servizi (DCAT-AP 2/3): Catalog -> dcat:service
+                try:
+                    for dist in self.g.objects(dataset_ref, DCAT.distribution):
+                        for svc in self.g.objects(dist, DCAT.accessService):
+                            self.g.add((target_catalog, DCAT.service, svc))
+                except Exception as e:
+                    log.debug(
+                        "Unable to add dcat:service for dataset %s: %r",
+                        dataset_dict.get('name') or dataset_dict.get('id'), e
+                    )
 
         if pagination_info:
             self._add_pagination_triples(pagination_info)
