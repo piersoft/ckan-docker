@@ -1,5 +1,8 @@
 # Changelog
 
+## `2026-01-27`
+Inserito file css.example con il css da inserire nel Front End dell'Admin, nel caso si voglia avere un layout diverso.
+
 ## `2026-01-07`
 Patch per hasPart come subcatalog per le organizzazioni create in locale
 dovete sempre e solo accertarvi che quando create una organizzazione il campo URL sia sempre valorizzato (diventa il site e quindi la URI del subcatalog)
