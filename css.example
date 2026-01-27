@@ -1,0 +1,487 @@
+CSS di esempio da inserire nel box Custom CSS in Admin-Configurazione del Front End del CKAN:
+
+
+@media (min-width: 768px) {
+    .row[class~="wrapper"]::before {
+        content: none !important;
+        display: none !important;
+    }
+}
+
+.label[data-format=csv], .label[data-format*=csv] {
+    background-color: #2db55d;
+}
+.label {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+.label[data-format=html],
+.label[data-format*=html] {
+  background-color: #2E759E;
+}
+.label[data-format=json],
+.label[data-format*=json] {
+  background-color: #D63B00;
+}
+.label[data-format=xml],
+.label[data-format*=xml] {
+  background-color: #D63B00;
+}
+.label[data-format=text],
+.label[data-format*=text] {
+  background-color: #1A7EA3;
+}
+.label[data-format=csv],
+.label[data-format*=csv] {
+  background-color: #856A00;
+}
+.label[data-format=xls],
+.label[data-format*=xls] {
+  background-color: #207E42;
+}
+.label[data-format=zip],
+.label[data-format*=zip] {
+  background-color: #686868;
+}
+.label[data-format=api],
+.label[data-format*=api] {
+  background-color: #D22D81;
+}
+.label[data-format=pdf],
+.label[data-format*=pdf] {
+  background-color: #e0051e;
+}
+.label[data-format=rdf],
+.label[data-format*=rdf],
+.label[data-format*=nquad],
+.label[data-format*=ntriples],
+.label[data-format*=turtle] {
+  background-color: #0b4498;
+}
+
+/* =====================================================
+   The "account masthead" bar across the top of the site
+   ===================================================== */
+.css-selector {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+font-size:18px;
+}
+
+ a, .resource-item .heading, .breadcrumb
+{
+  color: #0066cc;
+ #text-decoration:underline;
+}
+
+.toolbar .breadcrumb a {
+    color: #0066cc;
+}
+
+.nav-item a {
+    color: #0066cc;
+}
+.dataset-heading a {
+color: #06c;
+font-size: 2rem !important;
+ letter-spacing: 0.007em !important;
+#padding: 1.2rem !important;
+}
+
+.h3{
+color: #06c;
+}
+
+.account-masthead {
+   /*background-color: #009CC3;*/
+  background-color: rgb(49,56,61)
+}
+/* The "bubble" containing the number of new notifications. */
+.account-masthead .account .notifications a span {
+  background-color: black;
+}
+/* The text and icons in the user account info. */
+.account-masthead .account ul li a {
+  color: rgba(255,255,255, 0.6);
+}
+/* The user account info text and icons, when the user's pointer is hovering
+   over them. */
+.account-masthead .account ul li a:hover {
+  color: rgba(0,0,0, 0.7);
+  background-color: white;
+}
+
+.media-overlay .media-heading {
+background-color: #0066cc;
+padding: 6px 10px;
+}
+/* ========================================================================
+   The main masthead bar that contains the site logo, nav links, and search
+   ======================================================================== */
+
+.masthead {
+  /*background-color: rgb(255,255,255);*/
+  background: #0066cc;
+background-color: rgb(28,117,209);
+
+}
+
+.Header-titleLink a small {
+    font-style: italic;
+}
+
+.btn,  .dropdown.btn-group{
+text-transform: uppercase;
+  background-color: #0066cc;
+  border-color: #003647;
+  color: #FFFFFF;
+ background-image: none;
+  border-radius: 0.1em;
+  font-weight: 600;
+  #padding: 0.6em 1.2em;
+  text-transform: uppercase;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: 0 2px 4px 0 #bdbdbd;
+ border:none
+}
+
+
+.tag  {
+text-transform: lowercase;
+  background-color: #65dde0;
+  border-color: #50d8dc;
+  color: #004a4d;
+  background-image: none;
+  border-radius: 0.1em;
+  border:none;
+box-shadow:none;
+}
+
+
+.follow_button a:hover {
+  #background-color: rgb(255,255,255);
+  #color: black;
+}
+
+.btn[disabled], .btn.is-disabled {
+  background-color: #65dde0 !important;
+  border-color: #50d8dc !important;
+  color: #004a4d !important;
+}
+
+.btn:focus, .btn:hover , .dropdown.btn-group:hover, a.tag:hover{
+  background-color: rgb(255,255,255);
+  color: rgb(0, 0, 0);
+  #border-color: rgb(41, 203, 209);
+  box-shadow:none;
+}
+
+.btn:active, .btn.is-pressed, .content_action.is-pressed {
+  background-color: #003647;
+  border-color: rgb(0, 0, 0);
+  color: #65dde0;
+}
+
+.dropdown-toggle:active, .open .dropdown-toggle{
+  background-color: #004a4d;
+  border-color: rgb(0, 0, 0);
+  color: #65dde0;
+}
+
+.pagination ul>.disabled>a{
+color: #0066cc;
+}
+
+
+
+
+/* The "navigation pills" in the masthead (the links to Datasets,
+   Organizations, etc) when the user's pointer hovers over them. */
+.masthead .navigation .nav-pills>li>a:hover {
+  background-color: rgb(255,255,255);
+
+  color: black;
+  text-transform: uppercase;
+#  -ms-touch-action: manipulation;
+ #     touch-action: manipulation;
+ # vertical-align: middle;
+  #white-space: nowrap;
+#  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+ # box-shadow: 0 2px 4px 0 #bdbdbd;
+  border-radius: 0.1em;
+}
+.pagination ul>.active>a, .pagination ul>.active>span{
+color: white;
+background-color:#0066cc;
+}
+/* The "active" navigation pill (for example, when you're on the /dataset page
+   the "Datasets" link is active). */
+.masthead .navigation .nav-pills li.active a {
+ background-color: rgb(255,255,255);
+ color: black;
+ #background-color: #004a4d;
+#  border-color: rgb(0, 0, 0);
+ # color: #65dde0;
+opacity: .5;
+  text-transform: uppercase;
+  #-ms-touch-action: manipulation;
+    #  touch-action: manipulation;
+  #vertical-align: middle;
+  #white-space: nowrap;
+  #box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  #box-shadow: 0 2px 4px 0 #bdbdbd;
+  border-radius: 0.1em;
+}
+/* The "box shadow" effect that appears around the search box when it
+   has the keyboard cursor's focus. */
+.masthead input[type="text"]:focus {
+  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.7);
+}
+
+.masthead .navigation .nav-pills li a {
+#  background-color: #0066cc;
+#  color: white;
+}
+
+.homepage .module-search  {
+  background-color: #0066cc;
+  color: white;
+}
+
+.homepage .module-content {
+    margin: 20px 0;
+}
+
+.homepage .module-content:last-child {
+    padding-bottom: 20px;
+}
+
+
+/* ===========================================
+   The content in the middle of the front page
+   =========================================== */
+
+/* Remove the "box shadow" effect around various boxes on the page. */
+
+/* Remove the borders around the "Welcome to CKAN" and "Search Your Data"
+   boxes. */
+.hero .box {
+  border: none;
+}
+/* Change the colors of the "Search Your Data" box. */
+.homepage .module-search .module-content {
+  color: rgb(68, 68, 68);
+  background-color: white;
+}
+/* Change the background color of the "Popular Tags" box. */
+.homepage .module-search .tags {
+  background-color: #0066cc;
+}
+/* Remove some padding. This makes the bottom edges of the "Welcome to CKAN"
+   and "Search Your Data" boxes line up. */
+.module-content:last-child {
+  padding-bottom: 0px;
+}
+.homepage .module-search {
+  padding: 0px;
+}
+/* Add a border line between the top and bottom halves of the front page. */
+.homepage [role="main2"] {
+  border-top: 0px solid rgb(204, 204, 204);
+ # background-color: #eee;
+  padding-bottom: 30px;
+ /*background-image: url(../../../base/images/texture.png);*/
+}
+
+[role="main"]
+{
+ # background: #eee;
+}
+
+.homepage [role="main"] {
+  border-top: 0px solid rgb(204, 204, 204);
+ # background-color: #eee !important;
+ /*background-image: url(../../../base/images/netzwerk-total.jpg);*/
+ background-size: contain;
+ background-position: right center;
+ background-repeat: no-repeat;
+}
+
+.homepage {
+    /*background:url("../../../base/images/netzwerk-total.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+/* ====================================
+   The footer at the bottom of the site
+   ==================================== */
+
+.site-footer,
+body {
+ background-color: rgb(2,39,76);
+# #0066cc;
+}
+/* The text in the footer. */
+.site-footer,
+.site-footer label,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.6);
+}
+/* The link texts in the footer. */
+.site-footer a {
+  #color: rgba(255, 255, 255, 0.6);
+color: #65dcdf;
+font-weight: 700;
+}
+
+.masthead .btn-navbar.collapsed .top-bar {
+  transform: rotate(0);
+}
+.masthead .btn-navbar.collapsed .middle-bar {
+  opacity: 1;
+}
+.masthead .btn-navbar.collapsed .bottom-bar {
+  transform: rotate(0);
+}
+.masthead .btn-navbar {
+  border: none;
+ background-color: #0066cc;
+  background: transparent !important;
+}
+
+.masthead .btn-navbar:hover, .masthead .btn-navbar:focus{
+ background-color: rgb(255,255,255);
+ background: transparent !important;
+}
+.masthead .btn-navbar.collapsed:hover {
+#background-color: #0066cc;
+background: transparent !important;
+}
+.masthead .btn-navbar .fa-bar {
+  width: 18px;
+  transition: all 0.5s;
+}
+.masthead .btn-navbar .top-bar {
+  transform: rotate(45deg);
+  transform-origin: 25% 40%;
+}
+.masthead .btn-navbar .middle-bar {
+  opacity: 0;
+}
+.masthead .btn-navbar .bottom-bar {
+  transform: rotate(-45deg);
+  transform-origin: 25% 50%;
+}
+
+.masthead .btn-navbar .icon-bar {
+  display: block;
+  width: 40px;
+  height: 4px;
+  border-radius: 1px;
+}
+.btn.btn-navbar:hover, .btn.btn-navbar:focus{
+border-color: rgb(253,139,37);
+border:1px;
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+{
+height: 30px; 
+}
+
+.input-append .add-on, .input-prepend .add-on {
+height: 30px; 
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px), screen and (min-width: 992px) and (max-width: 1365px), screen and (min-width: 1366px) {
+ .Header-logo img {
+    height: 9.5rem;
+    width: 9.5rem;
+  }
+  }
+.Header-titleLink {
+    color: #000;
+    font-size: 3.6rem !important;
+    font-family: inherit;
+    font-weight: 700;
+}
+select {
+    padding: 0px;
+}
+
+.u-color-50, .Accordion--plus .Accordion-link, .Accordion--default .Accordion-link, .Linklist-link, .Linklist a, .Skiplinks > li > a, .ErrorPage-title, .ErrorPage-subtitle, .Header-language-other a, .Share-revealIcon.is-open {
+    color: #4A2C04 !important;
+}
+
+.module-heading{
+font-size: 1.6rem;
+}
+
+.module-narrow .nav-item > a {
+font-size: 1rem;
+}
+
+.toolbar .breadcrumb {
+font-size: 1.6rem;
+}
+
+.masthead .main-navbar .site-search button{
+margin-left: 0px;
+}
+
+.form-control {
+font-size: 0.7em;
+}
+
+.btn {
+font-size: 0.8em;
+}
+
+.homepage .module-search .tags h3, .homepage .module-search .tags .h3 {
+     font-size:1.6rem;
+
+}
+
+ol, ul {
+    padding-left: 0rem; 
+}
+
+.resource-item .format-label {
+    position: absolute;
+    top: 18px;
+    left: 10px;
+}
+
+.main1 {
+    padding: 2rem 0;
+}
+
+.homepage .module-feeds {
+    padding: 2rem 0;
+    background: transparent !important;
+}
+
+.navbar-toggler{
+font-size: 4rem;
+}
+
+
