@@ -62,6 +62,9 @@ services:
       - CKAN_DB_USER
       - CKAN_DB_PASSWORD
       - CKAN_DB
+      - DATASTORE_READONLY_USER
+      - DATASTORE_READONLY_PASSWORD
+      - DATASTORE_DB
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
