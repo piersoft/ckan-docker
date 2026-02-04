@@ -47,10 +47,9 @@ more information.
 
 1. Sostituisci tutte le stringhe del tipo `www.piersoftckan.biz` nel file `.env` con, ad esempio, `https://127.0.0.1:8443` o con IP privato e poi in produzione con il FQDN.
 
-1. Change in `.env` values for `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`. Default values are:
+1. Change in `.env` values for `CKAN_SYSADMIN_PASSWORD` (not CKAN_SYSADMIN_NAME) . Default value is:
 
 	```
-	CKAN_SYSADMIN_NAME = ckan_admin
 	CKAN_SYSADMIN_PASSWORD = test1234
 	```
 
