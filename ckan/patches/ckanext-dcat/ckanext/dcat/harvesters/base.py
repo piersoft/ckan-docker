@@ -9,11 +9,14 @@ from requests.adapters import HTTPAdapter
 
 class CustomSslContextHttpAdapter(HTTPAdapter):
         """"Transport adapter" that allows us to use a custom ssl context object with the requests."""
-        def init_poolmanager(self, connections, maxsize, block=False):
+        def init_poolmanager(self, connections, maxsize, block=False, **pool_kwargs):
             ctx = create_urllib3_context()
             ctx.load_default_certs()
             ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
-            self.poolmanager = urllib3.PoolManager(ssl_context=ctx)
+            # Con Python 3.10 non è permesso CERT_NONE con check_hostname=True:
+            # quando requests usa verify=False urllib3 prova a settare CERT_NONE
+            ctx.check_hostname = False
+            self.poolmanager = urllib3.PoolManager(ssl_context=ctx, assert_hostname=False, **pool_kwargs)
 
 
 
