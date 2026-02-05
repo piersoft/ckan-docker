@@ -7,6 +7,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 from urllib3.util.ssl_ import create_urllib3_context
 from requests.adapters import HTTPAdapter
 
+"""" PER LE VERSIONI NUOVISSIME DI PYTHON """
+ '''
 class CustomSslContextHttpAdapter(HTTPAdapter):
         """"Transport adapter" that allows us to use a custom ssl context object with the requests."""
         def init_poolmanager(self, connections, maxsize, block=False, **pool_kwargs):
@@ -17,8 +19,15 @@ class CustomSslContextHttpAdapter(HTTPAdapter):
             # quando requests usa verify=False urllib3 prova a settare CERT_NONE
             ctx.check_hostname = False
             self.poolmanager = urllib3.PoolManager(ssl_context=ctx, assert_hostname=False, **pool_kwargs)
+ '''
 
-
+class CustomSslContextHttpAdapter(HTTPAdapter):
+        """"Transport adapter" that allows us to use a custom ssl context object with the requests."""
+        def init_poolmanager(self, connections, maxsize, block=False):
+            ctx = create_urllib3_context()
+            ctx.load_default_certs()
+            ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
+            self.poolmanager = urllib3.PoolManager(ssl_context=ctx)
 
 import os
 import logging
