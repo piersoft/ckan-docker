@@ -433,6 +433,7 @@ class ItalianDCATAPProfile(RDFProfile):
                                license_name='Creative Commons CC0 1.0 Universale - Public Domain Dedication (CC0 1.0)'
                              else:
                               license_type.document_uri="http://creativecommons.org/licenses/by/4.0/"
+                              resource_dict['license_id'] = license_name
                            #license_type.default_name
                          #continue
                  #continue
