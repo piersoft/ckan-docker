@@ -65,7 +65,7 @@ more information.
 	docker compose up -d
 	```
 
-1. if CKAN failed (`unhealty`) launch `docker start ckan` and after 2-3 minutes launch `docker start nginx`.
+1. if CKAN failed (`unhealty`) launch `docker restart ckan` and after 2-3 minutes launch `docker start nginx`.
 
 1. IMPORTANT AFTER CKAN IS RUNNING HEALTY (ONLY FIRST TIME):
 
