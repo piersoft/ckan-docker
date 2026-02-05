@@ -105,7 +105,7 @@ class EuropeanDCATAPProfile(RDFProfile):
             ("version_notes", ADMS.versionNotes),
             ("frequency", DCT.accrualPeriodicity),
             ("provenance", DCT.provenance),
-            ("dcat_type", DCT.type, None, URIRefOrLiteral),
+            ("dcat_type", DCT.type),
         ):
             value = self._object_value(dataset_ref, predicate)
             if value:
