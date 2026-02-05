@@ -431,6 +431,8 @@ class ItalianDCATAPProfile(RDFProfile):
                            if license_type.document_uri is not None:
                              if 'publicdomain' in license_type.document_uri:
                                license_name='Creative Commons CC0 1.0 Universale - Public Domain Dedication (CC0 1.0)'
+                             else:
+                              license_type.document_uri="http://creativecommons.org/licenses/by/4.0/"
                            #license_type.default_name
                          #continue
                  #continue
