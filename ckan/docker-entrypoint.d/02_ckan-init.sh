@@ -38,7 +38,7 @@ ckan dcatapit load --filename "${APP_DIR}/src/ckanext-dcatapit/vocabularies/lice
 #wget "https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/regions/regions.rdf" -O "/tmp/regions.rdf"
 ckan dcatapit load --filename "${APP_DIR}/patches/regions.rdf" --name regions
 
-ckan config-tool $CKAN_INI "ckan.build = "finito" "
+#ckan config-tool $CKAN_INI "ckan.build = "finito" "
 echo -e "\nCKAN init completed successfully"
 
 fi
