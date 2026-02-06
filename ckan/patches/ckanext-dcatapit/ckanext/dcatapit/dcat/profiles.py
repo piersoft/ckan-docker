@@ -434,6 +434,7 @@ class ItalianDCATAPProfile(RDFProfile):
                              else:
                               license_type.document_uri="http://creativecommons.org/licenses/by/4.0/"
                               resource_dict['license_id'] = license_name
+                              resource_dict['license_type']="https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"
                            #license_type.default_name
                          #continue
                  #continue
