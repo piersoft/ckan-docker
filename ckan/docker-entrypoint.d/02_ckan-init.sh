@@ -54,8 +54,7 @@ fi
 ckan config-tool $CKAN_INI "ckan.locale_default = it"
 ckan config-tool $CKAN_INI "ckan.locales_offered = it en"
 ckan config-tool $CKAN_INI "ckan.auth.create_user_via_web = false"
-# da mettere expose_subcatalog True per cataloghi federati. per CKAN singoli lasciare commmentato
-#ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
+ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
 ckan config-tool $CKAN_INI "ckanext.dcat.normalize_ckan_format = true"
 ckan config-tool $CKAN_INI "geonames.username = demo"
 ckan config-tool $CKAN_INI "ckanext.dcat.clean_tags = True"
