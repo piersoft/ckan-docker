@@ -18,6 +18,7 @@ services:
       - ckannet
     depends_on:
       - ckan
+    restart: unless-stopped
     ports:
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
 
