@@ -532,7 +532,7 @@ class EuropeanDCATAPProfile(RDFProfile):
 
         # Use fallback license if set in config
         resource_license_fallback = None
-        if toolkit.asbool(config.get(DISTRIBUTION_LICENSE_FALLBACK_CONFIG, False)):
+        if toolkit.asbool(toolkit.config.get(DISTRIBUTION_LICENSE_FALLBACK_CONFIG, False)):
             if "license_id" in dataset_dict and isinstance(
                 URIRefOrLiteral(dataset_dict["license_id"]), URIRef
             ):
@@ -559,8 +559,8 @@ class EuropeanDCATAPProfile(RDFProfile):
             DCT.ProvenanceStatement
         )
         
-        from ckan.common import config
-        site_url = config.get('ckan.site_url', '').rstrip('/')
+        from ckan.common import config as ckan_config
+        site_url = ckan_config.get('ckan.site_url', '').rstrip('/')
         
         # Resources
         for resource_dict in dataset_dict.get("resources", []):
