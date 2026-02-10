@@ -1,5 +1,8 @@
 # Changelog
 
+## `2026-02-10`
+Fix docker-compose.yml per errore primo avvio
+
 ## `2026-01-27`
 Inserito file css.example con il css da inserire nel Front End dell'Admin, nel caso si voglia avere un layout diverso.
 
