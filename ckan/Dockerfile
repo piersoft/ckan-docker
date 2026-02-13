@@ -95,3 +95,5 @@ RUN for d in $APP_DIR/patches/*; do \
 RUN mkdir -p /var/run /var/log /etc/supervisord.d \
  && chown -R ckan:ckan /var/run /var/log
 RUN apk add nano
+RUN apk update
+RUN apk upgrade
