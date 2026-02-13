@@ -33,7 +33,7 @@ versions for client and server.
 used the `docker-compose` command. Please see [Docker Compose](https://docs.docker.com/compose/compose-v2/) for
 more information.
 
-## Install, build and run CKAN + dependencies
+## Install, build and run CKAN 2.10.9 + dependencies
 
 1. Clona il repo
 
