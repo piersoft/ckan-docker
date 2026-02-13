@@ -95,6 +95,6 @@ RUN for d in $APP_DIR/patches/*; do \
 
 
 RUN apt install nano
-RUN apt install curl
+RUN apt install curl -y
 RUN pip3 install setuptools==80
 
