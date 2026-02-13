@@ -1,4 +1,8 @@
-FROM ckan/ckan-base:2.10.3
+#FROM ckan/ckan-base:2.10.3
+
+FROM ckan/ckan-base:2.10-py3.10-v20251029 AS ckan
+
+USER root
 
 # Install any extensions needed by your CKAN instance
 # See Dockerfile.dev for more details and examples
@@ -56,14 +60,11 @@ COPY patches/base.py ${APP_DIR}/src/ckan/ckan/lib/base.py
 #patch per landing page . elimina il campo Origine nel form di editing del dataset
 COPY patches/package_metadata_fields.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets/package_metadata_fields.html
 
-#COPY patches/package_basic_fields.html ${APP_DIR}/src/ckan/ckan/templates/package/snippets
-#COPY patches/jeoquery.js ${APP_DIR}/src/ckanext-dcatapit/ckanext/dcatapit/fanstatic/jeoquery.js
-COPY patches/xmlrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py
-COPY patches/jsonrpc.py /usr/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
-COPY patches/core.py /usr/lib/python3.10/site-packages/pylons/controllers/core.py
+COPY patches/xmlrpc.py /usr/local/lib/python3.10/site-packages/pylons/controllers/xmlrpc.py
+COPY patches/jsonrpc.py /usr/local/lib/python3.10/site-packages/pylons/controllers/jsonrpc.py
+COPY patches/core.py /usr/local/lib/python3.10/site-packages/pylons/controllers/core.py
 COPY patches/supervisord.conf /etc/supervisord.conf
 COPY patches/sprite-resource-icons.png "${APP_DIR}/src/ckan/ckan/public/base/images"
-#COPY patches/ckanharvester.py ${APP_DIR}/src/ckanext-harvest/ckanext/harvest/harvesters/ckanharvester.py
 # patch per user not auth to show in harvesting
 COPY patches/__init__.py ${APP_DIR}/src/ckan/ckan/logic/__init__.py
 # patch per avere il rating dal portale europeo dei dati aperti. Decommentare se si vuole il punteggio
@@ -80,7 +81,6 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 COPY patches/groups ${APP_DIR}/patches/groups
 
-
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
 COPY patches ${APP_DIR}/patches
@@ -92,11 +92,8 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
-RUN mkdir -p /var/run /var/log /etc/supervisord.d \
- && chown -R ckan:ckan /var/run /var/log
-RUN apk add nano
-RUN apk update
-RUN apk upgrade
 
-#patch sicurezza se ckan esposto
-#RUN pip3 install git+git://github.com/gevent/gevent.git#egg=gevent
+
+RUN apt install nano
+
+
