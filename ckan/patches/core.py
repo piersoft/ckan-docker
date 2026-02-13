@@ -105,7 +105,7 @@ class WSGIController(object):
                       func.__name__, args)
         try:
             result = self._perform_call(func, args)
-        except HTTPException(httpe):
+        except HTTPException as httpe:
             if log_debug:
                 log.debug("%r method raised HTTPException: %s (code: %s)",
                           func.__name__, httpe.__class__.__name__,
