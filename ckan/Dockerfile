@@ -97,3 +97,6 @@ RUN mkdir -p /var/run /var/log /etc/supervisord.d \
 RUN apk add nano
 RUN apk update
 RUN apk upgrade
+
+#patch sicurezza se ckan esposto
+#RUN pip3 install git+git://github.com/gevent/gevent.git#egg=gevent
