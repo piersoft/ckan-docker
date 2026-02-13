@@ -1,5 +1,8 @@
 # Changelog
 
+## `2026-02-13`
+Migrazione al CKAN 2.10.9 e fix vari
+
 ## `2026-02-10`
 Fix docker-compose.yml per errore primo avvio
 
