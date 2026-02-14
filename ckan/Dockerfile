@@ -35,8 +35,8 @@ RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 # Install xloader version 2.2.0
 RUN pip3 install --no-cache-dir \
     git+https://github.com/ckan/ckanext-xloader.git@2.2.0#egg=ckanext-xloader \
-    && pip3 install --no-cache-dir chardet \
-    && pip3 install --no-cache-dir requests[security]
+    && pip3 install --no-cache-dir \
+    -r https://raw.githubusercontent.com/ckan/ckanext-xloader/2.2.0/requirements.txt
 
 # Install ckanext-multilang
 RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.git@master#egg=ckanext-multilang  && \
