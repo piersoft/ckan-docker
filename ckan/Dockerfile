@@ -32,10 +32,10 @@ RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
-# Install xloader
-RUN pip3 install -U ckanext-xloader \
+# Install xloader version 2.2.0
+RUN pip3 install -U \
+    git+https://github.com/ckan/ckanext-xloader.git@2.2.0#egg=ckanext-xloader \
     && pip3 install -U requests[security]
-RUN pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-xloader/master/requirements.txt
 
 
 # Install ckanext-multilang
