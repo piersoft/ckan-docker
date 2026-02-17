@@ -9,4 +9,5 @@ else
       ckan config-tool $CKAN_INI "ckanext.xloader.jobs_db.uri = postgresql://ckandbuser:ckandbpassword@db/ckandb?sslmode=disable"
       ckan config-tool $CKAN_INI "ckan.datastore.write_url = postgresql://ckandbuser:ckandbpassword@db/datastore?sslmode=disable"
       ckan config-tool $CKAN_INI "ckan.datastore.read_url = postgresql://datastore_ro:datastore@db/datastore?sslmode=disable"
+      ckan config-tool $CKAN_INI "ckanext.xloader.site_url = http://ckan:5000"
 fi
