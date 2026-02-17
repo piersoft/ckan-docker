@@ -6,8 +6,8 @@ echo "Not configuring token xloader.. already done"
 else
       echo "Set up ckan.xloader api_token in the CKAN config file"
       ckan config-tool $CKAN_INI "ckanext.xloader.api_token=$(ckan -c $CKAN_INI user token add ckan_admin xloader | tail -n 1 | tr -d '\t')"
-      ckan config-tool $CKAN_INI "ckanext.xloader.jobs_db.uri = postgresql://ckandbuser:ckandbpassword@db/ckandb?sslmode=disable"
-      ckan config-tool $CKAN_INI "ckan.datastore.write_url = postgresql://ckandbuser:ckandbpassword@db/datastore?sslmode=disable"
-      ckan config-tool $CKAN_INI "ckan.datastore.read_url = postgresql://datastore_ro:datastore@db/datastore?sslmode=disable"
+      ckan config-tool $CKAN_INI "ckanext.xloader.jobs_db.uri=${CKAN_SQLALCHEMY_URL}"
+      ckan config-tool $CKAN_INI "ckan.datastore.write_url=${CKAN_DATASTORE_WRITE_URL}"
+      ckan config-tool $CKAN_INI "ckan.datastore.read_url=${CKAN_DATASTORE_READ_URL}"
       ckan config-tool $CKAN_INI "ckanext.xloader.site_url = http://ckan:5000"
 fi
