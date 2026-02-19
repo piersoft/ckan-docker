@@ -362,14 +362,14 @@ class CKANServer(ResumptionOAIPMH):
                 data.append(self._record_for_dataset(package, spec))
         
         # Create additional header to include extra resumptionToken information
-        data.insert(
-            0,
-            (
-                self.generateInternalHeader(total_len),
-                "<empty/>",
-                None,
-            ),
-        )
+         #data.insert(
+          #   0,
+           #  (
+           #      self.generateInternalHeader(total_len),
+           #      "<empty/>",
+           #      None,
+           #  ),
+         #)
         return data
 
     def listSets(self, cursor=None, batch_size=None):
