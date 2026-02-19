@@ -10,18 +10,19 @@ else
       ckan config-tool $CKAN_INI "ckan.datastore.write_url=${CKAN_DATASTORE_WRITE_URL}"
       ckan config-tool $CKAN_INI "ckan.datastore.read_url=${CKAN_DATASTORE_READ_URL}"
       ckan config-tool $CKAN_INI "ckanext.xloader.site_url = http://ckan:5000"
+      # URL base dell'OAI-PMH
+      ckan config-tool $CKAN_INI "ckan.oaipmh.base_url = https://www.piersoftckan.biz/oai"
+      
+      # Record set, se vuoi usare filtri o categorie
+      ckan config-tool $CKAN_INI "ckan.oaipmh.sets = dataset_authority, custom_tag_set"
+      
+      # Metadata formats (oai_dc è standard)
+      ckan config-tool $CKAN_INI "ckan.oaipmh.metadata_formats = oai_dc"
+      
+      # Mapping dei campi (se aggiungi altri profili)
+      ckan config-tool $CKAN_INI "ckan.oaipmh.dc_element_map = title,description,keyword,publisher,identifier"
+      ckan config-tool $CKAN_INI "ckanext.dcat.resource.inherit.license = True"
+      ckan config-tool $CKAN_INI "ckanext.oai_pmh_server.resumption_token_batch_size = 100"
 fi
 
-# URL base dell'OAI-PMH
-ckan config-tool $CKAN_INI "ckan.oaipmh.base_url = https://www.piersoftckan.biz/oai"
 
-# Record set, se vuoi usare filtri o categorie
-ckan config-tool $CKAN_INI "ckan.oaipmh.sets = dataset_authority, custom_tag_set"
-
-# Metadata formats (oai_dc è standard)
-ckan config-tool $CKAN_INI "ckan.oaipmh.metadata_formats = oai_dc"
-
-# Mapping dei campi (se aggiungi altri profili)
-ckan config-tool $CKAN_INI "ckan.oaipmh.dc_element_map = title,description,keyword,publisher,identifier"
-ckan config-tool $CKAN_INI "ckanext.dcat.resource.inherit.license = True"
-ckan config-tool $CKAN_INI "ckanext.oai_pmh_server.resumption_token_batch_size = 100"
