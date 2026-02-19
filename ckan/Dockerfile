@@ -54,7 +54,6 @@ COPY patches/ckanext-oai-pmh-server ${APP_DIR}/src/ckanext-oai-pmh-server
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-oai-pmh-server
 RUN     pip3 install -r ${APP_DIR}/src/ckanext-oai-pmh-server/requirements.txt
 
-
 # CKAN group to DCATAPIT theme mapping file
 COPY patches/topics.json "${APP_DIR}/patches/topics.json"
 RUN chmod 666 "${APP_DIR}/patches/topics.json"
