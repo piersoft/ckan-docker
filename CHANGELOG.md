@@ -1,5 +1,8 @@
 # Changelog
 
+## `2026-02-19`
+Estensione patchata per OAI-PMH per l'interfacciamento con OPENAIRE. Configurare lo script 01 in dockerentrypoint con l'url del proprio server al posto di piersoftckan.biz
+
 ## `2026-02-13`
 Migrazione al CKAN 2.10.9 e fix vari
 
