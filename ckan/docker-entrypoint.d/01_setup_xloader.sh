@@ -24,3 +24,4 @@ ckan config-tool $CKAN_INI "ckan.oaipmh.metadata_formats = oai_dc"
 # Mapping dei campi (se aggiungi altri profili)
 ckan config-tool $CKAN_INI "ckan.oaipmh.dc_element_map = title,description,keyword,publisher,identifier"
 ckan config-tool $CKAN_INI "ckanext.dcat.resource.inherit.license = True"
+ckan config-tool $CKAN_INI "ckanext.oai_pmh_server.resumption_token_batch_size = 100"
