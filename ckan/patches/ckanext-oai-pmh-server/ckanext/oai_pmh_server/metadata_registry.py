@@ -39,7 +39,12 @@ metadataFormats = [
         "oai_dc",
         "http://www.openarchives.org/OAI/2.0/oai_dc.xsd",
         "http://www.openarchives.org/OAI/2.0/oai_dc/",
-    )
+    ),
+        (
+        "oai_datacite",
+        "http://schema.datacite.org/oai/oai-1.1/oai-1.1.xsd",
+        "http://schema.datacite.org/oai/oai-1.1/",
+    ),
 ]
 for prefix in availableMetadataPrefix:
     metadataFormat = (
