@@ -14,7 +14,7 @@ from urllib.parse import urlencode, quote, unquote, parse_qs
 from .oaipmh_server import CKANServer
 from .metadata_registry import availableMetadataPrefix
 from .external.rdftools import rdf_reader, dcat2rdf_writer
-
+from .external.datacite import oai_datacite_writer
 import logging
 
 log = logging.getLogger(__name__)
@@ -34,6 +34,7 @@ class CKANOAIPMHServerWrapper:
         metadata_registry = oaimd.MetadataRegistry()
         metadata_registry.registerReader("oai_dc", oaimd.oai_dc_reader)
         metadata_registry.registerWriter("oai_dc", oaisrv.oai_dc_writer)
+        metadata_registry.registerWriter("oai_datacite", oai_datacite_writer)
         for k, v in availableMetadataPrefix.items():
             # TODO: Check how to pass function/dict as value in dictionary
             # metadata_registry.registerReader(k, v.get("reader"))
