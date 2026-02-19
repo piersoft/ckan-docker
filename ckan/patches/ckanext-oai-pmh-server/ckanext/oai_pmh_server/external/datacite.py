@@ -154,3 +154,17 @@ def oai_datacite_writer(element, metadata):
         d.set("descriptionType", "Abstract")
         d.text = desc_vals[0]
 
+    # relatedIdentifiers for CKAN resources
+    resource_urls = md.get("resource_url") or []
+    if not isinstance(resource_urls, (list, tuple)):
+        resource_urls = [resource_urls]
+
+    resource_urls = [str(x).strip() for x in resource_urls if str(x).strip()]
+
+    if resource_urls:
+        rels = etree.SubElement(res, f"{{{NS_DATACITE_44}}}relatedIdentifiers")
+        for url in resource_urls:
+            ri = etree.SubElement(rels, f"{{{NS_DATACITE_44}}}relatedIdentifier")
+            ri.set("relatedIdentifierType", "URL")
+            ri.set("relationType", "HasPart")
+            ri.text = url
