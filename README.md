@@ -7,7 +7,7 @@
 
 ## Overview
 
-This is a set of configuration and setup files to run a CKAN site.
+This is a set of configuration and setup files to run a CKAN site (CKAN 2.10.9 with OAI-PMH and DCAT_AP/IT).
 
 The CKAN images used are from the official CKAN [ckan-docker](https://github.com/ckan/ckan-docker-base) repo
 
