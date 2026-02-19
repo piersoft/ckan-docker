@@ -32,6 +32,7 @@ RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
+# X-Loader
 RUN pip3 install --no-cache-dir \
     git+https://github.com/ckan/ckanext-xloader.git@2.2.0#egg=ckanext-xloader \
     && pip3 install --no-cache-dir \
@@ -46,10 +47,10 @@ COPY patches/theme_to_group.ini "${APP_DIR}/patches/theme_to_group.ini"
 RUN chmod 666 "${APP_DIR}/patches/theme_to_group.ini"
 
 # OPENAIRE ESTENSIONI
-COPY patches/ckanext-dcat ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa
+COPY patches/ckanext-dcat-ap-edp-mqa ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa
 RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa/requirements.txt
-COPY patches/ckanext-dcat ${APP_DIR}/src/ckanext-oai-pmh-server
+COPY patches/ckanext-oai-pmh-server ${APP_DIR}/src/ckanext-oai-pmh-server
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-oai-pmh-server
 RUN     pip3 install -r ${APP_DIR}/src/ckanext-oai-pmh-server/requirements.txt
 
