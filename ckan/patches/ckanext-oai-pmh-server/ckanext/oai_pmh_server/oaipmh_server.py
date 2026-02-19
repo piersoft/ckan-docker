@@ -115,7 +115,7 @@ class CKANServer(ResumptionOAIPMH):
         pids.append(package.get("id"))
         pids.append(
             config.get("ckan.site_url")
-            + url_for(controller="package", action="read", id=package["name"])
+            + url_for("dataset.read", id=package["name"])
         )
 
         meta = {
