@@ -12,6 +12,8 @@ from oaipmh.error import IdDoesNotExistError
 from ckan.logic import get_action
 from ckan.model import Package, Session, Group
 from ckan.plugins.toolkit import config
+import ckan.plugins.toolkit as toolkit
+
 from ckan.lib.helpers import url_for
 
 from sqlalchemy import between
@@ -118,6 +120,15 @@ class CKANServer(ResumptionOAIPMH):
             + url_for("dataset.read", id=package["name"])
         )
 
+        if package.get("organization") and package["organization"].get("title"):
+            publisher_list = [package["organization"]["title"]]
+        else:
+            publisher_list = [
+              agent["name"]
+              for agent in (list(helpers.get_distributors(package) or []) + list(helpers.get_contacts(package) or []))
+              if "name" in agent
+            ]
+        landing_url = toolkit.url_for("dataset.read", id=package["name"], _external=True)
         meta = {
             "title": self._get_json_content(
                 package.get("title", None) or package.get("name")
@@ -127,17 +138,13 @@ class CKANServer(ResumptionOAIPMH):
                 for author in helpers.get_authors(package)
                 if "name" in author
             ],
-            "publisher": [
-                agent["name"]
-                for agent in (list(helpers.get_distributors(package) or []) + list(helpers.get_contacts(package) or []))
-                if "name" in agent
-            ],
+            "publisher": publisher_list,
             "contributor": [
                 author["name"]
                 for author in helpers.get_contributors(package)
                 if "name" in author
             ],
-            "identifier": pids,
+            "identifier": [landing_url] + (pids or []),
             "type": ["dataset"],
             "language": [l.strip() for l in package.get("language").split(",")]
             if package.get("language", None)
@@ -156,9 +163,15 @@ class CKANServer(ResumptionOAIPMH):
             else None,
             "coverage": coverage if coverage else None,
         }
+        if not meta.get("creator"):
+           # fallback: usa il primo publisher se presente, altrimenti organization title, altrimenti niente
+           if meta.get("publisher"):
+              meta["creator"] = [meta["publisher"][0]]
+           elif package.get("organization") and package["organization"].get("title"):
+              meta["creator"] = [package["organization"]["title"]]
 
         iters = dataset.extras.items()
-        meta = dict(list(meta.items()) + list(iters))
+        meta = dict(list(iters) + list(meta.items()))
 #        meta = dict(iters + meta.items())
         metadata = {}
         # Fixes the bug on having a large dataset being scrambled to individual
