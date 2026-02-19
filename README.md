@@ -110,4 +110,4 @@ Se fossi il gestore del catalogo andrei a vedere i log. E' molto complicato "neu
 
 Consiglio di osservare anche il file `rdf.py` sempre nella cartella `patches`.
 
-Il plugin originale DCATAP_IT è disponibile nella repo di github di [Geosolutions](https://github.com/geosolutions-it/ckanext-dcatapit), ed è stato adeguato alla versione 2.10.3 di CKAN
+Il plugin originale DCATAP_IT è disponibile nella repo di github di [Geosolutions](https://github.com/geosolutions-it/ckanext-dcatapit), ed è stato adeguato alla versione 2.10.9 di CKAN. Il plugin per [OAI-PMH](https://github.com/tlmat-unican/ckanext-oai-pmh-server/) è stato aggiornato ed adeguato per Datacite e il CKAN 2.10.9
