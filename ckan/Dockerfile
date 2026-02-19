@@ -32,11 +32,6 @@ RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
-<<<<<<< HEAD
-# Install xloader version 2.2.0
-=======
-# Install xloader
->>>>>>> 6e646cb (OpenAIRE)
 RUN pip3 install --no-cache-dir \
     git+https://github.com/ckan/ckanext-xloader.git@2.2.0#egg=ckanext-xloader \
     && pip3 install --no-cache-dir \
