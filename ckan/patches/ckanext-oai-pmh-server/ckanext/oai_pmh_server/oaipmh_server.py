@@ -171,6 +171,15 @@ class CKANServer(ResumptionOAIPMH):
               meta["creator"] = [package["organization"]["title"]]
 
         iters = dataset.extras.items()
+        # add resources URLs to meta for DataCite relatedIdentifiers
+        resource_urls = []
+        for r in package.get("resources", []):
+           if r.get("url"):
+              resource_urls.append(r["url"])
+
+        if resource_urls:
+           meta["resource_url"] = resource_urls
+
         meta = dict(list(iters) + list(meta.items()))
 #        meta = dict(iters + meta.items())
         metadata = {}
