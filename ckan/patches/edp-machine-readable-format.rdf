@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:edp="https://europeandataportal.eu/voc#">
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GEOJSON">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ICS">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON_LD">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KML">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KMZ">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/NETCDF">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODS">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDFA">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_QUADS">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TRIG">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_XML">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RSS">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SHP">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLS">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLSX">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XML">
+        <edp:isMachineReadable rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isMachineReadable>
+    </rdf:Description>
+
+</rdf:RDF>

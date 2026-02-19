@@ -1,0 +1,14 @@
+# dcat_ap_edp_mqa-js:
+#   filter: rjsmin
+#   output: ckanext-dcat_ap_edp_mqa/%(version)s-dcat_ap_edp_mqa.js
+#   contents:
+#     - js/dcat_ap_edp_mqa.js
+#   extra:
+#     preload:
+#       - base/main
+
+# dcat_ap_edp_mqa-css:
+#   filter: cssrewrite
+#   output: ckanext-dcat_ap_edp_mqa/%(version)s-dcat_ap_edp_mqa.css
+#   contents:
+#     - css/dcat_ap_edp_mqa.css

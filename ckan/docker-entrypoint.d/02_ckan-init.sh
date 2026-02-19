@@ -46,7 +46,7 @@ if [[ $CKAN__PLUGINS == *"dcatapit_pkg"* ]]; then
    # dcatapit_pkg settings have been configured in the .env file
    # Set API token if necessary
    echo "Set up ckanext.dcat.rdf.profiles in the CKAN config file"
-   ckan config-tool $CKAN_INI "ckanext.dcat.rdf.profiles=euro_dcat_ap_2 it_dcat_ap"
+   ckan config-tool $CKAN_INI "ckanext.dcat.rdf.profiles=euro_dcat_ap_2 it_dcat_ap dcat_ap_edp_mqa"
    ckan config-tool $CKAN_INI "ckanext.dcat.base_uri=$CKAN_SITE_URL"
    ckan config-tool $CKAN_INI "solr_timeout=500"
 fi

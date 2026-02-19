@@ -1,0 +1,14 @@
+# oai_pmh_server-js:
+#   filter: rjsmin
+#   output: ckanext-oai_pmh_server/%(version)s-oai_pmh_server.js
+#   contents:
+#     - js/oai_pmh_server.js
+#   extra:
+#     preload:
+#       - base/main
+
+# oai_pmh_server-css:
+#   filter: cssrewrite
+#   output: ckanext-oai_pmh_server/%(version)s-oai_pmh_server.css
+#   contents:
+#     - css/oai_pmh_server.css

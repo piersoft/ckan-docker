@@ -32,7 +32,11 @@ RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 COPY patches/ckanext-dcatapit ${APP_DIR}/src/ckanext-dcatapit
 RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcatapit/
 
+<<<<<<< HEAD
 # Install xloader version 2.2.0
+=======
+# Install xloader
+>>>>>>> 6e646cb (OpenAIRE)
 RUN pip3 install --no-cache-dir \
     git+https://github.com/ckan/ckanext-xloader.git@2.2.0#egg=ckanext-xloader \
     && pip3 install --no-cache-dir \
@@ -45,6 +49,15 @@ RUN  pip3 install -e git+https://github.com/geosolutions-it/ckanext-multilang.gi
 # DCATAPIT theme to group mapping file
 COPY patches/theme_to_group.ini "${APP_DIR}/patches/theme_to_group.ini"
 RUN chmod 666 "${APP_DIR}/patches/theme_to_group.ini"
+
+# OPENAIRE ESTENSIONI
+COPY patches/ckanext-dcat ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa
+RUN     pip3 install -e ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa
+RUN     pip3 install -r ${APP_DIR}/src/ckanext-dcat-ap-edp-mqa/requirements.txt
+COPY patches/ckanext-dcat ${APP_DIR}/src/ckanext-oai-pmh-server
+RUN     pip3 install -e ${APP_DIR}/src/ckanext-oai-pmh-server
+RUN     pip3 install -r ${APP_DIR}/src/ckanext-oai-pmh-server/requirements.txt
+
 
 # CKAN group to DCATAPIT theme mapping file
 COPY patches/topics.json "${APP_DIR}/patches/topics.json"

@@ -1,0 +1,5 @@
+include README.rst
+include LICENSE
+include requirements.txt
+recursive-include ckanext/oai_pmh_server *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/oai_pmh_server/migration *.ini *.py *.mako

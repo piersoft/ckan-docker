@@ -1,0 +1,3 @@
+git+https://github.com/infrae/pyoai.git#egg=pyoai
+lxml
+iso-639>=0.4.5

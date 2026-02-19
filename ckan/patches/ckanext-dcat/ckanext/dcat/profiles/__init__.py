@@ -21,3 +21,5 @@ from .base import (
 from .euro_dcat_ap import EuropeanDCATAPProfile
 from .euro_dcat_ap_2 import EuropeanDCATAP2Profile
 from .schemaorg import SchemaOrgProfile
+
+DISTRIBUTION_LICENSE_FALLBACK_CONFIG = 'ckanext.dcat.resource.inherit.license'
