@@ -13,7 +13,7 @@ else
 fi
 
 # URL base dell'OAI-PMH
-ckan config-tool $CKAN_INI "ckan.oaipmh.base_url = https://192.168.0.93:8443/oai"
+ckan config-tool $CKAN_INI "ckan.oaipmh.base_url = https://www.piersoftckan.biz/oai"
 
 # Record set, se vuoi usare filtri o categorie
 ckan config-tool $CKAN_INI "ckan.oaipmh.sets = dataset_authority, custom_tag_set"
