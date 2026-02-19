@@ -123,3 +123,34 @@ def oai_datacite_writer(element, metadata):
     rt = etree.SubElement(res, f"{{{NS_DATACITE_44}}}resourceType")
     rt.set("resourceTypeGeneral", "Dataset")
     rt.text = "Dataset"
+    # subjects
+    subjects_vals = md.get("subject") or []
+    if not isinstance(subjects_vals, (list, tuple)):
+        subjects_vals = [subjects_vals]
+    subjects_vals = [str(x).strip() for x in subjects_vals if str(x).strip() and str(x).strip() != "[]"]
+    if subjects_vals:
+        subjects_el = etree.SubElement(res, f"{{{NS_DATACITE_44}}}subjects")
+        for s in subjects_vals:
+            _t(subjects_el, "subject", s, ns=NS_DATACITE_44)
+
+    # rightsList
+    rights_vals = md.get("rights") or []
+    if not isinstance(rights_vals, (list, tuple)):
+        rights_vals = [rights_vals]
+    rights_vals = [str(x).strip() for x in rights_vals if str(x).strip() and str(x).strip() != "[]"]
+    if rights_vals:
+        rights_el = etree.SubElement(res, f"{{{NS_DATACITE_44}}}rightsList")
+        for r in rights_vals:
+            _t(rights_el, "rights", r, ns=NS_DATACITE_44)
+
+    # descriptions (Abstract)
+    desc_vals = md.get("description") or []
+    if not isinstance(desc_vals, (list, tuple)):
+        desc_vals = [desc_vals]
+    desc_vals = [str(x).strip() for x in desc_vals if str(x).strip() and str(x).strip() != "[]"]
+    if desc_vals:
+        descs_el = etree.SubElement(res, f"{{{NS_DATACITE_44}}}descriptions")
+        d = etree.SubElement(descs_el, f"{{{NS_DATACITE_44}}}description")
+        d.set("descriptionType", "Abstract")
+        d.text = desc_vals[0]
+
