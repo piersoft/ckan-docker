@@ -78,8 +78,8 @@ COPY patches/__init__.py ${APP_DIR}/src/ckan/ckan/logic/__init__.py
 # patch per avere il rating dal portale europeo dei dati aperti. Decommentare se si vuole il punteggio
 #COPY patches/read.html "${APP_DIR}/src/ckan/ckan/templates/package/read.html"
 
-#FIX per XLOADER per il comando ckan xloader status. Opzionale ma consigliato:
-#COPY patches/command.py /usr/lib/python3.10/site-packages/ckanext/xloader/command.py
+#FIX per XLOADER per il comando ckan xloader status. Consigliato:
+COPY patches/command.py /usr/lib/python3.10/site-packages/ckanext/xloader/command.py
 
 # Min length resource = 5
 COPY patches/validators.py ${APP_DIR}/src/ckan/ckan/logic/validators.py
