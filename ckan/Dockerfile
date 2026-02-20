@@ -1,5 +1,3 @@
-#FROM ckan/ckan-base:2.10.3
-
 FROM ckan/ckan-base:2.10-py3.10-v20251029 AS ckan
 
 USER root
