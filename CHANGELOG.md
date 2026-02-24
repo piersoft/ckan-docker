@@ -1,7 +1,8 @@
 # Changelog
 
 ## `2026-02-19`
-Estensione patchata per OAI-PMH per l'interfacciamento con OPENAIRE. Configurare lo script /docker-entrypoint.d/01_setup_xloader.sh con l'url del proprio server al posto di piersoftckan.biz. Esempio https://www.piersoftckan.biz/oai?verb=ListMetadataFormats oppure https://www.piersoftckan.biz/oai?verb=Identify oppure https://www.piersoftckan.biz/oai?verb=GetRecord&identifier=<nome-dataset>&metadataPrefix=oai_datacite con <nome-dataset> tipo elenco-publicazioni-comune-di-bugliano. Per elenco totale da una data --> https://www.piersoftckan.biz/oai?verb=ListRecords&metadataPrefix=oai_datacite&from=2026-01-01
+Estensione patchata per OAI-PMH per l'interfacciamento con OPENAIRE. Configurare lo script /docker-entrypoint.d/01_setup_xloader.sh con l'url del proprio server al posto di piersoftckan.biz. Esempio https://www.piersoftckan.biz/oai?verb=ListMetadataFormats oppure https://www.piersoftckan.biz/oai?verb=Identify o. Per elenco totale da una data --> https://www.piersoftckan.biz/oai?verb=ListRecords&metadataPrefix=oai_datacite&from=2026-01-01.
+# SE NON  SERVE OpenAIRE cancellare dcat_ap_edp_mqa in01_setup_xloader.sh in ckanext.dcat.rdf.profiles e nel file .env nella sezione plugin
 
 ## `2026-02-13`
 Migrazione al CKAN 2.10.9 e fix vari
