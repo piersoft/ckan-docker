@@ -18,12 +18,24 @@ class MqaEuropeanDCATAP2Profile(EuropeanDCATAP2Profile):
     It requires the European DCAT-AP profile (`euro_dcat_ap`)
     """
 
+
+    def _safe_get_scheming_schema(self):
+          try:
+              h = toolkit.h
+              if hasattr(h, "scheming_get_dataset_schema"):
+                  return h.scheming_get_dataset_schema()
+          except Exception:
+              pass
+          return None
+
     def _best_label(self, node, lang_preference=("it", "en")):
+        """
+        Safe label picker that works with ConjunctiveGraph too (no g.label()).
+        """
         if not node:
             return None
 
         candidates = []
-
         for predicate in (SKOS.prefLabel, RDFS.label, DCTERMS.title):
             for o in self.g.objects(node, predicate):
                 if isinstance(o, RDFLiteral):
@@ -39,9 +51,12 @@ class MqaEuropeanDCATAP2Profile(EuropeanDCATAP2Profile):
 
         return str(candidates[0])
 
+
     def parse_dataset(self, dataset_dict, dataset_ref):
+        # lascia fare tutto al profilo EU prima
         super().parse_dataset(dataset_dict, dataset_ref)
 
+        # --- Spatial label (robusto) ---
         spatial = self._object(dataset_ref, DCT.spatial)
         if spatial:
             spatial_label = self._best_label(spatial) or str(spatial)
@@ -52,6 +67,8 @@ class MqaEuropeanDCATAP2Profile(EuropeanDCATAP2Profile):
                 )
 
         return dataset_dict
+
+
     def graph_from_dataset(self, dataset_dict, dataset_ref):
 
         super().graph_from_dataset(dataset_dict, dataset_ref)
