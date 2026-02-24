@@ -1,5 +1,3 @@
-# https://github.com/kangmoesss/ckanext-oaipmh-1/blob/55d1b73fe7da710410bf361d1e1d8b777b15a82a/ckanext/oaipmh/oaipmh_server.py
-
 import json
 from datetime import datetime
 from lxml import etree
@@ -47,7 +45,7 @@ class CKANServer(ResumptionOAIPMH):
                 f"{internal_plugin.BLUEPRINT_NAME}.{internal_plugin.BLUEPRINT_OAI_ACTION_NAME}"
             ),
             protocolVersion="2.0",
-            adminEmails=["support@tlmat.unican.es"],
+            adminEmails=["ckan@piersoft.it"],
             earliestDatestamp=utils.get_earliest_datestamp(),
             deletedRecord="no",
             granularity="YYYY-MM-DDThh:mm:ssZ",
@@ -179,7 +177,6 @@ class CKANServer(ResumptionOAIPMH):
 
         if resource_urls:
            meta["resource_url"] = resource_urls
-
         meta = dict(list(iters) + list(meta.items()))
 #        meta = dict(iters + meta.items())
         metadata = {}
@@ -302,14 +299,14 @@ class CKANServer(ResumptionOAIPMH):
             set, cursor, from_, until, batch_size
         )
         for package in packages:
-            spec = package.name
-            if group:
-                spec = group.name
-            else:
-                if package.owner_org:
-                    group = Group.get(package.owner_org)
-                    if group and group.name:
-                        spec = group.name
+            # Default: se non ho set, uso l'org del dataset (owner_org) se disponibile,
+            # altrimenti ripiego sul name del dataset.
+            this_group = group  # group viene da _filter_packages (quando l'utente passa ?set=...)
+            if not this_group and package.owner_org:
+                this_group = Group.get(package.owner_org)
+
+            spec = this_group.name if (this_group and this_group.name) else package.name
+
             data.append(
                 common.Header(
                     "", package.id, package.metadata_created, [spec], False
@@ -351,14 +348,12 @@ class CKANServer(ResumptionOAIPMH):
             set, cursor, from_, until, batch_size
         )
         for package in packages:
-            spec = package.name
-            if group:
-                spec = group.name
-            else:
-                if package.owner_org:
-                    group = Group.get(package.owner_org)
-                    if group and group.name:
-                        spec = group.name
+            this_group = group
+            if not this_group and package.owner_org:
+                this_group = Group.get(package.owner_org)
+
+            spec = this_group.name if (this_group and this_group.name) else package.name
+
             if metadataPrefix in availableMetadataPrefix.keys():
                 data.append(
                     self._record_for_dataset_dcat(
@@ -369,16 +364,17 @@ class CKANServer(ResumptionOAIPMH):
                 )
             else:
                 data.append(self._record_for_dataset(package, spec))
-        
+
+
         # Create additional header to include extra resumptionToken information
          #data.insert(
           #   0,
            #  (
-           #      self.generateInternalHeader(total_len),
-           #      "<empty/>",
-           #      None,
-           #  ),
-         #)
+            #     self.generateInternalHeader(total_len),
+             #    "<empty/>",
+              #   None,
+             #),
+        # )
         return data
 
     def listSets(self, cursor=None, batch_size=None):
