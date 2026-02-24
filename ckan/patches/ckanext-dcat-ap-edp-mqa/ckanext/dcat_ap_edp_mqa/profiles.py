@@ -1,38 +1,57 @@
-from rdflib import Graph, URIRef, BNode, Literal
-from rdflib.namespace import Namespace
+from rdflib import Graph, URIRef
+from rdflib.namespace import RDF, RDFS, DCTERMS, SKOS
+
 from ckanext.dcat.profiles import EuropeanDCATAP2Profile
 from ckanext.dcat.profiles import DCAT, DCT, LOCN
-from rdflib.namespace import RDF
+
+from rdflib.term import Literal as RDFLiteral
 
 from .vocabularies import vocabulary_providers
 
 import logging
-
 log = logging.getLogger(__name__)
 
 
 class MqaEuropeanDCATAP2Profile(EuropeanDCATAP2Profile):
     """
     An RDF profile for the MQA EDP DCAT-AP recommendation for data portals
-
     It requires the European DCAT-AP profile (`euro_dcat_ap`)
     """
 
-    def parse_dataset(self, dataset_dict, dataset_ref):
+    def _best_label(self, node, lang_preference=("it", "en")):
+        if not node:
+            return None
 
+        candidates = []
+
+        for predicate in (SKOS.prefLabel, RDFS.label, DCTERMS.title):
+            for o in self.g.objects(node, predicate):
+                if isinstance(o, RDFLiteral):
+                    candidates.append(o)
+
+        if not candidates:
+            return None
+
+        for lang in lang_preference:
+            for lit in candidates:
+                if (lit.language or "").lower().startswith(lang):
+                    return str(lit)
+
+        return str(candidates[0])
+
+    def parse_dataset(self, dataset_dict, dataset_ref):
         super().parse_dataset(dataset_dict, dataset_ref)
 
-        # Spatial label
         spatial = self._object(dataset_ref, DCT.spatial)
         if spatial:
-            spatial_label = self.g.label(spatial)
+            spatial_label = self._best_label(spatial) or str(spatial)
             if spatial_label:
+                dataset_dict.setdefault("extras", [])
                 dataset_dict["extras"].append(
-                    {"key": "spatial_text", "value": str(spatial_label)}
+                    {"key": "spatial_text", "value": spatial_label}
                 )
 
         return dataset_dict
-
     def graph_from_dataset(self, dataset_dict, dataset_ref):
 
         super().graph_from_dataset(dataset_dict, dataset_ref)
