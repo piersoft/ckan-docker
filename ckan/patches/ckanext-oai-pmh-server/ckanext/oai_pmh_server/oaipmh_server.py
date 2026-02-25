@@ -127,15 +127,19 @@ class CKANServer(ResumptionOAIPMH):
               if "name" in agent
             ]
         landing_url = toolkit.url_for("dataset.read", id=package["name"], _external=True)
+        #creator in DCATAP_IT è il titolare cioè holder_name
         meta = {
             "title": self._get_json_content(
                 package.get("title", None) or package.get("name")
             ),
-            "creator": [
-                author["name"]
-                for author in helpers.get_authors(package)
-                if "name" in author
-            ],
+            "creator": self._get_json_content(
+                package.get("holder_name", None)
+            ),
+#            "creator": [
+#                author["name"]
+#                for author in helpers.get_authors(package)
+#                if "name" in author
+#            ],
             "publisher": publisher_list,
             "contributor": [
                 author["name"]
