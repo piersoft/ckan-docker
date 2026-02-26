@@ -475,9 +475,9 @@ class DCATRDFHarvester(DCATHarvester):
                         resource['id'] = resource_mapping[res_uri]
                         if not 'rights' in resource:
                            resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
-                        else:
-                           resource.pop('rights')
-                           resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
+ #                       else:
+ #                          resource.pop('rights')
+ #                          resource['rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
  #                           if not dataset['access_rights']:
    #                          dataset['access_rights']='http://publications.europa.eu/resource/authority/access-right/PUBLIC'
    #                         if 'license' in resource:
