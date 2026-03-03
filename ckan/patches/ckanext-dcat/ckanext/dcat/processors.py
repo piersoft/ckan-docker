@@ -535,7 +535,7 @@ class RDFSerializer(RDFProcessor):
         log.debug('root_catalog_ref %s',root_catalog_ref)
         if (root_catalog_ref, DCT.hasPart, catalog_ref) not in g:
             dataset_reftmp=dataset_ref
-            dataset_reftmp=dataset_ref.replace(PREF_LANDING,source_uri)
+#            dataset_reftmp=dataset_ref.replace(PREF_LANDING,source_uri)
             dataset_refok=URIRef(dataset_reftmp)
             log.info('dataset_ref %s',dataset_ref)
             created_str = dataset_dict['organization']['created'].split('.')[0]  # taglia microsecondi
