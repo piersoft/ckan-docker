@@ -46,7 +46,7 @@ more information.
 1. Modify `.env` (eventually).
 2. Change in /docker-entrypoint.d/01_setup_xloader.sh, www.piersoftckan.biz with your ip:8443 (section ckan.oaipmh.base_url )
 
-1. Change every `www.piersoftckan.biz` in to `.env` file with, in example, `https://127.0.0.1:8443` o con private IP privato and then in production with the FQDN.
+1. Change every `www.piersoftckan.biz` in to `.env` file with, in example, `https://127.0.0.1:8443` or with private IP and then in production with the FQDN.
 
 1. Change in `.env` values for `CKAN_SYSADMIN_PASSWORD` (not CKAN_SYSADMIN_NAME) . Default value is:
 
