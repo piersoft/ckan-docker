@@ -44,7 +44,7 @@ more information.
 1. Rename `.env.example` in `.env`.
 
 1. Modify `.env` (eventually).
-2. Change in /dockerentrypoint 01 file, www.piersoftckan.biz with your ip:8443
+2. Change in /docker-entrypoint.d/01_setup_xloader.sh, www.piersoftckan.biz with your ip:8443 (section ckan.oaipmh.base_url )
 
 1. Change every `www.piersoftckan.biz` in to `.env` file with, in example, `https://127.0.0.1:8443` o con private IP privato and then in production with the FQDN.
 
