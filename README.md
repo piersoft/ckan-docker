@@ -35,7 +35,7 @@ more information.
 
 ## Install, build and run CKAN 2.10.9 + dependencies
 
-1. Clona il repo
+1. Clone repo:
 
 	```
 	git clone https://github.com/piersoft/ckan-docker.git
