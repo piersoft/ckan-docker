@@ -41,11 +41,12 @@ more information.
 	git clone https://github.com/piersoft/ckan-docker.git
 	```
 
-1. Rinomina `.env.example` in `.env`.
+1. Rename `.env.example` in `.env`.
 
-1. Modifica `.env` sulla base delle tue necessità.
+1. Modify `.env` (eventually).
+2. Change in /dockerentrypoint 01 file, www.piersoftckan.biz with your ip:8443
 
-1. Sostituisci tutte le stringhe del tipo `www.piersoftckan.biz` nel file `.env` con, ad esempio, `https://127.0.0.1:8443` o con IP privato e poi in produzione con il FQDN.
+1. Change every `www.piersoftckan.biz` in to `.env` file with, in example, `https://127.0.0.1:8443` o con private IP privato and then in production with the FQDN.
 
 1. Change in `.env` values for `CKAN_SYSADMIN_PASSWORD` (not CKAN_SYSADMIN_NAME) . Default value is:
 
