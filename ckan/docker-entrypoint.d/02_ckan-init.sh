@@ -59,6 +59,7 @@ ckan config-tool $CKAN_INI "ckanext.dcat.expose_subcatalogs = True"
 ckan config-tool $CKAN_INI "ckanext.dcat.normalize_ckan_format = true"
 ckan config-tool $CKAN_INI "geonames.username = demo"
 ckan config-tool $CKAN_INI "ckanext.dcat.clean_tags = True"
+ckan config-tool $CKAN_INI "ckan.uploads_enabled = True"
 
 
 
