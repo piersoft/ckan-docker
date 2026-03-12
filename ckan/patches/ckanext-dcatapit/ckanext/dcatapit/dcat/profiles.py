@@ -428,7 +428,7 @@ class ItalianDCATAPProfile(RDFProfile):
                         else:
                            log.warning('license_type.default_name')
                            license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-                           if license_type.document_uri is not None:
+                           if license_type is not None and license_type.document_uri is not None:
                              if 'publicdomain' in license_type.document_uri:
                                license_name='Creative Commons CC0 1.0 Universale - Public Domain Dedication (CC0 1.0)'
                              else:
@@ -443,7 +443,7 @@ class ItalianDCATAPProfile(RDFProfile):
                  #         if 'r_campan' in dataset_dict.get('holder_identifier'):
                   #            license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
 
-                if license_type.document_uri is not None:
+                if license_type is not None and license_type.document_uri is not None:
                           if 'https://creativecommons.org/licenses/by/4.0/' in license_type.document_uri:
                             #log.warning('2. Licenza Sconosciuta nel dataset, provo a settare CCBY')
                             license_name='Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
@@ -453,8 +453,31 @@ class ItalianDCATAPProfile(RDFProfile):
                             resource_dict['license_type'] = license_type.uri
                             resource_dict['license_id'] = license_name
                             setlic=1
-                log.info('Setting lincense %s %s %s', license_type.uri, license_name, license_type.document_uri) 
-                licenses.append((license_type.uri, license_name, license_type.document_uri))
+
+                access_rights = None
+
+                access_rights_ref = self._object_value(dataset_ref, DCT.accessRights)
+                if access_rights_ref:
+                    access_rights = str(access_rights_ref)
+
+                if access_rights is not None:
+                          log.info('access_rights trovato: %r', access_rights)
+                          if 'RESTRICTED' in access_rights:
+                             log.info('DGA trovato')
+                             license_name=''
+                             if license_type is not None:
+                               license_type.document_uri=''
+                               license_type.uri=''
+                          else:
+                             log.debug('Arights NON trovato')
+                else:
+                   log.info('access_rights non trovato')
+                license_uri = license_type.uri if license_type is not None else None
+                license_doc_uri = license_type.document_uri if license_type is not None else None
+
+                log.info('Setting license %s %s %s', license_uri, license_name, license_doc_uri)
+
+                licenses.append((license_uri, license_name, license_doc_uri))
             else:
                 log.warning('No license found for resource "%s"::"%s"',
                             dataset_dict.get('title', '---'),
