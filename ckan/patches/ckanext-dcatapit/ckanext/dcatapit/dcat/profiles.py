@@ -1478,6 +1478,11 @@ class ItalianDCATAPProfile(RDFProfile):
 
             # be lenient about license existence
             license_maybe = license_url or dcatapit_license
+            if resource_dict.get('license_id'):
+                 if 'OtherRestrictiveClauses' in resource_dict.get('license_id'):
+                   log.debug('license_id OtherRestrictiveClauses prima del dct.licensedocument in profiles  dcatapit')
+                   license_maybe = ''
+                     
             if license_maybe:
                 license_maybe=license_maybe.replace("deed.it","")
                 license = URIRef(license_maybe)
