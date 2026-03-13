@@ -461,13 +461,17 @@ class ItalianDCATAPProfile(RDFProfile):
                     access_rights = str(access_rights_ref)
 
                 if access_rights is not None:
-                          log.info('access_rights trovato: %r', access_rights)
+                          #log.info('access_rights trovato: %r', access_rights)
                           if 'RESTRICTED' in access_rights:
-                             log.info('DGA trovato')
-                             license_name=''
-                             if license_type is not None:
-                               license_type.document_uri=''
-                               license_type.uri=''
+                               log.info('DGA trovato')
+                               license_name=''
+                               log.info('DGA license_type %s',license_type)
+                               resource_dict['license_type'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                               resource_dict['license_id'] = 'OtherRestrictiveClauses'
+                               if license_type is not None:
+                                license_type.document_uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                                license_type.uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                                resource_dict['license_type'] = license_type.uri
                           else:
                              log.debug('Arights NON trovato')
                 else:
