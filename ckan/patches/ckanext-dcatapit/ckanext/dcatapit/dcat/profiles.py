@@ -472,6 +472,10 @@ class ItalianDCATAPProfile(RDFProfile):
                                 license_type.document_uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
                                 license_type.uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
                                 resource_dict['license_type'] = license_type.uri
+                               if license is not None:
+                                 license_lower = license.lower()
+                                 if 'w3id' in license_lower or 'unknown' in license_lower or 'creative' in license_lower:
+                                   resource_dict['license'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
                           else:
                              log.debug('Arights NON trovato')
                 else:
