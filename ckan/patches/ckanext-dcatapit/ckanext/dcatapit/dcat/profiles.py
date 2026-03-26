@@ -82,9 +82,9 @@ class ItalianDCATAPProfile(RDFProfile):
                   value=re.sub('\W+','', value)
                   value = value.replace('//', '')
                 if 'http' in value:
-                      value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
-                      value=re.sub('\W+','', value)
-                      value = value.replace('//', '')
+                  value=re.sub(r'[^a-zA-Z0-9:_]',r'',value)
+                  value=re.sub('\W+','', value)
+                  value = value.replace('//', '')
                 self._remove_from_extra(dataset_dict, key)
                 dataset_dict[key] = value
             else:
@@ -411,7 +411,7 @@ class ItalianDCATAPProfile(RDFProfile):
                   if 'r_campan' in dataset_dict.get('holder_identifier'):
                     license_type.document_uri = 'https://creativecommons.org/licenses/by/4.0/'
                     license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-                  if 'r_lazio' in dataset_dict.get('holder_identifier'):
+                  if 'r_lazio' in dataset_dict.get('holder_identifier') or 'm_sa' in dataset_dict.get('holder_identifier'):
                     license_type.document_uri = 'https://www.dati.gov.it/content/italian-open-data-license-v20'
                     license_name = 'Italian Open Data License 2.0'
                 try:
@@ -453,7 +453,6 @@ class ItalianDCATAPProfile(RDFProfile):
                             resource_dict['license_type'] = license_type.uri
                             resource_dict['license_id'] = license_name
                             setlic=1
-
                 access_rights = None
 
                 access_rights_ref = self._object_value(dataset_ref, DCT.accessRights)
@@ -461,13 +460,21 @@ class ItalianDCATAPProfile(RDFProfile):
                     access_rights = str(access_rights_ref)
 
                 if access_rights is not None:
-                          log.info('access_rights trovato: %r', access_rights)
+                          #log.info('access_rights trovato: %r', access_rights)
                           if 'RESTRICTED' in access_rights:
-                             log.info('DGA trovato')
-                             license_name=''
-                             if license_type is not None:
-                               license_type.document_uri=''
-                               license_type.uri=''
+                               log.info('DGA trovato')
+                               license_name=''
+                               log.info('DGA license_type %s',license_type)
+                               resource_dict['license_type'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                               resource_dict['license_id'] = 'OtherRestrictiveClauses'
+                               if license_type is not None:
+                                license_type.document_uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                                license_type.uri='http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                                resource_dict['license_type'] = license_type.uri
+                               if license is not None:
+                                 license_lower = license.lower()
+                                 if 'w3id' in license_lower or 'unknown' in license_lower or 'creative' in license_lower:
+                                   resource_dict['license'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
                           else:
                              log.debug('Arights NON trovato')
                 else:
@@ -478,6 +485,7 @@ class ItalianDCATAPProfile(RDFProfile):
                 log.info('Setting license %s %s %s', license_uri, license_name, license_doc_uri)
 
                 licenses.append((license_uri, license_name, license_doc_uri))
+
             else:
                 log.warning('No license found for resource "%s"::"%s"',
                             dataset_dict.get('title', '---'),
@@ -494,7 +502,6 @@ class ItalianDCATAPProfile(RDFProfile):
                   resource_dict['name']="N/A"
                 elif len(resource_dict.get('name'))<2:
                   resource_dict['name']="N/A"
-
                 self._collect_multilang_strings(resource_dict, key, distribution, predicate, loc_dict)
 
             if len(loc_dict) > 0:
@@ -642,6 +649,7 @@ class ItalianDCATAPProfile(RDFProfile):
            if d.get('modified'):
              temporal_coverage_item = {'temporal_start': d.get('modified')}
              temp_cov.append(temporal_coverage_item)
+
 
 
 
@@ -893,24 +901,23 @@ class ItalianDCATAPProfile(RDFProfile):
         if dataset_dict.get('frequency'):
           if 'continuo' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='OTHER'
-          elif 'Dato non disponibile' in dataset_dict.get('frequency'):
+          if 'Dato non disponibile' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='OTHER'
-          elif 'mai' in dataset_dict.get('frequency'):
+          if 'mai' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='NEVER'
-          elif 'Annuale' in dataset_dict.get('frequency'):
+          if 'Annuale' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='ANNUAL'
-          elif 'Giornaliera' in dataset_dict.get('frequency'):
+          if 'Giornaliera' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='DAILY'
-          elif 'Sconosciuta' in dataset_dict.get('frequency'):
-            dataset_dict.pop('frequency', None)
+          if 'Sconosciuta' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='UNKNOWN'
-          elif 'Settimanale' in dataset_dict.get('frequency'):
+          if 'Settimanale' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='WEEKLY'
-          elif 'annually' in dataset_dict.get('frequency'):
+          if 'annually' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='ANNUAL'
-          elif 'irregolare' in dataset_dict.get('frequency'):
+          if 'irregolare' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='IRREG'
-          elif 'mensile' in dataset_dict.get('frequency'):
+          if 'mensile' in dataset_dict.get('frequency'):
             dataset_dict['frequency']='MONTHLY'
         else:
             dataset_dict['frequency']='UNKNOWN'
@@ -1088,18 +1095,27 @@ class ItalianDCATAPProfile(RDFProfile):
             landing_page_uri = dataset_uri(dataset_dict)
             landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://dati.mit.gov.it")
             noaddsl=1 
+         if 'C_D634' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://www.opendata.maggioli.cloud")
+            noaddsl=1
+         if 'C_C621' in dataset_dict.get('holder_identifier'):
+            landing_page_uri = dataset_uri(dataset_dict)
+            landing_page_uri=landing_page_uri.replace(PREF_LANDING,"https://www.opendata.maggioli.cloud")
+            noaddsl=1
+
          if 'agcm_' in dataset_dict.get('holder_identifier'):
             landing_page_uri = dataset_uri(dataset_dict)
             noaddsl=0
             landing_page_uri=landing_page_uri.replace("/catalog","")
          if noaddsl==0:
            landing_page_uri += '/'
-             
+
          for extra in dataset_dict.get('extras', []):
              if extra['key'] == 'landingpage':
                 landing_page_uri = extra['value']
-                 
-         landing_page_uri = landing_page_uri.replace('documento:pubblico','documento_pubblico')  
+
+         landing_page_uri = landing_page_uri.replace('documento:pubblico','documento_pubblico')                
 
          landing_page_uri_f=""
          if landing_page_uri.endswith("/"):
@@ -1287,7 +1303,7 @@ class ItalianDCATAPProfile(RDFProfile):
         g.add((poc, RDF.type, VCARD.Kind))
         g.add((poc, RDF.type, VCARD.Organization))
 
-        g.add((poc, VCARD.fn, Literal(org_dict.get('display_name'))))
+        g.add((poc, VCARD.fn, Literal(org_dict.get('name'))))
 
         if 'email' in org_dict.keys():  # this element is mandatory for dcatapit, but it may not have been filled for imported datasets
             g.add((poc, VCARD.hasEmail, URIRef('mailto:'+org_dict.get('email'))))
@@ -1474,72 +1490,48 @@ class ItalianDCATAPProfile(RDFProfile):
 
             # be lenient about license existence
             license_maybe = license_url or dcatapit_license
+            if resource_dict.get('license_id'):
+                 if 'OtherRestrictiveClauses' in resource_dict.get('license_id'):
+                   log.debug('license_id OtherRestrictiveClauses prima del dct.licensedocument in profiles  dcatapit')
+                   license_maybe = ''
+
+#            if resource_dict.get('license') or resource_dict.get('license_type'):
+ #              license_maybe=resource_dict.get('license') or resource_dict.get('license_type')
+
             if license_maybe:
                 license_maybe=license_maybe.replace("deed.it","")
                 license = URIRef(license_maybe)
-                log.debug('license_maybe uriref  %s',URIRef(license_maybe))
-                if resource_dict.get('license'):
-                  log.debug('dct.license in risorsa: %s',resource_dict['license'])
-                  license=resource_dict.get('license')
-                  license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
-                  license=license.replace('by-nc','by')
-                  license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_IODL20','https://www.dati.gov.it/content/italian-open-data-license-v20')
-                  if resource_dict['license'] == license_url:
-                    log.debug('dct.license in dcatapit: %s',license)
-                  if 'italian-open-data-license-v20' in license:
-                    resource_dict.pop('license', None)
-                    dataset_dict.pop('license_id',None)
-                    dataset_dict.pop('license_title',None)
-                    dataset_dict['license_id']='Italian Open Data License 2.0'
-                    dataset_dict['license_title']='Italian Open Data License 2.0'
-                    resource_dict['license']=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                    log.debug('provo a patchare la licenza sia della risorsa che del dataset: %s',license)
                 if 'C1_Unknown' in license:
                     license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
-                if 'A21_IODL20' in license:
-                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
                 log.debug('provo a patchare la licenza: %s',license)
+                if 'A21' in license:
+                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
+                if 'IODL' in license:
+                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
                 if 'http' in license:
                     license=URIRef(license)
+                #    for lang, name in names.items():
+                  #    if 'Creative Commons Attribuzione 4.0' in name:
+                   #     license=URIRef('https://creativecommons.org/licenses/by/4.0/')
+                    #  if 'Italian Open Data License 2.0' in name:
+                      #  license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
+                g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
+                g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
+                g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
+                if license_version:
+                    g.add((license, OWL.versionInfo, Literal(license_version)))
                 for lang, name in names.items():
-                  if 'Creative Commons Attribuzione 4.0' in name:
-                    license=URIRef('https://creativecommons.org/licenses/by/4.0/')
-                  if 'Italian Open Data License 2.0' in name:
-                    license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                #qui è presente ancora il bug. se il dataset ha una licenza diversa dalla distribuzione, il dct.licensedocument segue il dataset 
-                if resource_dict.get('license'):
-                  licenseres=resource_dict.get('license')
-                  if 'license-v20' in licenseres:
-                    log.debug('provo a imporre IoDL2 al LicenseDocument')
-                    # Rimuovi TUTTI i valori esistenti di dct:license per quella distribuzione
-                    g.remove((distribution, DCT.license, None))
-                    g.add((URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20'), RDF.type, DCATAPIT.LicenseDocument))
-                    g.add((URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20'), RDF.type, DCT.LicenseDocument))
-                    g.add((URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20'), DCT.type, URIRef(dcat_license)))
-                    g.add((URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20'), OWL.versionInfo, Literal('2.0')))
-                    LABELS = {
-                         'it': 'Italian Open Data License 2.0 (IODL 2.0)',
-                         'en': 'Italian Open Data License 2.0 (IODL 2.0)',
-                         'fr': 'Italian Open Data License 2.0 (IODL 2.0)',
-                    }
-                    license_uri = URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                    for lang_code, label in LABELS.items():
-                        g.add((license_uri, FOAF.name, Literal(label, lang=lang_code)))
-                    resource_dict.pop('license', None)
-                    resource_dict['license']=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                    g.add((distribution, DCT.license, URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')))
-                  else:
-                    g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
-                    g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
-                    g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
-                    if license_version:
-                      g.add((license, OWL.versionInfo, Literal(license_version)))
-                    for lang, name in names.items():
-                      g.add((license, FOAF.name, Literal(name, lang=lang)))
-
+                    g.add((license, FOAF.name, Literal(name, lang=lang)))
+                # originale era if resource_dict.get('license'): cambio le NC perchè non previste
+                if resource_dict.get('license') or resource_dict.get('license_type'):
+                  license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
+                  license=license.replace('by-nc','by')
+   #                if resource_dict['license'] == license_url:
+     #                log.debug('dct.license in dcatapit: %s',license)
+                  g.remove((distribution, DCT.license, None))
+                  g.add((distribution, DCT.license, URIRef(license)))
                 else:
-                    log.debug('impongo CCBY alla risorsa')
+                    g.remove((distribution, DCT.license, None))
                     g.add((distribution, DCT.license, URIRef('http://creativecommons.org/licenses/by/4.0/')))
             else:
                 log.error('*** License not set')
@@ -1639,7 +1631,14 @@ class ItalianDCATAPProfile(RDFProfile):
                 # subthemes = theme.get('subthemes') or []
                 # theme_ref = URIRef(theme_name)
                 # self.g.remove((dataset_ref, DCAT.theme, theme_ref))
-
+                if 'ENVIRONMENTAL' in theme or 'environmental' in theme:
+                    theme ="http://publications.europa.eu/resource/authority/data-theme/ENVI"
+                if 'LAVORO' in theme or 'lavoro' in theme:
+                    theme ="http://publications.europa.eu/resource/authority/data-theme/ECON"
+                if 'FORMAZIONE' in theme or 'formazione' in theme:
+                    theme ="http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                if 'GEO_UNITS' in theme or 'geo_units' in theme:
+                    theme ="http://publications.europa.eu/resource/authority/data-theme/REGI"
                 self.g.add((dataset_ref, DCAT.theme, URIRef(theme)))
                 self._add_concept(THEME_CONCEPTS, uri=theme)
                 # self._add_subthemes(dataset_ref, subthemes)
@@ -1664,9 +1663,11 @@ class ItalianDCATAPProfile(RDFProfile):
             self.g.add((sref, RDF.type, DCATAPIT.subTheme))  # only for dcatapit 0.4, not in 1.0
             for lang, label in labels.items():
                 if lang in OFFERED_LANGS:
+                  if label[0].isdigit() == True:
                     labelnonmb=label[5:].strip()
                     self.g.add((sref, SKOS.prefLabel, Literal(labelnonmb, lang=lang)))
-                 #   self.g.add((sref, SKOS.prefLabel, Literal(label, lang=lang)))
+                  else:
+                    self.g.add((sref, SKOS.prefLabel, Literal(label, lang=lang)))
             self.g.add((ref, DCT.subject, sref))
 
     def _add_creators(self, dataset_dict, ref):
@@ -1820,7 +1821,7 @@ class ItalianDCATAPProfile(RDFProfile):
         # Replace homepage
         # Try to avoid to have the Catalog URIRef identical to the homepage URI
         g.remove((catalog_ref, FOAF.homepage, URIRef(config.get('ckan.site_url'))))
-        g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri() + '/#')))
+ #       g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri() + '/#')))
  #        g.add((catalog_ref, FOAF.homepage, URIRef(catalog_uri())))
 
         # publisher
