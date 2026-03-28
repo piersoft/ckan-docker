@@ -1490,13 +1490,23 @@ class ItalianDCATAPProfile(RDFProfile):
 
             # be lenient about license existence
             license_maybe = license_url or dcatapit_license
+            log.debug('license_maybe: %s',license_maybe)
             if resource_dict.get('license_id'):
                  if 'OtherRestrictiveClauses' in resource_dict.get('license_id'):
                    log.debug('license_id OtherRestrictiveClauses prima del dct.licensedocument in profiles  dcatapit')
                    license_maybe = ''
 
-#            if resource_dict.get('license') or resource_dict.get('license_type'):
- #              license_maybe=resource_dict.get('license') or resource_dict.get('license_type')
+            if resource_dict.get('license'):
+             if resource_dict.get('license') != license_maybe:
+                license_maybe=resource_dict.get('license')
+
+            if resource_dict.get('license_type'):
+             if resource_dict.get('license_type') != license_maybe:
+                license_maybe=resource_dict.get('license_type')
+
+            if resource_dict.get('license_type') and resource_dict.get('license'):
+             if resource_dict.get('license_type') != resource_dict.get('license'):
+                license_maybe=resource_dict.get('license')
 
             if license_maybe:
                 license_maybe=license_maybe.replace("deed.it","")
@@ -1504,35 +1514,31 @@ class ItalianDCATAPProfile(RDFProfile):
                 if 'C1_Unknown' in license:
                     license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown','http://creativecommons.org/licenses/by/4.0/it/')
                 log.debug('provo a patchare la licenza: %s',license)
-                if 'A21' in license:
+                if 'A29' in license:
                     license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
                 if 'IODL' in license:
                     license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
                 if 'http' in license:
                     license=URIRef(license)
-                #    for lang, name in names.items():
-                  #    if 'Creative Commons Attribuzione 4.0' in name:
-                   #     license=URIRef('https://creativecommons.org/licenses/by/4.0/')
-                    #  if 'Italian Open Data License 2.0' in name:
-                      #  license=URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-                g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
-                g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
-                g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
-                if license_version:
-                    g.add((license, OWL.versionInfo, Literal(license_version)))
-                for lang, name in names.items():
-                    g.add((license, FOAF.name, Literal(name, lang=lang)))
                 # originale era if resource_dict.get('license'): cambio le NC perchè non previste
                 if resource_dict.get('license') or resource_dict.get('license_type'):
                   license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40','http://creativecommons.org/licenses/by/4.0/')
                   license=license.replace('by-nc','by')
-   #                if resource_dict['license'] == license_url:
-     #                log.debug('dct.license in dcatapit: %s',license)
+                  license=license.replace('https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40','http://creativecommons.org/licenses/by/4.0/')
                   g.remove((distribution, DCT.license, None))
                   g.add((distribution, DCT.license, URIRef(license)))
                 else:
                     g.remove((distribution, DCT.license, None))
                     g.add((distribution, DCT.license, URIRef('http://creativecommons.org/licenses/by/4.0/')))
+                license=URIRef(license)
+                if license_version:
+                    g.add((license, OWL.versionInfo, Literal(license_version)))
+                for lang, name in names.items():
+                    g.add((license, FOAF.name, Literal(name, lang=lang)))
+                g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
+                g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
+                g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
+
             else:
                 log.error('*** License not set')
 
