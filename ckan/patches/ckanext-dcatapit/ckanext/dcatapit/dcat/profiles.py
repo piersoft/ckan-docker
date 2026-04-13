@@ -1533,11 +1533,12 @@ class ItalianDCATAPProfile(RDFProfile):
                 license=URIRef(license)
                 if license_version:
                     g.add((license, OWL.versionInfo, Literal(license_version)))
-                for lang, name in names.items():
+                for lang, name in (names or {}).items():
                     g.add((license, FOAF.name, Literal(name, lang=lang)))
                 g.add((URIRef(license), RDF.type, DCATAPIT.LicenseDocument))
                 g.add((URIRef(license), RDF.type, DCT.LicenseDocument))
-                g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
+                if dcat_license:
+                    g.add((URIRef(license), DCT.type, URIRef(dcat_license)))
 
             else:
                 log.error('*** License not set')
