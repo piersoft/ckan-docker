@@ -302,7 +302,7 @@ def load_licenses(g: Graph):
                               uri=str(license),
                               path=license_path,
                               document_uri=str(doc_uri) if doc_uri else None,
-                              rank_order=int(str(rank_order)),
+                              rank_order=int(str(rank_order)) if rank_order is not None else 0,
                               names=labels,
                               parent=None)  # parent will be set later
 
