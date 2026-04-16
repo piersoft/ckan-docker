@@ -784,7 +784,13 @@ class ItalianDCATAPProfile(RDFProfile):
                     dataset_dict['extras'].pop(eidx)
                     dataset_dict[fdef['name']] = ex['value']
                     break
-
+            # FIX: controlla anche i couples (es. holder_name, holder_identifier)
+            for couple in fdef.get('couples', []):
+                for eidx, ex in enumerate(dataset_dict.get('extras') or []):
+                    if ex['key'] == couple['name']:
+                        dataset_dict['extras'].pop(eidx)
+                        dataset_dict[couple['name']] = ex['value']
+                        break
         g = self.g
 
         for prefix, namespace in it_namespaces.items():
