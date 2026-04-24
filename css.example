@@ -136,8 +136,8 @@ body {
 a,
 .resource-item .heading,
 .breadcrumb {
-  color: #0066cc;
-  /* [SYNTAX] rimosso: #text-decoration (non è CSS valido) */
+  color: #fff;
+
 }
 
 .toolbar .breadcrumb a {
