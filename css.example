@@ -578,3 +578,414 @@ color: #ffffff !important ;
    
    oppure link diretto alla dichiarazione su AgID.
    --------------------------------------------------------------- */
+
+/* ===============================================================
+   FIX LOGO + TITOLO + SOTTOTITOLO via pseudo-elementi
+   Il template CKAN non mostra h1/h2 quando il logo è impostato.
+   Iniettiamo titolo e sottotitolo via ::before e ::after su hgroup.
+   =============================================================== */
+
+/* Contenitore hgroup: flex con logo a sinistra e testo impilato a destra */
+.masthead hgroup.header-image {
+  display: flex !important;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Logo a sinistra */
+.masthead hgroup.header-image .logo {
+  order: 1;
+  flex-shrink: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.masthead hgroup.header-image .logo img {
+  height: 130px;
+  width: auto;
+  max-width: none;
+  display: block;
+}
+
+/* TITOLO (grande) */
+.masthead hgroup.header-image::before {
+  content: "Comune di Deliceto";
+  order: 2;
+  color: #ffffff;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  flex-basis: calc(100% - 130px - 1.25rem);
+  margin: 0;
+  padding: 0;
+}
+
+/* SOTTOTITOLO (piccolo) */
+.masthead hgroup.header-image::after {
+  content: "Portale dei Dati Aperti";
+  order: 3;
+  color: #ffffff;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+flex-basis: calc(100% - 130px - 1.25rem);
+  margin: 0.2rem 0 0 0;
+  padding: 0;
+}
+
+/* Responsive mobile */
+@media (max-width: 767px) {
+  .masthead hgroup.header-image .logo img {
+    height: 90px;
+  }
+  .masthead hgroup.header-image::before {
+    font-size: 1.6rem;
+    flex-basis: calc(100% - 90px - 1.25rem);
+  }
+  .masthead hgroup.header-image::after {
+    font-size: 0.95rem;
+    flex-basis: calc(100% - 90px - 1.25rem);
+  }
+}
+
+/* ===============================================================
+   FOOTER — sfondo bianco, testo blu, leggibile e accessibile
+   =============================================================== */
+.site-footer {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #003d7a !important;
+  padding: 2rem 0;
+  border-top: 3px solid #0066cc;
+}
+
+/* Tutto il testo del footer in blu scuro per contrasto AA */
+.site-footer,
+.site-footer p,
+.site-footer label,
+.site-footer small,
+.site-footer strong,
+.site-footer .attribution p,
+.site-footer .footer-links,
+.site-footer .col-md-4,
+.site-footer .col-md-8 {
+  color: #003d7a !important;
+}
+
+/* Link del footer: blu istituzionale, sottolineati per accessibilità */
+.site-footer a {
+  color: #0066cc !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  color: #003d7a !important;
+  text-decoration: underline;
+}
+
+/* Liste di link nel footer: spaziatura pulita */
+.site-footer ul.list-unstyled li {
+  padding: 0.25rem 0;
+}
+
+/* Blocco "Fatto con CKAN / rebuilt by Piersoft" */
+.site-footer .attribution p {
+  font-size: 0.875rem;
+  color: #003d7a !important;
+}
+
+.site-footer .attribution strong {
+  color: #003d7a !important;
+}
+
+/* Logo CKAN: il tuo CSS attuale usa background-image con text-indent.
+   Se diventa invisibile su bianco, forziamo la versione corretta del logo. */
+.site-footer .attribution .ckan-footer-logo {
+  display: inline-block;
+  width: 68px;
+  height: 21px;
+  background: url(../../base/images/ckan_logo_col.png) no-repeat top left;
+  background-size: contain;
+  text-indent: -900em;
+  vertical-align: middle;
+}
+
+/* Selettore lingua: label + dropdown */
+.site-footer .lang-select label {
+  color: #003d7a !important;
+  font-weight: 700;
+}
+
+.site-footer .lang-select select {
+  background: #ffffff;
+  color: #003d7a;
+  border: 1px solid #0066cc;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+}
+
+/* Le immagini dei loghi PNRR/UE/MiC in alto al footer: 
+   hanno sfondo bianco trasparente nel PNG, quindi ora 
+   sono perfettamente leggibili su sfondo bianco.
+   Il logo "Mystica Harmonia" ha testo rosso che su bianco si legge. */
+.site-footer .gal-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Separatore opzionale tra le colonne */
+.site-footer .row {
+  align-items: flex-start;
+}
+
+/* ===============================================================
+   FOOTER — sfondo bianco, testo blu, leggibile e accessibile
+   =============================================================== */
+.site-footer {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #003d7a !important;
+  padding: 2rem 0;
+  border-top: 3px solid #0066cc;
+}
+
+.site-footer,
+.site-footer p,
+.site-footer label,
+.site-footer small,
+.site-footer strong,
+.site-footer .attribution p,
+.site-footer .footer-links,
+.site-footer .col-md-4,
+.site-footer .col-md-8 {
+  color: #003d7a !important;
+}
+
+.site-footer a {
+  color: #0066cc !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  color: #003d7a !important;
+  text-decoration: underline;
+}
+
+.site-footer ul.list-unstyled li {
+  padding: 0.25rem 0;
+}
+
+.site-footer .attribution p {
+  font-size: 0.875rem;
+  color: #003d7a !important;
+}
+
+.site-footer .attribution strong {
+  color: #003d7a !important;
+}
+
+/* Logo CKAN: il tuo CSS attuale usa background-image con text-indent.
+   Se diventa invisibile su bianco, forziamo la versione corretta del logo. */
+.site-footer .attribution .ckan-footer-logo {
+  display: inline-block;
+  width: 68px;
+  height: 21px;
+  background: url(../../base/images/ckan_logo_col.png) no-repeat top left;
+  background-size: contain;
+  text-indent: -900em;
+  vertical-align: middle;
+}
+
+/* Selettore lingua: label + dropdown */
+.site-footer .lang-select label {
+  color: #003d7a !important;
+  font-weight: 700;
+}
+
+.site-footer .lang-select select {
+  background: #ffffff;
+  color: #003d7a;
+  border: 1px solid #0066cc;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+}
+
+/* Le immagini dei loghi PNRR/UE/MiC in alto al footer: 
+   hanno sfondo bianco trasparente nel PNG, quindi ora 
+   sono perfettamente leggibili su sfondo bianco.
+   Il logo "Mystica Harmonia" ha testo rosso che su bianco si legge. */
+.site-footer .gal-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Separatore opzionale tra le colonne */
+.site-footer .row {
+  align-items: flex-start;
+}
+
+/* ===============================================================
+   HEADER — menu orizzontale su desktop, hamburger solo su mobile
+   =============================================================== */
+
+/* Desktop (≥ 992px): nascondi hamburger, mostra menu orizzontale */
+@media (min-width: 992px) {
+  
+  /* Nascondi il pulsante hamburger */
+  .masthead .navbar-toggler {
+    display: none !important;
+  }
+  
+  /* Forza il menu a essere visibile anche senza la classe .show */
+  .masthead .main-navbar.collapse,
+  .masthead .main-navbar.collapse:not(.show),
+  .masthead #main-navigation-toggle {
+    display: flex !important;
+    flex-basis: auto !important;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  /* Lista dei link orizzontale */
+  .masthead .main-navbar .navbar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .masthead .main-navbar .navbar-nav > li {
+    list-style: none;
+    margin: 0;
+  }
+  
+  /* Stile dei link del menu */
+  .masthead .main-navbar .navbar-nav > li > a {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    border-radius: 0;
+  }
+  
+  .masthead .main-navbar .navbar-nav > li > a:hover,
+  .masthead .main-navbar .navbar-nav > li > a:focus {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+  }
+  
+  /* Search box nell'header su desktop */
+  .masthead .site-search {
+    display: flex !important;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  
+  .masthead .site-search input[type="text"] {
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    height: 38px;
+    padding: 0 0.75rem;
+    min-width: 180px;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  .masthead .site-search .btn {
+    background: #ffffff !important;
+    color: #0066cc !important;
+    border: none;
+    border-left: 1px solid #e0e0e0;
+    height: 38px;
+    width: 38px;
+    padding: 0;
+    border-radius: 0 3px 3px 0;
+    box-shadow: none;
+  }
+  
+  .masthead .site-search .btn i {
+    color: #0066cc !important;
+  }
+}
+
+/* Mobile (< 992px): hamburger visibile, menu nascosto quando collapsed */
+@media (max-width: 991px) {
+  .masthead .navbar-toggler {
+    display: block;
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+  }
+}
+
+.homepage [role="main"] {
+  border-top: 0px solid rgb(204, 204, 204);
+ background-size: contain;
+ background-position: right center;
+ background-repeat: no-repeat;
+}
+
+.homepage {
+
+background:url(../../base/images/IMMAGINEDIFONDO) no-repeat center center fixed;
+ -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+/* Link di default: blu istituzionale leggibile su sfondo bianco */
+a {
+  color: #0066cc;
+}
+
+a:hover {
+  color: #003d7a;
+  text-decoration: underline;
+}
+
+/* Link bianchi SOLO nell'header del sito */
+.masthead a,
+.account-masthead a {
+  color: #ffffff;
+}
+
+.masthead a:hover,
+.account-masthead a:hover {
+  color: #ffffff;
+}
+
+/* Heading delle risorse e breadcrumb: colore blu (non bianco su bianco) */
+.resource-item .heading,
+.breadcrumb {
+  color: #003d7a;
+}
+.homepage [role="main"] {
+    border-top: 0px solid rgb(204, 204, 204);
+    padding-bottom: 30px;
+    background-image: none;
+}
