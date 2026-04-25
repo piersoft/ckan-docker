@@ -919,7 +919,7 @@ flex-basis: calc(100% - 130px - 1.25rem);
     background: #ffffff !important;
     color: #0066cc !important;
     border: none;
-    border-left: 1px solid #e0e0e0;
+    border-left: 9px solid #ffffff;
     height: 38px;
     width: 38px;
     padding: 0;
