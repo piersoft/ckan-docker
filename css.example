@@ -614,7 +614,7 @@ color: #ffffff !important ;
 
 /* TITOLO (grande) */
 .masthead hgroup.header-image::before {
-  content: "Comune di Deliceto";
+  content: "Comune di Bugnano";
   order: 2;
   color: #ffffff;
   font-family: 'Titillium Web', sans-serif;
