@@ -345,8 +345,34 @@ class ItalianDCATAPProfile(RDFProfile):
             # License
             setlic=0
             license = self._object(distribution, DCT.license)
+            # DGA guard FIRST: leggi accessRights direttamente dal graph upstream,
+            # indipendentemente dalla presenza di dct:license sulla distribution
+            access_rights_ref_early = self._object_value(dataset_ref, DCT.accessRights)
+            is_dga_restricted = access_rights_ref_early and 'RESTRICTED' in str(access_rights_ref_early)
+
+            if is_dga_restricted:
+                log.info('DGA dataset detected (RESTRICTED) for "%s"::"%s", forcing OtherRestrictiveClauses',
+                        dataset_dict.get('title', '---'),
+                        resource_dict.get('name', '---'))
+                
+                # Sovrascrive a livello dataset (impedisce a CKAN di propagare CC-BY)
+                dataset_dict['license_id'] = 'OtherRestrictiveClauses'
+                dataset_dict['license_title'] = 'Other Restrictive Clauses'
+                setlic = 1  # blocca il postprocess license_ids.pop()
+                
+                # Sovrascrive a livello resource
+                resource_dict['license_type'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                resource_dict['license_id'] = 'OtherRestrictiveClauses'
+                resource_dict['license'] = 'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                
+                # Aggiunge alla lista licenses per il postprocess (con tupla compatibile)
+                licenses.append((
+                    'http://purl.org/adms/licencetype/OtherRestrictiveClauses',
+                    'OtherRestrictiveClauses',
+                    'http://purl.org/adms/licencetype/OtherRestrictiveClauses'
+                ))
             #applico patch alle licenze specifiche e per evitare duplicati in dct:license e patch ad hoc per Reg Campania
-            if license:
+            elif license:
                 license=license.replace("https://w3id.org/italia/env/ld/catalog/license/ccby40","https://creativecommons.org/licenses/by/4.0/")
                 license=license.replace("https://api.smartdatanet.it/metadataapi/api/license/CCBY","https://creativecommons.org/licenses/by/4.0/")
                 license=license.replace("https://dati.veneto.it/lod/licenses/CC_BY-SA_-_Condivisione_con_la_stessa_licenza","https://creativecommons.org/licenses/by-sa/4.0/")
@@ -408,10 +434,10 @@ class ItalianDCATAPProfile(RDFProfile):
                     resource_dict['license_type'] = str(license)
 
                 if dataset_dict.get('holder_identifier') is not None:
-                  if 'r_campan' in dataset_dict.get('holder_identifier'):
-                    license_type.document_uri = 'https://creativecommons.org/licenses/by/4.0/'
-                    license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
-                  if 'r_lazio' in dataset_dict.get('holder_identifier') or 'm_sa' in dataset_dict.get('holder_identifier'):
+ #                 if 'r_campan' in dataset_dict.get('holder_identifier'):
+ #                   license_type.document_uri = 'https://creativecommons.org/licenses/by/4.0/'
+ #                   license_name = 'Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)'
+                  if 'r_lazio' in dataset_dict.get('holder_identifier'):
                     license_type.document_uri = 'https://www.dati.gov.it/content/italian-open-data-license-v20'
                     license_name = 'Italian Open Data License 2.0'
                 try:
@@ -792,6 +818,7 @@ class ItalianDCATAPProfile(RDFProfile):
                     dataset_dict['extras'].pop(eidx)
                     dataset_dict[fdef['name']] = ex['value']
                     break
+                    
             # FIX: controlla anche i couples (es. holder_name, holder_identifier)
             for couple in fdef.get('couples', []):
                 for eidx, ex in enumerate(dataset_dict.get('extras') or []):
@@ -799,6 +826,7 @@ class ItalianDCATAPProfile(RDFProfile):
                         dataset_dict['extras'].pop(eidx)
                         dataset_dict[couple['name']] = ex['value']
                         break
+
         g = self.g
 
         for prefix, namespace in it_namespaces.items():
@@ -1499,77 +1527,72 @@ class ItalianDCATAPProfile(RDFProfile):
             # "license_title" : "Creative Commons CCZero",
             # "license_url" : "http://www.opendefinition.org/licenses/cc-zero",
 
-            license_info = interfaces.get_license_for_dcat(resource_dict.get('license_type'))
-            dcat_license, license_title, license_url, license_version, dcatapit_license, names = license_info
+            # License
+            # DGA guard FIRST: se il dataset è RESTRICTED, applica OtherRestrictiveClauses
+            # e salta tutta la logica CC-BY/license_maybe
+            ar = dataset_dict.get('access_rights') or ''
+            is_dga_restricted = 'RESTRICTED' in ar
 
-            # be lenient about license existence
-            license_maybe = license_url or dcatapit_license
-            log.debug('license_maybe: %s',license_maybe)
-            if resource_dict.get('license_id'):
-                 if 'OtherRestrictiveClauses' in resource_dict.get('license_id'):
-                   log.debug('license_id OtherRestrictiveClauses prima del dct.licensedocument in profiles  dcatapit')
-                   license_maybe = ''
+            # Cleanup difensivo: rimuovi eventuali dct:license preesistenti
+            # (potrebbero essere stati scritti dal profilo euro_dcat_ap base)
+            self.g.remove((distribution, DCT.license, None))
 
-            if resource_dict.get('license'):
-             if resource_dict.get('license') != license_maybe:
-                license_maybe=resource_dict.get('license')
-
-            if resource_dict.get('license_type'):
-             if resource_dict.get('license_type') != license_maybe:
-                license_maybe=resource_dict.get('license_type')
-
-            if resource_dict.get('license_type') and resource_dict.get('license'):
-             if resource_dict.get('license_type') != resource_dict.get('license'):
-                license_maybe=resource_dict.get('license')
-
-
-            if license_maybe:
-                license_maybe = license_maybe.replace("deed.it", "")
-                license = URIRef(license_maybe)
-                if 'C1_Unknown' in license:
-                    license = license.replace(
-                        'https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown',
-                        'http://creativecommons.org/licenses/by/4.0/it/')
-                log.debug('provo a patchare la licenza: %s', license)
-                if 'http' in license:
-                    license = URIRef(license)
-                for lang, name in names.items():
-                    if 'Creative Commons Attribuzione 4.0' in name:
-                        license = URIRef('https://creativecommons.org/licenses/by/4.0/')
-                    if 'Italian Open Data License 2.0' in name:
-                        license = URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
-
-                # Patch NC: le licenze NonCommercial non sono previste in DCAT-AP_IT, le rimappo
-                if resource_dict.get('license'):
-                    license = license.replace(
-                        'https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40',
-                        'http://creativecommons.org/licenses/by/4.0/')
-                    license = license.replace('by-nc', 'by')
-                    license = URIRef(license)
-
-                g.add((license, RDF.type, DCATAPIT.LicenseDocument))
-                g.add((license, RDF.type, DCT.LicenseDocument))
-                g.add((license, DCT.type, URIRef(dcat_license)))
-                if license_version:
-                    g.add((license, OWL.versionInfo, Literal(license_version)))
-                for lang, name in names.items():
-                    g.add((license, FOAF.name, Literal(name, lang=lang)))
-
-                # FIX: aggancio sempre la distribution alla license (la riga commentata originale)
-                g.add((distribution, DCT.license, license))
-
+            if is_dga_restricted:
+                log.info('DGA dataset (access_rights RESTRICTED): applying OtherRestrictiveClauses to %s', distribution)
+                other_lic = URIRef('http://purl.org/adms/licencetype/OtherRestrictiveClauses')
+                g.add((distribution, DCT.license, other_lic))
+                g.add((other_lic, RDF.type, DCATAPIT.LicenseDocument))
+                g.add((other_lic, RDF.type, DCT.LicenseDocument))
+                g.add((other_lic, DCT.type, other_lic))
+                g.add((other_lic, FOAF.name, Literal('Other Restrictive Clauses', lang='en')))
+                g.add((other_lic, FOAF.name, Literal('Clausole restrittive', lang='it')))
             else:
-                # FIX: garantisco un dct:license sulla distribution anche quando license_maybe è vuota
-                if resource_dict.get('license_id') and 'OtherRestrictiveClauses' in resource_dict.get('license_id'):
-                    log.debug('License DGA OtherRestrictiveClauses applied to distribution %s', distribution)
-                    g.add((distribution, DCT.license,
-                        URIRef('http://purl.org/adms/licencetype/OtherRestrictiveClauses')))
+                license_info = interfaces.get_license_for_dcat(resource_dict.get('license_type'))
+                dcat_license, license_title, license_url, license_version, dcatapit_license, names = license_info
+                license_maybe = license_url or dcatapit_license
+
+                if license_maybe:
+                    license_maybe = license_maybe.replace("deed.it", "")
+                    license = URIRef(license_maybe)
+                    if 'C1_Unknown' in license:
+                        license = license.replace(
+                            'https://w3id.org/italia/controlled-vocabulary/licences/C1_Unknown',
+                            'http://creativecommons.org/licenses/by/4.0/it/')
+                    log.debug('provo a patchare la licenza: %s', license)
+                    if 'http' in license:
+                        license = URIRef(license)
+                    for lang, name in names.items():
+                        if 'Creative Commons Attribuzione 4.0' in name:
+                            license = URIRef('https://creativecommons.org/licenses/by/4.0/')
+                        if 'Italian Open Data License 2.0' in name:
+                            license = URIRef('https://www.dati.gov.it/content/italian-open-data-license-v20')
+
+                    # Patch NC: le NonCommercial non sono previste in DCAT-AP_IT
+                    if resource_dict.get('license'):
+                        license = license.replace(
+                            'https://w3id.org/italia/controlled-vocabulary/licences/B11_CCBYNC40',
+                            'http://creativecommons.org/licenses/by/4.0/')
+                        license = license.replace('by-nc', 'by')
+                        license = URIRef(license)
+
+                    g.add((license, RDF.type, DCATAPIT.LicenseDocument))
+                    g.add((license, RDF.type, DCT.LicenseDocument))
+                    g.add((license, DCT.type, URIRef(dcat_license)))
+                    if license_version:
+                        g.add((license, OWL.versionInfo, Literal(license_version)))
+                    for lang, name in names.items():
+                        g.add((license, FOAF.name, Literal(name, lang=lang)))
+
+                    # FIX: aggancio la distribution alla license (era commentato nell'originale)
+                    g.add((distribution, DCT.license, license))
                 else:
                     log.warning('*** License not set, applying default CC-BY 4.0 IT for distribution %s', distribution)
                     g.add((distribution, DCT.license,
-                        URIRef('http://creativecommons.org/licenses/by/4.0/it/')))
+                           URIRef('http://creativecommons.org/licenses/by/4.0/it/')))
 
-
+            # Multilingual
+            # Add localized entries in resource
+            # TODO: should we remove the not-localized nodes?
             # Multilingual
             # Add localized entries in resource
             # TODO: should we remove the not-localized nodes?
