@@ -95,7 +95,15 @@ class DCATHarvester(HarvesterBase):
             # get the `requests` session object
             session = requests.Session()
             session.mount(url, CustomSslContextHttpAdapter())
-         
+
+            # Override default python-requests UA: some PA portals
+            # (es. aperto.comune.torino.it) bloccano UA non-browser con 403
+            session.headers.update({
+                'User-Agent': 'dati.gov.it-harvester/1.0 (+https://dati.gov.it/it/harvester; segnalazioni@dati.gov.it) Mozilla/5.0 (compatible)',
+                'Accept': 'application/rdf+xml, text/turtle, application/n-triples, application/ld+json, */*;q=0.8',
+                'From': 'segnalazioni@dati.gov.it',
+            })
+                
             for harvester in p.PluginImplementations(IDCATRDFHarvester):
                 session = harvester.update_session(session)
 
